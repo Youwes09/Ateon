@@ -5,7 +5,6 @@ SOURCE_HYPR="$HOME/.config/hypr"
 SOURCE_AGS="$HOME/.config/ags"
 DEST="$HOME/Ateon"
 BRANCH="main"
-COMMIT_MSG="Update Hyprland and AGS configs"
 
 # --- Safety check ---
 if [ ! -d "$SOURCE_HYPR" ] || [ ! -d "$SOURCE_AGS" ]; then
@@ -22,6 +21,9 @@ fi
 echo "Copying configs..."
 cp -r "$SOURCE_HYPR" "$DEST/"
 cp -r "$SOURCE_AGS" "$DEST/"
+
+# --- Prompt for commit message ---
+read -rp "Enter commit message: " COMMIT_MSG
 
 # --- Commit changes ---
 cd "$DEST" || exit
