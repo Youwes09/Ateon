@@ -7,105 +7,105 @@
 */
 
 
-$background: rgba(21, 19, 20, 1.0);
+$background: rgba(19, 19, 19, 1.0);
 
 $error: rgba(255, 180, 171, 1.0);
 
 $error_container: rgba(147, 0, 10, 1.0);
 
-$inverse_on_surface: rgba(50, 48, 49, 1.0);
+$inverse_on_surface: rgba(48, 48, 48, 1.0);
 
-$inverse_primary: rgba(105, 90, 103, 1.0);
+$inverse_primary: rgba(156, 64, 76, 1.0);
 
-$inverse_surface: rgba(231, 225, 226, 1.0);
+$inverse_surface: rgba(226, 226, 226, 1.0);
 
-$on_background: rgba(231, 225, 226, 1.0);
+$on_background: rgba(226, 226, 226, 1.0);
 
 $on_error: rgba(105, 0, 5, 1.0);
 
 $on_error_container: rgba(255, 218, 214, 1.0);
 
-$on_primary: rgba(57, 44, 56, 1.0);
+$on_primary: rgba(95, 18, 33, 1.0);
 
-$on_primary_container: rgba(241, 221, 236, 1.0);
+$on_primary_container: rgba(255, 218, 219, 1.0);
 
-$on_primary_fixed: rgba(35, 24, 35, 1.0);
+$on_primary_fixed: rgba(64, 0, 14, 1.0);
 
-$on_primary_fixed_variant: rgba(80, 67, 79, 1.0);
+$on_primary_fixed_variant: rgba(125, 41, 54, 1.0);
 
-$on_secondary: rgba(54, 46, 53, 1.0);
+$on_secondary: rgba(68, 41, 43, 1.0);
 
-$on_secondary_container: rgba(237, 222, 232, 1.0);
+$on_secondary_container: rgba(255, 218, 219, 1.0);
 
-$on_secondary_fixed: rgba(33, 25, 32, 1.0);
+$on_secondary_fixed: rgba(44, 21, 23, 1.0);
 
-$on_secondary_fixed_variant: rgba(77, 68, 76, 1.0);
+$on_secondary_fixed_variant: rgba(92, 63, 65, 1.0);
 
-$on_surface: rgba(231, 225, 226, 1.0);
+$on_surface: rgba(226, 226, 226, 1.0);
 
-$on_surface_variant: rgba(203, 197, 198, 1.0);
+$on_surface_variant: rgba(198, 198, 198, 1.0);
 
-$on_tertiary: rgba(60, 43, 59, 1.0);
+$on_tertiary: rgba(67, 44, 6, 1.0);
 
-$on_tertiary_container: rgba(245, 219, 241, 1.0);
+$on_tertiary_container: rgba(255, 221, 180, 1.0);
 
-$on_tertiary_fixed: rgba(38, 22, 38, 1.0);
+$on_tertiary_fixed: rgba(41, 24, 0, 1.0);
 
-$on_tertiary_fixed_variant: rgba(83, 65, 82, 1.0);
+$on_tertiary_fixed_variant: rgba(93, 66, 27, 1.0);
 
-$outline: rgba(148, 143, 145, 1.0);
+$outline: rgba(145, 145, 145, 1.0);
 
-$outline_variant: rgba(73, 70, 71, 1.0);
+$outline_variant: rgba(71, 71, 71, 1.0);
 
-$primary: rgba(212, 193, 208, 1.0);
+$primary: rgba(255, 178, 184, 1.0);
 
-$primary_container: rgba(80, 67, 79, 1.0);
+$primary_container: rgba(125, 41, 54, 1.0);
 
-$primary_fixed: rgba(241, 221, 236, 1.0);
+$primary_fixed: rgba(255, 218, 219, 1.0);
 
-$primary_fixed_dim: rgba(212, 193, 208, 1.0);
+$primary_fixed_dim: rgba(255, 178, 184, 1.0);
 
 $scrim: rgba(0, 0, 0, 1.0);
 
-$secondary: rgba(208, 195, 204, 1.0);
+$secondary: rgba(230, 189, 191, 1.0);
 
-$secondary_container: rgba(77, 68, 76, 1.0);
+$secondary_container: rgba(92, 63, 65, 1.0);
 
-$secondary_fixed: rgba(237, 222, 232, 1.0);
+$secondary_fixed: rgba(255, 218, 219, 1.0);
 
-$secondary_fixed_dim: rgba(208, 195, 204, 1.0);
+$secondary_fixed_dim: rgba(230, 189, 191, 1.0);
 
 $shadow: rgba(0, 0, 0, 1.0);
 
-$source_color: rgba(231, 26, 255, 1.0);
+$source_color: rgba(254, 4, 84, 1.0);
 
-$surface: rgba(21, 19, 20, 1.0);
+$surface: rgba(19, 19, 19, 1.0);
 
-$surface_bright: rgba(59, 56, 58, 1.0);
+$surface_bright: rgba(57, 57, 57, 1.0);
 
-$surface_container: rgba(33, 31, 32, 1.0);
+$surface_container: rgba(31, 31, 31, 1.0);
 
-$surface_container_high: rgba(44, 41, 43, 1.0);
+$surface_container_high: rgba(42, 42, 42, 1.0);
 
-$surface_container_highest: rgba(55, 52, 53, 1.0);
+$surface_container_highest: rgba(53, 53, 53, 1.0);
 
-$surface_container_low: rgba(29, 27, 28, 1.0);
+$surface_container_low: rgba(27, 27, 27, 1.0);
 
-$surface_container_lowest: rgba(15, 14, 15, 1.0);
+$surface_container_lowest: rgba(14, 14, 14, 1.0);
 
-$surface_dim: rgba(21, 19, 20, 1.0);
+$surface_dim: rgba(19, 19, 19, 1.0);
 
-$surface_tint: rgba(212, 193, 208, 1.0);
+$surface_tint: rgba(255, 178, 184, 1.0);
 
-$surface_variant: rgba(73, 70, 71, 1.0);
+$surface_variant: rgba(71, 71, 71, 1.0);
 
-$tertiary: rgba(216, 191, 212, 1.0);
+$tertiary: rgba(232, 192, 142, 1.0);
 
-$tertiary_container: rgba(83, 65, 82, 1.0);
+$tertiary_container: rgba(93, 66, 27, 1.0);
 
-$tertiary_fixed: rgba(245, 219, 241, 1.0);
+$tertiary_fixed: rgba(255, 221, 180, 1.0);
 
-$tertiary_fixed_dim: rgba(216, 191, 212, 1.0);
+$tertiary_fixed_dim: rgba(232, 192, 142, 1.0);
 
 
 /* general color variables */
