@@ -1,8 +1,8 @@
 #!/bin/bash
 
-repo="https://github.com/Neurarian/matshell/"
-ags_dest="$HOME/.config/ags/"
-hypr_dest="$HOME/.config/hypr/"
+repo="https://github.com/Youwes09/Ateon.git"
+ags_dest="$HOME/.config/ags"
+hypr_dest="$HOME/.config/hypr"
 
 # --- Helpers ---
 command_exists() { command -v "$1" >/dev/null 2>&1; }
@@ -32,22 +32,19 @@ install_core() {
         adwaita-icon-theme ttf-firacode-nerd ttf-material-symbols-variable-git
 }
 
-# --- Clone AGS setup ---
-setup_ags() {
-    if [ ! -d "${ags_dest}" ]; then
-        echo "📥 Cloning AGS setup..."
-        git clone --depth 1 "$repo" "$ags_dest"
-    else
-        echo "✔️ AGS already present at $ags_dest"
-    fi
-}
+# --- Clone Ateon repo into tmp and copy configs ---
+setup_configs() {
+    tmp_dir=$(mktemp -d)
+    echo "📥 Cloning Ateon repo..."
+    git clone --depth 1 "$repo" "$tmp_dir"
 
-# --- Ensure Hyprland config dir exists ---
-setup_hypr() {
-    if [ ! -d "${hypr_dest}" ]; then
-        echo "📂 Creating Hyprland config directory..."
-        mkdir -p "$hypr_dest"
-    fi
+    echo "📂 Installing configs..."
+    mkdir -p "$ags_dest" "$hypr_dest"
+    cp -r "$tmp_dir/ags/." "$ags_dest/"
+    cp -r "$tmp_dir/hypr/." "$hypr_dest/"
+
+    rm -rf "$tmp_dir"
+    echo "✔️ Configs installed to ~/.config/ags and ~/.config/hypr"
 }
 
 # --- Setup matugen config ---
@@ -75,9 +72,8 @@ EOF
 
 # --- Run all steps ---
 install_core
-setup_ags
-setup_hypr
+setup_configs
 setup_matugen
 
-echo "✅ Base Hyprland + AGS environment ready."
-echo "Start AGS with: ags run"
+echo "✅ Ateon (Hyprland + AGS) environment ready."
+echo "👉 Start AGS with: ags run"
