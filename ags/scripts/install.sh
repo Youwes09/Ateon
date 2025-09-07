@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 repo="https://github.com/Youwes09/Ateon.git"
 ags_dest="$HOME/.config/ags"
@@ -8,28 +9,70 @@ hypr_dest="$HOME/.config/hypr"
 command_exists() { command -v "$1" >/dev/null 2>&1; }
 is_arch_based() { [ -f /etc/arch-release ] || command_exists pacman; }
 
-# --- Install core dependencies ---
-install_core() {
+# --- Package lists ---
+CORE_PKGS=(
+    hyprland
+    aylurs-gtk-shell-git
+    libastal-hyprland-git
+    libastal-tray-git
+    libastal-notifd-git
+    libastal-apps-git
+    libastal-wireplumber-git
+    libastal-mpris-git
+    libastal-network-git
+    libastal-bluetooth-git
+    libastal-cava-git
+    libastal-battery-git
+    libastal-powerprofiles-git
+    matugen-bin
+    libgtop
+    coreutils
+    dart-sass
+    imagemagick
+    networkmanager
+    wireplumber
+    adwaita-icon-theme
+    ttf-firacode-nerd
+    ttf-material-symbols-variable-git
+    hyprpaper
+)
+
+EXTRA_PKGS=(
+    hyprshot
+    swappy
+    grim
+    slurp
+    wl-clipboard
+)
+
+# --- Install yay if missing ---
+install_yay() {
+    if ! command_exists yay; then
+        echo "📥 Installing yay..."
+        sudo pacman -Sy --needed --noconfirm git base-devel
+        tmpdir=$(mktemp -d)
+        git clone https://aur.archlinux.org/yay.git "$tmpdir"
+        pushd "$tmpdir"
+        makepkg -si --noconfirm
+        popd
+        rm -rf "$tmpdir"
+    fi
+}
+
+# --- Install packages ---
+install_packages() {
     if ! is_arch_based; then
-        echo "⚠️ Only Arch-based distros supported (pacman/yay). Install manually otherwise."
+        echo "⚠️ Only Arch-based distros supported. Install packages manually."
         exit 1
     fi
 
-    if command_exists yay; then
-        INSTALLER="yay -S --noconfirm"
-    else
-        echo "❌ yay not found. Please install yay first."
-        exit 1
-    fi
+    install_yay
 
-    echo "📦 Installing Hyprland + AGS dependencies..."
-    $INSTALLER hyprland aylurs-gtk-shell-git libastal-hyprland-git \
-        libastal-tray-git libastal-notifd-git libastal-apps-git \
-        libastal-wireplumber-git libastal-mpris-git libastal-network-git \
-        libastal-bluetooth-git libastal-cava-git libastal-battery-git \
-        libastal-powerprofiles-git matugen-bin libgtop \
-        coreutils dart-sass imagemagick networkmanager wireplumber \
-        adwaita-icon-theme ttf-firacode-nerd ttf-material-symbols-variable-git hyprpaper
+    echo "📦 Installing core packages..."
+    yay -S --needed --noconfirm "${CORE_PKGS[@]}"
+
+    echo "📦 Installing extra packages..."
+    yay -S --needed --noconfirm "${EXTRA_PKGS[@]}"
 }
 
 # --- Clone Ateon repo into tmp and copy configs ---
@@ -71,7 +114,7 @@ EOF
 }
 
 # --- Run all steps ---
-install_core
+install_packages
 setup_configs
 setup_matugen
 
