@@ -1,0 +1,33 @@
+.clock-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  // breathing room scaled down
+  margin-top: 12px;
+  transform: scale(1.1);
+
+  .digit-stack {
+    min-width: 1.2em; // keeps digits aligned
+    label {
+      font-family: "JetBrainsMono Nerd Font", monospace;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+  }
+
+  .colon {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: 0 2px;
+    opacity: 0.8;
+  }
+}
+.clock-divider {
+  min-height: 2px;
+  background-color: rgba(255, 255, 255, 0.3); // subtle but visible
+  margin: 8px 0; // breathing room
+  border-radius: 1px;
+}

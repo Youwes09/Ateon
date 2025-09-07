@@ -1,0 +1,74 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+.base-widget {
+  background: $barBg;
+  border-radius: calc(#{$round} * 3);
+  padding: $spacing-md;
+  margin: $spacing-md;
+  color: $fg;
+
+  // Generic "header/content" row
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+
+    .header-icon {
+      min-width: 72px;
+      min-height: 72px;
+      color: $fg;
+      margin-bottom: 0.5rem;
+    }
+
+    .header-title {
+      font-size: calc(#{$font} + 0.8rem);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .header-subtitle {
+      font-size: calc(#{$font} - 0.1rem);
+      color: $outline;
+      margin-bottom: 0.2rem;
+    }
+
+    .header-extra {
+      font-size: calc(#{$font} - 0.2rem);
+      color: $outline;
+    }
+  }
+
+  // Generic "items row" for children
+  .items-row {
+    margin-top: $spacing-sm;
+    display: flex;
+    gap: $spacing-md;
+    justify-content: center;
+
+    .item {
+      min-width: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .item-title {
+        font-size: calc(#{$font} - 0.3rem);
+        color: $outline;
+      }
+
+      .item-icon {
+        margin: 0.3rem 0;
+        color: $fg;
+      }
+
+      .item-value {
+        font-size: calc(#{$font} - 0.1rem);
+        font-weight: 500;
+        color: $fg;
+      }
+    }
+  }
+}

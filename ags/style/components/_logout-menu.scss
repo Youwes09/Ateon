@@ -1,0 +1,34 @@
+@use "../layouts" as *;
+@use "../abstracts" as *;
+@use "sass:color";
+
+box.logout-background {
+  background-color: $bg;
+  .logout-menu {
+    @include window;
+    background-color: color.adjust($background, $alpha: -0.3);
+    button {
+      @include window-box;
+      @include button;
+      margin: 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      @if $darkmode {
+      } @else {
+        // Light mode enhancements
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+      }
+      &:focus {
+        @if $darkmode {
+          background: color.adjust($buttonDisabled, $lightness: +20%);
+        } @else {
+          background: color.adjust($primaryMon, $lightness: +22%);
+        }
+      }
+      label {
+        font-family: "Material Symbols Outlined";
+        font-size: 15rem;
+        margin: 0rem 1rem;
+      }
+    }
+  }
+}
