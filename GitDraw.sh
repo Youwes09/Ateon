@@ -1,26 +1,22 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 # --- Config ---
-SOURCE_HYPR="$HOME/.config/hypr"
-SOURCE_AGS="$HOME/.config/ags"
 DEST="$HOME/Ateon"
-BRANCH="main"
+SOURCES=("$HOME/.config/hypr" "$HOME/.config/ags" "$HOME/.config/foot")
 
 # --- Safety check ---
-if [ ! -d "$SOURCE_HYPR" ] || [ ! -d "$SOURCE_AGS" ]; then
-    echo "Error: One or both source directories do not exist."
-    exit 1
-fi
-
-if [ ! -d "$DEST/.git" ]; then
-    echo "Error: Destination directory is not a Git repository."
-    exit 1
-fi
+for dir in "${SOURCES[@]}"; do
+    [ -d "$dir" ] || { echo "Error: Source directory '$dir' does not exist."; exit 1; }
+done
+[ -d "$DEST/.git" ] || { echo "Error: Destination directory is not a Git repository."; exit 1; }
 
 # --- Copy configs ---
 echo "Copying configs..."
-cp -r "$SOURCE_HYPR" "$DEST/"
-cp -r "$SOURCE_AGS" "$DEST/"
+for dir in "${SOURCES[@]}"; do
+    echo "  -> $(basename "$dir")"
+    cp -r "$dir" "$DEST/"
+done
 
 # --- Prompt for commit message ---
 read -rp "Enter commit message: " COMMIT_MSG

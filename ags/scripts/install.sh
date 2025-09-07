@@ -29,7 +29,7 @@ install_core() {
         libastal-bluetooth-git libastal-cava-git libastal-battery-git \
         libastal-powerprofiles-git matugen-bin libgtop \
         coreutils dart-sass imagemagick networkmanager wireplumber \
-        adwaita-icon-theme ttf-firacode-nerd ttf-material-symbols-variable-git
+        adwaita-icon-theme ttf-firacode-nerd ttf-material-symbols-variable-git hyprpaper
 }
 
 # --- Clone Ateon repo into tmp and copy configs ---
