@@ -26,7 +26,7 @@ export default function Sidebar(props: { children?: Gtk.Widget[] } = {}) {
       layer={Astal.Layer.TOP}
       application={app}
       visible={visible}
-      widthRequest={320}
+      widthRequest={300}
     >
       <box
         orientation={Gtk.Orientation.VERTICAL}

@@ -1,0 +1,11 @@
+[config]
+output_dir = "~/.config/ags/style"
+template_dir = "~/.config/ags/matugen/templates"
+
+[templates.ags]
+input_path = "~/.config/ags/matugen/templates/ags.scss"
+output_path = "~/.config/ags/style/abstracts/_variables.scss"
+
+[templates.hypr]
+input_path = "~/.config/ags/matugen/templates/hyprland_colors.conf"
+output_path = "~/.config/hypr/hyprland_colors.conf"

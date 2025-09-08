@@ -3,30 +3,39 @@ set -euo pipefail
 
 # --- Config ---
 DEST="$HOME/Ateon"
-SOURCES=("$HOME/.config/hypr" "$HOME/.config/ags" "$HOME/.config/foot")
+SOURCES=(
+    "$HOME/.config/hypr"
+    "$HOME/.config/ags"
+    "$HOME/.config/foot"
+    "$HOME/.config/matugen"
+)
 
 # --- Safety check ---
+if [ ! -d "$DEST/.git" ]; then
+    echo "❌ Error: $DEST is not a Git repository."
+    exit 1
+fi
+
 for dir in "${SOURCES[@]}"; do
-    [ -d "$dir" ] || { echo "Error: Source directory '$dir' does not exist."; exit 1; }
+    [ -d "$dir" ] || echo "⚠️ Warning: Skipping missing $dir"
 done
-[ -d "$DEST/.git" ] || { echo "Error: Destination directory is not a Git repository."; exit 1; }
 
 # --- Copy configs ---
-echo "Copying configs..."
+echo "📂 Syncing configs into $DEST..."
 for dir in "${SOURCES[@]}"; do
-    echo "  -> $(basename "$dir")"
+    [ -d "$dir" ] || continue
     cp -r "$dir" "$DEST/"
+    echo "  ✔ Copied $(basename "$dir")"
 done
 
-# --- Prompt for commit message ---
-read -rp "Enter commit message: " COMMIT_MSG
-
 # --- Commit changes ---
-cd "$DEST" || exit
-git add .
-if git diff --cached --quiet; then
-    echo "No changes to commit."
-else
-    git commit -m "$COMMIT_MSG"
-    echo "Changes committed. Ready to push."
+cd "$DEST"
+if git diff --quiet && git diff --cached --quiet; then
+    echo "ℹ️ No changes to commit."
+    exit 0
 fi
+
+read -rp "💬 Commit message: " COMMIT_MSG
+git add .
+git commit -m "$COMMIT_MSG"
+echo "✅ Changes committed. Use 'git push' to upload."

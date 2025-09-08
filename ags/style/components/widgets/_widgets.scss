@@ -9,11 +9,8 @@
   margin: $spacing-md;
   color: $fg;
 
-  // Generic "header/content" row
+  /* Generic "header/content" row */
   .header-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: $spacing-sm;
 
     .header-icon {
@@ -24,38 +21,32 @@
     }
 
     .header-title {
-      font-size: calc(#{$font} + 0.8rem);
+      font-size: $font;
       font-weight: 700;
       margin-bottom: 0.2rem;
     }
 
     .header-subtitle {
-      font-size: calc(#{$font} - 0.1rem);
+      font-size: $font;
       color: $outline;
       margin-bottom: 0.2rem;
     }
 
     .header-extra {
-      font-size: calc(#{$font} - 0.2rem);
+      font-size: $font;
       color: $outline;
     }
   }
 
-  // Generic "items row" for children
+  /* Generic "items row" for children */
   .items-row {
     margin-top: $spacing-sm;
-    display: flex;
-    gap: $spacing-md;
-    justify-content: center;
 
     .item {
       min-width: 3rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
 
       .item-title {
-        font-size: calc(#{$font} - 0.3rem);
+        font-size: $font;
         color: $outline;
       }
 
@@ -65,7 +56,7 @@
       }
 
       .item-value {
-        font-size: calc(#{$font} - 0.1rem);
+        font-size: $font;
         font-weight: 500;
         color: $fg;
       }

@@ -81,12 +81,12 @@ popover modelbutton:only-child {
 /* buttons */
 .button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(164, 94.1, 103.5, 0.5);
+  background: rgba(164, 94.1, 102.8, 0.5);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgba(115.9961889639, 65.6038110361, 72.3804684399, 0.5);
+  background: rgba(115.9961889639, 65.6038110361, 71.8758237396, 0.5);
 }
 
 .button-disabled {
@@ -145,12 +145,12 @@ popover modelbutton:only-child {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(164, 94.1, 103.5);
-  box-shadow: inset -2px -2px 2px rgb(123.6451667328, 69.9298332672, 77.1533545058);
+  background: rgb(164, 94.1, 102.8);
+  box-shadow: inset -2px -2px 2px rgb(123.6451667328, 69.9298332672, 76.6154327114);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(196.5, 138.35, 144.75);
-  box-shadow: inset -2px -2px 2px rgb(167.2577183842, 83.8797816158, 93.0563731088);
+  background: rgb(196.5, 138.35, 144.3);
+  box-shadow: inset -2px -2px 2px rgb(167.2577183842, 83.8797816158, 92.4111440194);
 }
 .Bar .Workspaces .monitor1 {
   background: rgb(174, 143.5, 103.5);
@@ -169,12 +169,12 @@ popover modelbutton:only-child {
   box-shadow: inset -2px -2px 2px rgb(146.6552956691, 100.7697043309, 102.7617434758);
 }
 .Bar .Workspaces .monitor3 {
-  background: rgb(181.4, 144.6, 146.6);
-  box-shadow: inset -2px -2px 2px rgb(146.7, 97.8, 100.4576086957);
+  background: rgb(181.4, 144.6, 145.9);
+  box-shadow: inset -2px -2px 2px rgb(146.7, 97.8, 99.5274456522);
 }
 .Bar .Workspaces .monitor3:hover {
-  background: rgb(140.9, 107.6, 109.6);
-  box-shadow: inset -2px -2px 2px rgb(105.675, 80.7, 82.2);
+  background: rgb(140.9, 107.6, 109.15);
+  box-shadow: inset -2px -2px 2px rgb(105.675, 80.7, 81.8625);
 }
 .Bar {
   /* music */
@@ -225,7 +225,7 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(210.8, 131.42, 139.8);
+  color: rgb(210.8, 131.42, 138.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress radius {
@@ -235,7 +235,7 @@ popover modelbutton:only-child {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(210.8, 131.42, 139.8);
+  color: rgb(210.8, 131.42, 138.8);
 }
 .Bar .bar-hw-ram-box button label {
   margin: 1px 0px 0px 2px;
@@ -246,7 +246,7 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(210.8, 131.42, 139.8);
+  color: rgb(210.8, 131.42, 138.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress radius {
@@ -256,7 +256,7 @@ popover modelbutton:only-child {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(184.74, 149.16, 102.9);
+  color: rgb(184.08, 149.16, 102.9);
 }
 .Bar .bar-hw-cpu-box button label {
   margin: 1px 0px 0px 1px;
@@ -325,7 +325,7 @@ box.applauncher box.search {
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem 1rem 0.5rem;
-  background-color: rgba(164, 94.1, 103.5, 0.4);
+  background-color: rgba(164, 94.1, 102.8, 0.4);
 }
 box.applauncher box.search image {
   -gtk-icon-size: 2rem;
@@ -755,12 +755,12 @@ box.logout-background .logout-menu button label {
 
 .network-item-connected {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(164, 94.1, 103.5, 0.5);
+  background: rgba(164, 94.1, 102.8, 0.5);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .network-item-connected:hover {
-  background: rgba(115.9961889639, 65.6038110361, 72.3804684399, 0.5);
+  background: rgba(115.9961889639, 65.6038110361, 71.8758237396, 0.5);
 }
 .network-item-connected {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -942,7 +942,7 @@ image {
   background-color: rgba(57, 57, 57, 0.6);
 }
 .option-switch:checked slider {
-  background-color: rgba(164, 94.1, 103.5, 0.5);
+  background-color: rgba(164, 94.1, 102.8, 0.5);
 }
 
 .option-dropdown {
@@ -952,12 +952,12 @@ image {
 
 .option-dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(164, 94.1, 103.5, 0.5);
+  background: rgba(164, 94.1, 102.8, 0.5);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .option-dropdown button:hover {
-  background: rgba(115.9961889639, 65.6038110361, 72.3804684399, 0.5);
+  background: rgba(115.9961889639, 65.6038110361, 71.8758237396, 0.5);
 }
 
 .option-row {
@@ -1044,12 +1044,8 @@ image {
 }
 
 .clock-widget {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
+  /* layout adjustments must be done via margins/padding in AGS */
   margin-top: 12px;
-  transform: scale(1.1);
 }
 .clock-widget .digit-stack {
   min-width: 1.2em;
@@ -1090,17 +1086,17 @@ image {
   margin-bottom: 0.5rem;
 }
 .weather-widget .current-weather .weather-temp {
-  font-size: calc(1.1rem + 0.8rem);
+  font-size: 1.1rem; /* avoid calc() */
   font-weight: 700;
   margin-bottom: 0.2rem;
 }
 .weather-widget .current-weather .weather-desc {
-  font-size: calc(1.1rem - 0.1rem);
+  font-size: 1.1rem; /* avoid calc() */
   color: rgb(145, 145, 145);
   margin-bottom: 0.2rem;
 }
 .weather-widget .current-weather .weather-extra {
-  font-size: calc(1.1rem - 0.2rem);
+  font-size: 1.1rem; /* avoid calc() */
   color: rgb(145, 145, 145);
 }
 .weather-widget .forecast-row {
@@ -1110,7 +1106,7 @@ image {
   min-width: 3rem;
 }
 .weather-widget .forecast-row .forecast-item .forecast-hour {
-  font-size: calc(1.1rem - 0.3rem);
+  font-size: 1.1rem; /* avoid calc() */
   color: rgb(145, 145, 145);
 }
 .weather-widget .forecast-row .forecast-item .forecast-icon {
@@ -1118,7 +1114,7 @@ image {
   color: rgb(226, 226, 226);
 }
 .weather-widget .forecast-row .forecast-item .forecast-temp {
-  font-size: calc(1.1rem - 0.1rem);
+  font-size: 1.1rem; /* avoid calc() */
   font-weight: 500;
   color: rgb(226, 226, 226);
 }
@@ -1131,11 +1127,9 @@ image {
   padding: 0.75rem;
   margin: 0.75rem;
   color: rgb(226, 226, 226);
+  /* Generic "header/content" row */
 }
 .base-widget .header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin-bottom: 0.4rem;
 }
 .base-widget .header-row .header-icon {
@@ -1145,33 +1139,30 @@ image {
   margin-bottom: 0.5rem;
 }
 .base-widget .header-row .header-title {
-  font-size: calc(1.1rem + 0.8rem);
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.2rem;
 }
 .base-widget .header-row .header-subtitle {
-  font-size: calc(1.1rem - 0.1rem);
+  font-size: 1.1rem;
   color: rgb(145, 145, 145);
   margin-bottom: 0.2rem;
 }
 .base-widget .header-row .header-extra {
-  font-size: calc(1.1rem - 0.2rem);
+  font-size: 1.1rem;
   color: rgb(145, 145, 145);
+}
+.base-widget {
+  /* Generic "items row" for children */
 }
 .base-widget .items-row {
   margin-top: 0.4rem;
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
 }
 .base-widget .items-row .item {
   min-width: 3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 .base-widget .items-row .item .item-title {
-  font-size: calc(1.1rem - 0.3rem);
+  font-size: 1.1rem;
   color: rgb(145, 145, 145);
 }
 .base-widget .items-row .item .item-icon {
@@ -1179,7 +1170,7 @@ image {
   color: rgb(226, 226, 226);
 }
 .base-widget .items-row .item .item-value {
-  font-size: calc(1.1rem - 0.1rem);
+  font-size: 1.1rem;
   font-weight: 500;
   color: rgb(226, 226, 226);
 }

@@ -23,7 +23,8 @@ wallpaper=$(echo "$wallpaper" | xargs)  # trim whitespace
 
 # --- Save for next time ---
 mkdir -p "$(dirname "$LAST_WALL")"
-cp "$wallpaper" "$LAST_WALL"
+# Ensure conversion to real PNG instead of just renaming
+magick "$wallpaper" "$LAST_WALL"
 
 # --- Average color ---
 echo "Calculating average color..."

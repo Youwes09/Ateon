@@ -18,19 +18,19 @@
     }
 
     .weather-temp {
-      font-size: calc(#{$font} + 0.8rem);
+      font-size: $font; /* avoid calc() */
       font-weight: 700;
       margin-bottom: 0.2rem;
     }
 
     .weather-desc {
-      font-size: calc(#{$font} - 0.1rem);
+      font-size: $font; /* avoid calc() */
       color: $outline;
       margin-bottom: 0.2rem;
     }
 
     .weather-extra {
-      font-size: calc(#{$font} - 0.2rem);
+      font-size: $font; /* avoid calc() */
       color: $outline;
     }
   }
@@ -42,7 +42,7 @@
       min-width: 3rem;
 
       .forecast-hour {
-        font-size: calc(#{$font} - 0.3rem);
+        font-size: $font; /* avoid calc() */
         color: $outline;
       }
 
@@ -52,7 +52,7 @@
       }
 
       .forecast-temp {
-        font-size: calc(#{$font} - 0.1rem);
+        font-size: $font; /* avoid calc() */
         font-weight: 500;
         color: $fg;
       }
