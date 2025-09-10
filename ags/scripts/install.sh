@@ -20,7 +20,7 @@ CORE_PKGS=(
     libastal-mpris-git libastal-network-git libastal-bluetooth-git
     libastal-cava-git libastal-battery-git libastal-powerprofiles-git
     matugen-bin libgtop coreutils dart-sass imagemagick networkmanager
-    wireplumber adwaita-icon-theme ttf-firacode-nerd ttf-material-symbols-variable-git
+    wireplumber adwaita-icon-theme libadwaita ttf-firacode-nerd ttf-material-symbols-variable-git
     hyprpaper
 )
 

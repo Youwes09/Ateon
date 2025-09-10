@@ -10,10 +10,7 @@ interface OnScreenProgressProps {
   setVisible: (visible: boolean) => void;
 }
 
-export default function OnScreenProgress({
-  visible,
-  setVisible,
-}: OnScreenProgressProps) {
+export default function OnScreenProgress({ visible, setVisible }: OnScreenProgressProps) {
   const [value, setValue] = createState(0);
   const [label, setLabel] = createState("");
   const [icon, setIcon] = createState("");
@@ -22,12 +19,7 @@ export default function OnScreenProgress({
   let currentTimeout: any = null;
   const TIMEOUT_DELAY = 2000;
 
-  const show = (
-    val: number,
-    text: string,
-    iconName: string,
-    progress = true,
-  ) => {
+  const show = (val: number, text: string, iconName: string, progress = true) => {
     setValue(val);
     setLabel(text);
     setIcon(iconName);
@@ -39,18 +31,11 @@ export default function OnScreenProgress({
   };
 
   // Audio
-  [
-    Wp.get_default()?.get_default_speaker(),
-    Wp.get_default()?.get_default_microphone(),
-  ]
+  [Wp.get_default()?.get_default_speaker(), Wp.get_default()?.get_default_microphone()]
     .filter(Boolean)
     .forEach((endpoint) => {
       const id = endpoint!.connect("notify::volume", () =>
-        show(
-          endpoint!.volume,
-          endpoint!.description || "",
-          endpoint!.volumeIcon,
-        ),
+        show(endpoint!.volume, endpoint!.description || "", endpoint!.volumeIcon)
       );
       onCleanup(() => endpoint!.disconnect(id));
     });
@@ -59,40 +44,34 @@ export default function OnScreenProgress({
   try {
     const brightness = Brightness.get_default();
     const id = brightness.connect("notify::screen", () =>
-      show(
-        brightness.screen,
-        "Screen Brightness",
-        "display-brightness-symbolic",
-      ),
+      show(brightness.screen, "Screen Brightness", "display-brightness-symbolic")
     );
     onCleanup(() => brightness.disconnect(id));
   } catch {}
 
-  // Bluetooth: with my bt adapter only functional when in active mode
+  // Bluetooth
   const bluetooth = Bluetooth.get_default();
   const btId = bluetooth.connect("notify::devices", () => {
     bluetooth.devices.forEach((device) => {
-      device.connect("notify::connected", () => {
+      const devId = device.connect("notify::connected", () => {
         const message = device.connected
           ? `Connected: ${device.name || device.address}`
           : `Disconnected: ${device.name || device.address}`;
-
-        show(0, message, device.icon || "bluetooth-active-symbolic", false);
+        const iconName = device.connected
+          ? "bluetooth-active-symbolic"
+          : "bluetooth-symbolic";
+        show(0, message, iconName, false);
       });
+      onCleanup(() => device.disconnect(devId));
     });
   });
 
   onCleanup(() => {
-    try {
-      bluetooth.disconnect(btId);
-    } catch {}
+    try { bluetooth.disconnect(btId); } catch {}
   });
 
   return (
-    <revealer
-      revealChild={visible}
-      transitionType={Gtk.RevealerTransitionType.CROSSFADE}
-    >
+    <revealer revealChild={visible} transitionType={Gtk.RevealerTransitionType.CROSSFADE}>
       <box cssClasses={["osd"]}>
         <image iconName={icon} />
         <box orientation={Gtk.Orientation.VERTICAL}>
