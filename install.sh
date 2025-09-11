@@ -94,8 +94,8 @@ copy_configs() {
 # --- Install WallSet permanently ---
 install_wallset() {
     mkdir -p "$bin_dest"
-    if [ -f "$script_dir/scripts/WallSet" ]; then
-        cp "$script_dir/scripts/WallSet" "$bin_dest/wallset"
+    if [ -f "$script_dir/scripts/WallSet.sh" ]; then
+        cp "$script_dir/scripts/WallSet.sh" "$bin_dest/wallset"
         chmod +x "$bin_dest/wallset"
         echo "✔️ WallSet installed to $bin_dest (run with 'wallset')."
     fi
