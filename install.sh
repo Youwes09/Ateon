@@ -21,7 +21,7 @@ CORE_PKGS=(
     libastal-cava-git libastal-battery-git libastal-powerprofiles-git
     matugen-bin libgtop coreutils dart-sass imagemagick networkmanager
     wireplumber adwaita-icon-theme libadwaita ttf-firacode-nerd ttf-material-symbols-variable-git
-    hyprpaper
+    hyprpaper polkit-gnome
 )
 
 EXTRA_PKGS=( hyprshot swappy grim slurp wl-clipboard )
