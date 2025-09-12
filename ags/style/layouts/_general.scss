@@ -1,0 +1,62 @@
+@use "../abstracts" as *;
+
+tooltip.background,
+tooltip > box {
+  background-color: $tooltipBg;
+  border-radius: $round;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 rgba(0, 0, 0, 0.4);
+  label {
+    margin: 0.1rem 0.4rem;
+  }
+}
+
+/* scales */
+scale {
+  trough {
+    background-color: $surface;
+    border-radius: $scale;
+    min-width: calc(#{$scale} * 10);
+    padding: 0 calc(#{$scale} / 2);
+  }
+
+  highlight,
+  progress {
+    background: $overlay;
+    border-radius: $scale;
+    margin: 0 calc(0px - #{$scale} / 2);
+    min-height: $scale;
+  }
+}
+
+/* popovers */
+popover {
+  background: $tooltipBg;
+  border-radius: $round;
+  font-size: $font;
+  modelbutton {
+    @include button;
+    border-radius: 0;
+    padding: 0.4rem 0.7rem;
+
+    &:first-child {
+      border-radius: $round $round 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 $round $round;
+    }
+    &:only-child {
+      border-radius: $round;
+    }
+  }
+}
+
+/* buttons */
+.button {
+  @include button-active;
+}
+
+.button-disabled {
+  @include button;
+}

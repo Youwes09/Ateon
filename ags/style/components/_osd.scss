@@ -1,0 +1,36 @@
+@use "../layouts" as *;
+@use "../abstracts" as *;
+
+.osd {
+  @include window;
+  border-radius: 3rem;
+  box-shadow: none;
+  margin: 5rem;
+  padding: 1rem;
+
+  image {
+    -gtk-icon-size: 4rem;
+    margin: 0.5rem;
+  }
+
+  box {
+    margin: 0.5rem;
+  }
+
+  label {
+    margin: 0 0 0.5rem;
+  }
+
+  levelbar {
+    trough {
+      margin: 0.5rem 0.5rem;
+    }
+    block {
+      min-height: 1rem;
+    }
+    block.filled {
+      border-radius: 1.5rem;
+      background-color: $fg;
+    }
+  }
+}
