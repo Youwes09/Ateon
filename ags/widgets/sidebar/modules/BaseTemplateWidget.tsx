@@ -1,4 +1,4 @@
-// ~/.config/ags/widgets/sidebar/modules/BaseTemplateWidget.tsx
+// /ags/widgets/sidebar/modules/BaseTemplateWidget.tsx
 import { Gtk } from "ags/gtk4";
 
 interface BaseItemProps {
@@ -14,6 +14,8 @@ function BaseItem({ title, value, icon }: BaseItemProps) {
       <image iconName={icon} pixelSize={28} class="item-icon" />
       <label label={value} class="item-value" />
     </box>
+        orientation={Gtk.Orientation.HORIZONTAL}
+        spacing={8}
   );
 }
 
