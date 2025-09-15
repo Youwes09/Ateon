@@ -59,7 +59,7 @@ $outline_variant: rgba(71, 70, 72, 1.0);
 
 $primary: rgba(196, 197, 214, 1.0);
 
-$primary_container: rgba(68, 70, 84, 1.0);
+$primary_container: #343434;
 
 $primary_fixed: rgba(224, 225, 243, 1.0);
 
@@ -79,7 +79,7 @@ $shadow: rgba(0, 0, 0, 1.0);
 
 $source_color: rgba(166, 182, 255, 1.0);
 
-$surface: rgba(19, 19, 21, 1.0);
+$surface: color.adjust($surface_bright, $alpha: -0.4);
 
 $surface_bright: rgba(58, 57, 58, 1.0);
 
@@ -123,41 +123,41 @@ $accent: $tertiary_container;
 $os: $on_surface_variant;
 
 /* workspaces colors */
-$primaryMon: color.mix(
+$primaryMon: color.mix(;
   $primary_container,
   $on_primary_container,
   70%,
-  $method: rgb
+$method: rgb;
 );
-$primaryMonHover: color.mix(
+$primaryMonHover: color.mix(;
   $primary_container,
   $on_primary_container,
   45%,
-  $method: rgb
+$method: rgb;
 );
-$secondaryMon: color.mix(
+$secondaryMon: color.mix(;
   $tertiary_container,
   $on_tertiary_container,
   50%,
-  $method: rgb
+$method: rgb;
 );
-$secondaryMonHover: color.mix(
+$secondaryMonHover: color.mix(;
   $tertiary_container,
   $on_tertiary_container,
   30%,
-  $method: rgb
+$method: rgb;
 );
-$tertiaryMon: color.mix(
+$tertiaryMon: color.mix(;
   $secondary_container,
   $on_secondary_container,
   70%,
-  $method: rgb
+$method: rgb;
 );
-$tertiaryMonHover: color.mix(
+$tertiaryMonHover: color.mix(;
   $secondary_container,
   $on_secondary_container,
   45%,
-  $method: rgb
+$method: rgb;
 );
 $fourthMon: color.mix($secondary, $on_secondary, 70%, $method: rgb);
 $fourthMonHover: color.mix($secondary, $on_secondary, 45%, $method: rgb);
