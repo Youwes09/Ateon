@@ -122,7 +122,8 @@ ______________________________________________________________________
 The installation script will handle everything for you while preserving your existing configurations:
 
 ```console
-bash <(curl -s https://raw.githubusercontent.com/Youwes09/Ateon/refs/heads/master/install.sh)
+git clone https://github.com/Youwes09/Ateon.git ~/Ateon
+bash ~/Ateon/install.sh
 ```
 
 > [!NOTE]  
