@@ -1,0 +1,52 @@
+format = """
+[┌─────────────────────────────────────────────────────────────────────┐](bold magenta)
+[│](bold magenta)$os$username$hostname$directory$git_branch$git_status$cmd_duration[│](bold magenta)
+[└─](bold magenta)$character"""
+
+right_format = """$time"""
+
+[os]
+format = "[$symbol ]($style)"
+style = "bold blue"
+disabled = false
+
+[os.symbols]
+Arch = ""
+Linux = ""
+
+[username]
+format = "[$user]($style)"
+style_user = "bold cyan"
+show_always = true
+
+[hostname]
+format = "[@$hostname ]($style)"
+style = "bold green"
+ssh_only = false
+
+[directory]
+format = "[$path ]($style)"
+style = "bold yellow"
+truncation_length = 4
+
+[git_branch]
+format = "[on $branch ]($style)"
+style = "bold magenta"
+
+[git_status]
+format = "([$all_status$ahead_behind ]($style))"
+style = "bold red"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+[cmd_duration]
+format = "[took $duration ]($style)"
+style = "bold cyan"
+min_time = 2_000
+
+[time]
+format = "[$time]($style)"
+style = "bold blue"
+time_format = "%H:%M:%S"

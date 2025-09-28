@@ -10,6 +10,10 @@ USER_HOME="$HOME"
 AGS_DEST="$USER_HOME/.config/ags"
 HYPR_DEST="$USER_HOME/.config/hypr"
 MATUGEN_DEST="$USER_HOME/.config/matugen"
+FOOT_DEST="$USER_HOME/.config/foot"
+FISH_DEST="$USER_HOME/.config/fish"
+FASTFETCH_DEST="$USER_HOME/.config/fastfetch"
+STARSHIP_DEST="$USER_HOME/.config/starship.toml"
 BIN_DEST="$USER_HOME/.local/bin"
 
 # Backup settings
@@ -28,14 +32,19 @@ CORE_PKGS=(
     hyprland aylurs-gtk-shell-git matugen-bin
     libastal-{hyprland,tray,notifd,apps,wireplumber,mpris,network,bluetooth,cava,battery,powerprofiles}-git
     libgtop dart-sass imagemagick adwaita-icon-theme libadwaita
-    ttf-firacode-nerd ttf-material-symbols-variable-git
+    ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-material-symbols-variable-git
     hyprpaper polkit-gnome glib-networking libsoup3
 )
 
+TERMINAL_PKGS=(
+    foot fish starship fastfetch
+    wl-clipboard
+)
+
 UTIL_PKGS=(
-    hyprshot swappy grim slurp wl-clipboard hyprpicker-git
+    hyprshot swappy grim slurp hyprpicker-git
     brightnessctl playerctl pipewire pipewire-pulse wireplumber
-    foot firefox nautilus github-desktop code obsidian spotify-launcher
+    firefox nautilus github-desktop code obsidian spotify-launcher
     normcap python-zxing-cpp tesseract tesseract-data-eng
     python-pytesseract pyside6 pavucontrol
 )
@@ -47,6 +56,10 @@ CONFIG_MAPPINGS=(
     "hypr:$HYPR_DEST:Hyprland configuration:true"
     "ags:$AGS_DEST:AGS desktop shell:true"
     "matugen:$MATUGEN_DEST:Matugen theming:false"
+    "foot:$FOOT_DEST:Foot terminal:false"
+    "fish:$FISH_DEST:Fish shell:false"
+    "fastfetch:$FASTFETCH_DEST:Fastfetch system info:false"
+    "starship.toml:$STARSHIP_DEST:Starship prompt:false"
 )
 
 # Logging
@@ -111,8 +124,8 @@ validate_system() {
     
     local free_space
     free_space=$(df "$USER_HOME" --output=avail -B1M | tail -n1 | tr -d ' ')
-    if [[ $free_space -lt 1000 ]]; then
-        _warn "Low disk space: ${free_space}MB available (recommended: 1GB+)"
+    if [[ $free_space -lt 1500 ]]; then
+        _warn "Low disk space: ${free_space}MB available (recommended: 1.5GB+)"
         confirm_action "Continue with limited disk space?" || return 1
     fi
     
@@ -125,8 +138,8 @@ validate_system() {
     done
     
     if [[ ${#missing_configs[@]} -gt 0 ]]; then
-        _err "Missing source configurations: ${missing_configs[*]}"
-        return 1
+        _warn "Missing source configurations: ${missing_configs[*]}"
+        _log "These will be skipped during installation"
     fi
     
     return 0
@@ -169,8 +182,8 @@ install_single_config() {
     local confirm_mode="$5"  # "confirm" or "no_confirm"
     
     if [[ ! -e "$src" ]]; then
-        _err "Source not found: $src"
-        return 1
+        _warn "Source not found: $src"
+        [[ "$is_critical" == "true" ]] && return 1 || return 2
     fi
     
     # Handle existing config
@@ -233,10 +246,11 @@ install_yay() {
 
 install_packages() {
     # Check existing packages
-    local total_packages=$((${#CORE_PKGS[@]} + ${#UTIL_PKGS[@]}))
+    local all_packages=("${CORE_PKGS[@]}" "${TERMINAL_PKGS[@]}" "${UTIL_PKGS[@]}")
+    local total_packages=${#all_packages[@]}
     local installed_count=0
     
-    for pkg in "${CORE_PKGS[@]}" "${UTIL_PKGS[@]}"; do
+    for pkg in "${all_packages[@]}"; do
         yay -Qi "$pkg" >/dev/null 2>&1 && ((installed_count++))
     done 2>/dev/null || true
     
@@ -248,7 +262,7 @@ install_packages() {
         }
     else
         local missing=$((total_packages - installed_count))
-        confirm_action "Install $missing packages? (~700MB download)" || {
+        confirm_action "Install $missing packages? (~800MB download)" || {
             _log "Skipping package installation"
             return 0
         }
@@ -261,8 +275,8 @@ install_packages() {
         return 0
     fi
     
-    # Install core packages first
-    _log "Installing core packages..."
+    # Install core packages first (critical for desktop)
+    _log "Installing core desktop packages..."
     local failed_core=()
     for pkg in "${CORE_PKGS[@]}"; do
         if ! yay -Qi "$pkg" >/dev/null 2>&1; then
@@ -273,7 +287,19 @@ install_packages() {
         fi
     done
     
-    # Install utility packages
+    # Install terminal packages
+    _log "Installing terminal packages..."
+    local failed_terminal=()
+    for pkg in "${TERMINAL_PKGS[@]}"; do
+        if ! yay -Qi "$pkg" >/dev/null 2>&1; then
+            if ! yay -S --needed --noconfirm "$pkg" >/dev/null 2>&1; then
+                failed_terminal+=("$pkg")
+                _warn "Failed to install: $pkg"
+            fi
+        fi
+    done
+    
+    # Install utility packages (non-critical)
     _log "Installing utility packages..."
     for pkg in "${UTIL_PKGS[@]}"; do
         if ! yay -Qi "$pkg" >/dev/null 2>&1; then
@@ -283,15 +309,31 @@ install_packages() {
     
     # Check critical packages
     if [[ ${#failed_core[@]} -gt 0 ]]; then
-        _err "Critical packages failed: ${failed_core[*]}"
+        _err "Critical desktop packages failed: ${failed_core[*]}"
         return 1
     fi
     
-    # Enable audio services
-    _log "Configuring audio services..."
+    # Warn about terminal packages but don't fail
+    if [[ ${#failed_terminal[@]} -gt 0 ]]; then
+        _warn "Some terminal packages failed: ${failed_terminal[*]}"
+        _warn "Terminal features may be limited"
+    fi
+    
+    # Configure services
+    _log "Configuring services..."
+    
+    # Audio services
     for service in pipewire pipewire-pulse wireplumber; do
         systemctl --user enable --now "$service" 2>/dev/null || _warn "Failed to enable $service"
     done
+    
+    # Set Fish as default shell if installed
+    if command_exists fish && [[ "$SHELL" != */fish ]]; then
+        _log "Setting Fish as default shell..."
+        if confirm_action "Make Fish your default shell?"; then
+            chsh -s "$(which fish)" || _warn "Failed to set Fish as default shell"
+        fi
+    fi
     
     return 0
 }
@@ -337,17 +379,14 @@ install_configs() {
                 IFS=':' read -r config_name dest_path display_name is_critical <<< "$config_def"
                 local src_path="$SCRIPT_DIR/$config_name"
                 
-                if [[ ! -e "$src_path" ]]; then
-                    _warn "Source not found: $src_path"
-                    [[ "$is_critical" == "true" ]] && ((failed_count++))
-                    continue
-                fi
+                local result=0
+                install_single_config "$src_path" "$dest_path" "$display_name" "$is_critical" "no_confirm" || result=$?
                 
-                if install_single_config "$src_path" "$dest_path" "$display_name" "$is_critical" "no_confirm"; then
-                    ((installed_count++))
-                else
-                    ((failed_count++))
-                fi
+                case $result in
+                    0) ((installed_count++)) ;;
+                    1) ((failed_count++)) ;;
+                    2) ((skipped_count++)) ;;
+                esac
             done
             ;;
             
@@ -356,12 +395,6 @@ install_configs() {
             for config_def in "${CONFIG_MAPPINGS[@]}"; do
                 IFS=':' read -r config_name dest_path display_name is_critical <<< "$config_def"
                 local src_path="$SCRIPT_DIR/$config_name"
-                
-                if [[ ! -e "$src_path" ]]; then
-                    _warn "Source not found: $src_path"
-                    [[ "$is_critical" == "true" ]] && ((failed_count++))
-                    continue
-                fi
                 
                 if confirm_action "Install $display_name?"; then
                     local result=0
@@ -385,61 +418,108 @@ install_configs() {
     _log "  Failed: $failed_count" 
     _log "  Skipped: $skipped_count"
     
-    [[ $failed_count -gt 0 ]] && return 1
+    # Only fail if critical configs failed
+    local critical_failed=false
+    for config_def in "${CONFIG_MAPPINGS[@]}"; do
+        IFS=':' read -r config_name dest_path display_name is_critical <<< "$config_def"
+        if [[ "$is_critical" == "true" && ! -e "$dest_path" ]]; then
+            critical_failed=true
+            break
+        fi
+    done
+    
+    [[ "$critical_failed" == "true" ]] && return 1
     return 0
 }
 
 install_utilities() {
+    local utilities_installed=0
+    
+    # Install WallSet utility
     local wallset_src="$SCRIPT_DIR/ags/scripts/WallSet.sh"
     local wallset_dest="$BIN_DEST/wallset"
     
-    [[ ! -f "$wallset_src" ]] && return 0
-    
-    if [[ -f "$wallset_dest" ]]; then
-        confirm_action "Overwrite existing wallset utility?" || {
-            _log "Skipping wallset utility"
-            return 0
-        }
-        backup_if_exists "$wallset_dest" "wallset"
+    if [[ -f "$wallset_src" ]]; then
+        if [[ -f "$wallset_dest" ]]; then
+            confirm_action "Overwrite existing wallset utility?" || {
+                _log "Skipping wallset utility"
+            }
+        fi
+        
+        if [[ ! -f "$wallset_dest" ]] || confirm_action "Overwrite existing wallset utility?"; then
+            backup_if_exists "$wallset_dest" "wallset"
+            mkdir -p "$BIN_DEST"
+            
+            if [[ "$DRY_RUN" == true ]]; then
+                _log "[dry-run] Would install wallset utility"
+            else
+                if cp "$wallset_src" "$wallset_dest" && chmod +x "$wallset_dest"; then
+                    _log "Installed wallset utility"
+                    ((utilities_installed++))
+                else
+                    _err "Failed to install wallset utility"
+                fi
+            fi
+        fi
     fi
     
-    mkdir -p "$BIN_DEST"
+    # Install GitDraw utility
+    local gitdraw_src="$SCRIPT_DIR/scripts/GitDraw.sh"
+    local gitdraw_dest="$BIN_DEST/gitdraw"
     
-    if [[ "$DRY_RUN" == true ]]; then
-        _log "[dry-run] Would install wallset utility"
-        return 0
+    if [[ -f "$gitdraw_src" ]]; then
+        if [[ ! -f "$gitdraw_dest" ]] || confirm_action "Install/update GitDraw utility?"; then
+            backup_if_exists "$gitdraw_dest" "gitdraw"
+            mkdir -p "$BIN_DEST"
+            
+            if [[ "$DRY_RUN" == true ]]; then
+                _log "[dry-run] Would install GitDraw utility"
+            else
+                if cp "$gitdraw_src" "$gitdraw_dest" && chmod +x "$gitdraw_dest"; then
+                    _log "Installed GitDraw utility"
+                    ((utilities_installed++))
+                else
+                    _warn "Failed to install GitDraw utility"
+                fi
+            fi
+        fi
     fi
     
-    if cp "$wallset_src" "$wallset_dest" && chmod +x "$wallset_dest"; then
-        _log "Installed wallset utility"
-    else
-        _err "Failed to install wallset utility"
-        return 1
-    fi
-    
+    [[ $utilities_installed -gt 0 ]] && _log "Installed $utilities_installed utilities"
     return 0
 }
 
 show_completion() {
     [[ "$DRY_RUN" == true ]] && {
-        _log "Dry run completed"
+        _log "Dry run completed - review the changes above"
         return 0
     }
     
-    _log "Installation completed!"
+    _log "ATEON installation completed!"
     echo
     _log "Next steps:"
     echo "  1. Log out and select Hyprland session"
-    echo "  2. Desktop should load automatically"
-    echo "  3. If needed, run 'ags run' in terminal"
+    echo "  2. Desktop should load automatically with AGS shell"
+    echo "  3. Open terminal (Super+Return) to see your new setup"
     echo
     _log "Key bindings:"
-    echo "  Super+Return: Terminal"
+    echo "  Super+Return: Terminal (Foot with Fish shell)"
     echo "  Super+Q: Close window"
     echo "  Super+Space: App launcher"
     echo "  Super+Shift+S: Screenshot"
     echo
-    _log "Backups: $BACKUPS_ROOT"
+    _log "Terminal features:"
+    echo "  • Fish shell with autosuggestions"
+    echo "  • Starship prompt with git integration"
+    echo "  • Fastfetch with ATEON ASCII art"
+    echo "  • JetBrains Mono Nerd Font"
+    echo
+    _log "Utilities installed:"
+    echo "  • wallset: Change wallpaper and apply theme"
+    echo "  • gitdraw: Sync your configs to Git"
+    echo
+    _log "Configuration backups: $BACKUPS_ROOT"
+    _log "Use './install.sh --list-backups' to see available backups"
 }
 
 list_backups() {
@@ -457,12 +537,21 @@ list_backups() {
             local date_part=${timestamp%_*}
             local time_part=${timestamp#*_}
             local formatted="${date_part:0:4}-${date_part:4:2}-${date_part:6:2} ${time_part:0:2}:${time_part:2:2}:${time_part:4:2}"
-            echo "  $formatted"
+            
+            # Show what's in the backup
+            local backup_contents=()
+            for config_def in "${CONFIG_MAPPINGS[@]}"; do
+                local config_name="${config_def%%:*}"
+                [[ -e "$backup_dir/$(basename "${config_name}")" ]] && backup_contents+=("$(basename "${config_name}")")
+            done
+            
+            echo "  $formatted (${#backup_contents[@]} configs: ${backup_contents[*]})"
             ((count++))
         fi
     done < <(find "$BACKUPS_ROOT" -maxdepth 1 -type d -name "????????_??????" | sort -r | head -10)
     
     [[ $count -eq 0 ]] && echo "  No backups found"
+    [[ $count -eq 10 ]] && echo "  (showing 10 most recent)"
 }
 
 restore_backup() {
@@ -476,71 +565,93 @@ restore_backup() {
     
     _log "Restoring from backup: $timestamp"
     
-    # Show available configs
+    # Show available configs in backup
     local available_configs=()
     for config_def in "${CONFIG_MAPPINGS[@]}"; do
         IFS=':' read -r config_name dest_path display_name _ <<< "$config_def"
-        [[ -e "$backup_path/$config_name" ]] && available_configs+=("$config_name:$dest_path:$display_name")
+        local backup_config="$backup_path/$(basename "$config_name")"
+        [[ -e "$backup_config" ]] && available_configs+=("$config_name:$dest_path:$display_name")
     done
     
+    # Check for utilities
     [[ -e "$backup_path/wallset" ]] && available_configs+=("wallset:$BIN_DEST/wallset:Wallset utility")
+    [[ -e "$backup_path/gitdraw" ]] && available_configs+=("gitdraw:$BIN_DEST/gitdraw:GitDraw utility")
     
     if [[ ${#available_configs[@]} -eq 0 ]]; then
         _err "No configurations found in backup"
         return 1
     fi
     
-    confirm_action "Restore ${#available_configs[@]} configurations?" "true" || return 0
+    _log "Found ${#available_configs[@]} configurations in backup"
+    confirm_action "Restore all configurations from backup?" "true" || return 0
     
     local restored=0
     for config_def in "${available_configs[@]}"; do
         IFS=':' read -r config_name dest_path display_name <<< "$config_def"
-        local backup_item="$backup_path/$config_name"
+        local backup_item="$backup_path/$(basename "$config_name")"
         
-        [[ -e "$dest_path" ]] && backup_if_exists "$dest_path" "$config_name"
+        [[ -e "$dest_path" ]] && backup_if_exists "$dest_path" "$(basename "$config_name")"
         
         _log "Restoring $display_name..."
         [[ -e "$dest_path" ]] && rm -rf "$dest_path"
         mkdir -p "$(dirname "$dest_path")"
         
         if cp -a "$backup_item" "$dest_path"; then
-            [[ "$config_name" == "wallset" ]] && chmod +x "$dest_path"
+            [[ "$config_name" =~ (wallset|gitdraw) ]] && chmod +x "$dest_path"
             ((restored++))
         else
             _err "Failed to restore $display_name"
         fi
     done
     
-    _log "Restored $restored configurations"
+    _log "Restored $restored configurations from backup"
+    _log "Restart your session to apply changes"
     return 0
 }
 
 show_help() {
     cat << 'EOF'
-Ateon Desktop Environment Installer
+ATEON Desktop Environment Installer
 
 USAGE:
     ./install.sh [OPTIONS]
 
 OPTIONS:
-    --update              Update configs only
+    --update              Update configs only (skip packages)
     --restore TIMESTAMP   Restore from backup
     --list-backups        Show available backups  
-    --dry-run            Preview changes
-    --force              Skip confirmations
+    --dry-run            Preview changes without making them
+    --force              Skip all confirmations
     --help               Show this help
 
 EXAMPLES:
-    ./install.sh                    # Interactive install
-    ./install.sh --dry-run          # Preview
+    ./install.sh                    # Full interactive install
+    ./install.sh --dry-run          # Preview installation
     ./install.sh --update           # Update configs only
-    ./install.sh --list-backups     # Show backups
+    ./install.sh --list-backups     # Show available backups
     ./install.sh --restore 20240101_120000
+
+WHAT GETS INSTALLED:
+    Desktop Environment:
+    • Hyprland compositor + AGS shell
+    • Material Design theming with matugen
+    
+    Terminal Setup:
+    • Foot terminal with transparency
+    • Fish shell with autosuggestions  
+    • Starship prompt with git integration
+    • Fastfetch with ATEON ASCII art
+    • JetBrains Mono Nerd Font
+    
+    Utilities:
+    • Screenshot tools (hyprshot, grim, slurp)
+    • Media controls and audio setup
+    • Development tools and apps
 
 REQUIREMENTS:
     • Arch Linux or derivative
-    • ~1GB free space
-    • Internet connection
+    • ~1.5GB free space
+    • Internet connection for packages
 EOF
 }
 
@@ -567,9 +678,10 @@ cleanup() {
 
 main() {
     trap cleanup EXIT
-    trap 'echo; _warn "Interrupted"; exit 130' INT TERM
+    trap 'echo; _warn "Interrupted by user"; exit 130' INT TERM
     
-    _log "Ateon Desktop Environment Installer"
+    _log "ATEON Desktop Environment Installer"
+    echo
     
     parse_arguments "$@"
     ACTION="${ACTION:-install}"
@@ -587,12 +699,14 @@ main() {
             show_completion
             ;;
         update)
+            _log "Updating configurations only..."
             install_configs || exit 1
             install_utilities
-            _log "Update completed"
+            _log "Configuration update completed"
+            _log "Restart your Hyprland session to apply changes"
             ;;
         restore)
-            [[ -z "$RESTORE_TARGET" ]] && { _err "Restore target required"; exit 1; }
+            [[ -z "$RESTORE_TARGET" ]] && { _err "Restore target timestamp required"; exit 1; }
             restore_backup "$RESTORE_TARGET"
             ;;
         *) _err "Unknown action: $ACTION"; exit 1 ;;

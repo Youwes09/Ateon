@@ -1,4 +1,4 @@
-=#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 # Configuration
@@ -8,6 +8,9 @@ SOURCES=(
     "$HOME/.config/ags" 
     "$HOME/.config/foot"
     "$HOME/.config/matugen"
+    "$HOME/.config/fish"
+    "$HOME/.config/starship.toml"
+    "$HOME/.config/fastfetch"
 )
 
 # Exclude patterns (files/dirs to skip during sync)
@@ -18,6 +21,10 @@ EXCLUDE_PATTERNS=(
     ".DS_Store"
     "node_modules"
     "__pycache__"
+    "fish_variables"
+    "fishd.*"
+    "completions"
+    "conf.d"
 )
 
 # Options
@@ -28,6 +35,7 @@ VERBOSE=false
 SHOW_CHANGES=true
 CREATE_BACKUP=false
 BACKUP_DIR="$HOME/.config-backups"
+PULL_FIRST=false
 
 # Colors and logging
 RED='\033[0;31m'
@@ -43,10 +51,10 @@ debug() { [[ "$VERBOSE" == true ]] && echo -e "${BLUE}[DEBUG]${NC} $*" >&2 || tr
 
 show_help() {
     cat << 'EOF'
-Config Sync Script - Sync local configs to Git repository
+ATEON Config Sync Script - Sync local configs to Git repository
 
 USAGE:
-    ./sync-configs.sh [OPTIONS]
+    ./gitdraw.sh [OPTIONS]
 
 OPTIONS:
     --dry-run           Show what would be synced without making changes
@@ -54,16 +62,29 @@ OPTIONS:
     --force-push        Automatically push after commit
     --verbose           Enable verbose logging
     --no-backup         Skip creating backup before sync
+    --pull-first        Pull from remote before syncing (recommended)
     --help              Show this help
 
 EXAMPLES:
-    ./sync-configs.sh                    # Interactive sync
-    ./sync-configs.sh --dry-run          # Preview changes
-    ./sync-configs.sh --auto-commit      # Auto-commit with timestamp
-    ./sync-configs.sh --force-push       # Sync and push automatically
+    ./gitdraw.sh                         # Interactive sync
+    ./gitdraw.sh --dry-run               # Preview changes
+    ./gitdraw.sh --auto-commit           # Auto-commit with timestamp
+    ./gitdraw.sh --pull-first --force-push  # Full sync with remote
+    ./gitdraw.sh --verbose --dry-run     # Detailed preview
 
-CONFIGURATION:
-Edit the script to modify DEST and SOURCES arrays for your setup.
+CONFIGURATION FILES SYNCED:
+    - Hyprland configs (~/.config/hypr)
+    - AGS configs (~/.config/ags)
+    - Foot terminal (~/.config/foot)
+    - Matugen theming (~/.config/matugen)
+    - Fish shell (~/.config/fish)
+    - Starship prompt (~/.config/starship.toml)
+    - Fastfetch system info (~/.config/fastfetch)
+
+NOTES:
+    - Fish temporary files are excluded automatically
+    - Use --pull-first to avoid conflicts when working on multiple machines
+    - Creates backups by default unless --no-backup is specified
 EOF
 }
 
@@ -75,11 +96,50 @@ parse_args() {
             --force-push) FORCE_PUSH=true ;;
             --verbose) VERBOSE=true ;;
             --no-backup) CREATE_BACKUP=false ;;
+            --pull-first) PULL_FIRST=true ;;
             --help|-h) show_help; exit 0 ;;
             *) error "Unknown option: $1"; show_help; exit 1 ;;
         esac
         shift
     done
+}
+
+pull_from_remote() {
+    if [[ "$DRY_RUN" == true ]]; then
+        log "Would pull from remote first"
+        return 0
+    fi
+    
+    cd "$DEST"
+    
+    # Check if we have a remote
+    if ! git remote >/dev/null 2>&1; then
+        debug "No remote configured, skipping pull"
+        return 0
+    fi
+    
+    log "Pulling latest changes from remote..."
+    
+    # Fetch first to see what's available
+    if git fetch; then
+        # Check if we're behind
+        local behind_count=$(git rev-list --count HEAD..@{u} 2>/dev/null || echo "0")
+        if [[ "$behind_count" -gt 0 ]]; then
+            log "Remote has $behind_count new commit(s), pulling..."
+            if git pull --rebase; then
+                log "Successfully pulled and rebased changes"
+            else
+                error "Failed to pull changes - you may need to resolve conflicts"
+                return 1
+            fi
+        else
+            debug "Already up to date with remote"
+        fi
+    else
+        warn "Failed to fetch from remote, continuing anyway..."
+    fi
+    
+    return 0
 }
 
 show_uncommitted_changes() {
@@ -123,6 +183,7 @@ validate_environment() {
     # Check if destination exists and is a git repo
     if [[ ! -d "$DEST" ]]; then
         error "Destination directory does not exist: $DEST"
+        error "Please clone your Ateon repository to $DEST first"
         return 1
     fi
     
@@ -149,20 +210,27 @@ validate_environment() {
         fi
     fi
     
-    # Validate source directories
+    # Validate source directories and files
     local missing_sources=()
+    local found_sources=()
+    
     for source in "${SOURCES[@]}"; do
-        if [[ ! -d "$source" ]]; then
+        if [[ -d "$source" ]] || [[ -f "$source" ]]; then
+            found_sources+=("$source")
+            debug "Found: $source"
+        else
             missing_sources+=("$source")
         fi
     done
     
-    if [[ ${#missing_sources[@]} -eq ${#SOURCES[@]} ]]; then
-        error "No source directories found"
+    if [[ ${#found_sources[@]} -eq 0 ]]; then
+        error "No source directories or files found"
         return 1
     elif [[ ${#missing_sources[@]} -gt 0 ]]; then
-        warn "Missing source directories:"
+        warn "Missing source directories/files:"
         printf '  %s\n' "${missing_sources[@]}"
+        echo
+        log "Found ${#found_sources[@]} source(s) to sync"
     fi
     
     debug "Environment validation passed"
@@ -192,26 +260,11 @@ create_backup() {
     
     # Keep only last 5 backups
     local backup_count
-    backup_count=$(find "$BACKUP_DIR" -maxdepth 1 -name "ateon_backup_*" -type d | wc -l)
+    backup_count=$(find "$BACKUP_DIR" -maxdepth 1 -name "ateon_backup_*" -type d 2>/dev/null | wc -l)
     if [[ $backup_count -gt 5 ]]; then
         log "Cleaning old backups (keeping 5 most recent)..."
-        find "$BACKUP_DIR" -maxdepth 1 -name "ateon_backup_*" -type d | sort | head -n $((backup_count - 5)) | xargs rm -rf
+        find "$BACKUP_DIR" -maxdepth 1 -name "ateon_backup_*" -type d 2>/dev/null | sort | head -n $((backup_count - 5)) | xargs rm -rf
     fi
-    
-    return 0
-}
-
-detect_changes() {
-    if [[ "$DRY_RUN" == true ]]; then
-        log "Would detect changes before sync"
-        return 0
-    fi
-    
-    debug "Detecting changes before sync..."
-    
-    # This function can be expanded to show what will change
-    # For now, just log that we're about to sync
-    log "Preparing to sync ${#SOURCES[@]} configuration directories"
     
     return 0
 }
@@ -224,6 +277,27 @@ build_rsync_excludes() {
     echo "${exclude_args[@]}"
 }
 
+sync_single_file() {
+    local source="$1"
+    local dest_file="$2"
+    
+    if [[ "$DRY_RUN" == true ]]; then
+        log "Would sync file: $source -> $dest_file"
+        return 0
+    fi
+    
+    # Create destination directory if needed
+    mkdir -p "$(dirname "$dest_file")"
+    
+    if cp "$source" "$dest_file"; then
+        debug "Successfully synced $(basename "$source")"
+        return 0
+    else
+        error "Failed to sync $(basename "$source")"
+        return 1
+    fi
+}
+
 sync_configs() {
     log "Syncing configurations..."
     
@@ -232,11 +306,24 @@ sync_configs() {
     exclude_args=($(build_rsync_excludes))
     
     for source in "${SOURCES[@]}"; do
-        if [[ ! -d "$source" ]]; then
+        if [[ ! -d "$source" ]] && [[ ! -f "$source" ]]; then
             debug "Skipping missing source: $source"
             continue
         fi
         
+        # Handle single files differently from directories
+        if [[ -f "$source" ]]; then
+            local filename=$(basename "$source")
+            local dest_file="$DEST/$filename"
+            
+            if sync_single_file "$source" "$dest_file"; then
+                log "Synced $filename"
+                ((synced_count++))
+            fi
+            continue
+        fi
+        
+        # Handle directories
         local basename=$(basename "$source")
         local dest_path="$DEST/$basename"
         
@@ -244,7 +331,8 @@ sync_configs() {
             log "Would sync: $source -> $dest_path"
             # Show what would be synced
             if command -v rsync >/dev/null 2>&1; then
-                rsync -av --dry-run "${exclude_args[@]}" "$source/" "$dest_path/" | head -20
+                echo "Preview of changes:"
+                rsync -av --dry-run "${exclude_args[@]}" "$source/" "$dest_path/" 2>/dev/null | head -20
                 echo "..."
             fi
         else
@@ -297,8 +385,11 @@ commit_changes() {
     
     # Check if there are any changes
     if git diff --quiet && git diff --cached --quiet; then
-        log "No changes to commit"
-        return 0
+        local untracked=$(git ls-files --others --exclude-standard)
+        if [[ -z "$untracked" ]]; then
+            log "No changes to commit"
+            return 0
+        fi
     fi
     
     # Show status
@@ -310,13 +401,13 @@ commit_changes() {
     # Get commit message
     local commit_msg
     if [[ "$AUTO_COMMIT" == true ]]; then
-        commit_msg="Auto-sync configs $(date '+%Y-%m-%d %H:%M:%S')"
+        commit_msg="Auto-sync ATEON configs $(date '+%Y-%m-%d %H:%M:%S')"
         log "Using auto-commit message: $commit_msg"
     else
         echo
         read -rp "Enter commit message (or press Enter for auto-message): " commit_msg
         if [[ -z "$commit_msg" ]]; then
-            commit_msg="Sync configs $(date '+%Y-%m-%d %H:%M:%S')"
+            commit_msg="Sync ATEON configs $(date '+%Y-%m-%d %H:%M:%S')"
         fi
     fi
     
@@ -335,7 +426,7 @@ commit_changes() {
             if git push; then
                 log "Successfully pushed to remote"
             else
-                warn "Failed to push to remote"
+                warn "Failed to push to remote - you may need to set up remote first"
                 return 1
             fi
         else
@@ -352,30 +443,49 @@ commit_changes() {
 show_summary() {
     if [[ "$DRY_RUN" == true ]]; then
         log "Dry run completed - no changes were made"
+        log "Run without --dry-run to actually sync your configs"
         return 0
     fi
     
     cd "$DEST"
     
-    log "Sync completed successfully!"
+    log "ATEON config sync completed successfully!"
     echo
     log "Repository status:"
     echo "  Location: $DEST"
     echo "  Branch: $(git branch --show-current)"
     echo "  Last commit: $(git log -1 --format='%h - %s (%cr)')"
     
+    # Show what was synced
+    echo
+    log "Synced configurations:"
+    for source in "${SOURCES[@]}"; do
+        if [[ -d "$source" ]] || [[ -f "$source" ]]; then
+            echo "  ✓ $(basename "$source")"
+        fi
+    done
+    
     # Show remote status if available
     if git remote >/dev/null 2>&1; then
         local remote_url=$(git remote get-url origin 2>/dev/null || echo "none")
+        echo
         echo "  Remote: $remote_url"
         
         # Check if we're ahead/behind
         if git ls-remote origin >/dev/null 2>&1; then
-            local status=$(git status --porcelain -b | head -1)
-            if [[ "$status" == *"ahead"* ]]; then
-                warn "Local branch is ahead of remote - consider pushing"
-            elif [[ "$status" == *"behind"* ]]; then
-                warn "Local branch is behind remote - consider pulling first"
+            local ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null || echo "0")
+            local behind=$(git rev-list --count HEAD..@{u} 2>/dev/null || echo "0")
+            
+            if [[ "$ahead" -gt 0 ]]; then
+                warn "Local branch is $ahead commit(s) ahead of remote"
+                [[ "$FORCE_PUSH" != true ]] && warn "Use --force-push next time to push automatically"
+            fi
+            if [[ "$behind" -gt 0 ]]; then
+                warn "Local branch is $behind commit(s) behind remote"
+                warn "Use --pull-first next time to avoid conflicts"
+            fi
+            if [[ "$ahead" -eq 0 ]] && [[ "$behind" -eq 0 ]]; then
+                log "✓ In sync with remote"
             fi
         fi
     fi
@@ -391,7 +501,7 @@ main() {
     trap cleanup EXIT
     trap 'echo; warn "Interrupted by user"; exit 130' INT TERM
     
-    log "Config Sync Script"
+    log "ATEON Config Sync Script"
     echo
     
     parse_args "$@"
@@ -405,24 +515,30 @@ main() {
         debug "  Dry run: $DRY_RUN"
         debug "  Auto commit: $AUTO_COMMIT"
         debug "  Force push: $FORCE_PUSH"
-        debug "  Show changes: $SHOW_CHANGES"
+        debug "  Pull first: $PULL_FIRST"
         debug "  Create backup: $CREATE_BACKUP"
         echo
     fi
     
     validate_environment || exit 1
     
+    # Pull from remote if requested
+    if [[ "$PULL_FIRST" == true ]]; then
+        pull_from_remote || exit 1
+    fi
+    
     # Create backup before making changes
     if [[ "$CREATE_BACKUP" == true ]]; then
         create_backup || exit 1
     fi
     
-    # Detect changes before sync
-    detect_changes || exit 1
-    
     sync_configs || exit 1
     commit_changes || exit 1
     show_summary
+    
+    echo
+    log "🎉 Your ATEON configs are now synced!"
+    [[ "$DRY_RUN" != true ]] && log "Your beautiful terminal setup is safely stored in Git."
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

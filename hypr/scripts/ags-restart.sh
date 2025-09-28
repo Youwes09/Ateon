@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-ags quit -i matshell
+ags quit -i ateon
 ags run
