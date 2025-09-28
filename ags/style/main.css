@@ -78,13 +78,13 @@ popover modelbutton:only-child {
 /* buttons */
 .button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(249, 172, 250, 0.2);
-  border: 1px solid rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 
 .button-disabled {
@@ -142,36 +142,36 @@ popover modelbutton:only-child {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(152.1, 95.7, 154.4);
-  box-shadow: inset -2px -2px 2px rgb(114.075, 71.775, 115.8);
+  background: rgb(164, 94.1, 102.8);
+  box-shadow: inset -2px -2px 2px rgb(123.6451667328, 69.9298332672, 76.6154327114);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(188.85, 137.95, 188.9);
-  box-shadow: inset -2px -2px 2px rgb(156.5988943489, 88.4716830467, 156.6658169533);
+  background: rgb(196.5, 138.35, 144.3);
+  box-shadow: inset -2px -2px 2px rgb(167.2577183842, 83.8797816158, 92.4111440194);
 }
 .Bar .Workspaces .monitor1 {
-  background: rgb(179, 138.5, 131);
-  box-shadow: inset -2px -2px 2px rgb(144.15, 97.06875, 88.35);
+  background: rgb(174, 143.5, 103.5);
+  box-shadow: inset -2px -2px 2px rgb(135.6169354839, 108.314516129, 72.5080645161);
 }
 .Bar .Workspaces .monitor1:hover {
-  background: rgb(209.4, 170.3, 163);
-  box-shadow: inset -2px -2px 2px rgb(178.5470930233, 112.9920784884, 100.7529069767);
+  background: rgb(206.4, 174.5, 134.1);
+  box-shadow: inset -2px -2px 2px rgb(181.9924778761, 134.0719026549, 73.3825221239);
 }
 .Bar .Workspaces .monitor2 {
-  background: rgb(131.6, 111.2, 129.7);
-  box-shadow: inset -2px -2px 2px rgb(98.7, 83.4, 97.275);
+  background: rgb(140.9, 109.5, 111.2);
+  box-shadow: inset -2px -2px 2px rgb(105.675, 82.125, 83.4);
 }
 .Bar .Workspaces .monitor2:hover {
-  background: rgb(172.1, 149.7, 169.45);
-  box-shadow: inset -2px -2px 2px rgb(135.0380180659, 106.3119819341, 131.6396253985);
+  background: rgb(181.65, 148.25, 149.7);
+  box-shadow: inset -2px -2px 2px rgb(146.6552956691, 100.7697043309, 102.7617434758);
 }
 .Bar .Workspaces .monitor3 {
-  background: rgb(169.2, 146.6, 166.1);
-  box-shadow: inset -2px -2px 2px rgb(132.2066941298, 104.6433058702, 128.4258753862);
+  background: rgb(181.4, 144.6, 145.9);
+  box-shadow: inset -2px -2px 2px rgb(146.7, 97.8, 99.5274456522);
 }
 .Bar .Workspaces .monitor3:hover {
-  background: rgb(130.2, 109.6, 127.85);
-  box-shadow: inset -2px -2px 2px rgb(97.65, 82.2, 95.8875);
+  background: rgb(140.9, 107.6, 109.15);
+  box-shadow: inset -2px -2px 2px rgb(105.675, 80.7, 81.8625);
 }
 .Bar {
   /* music */
@@ -222,7 +222,7 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(201.06, 128.82, 203.42);
+  color: rgb(210.8, 131.42, 138.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress radius {
@@ -232,7 +232,7 @@ popover modelbutton:only-child {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(201.06, 128.82, 203.42);
+  color: rgb(210.8, 131.42, 138.8);
 }
 .Bar .bar-hw-ram-box button label {
   margin: 1px 0px 0px 2px;
@@ -243,7 +243,7 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(201.06, 128.82, 203.42);
+  color: rgb(210.8, 131.42, 138.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress radius {
@@ -253,7 +253,7 @@ popover modelbutton:only-child {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(197.38, 141.5, 130.86);
+  color: rgb(184.08, 149.16, 102.9);
 }
 .Bar .bar-hw-cpu-box button label {
   margin: 1px 0px 0px 1px;
@@ -322,7 +322,7 @@ box.picker box.search {
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem;
-  background-color: rgba(249, 172, 250, 0.15);
+  background-color: rgba(255, 178, 183, 0.15);
 }
 box.picker box.search label {
   font-family: "Material Symbols Outlined";
@@ -388,16 +388,16 @@ box.picker box.results-list button label.description {
 }
 box.picker box.results-list button:focus, box.picker box.results-list button:hover {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(249, 172, 250, 0.2);
-  border: 1px solid rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.picker box.results-list button:focus:hover, box.picker box.results-list button:hover:hover {
-  background: rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 box.picker box.results-list button:focus, box.picker box.results-list button:hover {
-  background-color: rgba(249, 172, 250, 0.3);
+  background-color: rgba(255, 178, 183, 0.3);
   border: transparent;
 }
 box.picker box.results-grid {
@@ -439,7 +439,7 @@ box.picker box.not-found label {
 }
 .mode-bar .mode-button:hover, .mode-bar .mode-button:focus, .mode-bar .mode-button.active {
   border-radius: calc(16px - 0.4rem - 2px);
-  background-color: rgba(249, 172, 250, 0.15);
+  background-color: rgba(255, 178, 183, 0.15);
   border: transparent;
   padding: 6px 12px;
   transition: all 0.2s ease;
@@ -525,7 +525,7 @@ box.logout-background .logout-menu button {
   margin: 1rem;
 }
 box.logout-background .logout-menu button:focus {
-  background: rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";
@@ -819,13 +819,13 @@ box.logout-background .logout-menu button label {
 
 .network-item-active {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(249, 172, 250, 0.2);
-  border: 1px solid rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .network-item-active:hover {
-  background: rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 .network-item-active {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -1024,8 +1024,8 @@ image {
   margin: 0 0.4rem;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: rgba(249, 172, 250, 0.2);
-  border: 1px solid rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   transform: translateY(-2px);
 }
 .quick-actions-widget .actions-grid .action-button .action-icon {
@@ -1141,10 +1141,10 @@ image {
   transition: all 100ms ease;
 }
 .stacked-settings-widget .settings-scroll scrollbar slider:hover {
-  background: rgba(249, 172, 250, 0.7);
+  background: rgba(255, 178, 183, 0.7);
 }
 .stacked-settings-widget .settings-scroll scrollbar slider:active {
-  background: rgb(249, 172, 250);
+  background: rgb(255, 178, 183);
 }
 .stacked-settings-widget .option-row {
   background: rgba(24.1, 24.1, 24.1, 0.5);
@@ -1170,23 +1170,23 @@ image {
   background-color: rgba(226, 226, 226, 0.3);
 }
 .stacked-settings-widget .option-row .option-switch:checked {
-  background-color: rgba(249, 172, 250, 0.2);
+  background-color: rgba(255, 178, 183, 0.2);
 }
 .stacked-settings-widget .option-row .option-switch:checked slider {
-  background-color: rgba(249, 172, 250, 0.7);
+  background-color: rgba(255, 178, 183, 0.7);
 }
 .stacked-settings-widget .option-row .option-dropdown {
   min-width: 140px;
 }
 .stacked-settings-widget .option-row .option-dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(249, 172, 250, 0.2);
-  border: 1px solid rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .stacked-settings-widget .option-row .option-dropdown button:hover {
-  background: rgba(249, 172, 250, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 .stacked-settings-widget .option-row .option-dropdown button {
   border-radius: calc(8px * 1.5);

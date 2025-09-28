@@ -26,6 +26,7 @@ DRY_RUN=false
 FORCE=false
 ACTION=""
 RESTORE_TARGET=""
+INSTALL_MODE="grouped"  # "grouped" or "individual"
 
 # Package groups
 CORE_PKGS=(
@@ -51,15 +52,22 @@ UTIL_PKGS=(
 
 REQUIRED_DEPS=(git curl systemctl)
 
-# Config mappings: "source:dest:display_name:critical"
+# Config group definitions
+declare -A CONFIG_GROUPS=(
+    ["desktop"]="Desktop Environment (Hyprland + AGS + Matugen theming)"
+    ["terminal"]="Terminal Setup (Foot + Fish + Starship + Fastfetch)"
+    ["individual"]="Individual configuration files"
+)
+
+# Config mappings: "source:dest:display_name:group:critical"
 CONFIG_MAPPINGS=(
-    "hypr:$HYPR_DEST:Hyprland configuration:true"
-    "ags:$AGS_DEST:AGS desktop shell:true"
-    "matugen:$MATUGEN_DEST:Matugen theming:false"
-    "foot:$FOOT_DEST:Foot terminal:false"
-    "fish:$FISH_DEST:Fish shell:false"
-    "fastfetch:$FASTFETCH_DEST:Fastfetch system info:false"
-    "starship.toml:$STARSHIP_DEST:Starship prompt:false"
+    "hypr:$HYPR_DEST:Hyprland configuration:desktop:true"
+    "ags:$AGS_DEST:AGS desktop shell:desktop:true"
+    "matugen:$MATUGEN_DEST:Matugen theming:desktop:false"
+    "foot:$FOOT_DEST:Foot terminal:terminal:false"
+    "fish:$FISH_DEST:Fish shell:terminal:false"
+    "starship.toml:$STARSHIP_DEST:Starship prompt:terminal:false"
+    "fastfetch:$FASTFETCH_DEST:Fastfetch system info:terminal:false"
 )
 
 # Logging
@@ -122,24 +130,25 @@ validate_system() {
         return 1
     fi
     
+    # Check if script is run from correct directory
+    local expected_configs=("hypr" "ags" "foot" "fish")
+    local missing_configs=()
+    
+    for config in "${expected_configs[@]}"; do
+        [[ ! -d "$SCRIPT_DIR/$config" && ! -f "$SCRIPT_DIR/$config" ]] && missing_configs+=("$config")
+    done
+    
+    if [[ ${#missing_configs[@]} -gt 0 ]]; then
+        _err "Missing source configurations: ${missing_configs[*]}"
+        _err "Please run this script from the ATEON repository root directory"
+        return 1
+    fi
+    
     local free_space
     free_space=$(df "$USER_HOME" --output=avail -B1M | tail -n1 | tr -d ' ')
     if [[ $free_space -lt 1500 ]]; then
         _warn "Low disk space: ${free_space}MB available (recommended: 1.5GB+)"
         confirm_action "Continue with limited disk space?" || return 1
-    fi
-    
-    # Validate source configs exist
-    local missing_configs=()
-    for config_def in "${CONFIG_MAPPINGS[@]}"; do
-        local config_name="${config_def%%:*}"
-        local src_path="$SCRIPT_DIR/$config_name"
-        [[ ! -e "$src_path" ]] && missing_configs+=("$config_name")
-    done
-    
-    if [[ ${#missing_configs[@]} -gt 0 ]]; then
-        _warn "Missing source configurations: ${missing_configs[*]}"
-        _log "These will be skipped during installation"
     fi
     
     return 0
@@ -338,62 +347,160 @@ install_packages() {
     return 0
 }
 
+choose_install_mode() {
+    if [[ "$FORCE" == "true" ]]; then
+        INSTALL_MODE="grouped"
+        return 0
+    fi
+    
+    echo
+    _log "Configuration installation options:"
+    echo "  1. Grouped installation (recommended)"
+    echo "     • Desktop Environment: Hyprland + AGS + Matugen theming"
+    echo "     • Terminal Setup: Foot + Fish + Starship + Fastfetch"
+    echo "  2. Individual configuration selection"
+    echo
+    
+    while true; do
+        read -rp "Choose installation mode [1-2]: " choice
+        case "$choice" in
+            1|"") INSTALL_MODE="grouped"; break ;;
+            2) INSTALL_MODE="individual"; break ;;
+            *) _warn "Invalid choice. Please enter 1 or 2." ;;
+        esac
+    done
+}
+
+install_config_group() {
+    local group="$1"
+    local group_description="$2"
+    local confirm_mode="$3"
+    
+    # Find all configs in this group
+    local group_configs=()
+    local group_names=()
+    for config_def in "${CONFIG_MAPPINGS[@]}"; do
+        IFS=':' read -r config_name dest_path display_name config_group is_critical <<< "$config_def"
+        if [[ "$config_group" == "$group" ]]; then
+            group_configs+=("$config_def")
+            group_names+=("$display_name")
+        fi
+    done
+    
+    if [[ ${#group_configs[@]} -eq 0 ]]; then
+        _warn "No configurations found for group: $group"
+        return 0
+    fi
+    
+    # Check if group should be installed
+    if [[ "$confirm_mode" == "confirm" ]]; then
+        echo
+        _log "Install $group_description?"
+        echo "  Includes: ${group_names[*]}"
+        if ! confirm_action "Install this group?"; then
+            _log "Skipping $group_description"
+            return 0
+        fi
+    fi
+    
+    # Check for existing configs in group
+    local has_existing=false
+    if [[ "$confirm_mode" != "no_confirm" ]]; then
+        for config_def in "${group_configs[@]}"; do
+            IFS=':' read -r config_name dest_path _ _ _ <<< "$config_def"
+            if [[ -e "$dest_path" ]]; then
+                has_existing=true
+                break
+            fi
+        done
+        
+        if [[ "$has_existing" == "true" ]] && [[ "$confirm_mode" == "confirm" ]]; then
+            if ! confirm_action "Replace existing configurations in this group?" "true"; then
+                _log "Skipping $group_description"
+                return 0
+            fi
+        fi
+    fi
+    
+    # Install all configs in group
+    local installed=0
+    local failed=0
+    
+    _log "Installing $group_description..."
+    
+    for config_def in "${group_configs[@]}"; do
+        IFS=':' read -r config_name dest_path display_name _ is_critical <<< "$config_def"
+        local src_path="$SCRIPT_DIR/$config_name"
+        
+        local result=0
+        install_single_config "$src_path" "$dest_path" "$display_name" "$is_critical" "no_confirm" || result=$?
+        
+        case $result in
+            0) ((installed++)) ;;
+            1) ((failed++)) ;;
+            2) _log "Skipped $display_name (source not found)" ;;
+        esac
+    done
+    
+    if [[ $installed -gt 0 ]]; then
+        _log "Successfully installed $installed configurations in $group_description"
+    fi
+    
+    if [[ $failed -gt 0 ]]; then
+        _warn "$failed configurations failed in $group_description"
+        return 1
+    fi
+    
+    return 0
+}
+
 install_configs() {
     _log "Installing configurations..."
     
-    # Determine install mode - default to install_all
-    local install_mode="install_all"
-    if [[ "$FORCE" != "true" ]]; then
-        read -rp "Install all configs? [Y/n]: " ans
-        case "${ans,,}" in
-            n|no) install_mode="selective" ;;
-            *) install_mode="install_all" ;;
-        esac
-    fi
+    choose_install_mode
     
-    local installed_count=0
-    local failed_count=0
-    local skipped_count=0
+    local total_installed=0
+    local total_failed=0
     
-    case "$install_mode" in
-        "install_all")
+    case "$INSTALL_MODE" in
+        "grouped")
             # Check if any configs exist and ask once for all
             local has_existing_configs=false
             for config_def in "${CONFIG_MAPPINGS[@]}"; do
-                IFS=':' read -r config_name dest_path _ _ <<< "$config_def"
+                IFS=':' read -r config_name dest_path _ _ _ <<< "$config_def"
                 if [[ -e "$dest_path" ]]; then
                     has_existing_configs=true
                     break
                 fi
             done
             
-            if [[ "$has_existing_configs" == "true" ]]; then
+            local confirm_mode="no_confirm"
+            if [[ "$has_existing_configs" == "true" ]] && [[ "$FORCE" != "true" ]]; then
                 if ! confirm_action "Replace ALL existing configurations?" "true"; then
                     _log "Installation cancelled"
                     return 1
                 fi
             fi
             
-            # Install all configs without individual confirmation
-            for config_def in "${CONFIG_MAPPINGS[@]}"; do
-                IFS=':' read -r config_name dest_path display_name is_critical <<< "$config_def"
-                local src_path="$SCRIPT_DIR/$config_name"
-                
-                local result=0
-                install_single_config "$src_path" "$dest_path" "$display_name" "$is_critical" "no_confirm" || result=$?
-                
-                case $result in
-                    0) ((installed_count++)) ;;
-                    1) ((failed_count++)) ;;
-                    2) ((skipped_count++)) ;;
-                esac
-            done
+            # Install desktop group
+            if install_config_group "desktop" "${CONFIG_GROUPS[desktop]}" "$confirm_mode"; then
+                ((total_installed += 3))  # hypr + ags + matugen
+            else
+                ((total_failed++))
+            fi
+            
+            # Install terminal group
+            if install_config_group "terminal" "${CONFIG_GROUPS[terminal]}" "$confirm_mode"; then
+                ((total_installed += 4))  # foot + fish + starship + fastfetch
+            else
+                ((total_failed++))
+            fi
             ;;
             
-        "selective")
+        "individual")
             # Ask for each config individually
             for config_def in "${CONFIG_MAPPINGS[@]}"; do
-                IFS=':' read -r config_name dest_path display_name is_critical <<< "$config_def"
+                IFS=':' read -r config_name dest_path display_name config_group is_critical <<< "$config_def"
                 local src_path="$SCRIPT_DIR/$config_name"
                 
                 if confirm_action "Install $display_name?"; then
@@ -401,30 +508,29 @@ install_configs() {
                     install_single_config "$src_path" "$dest_path" "$display_name" "$is_critical" "confirm" || result=$?
                     
                     case $result in
-                        0) ((installed_count++)) ;;
-                        1) ((failed_count++)) ;;
-                        2) ((skipped_count++)) ;;
+                        0) ((total_installed++)) ;;
+                        1) ((total_failed++)) ;;
+                        2) _log "Skipped $display_name" ;;
                     esac
                 else
                     _log "Skipping $display_name"
-                    ((skipped_count++))
                 fi
             done
             ;;
     esac
     
-    _log "Configuration summary:"
-    _log "  Installed: $installed_count"
-    _log "  Failed: $failed_count" 
-    _log "  Skipped: $skipped_count"
+    echo
+    _log "Configuration installation summary:"
+    _log "  Successfully installed: $total_installed"
+    _log "  Failed: $total_failed"
     
     # Only fail if critical configs failed
     local critical_failed=false
     for config_def in "${CONFIG_MAPPINGS[@]}"; do
-        IFS=':' read -r config_name dest_path display_name is_critical <<< "$config_def"
+        IFS=':' read -r config_name dest_path display_name config_group is_critical <<< "$config_def"
         if [[ "$is_critical" == "true" && ! -e "$dest_path" ]]; then
             critical_failed=true
-            break
+            _err "Critical configuration missing: $display_name"
         fi
     done
     
@@ -434,34 +540,6 @@ install_configs() {
 
 install_utilities() {
     local utilities_installed=0
-    
-    # Install WallSet utility
-    local wallset_src="$SCRIPT_DIR/ags/scripts/WallSet.sh"
-    local wallset_dest="$BIN_DEST/wallset"
-    
-    if [[ -f "$wallset_src" ]]; then
-        if [[ -f "$wallset_dest" ]]; then
-            confirm_action "Overwrite existing wallset utility?" || {
-                _log "Skipping wallset utility"
-            }
-        fi
-        
-        if [[ ! -f "$wallset_dest" ]] || confirm_action "Overwrite existing wallset utility?"; then
-            backup_if_exists "$wallset_dest" "wallset"
-            mkdir -p "$BIN_DEST"
-            
-            if [[ "$DRY_RUN" == true ]]; then
-                _log "[dry-run] Would install wallset utility"
-            else
-                if cp "$wallset_src" "$wallset_dest" && chmod +x "$wallset_dest"; then
-                    _log "Installed wallset utility"
-                    ((utilities_installed++))
-                else
-                    _err "Failed to install wallset utility"
-                fi
-            fi
-        fi
-    fi
     
     # Install GitDraw utility
     local gitdraw_src="$SCRIPT_DIR/scripts/GitDraw.sh"
@@ -495,7 +573,8 @@ show_completion() {
         return 0
     }
     
-    _log "ATEON installation completed!"
+    echo
+    _log "🎉 ATEON installation completed successfully!"
     echo
     _log "Next steps:"
     echo "  1. Log out and select Hyprland session"
@@ -513,10 +592,6 @@ show_completion() {
     echo "  • Starship prompt with git integration"
     echo "  • Fastfetch with ATEON ASCII art"
     echo "  • JetBrains Mono Nerd Font"
-    echo
-    _log "Utilities installed:"
-    echo "  • wallset: Change wallpaper and apply theme"
-    echo "  • gitdraw: Sync your configs to Git"
     echo
     _log "Configuration backups: $BACKUPS_ROOT"
     _log "Use './install.sh --list-backups' to see available backups"
@@ -541,7 +616,7 @@ list_backups() {
             # Show what's in the backup
             local backup_contents=()
             for config_def in "${CONFIG_MAPPINGS[@]}"; do
-                local config_name="${config_def%%:*}"
+                IFS=':' read -r config_name _ _ _ _ <<< "$config_def"
                 [[ -e "$backup_dir/$(basename "${config_name}")" ]] && backup_contents+=("$(basename "${config_name}")")
             done
             
@@ -568,13 +643,12 @@ restore_backup() {
     # Show available configs in backup
     local available_configs=()
     for config_def in "${CONFIG_MAPPINGS[@]}"; do
-        IFS=':' read -r config_name dest_path display_name _ <<< "$config_def"
+        IFS=':' read -r config_name dest_path display_name _ _ <<< "$config_def"
         local backup_config="$backup_path/$(basename "$config_name")"
         [[ -e "$backup_config" ]] && available_configs+=("$config_name:$dest_path:$display_name")
     done
     
     # Check for utilities
-    [[ -e "$backup_path/wallset" ]] && available_configs+=("wallset:$BIN_DEST/wallset:Wallset utility")
     [[ -e "$backup_path/gitdraw" ]] && available_configs+=("gitdraw:$BIN_DEST/gitdraw:GitDraw utility")
     
     if [[ ${#available_configs[@]} -eq 0 ]]; then
@@ -597,7 +671,7 @@ restore_backup() {
         mkdir -p "$(dirname "$dest_path")"
         
         if cp -a "$backup_item" "$dest_path"; then
-            [[ "$config_name" =~ (wallset|gitdraw) ]] && chmod +x "$dest_path"
+            [[ "$config_name" =~ gitdraw ]] && chmod +x "$dest_path"
             ((restored++))
         else
             _err "Failed to restore $display_name"
@@ -621,7 +695,7 @@ OPTIONS:
     --restore TIMESTAMP   Restore from backup
     --list-backups        Show available backups  
     --dry-run            Preview changes without making them
-    --force              Skip all confirmations
+    --force              Skip all confirmations (use grouped mode)
     --help               Show this help
 
 EXAMPLES:
@@ -631,27 +705,23 @@ EXAMPLES:
     ./install.sh --list-backups     # Show available backups
     ./install.sh --restore 20240101_120000
 
-WHAT GETS INSTALLED:
+CONFIGURATION GROUPS:
     Desktop Environment:
-    • Hyprland compositor + AGS shell
-    • Material Design theming with matugen
+    • Hyprland compositor configuration
+    • AGS shell with widgets and panels
+    • Matugen theming integration
     
     Terminal Setup:
     • Foot terminal with transparency
     • Fish shell with autosuggestions  
     • Starship prompt with git integration
     • Fastfetch with ATEON ASCII art
-    • JetBrains Mono Nerd Font
-    
-    Utilities:
-    • Screenshot tools (hyprshot, grim, slurp)
-    • Media controls and audio setup
-    • Development tools and apps
 
 REQUIREMENTS:
     • Arch Linux or derivative
     • ~1.5GB free space
     • Internet connection for packages
+    • Run from ATEON repository root directory
 EOF
 }
 
@@ -680,7 +750,8 @@ main() {
     trap cleanup EXIT
     trap 'echo; _warn "Interrupted by user"; exit 130' INT TERM
     
-    _log "ATEON Desktop Environment Installer"
+    echo
+    _log "🚀 ATEON Desktop Environment Installer"
     echo
     
     parse_arguments "$@"
