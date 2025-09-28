@@ -7,9 +7,6 @@
  / ___ / /_/  __/ /_/ / / / / 
 /_/  |_\__/\___/\____/_/ /_/  
 ```
-
-# Ateon
-
 ### A complete Hyprland desktop rice with GTK4 Material Design shell
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Youwes09/Ateon?style=for-the-badge&logo=gitlfs&logoColor=%23D8B4FE&labelColor=%234C1D95&color=%23D8B4FE)
@@ -63,12 +60,14 @@ Built upon the foundation of [Matshell](https://github.com/neurarian/matshell), 
 - Logout Menu - wlogout-like but ags
 
 - App Launcher - Fast fuzzy search application access
+  
+- Wallpaper Manager - Linked with Matugen Theming
 
 - On-Screen Display - Tracks Audio, Brightness, and Bluetooth connections
 
 - Sidebar - Weather display and digital flip clock
-
-- Drop-down Bar (Coming Soon) - Keybinds cheatsheet, periodic table, and wallpaper manager
+  
+- Customized Terminal
 
 </details>
 
