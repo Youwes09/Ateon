@@ -16,7 +16,7 @@
   "musicPlayer.modules.cava.style": "catmull_rom",
   "system-menu.modules.bluetooth-advanced.enable": true,
   "system-menu.modules.wifi-advanced.enable": true,
-  "wallpaper.dir": "/home/shozikan/Pictures/Wallpapers",
+  "wallpaper.dir": "~/Pictures/Wallpapers",
   "wallpaper.cache-size": 50,
   "wallpaper.theme-cache-size": 100,
   "weather.update-interval": 900000
