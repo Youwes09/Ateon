@@ -886,7 +886,6 @@ box.logout-background .logout-menu button label {
 }
 
 .disconnect-button,
-.connect-button,
 .forget-button,
 .cancel-button {
   border-radius: calc(8px * 1.6);

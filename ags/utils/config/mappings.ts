@@ -17,6 +17,7 @@ export const OS_OPTIONS: OptionChoice[] = [
   { label: "Arch Linux", value: "arch-symbolic" },
   { label: "NixOS", value: "nix-symbolic" },
   { label: "Windows", value: "windows-symbolic"},
+  { label: "Ateon", value: "ateon-symbolic"},
 ];
 
 export const BAR_POSITION_OPTIONS: OptionChoice[] = [
