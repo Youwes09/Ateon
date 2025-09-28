@@ -168,8 +168,15 @@ export class WallpaperStore extends GObject.Object {
 
   // Public API
   search(text: string): WallpaperItem[] {
-    if (!text?.trim()) return [];
+    if (!text?.trim()) return this.getAllWallpapers();
     return this.fuse.search(text, { limit: this.maxItems }).map((r) => r.item);
+  }
+
+  // Method to get all wallpapers sorted alphabetically
+  getAllWallpapers(): WallpaperItem[] {
+    return [...this.wallpapers]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .slice(0, this.maxItems);
   }
 
   async setRandomWallpaper() {

@@ -17,3 +17,8 @@ output_path = "~/.config/chromash/colors/current.fish"
 [templates.foot_config]
 input_path = "~/.config/ags/matugen/templates/foot.ini"
 output_path = "~/.config/foot/foot.ini"
+
+[templates.discord_theme]
+input_path = "~/.config/ags/matugen/templates/ateon-midnight-discord.scss"
+output_path = "~/.config/equibop/themes/ateon-midnight.theme.css"
+

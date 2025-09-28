@@ -1,0 +1,171 @@
+/**
+ * @name Ateon Discord
+ * @description A dark discord theme with Ateon colors. Standalone version.
+ * @author Ateon Theme System
+ * @version 1.0.0
+ * @description Standalone theme using Ateon color palette
+*/
+
+/* Import base fonts */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Ateon Material Design 3 colors */
+    --ateon-primary: {{colors.primary.default.hex}};
+    --ateon-on-primary: {{colors.on_primary.default.hex}};
+    --ateon-primary-container: {{colors.primary_container.default.hex}};
+    --ateon-on-primary-container: {{colors.on_primary_container.default.hex}};
+    --ateon-secondary: {{colors.secondary.default.hex}};
+    --ateon-on-secondary: {{colors.on_secondary.default.hex}};
+    --ateon-secondary-container: {{colors.secondary_container.default.hex}};
+    --ateon-tertiary: {{colors.tertiary.default.hex}};
+    --ateon-error: {{colors.error.default.hex}};
+    --ateon-surface: {{colors.surface.default.hex}};
+    --ateon-on-surface: {{colors.on_surface.default.hex}};
+    --ateon-surface-variant: {{colors.surface_variant.default.hex}};
+    --ateon-on-surface-variant: {{colors.on_surface_variant.default.hex}};
+    --ateon-outline: {{colors.outline.default.hex}};
+    --ateon-outline-variant: {{colors.outline_variant.default.hex}};
+    --ateon-surface-container: {{colors.surface_container.default.hex}};
+    --ateon-surface-container-low: {{colors.surface_container_low.default.hex}};
+    --ateon-surface-container-high: {{colors.surface_container_high.default.hex}};
+    --ateon-surface-container-highest: {{colors.surface_container_highest.default.hex}};
+    --ateon-background: {{colors.background.default.hex}};
+
+    /* Additional accent colors */
+    --ateon-green: #a3be8c;
+    --ateon-yellow: #ebcb8b;
+    --ateon-purple: #b48ead;
+
+    /* Discord color overrides using Ateon colors */
+    /* Main backgrounds */
+    --background-primary: var(--ateon-background);
+    --background-secondary: var(--ateon-surface);
+    --background-secondary-alt: var(--ateon-surface-container-low);
+    --background-tertiary: var(--ateon-surface-container);
+    --background-accent: var(--ateon-primary);
+    --background-floating: var(--ateon-surface-container-high);
+    --background-mobile-primary: var(--ateon-background);
+    --background-mobile-secondary: var(--ateon-surface);
+    --background-nested-floating: var(--ateon-surface-container);
+    --background-message-hover: var(--ateon-surface-container-low);
+    --background-modifier-hover: var(--ateon-surface-container-low);
+    --background-modifier-active: var(--ateon-surface-container);
+    --background-modifier-selected: var(--ateon-surface-container-high);
+    --background-modifier-accent: var(--ateon-primary-container);
+
+    /* Text colors */
+    --text-normal: var(--ateon-on-surface);
+    --text-muted: var(--ateon-outline);
+    --text-faint: var(--ateon-outline-variant);
+    --text-positive: var(--ateon-green);
+    --text-warning: var(--ateon-yellow);
+    --text-danger: var(--ateon-error);
+    --text-brand: var(--ateon-primary);
+    --text-link: var(--ateon-primary);
+
+    /* Header colors */
+    --header-primary: var(--ateon-on-surface);
+    --header-secondary: var(--ateon-outline);
+
+    /* Interactive elements */
+    --interactive-normal: var(--ateon-outline);
+    --interactive-hover: var(--ateon-on-surface-variant);
+    --interactive-active: var(--ateon-on-surface);
+    --interactive-muted: var(--ateon-outline-variant);
+
+    /* Buttons */
+    --button-danger-background: var(--ateon-error);
+    --button-danger-background-hover: var(--ateon-error);
+    --button-danger-background-active: var(--ateon-error);
+    --button-positive-background: var(--ateon-green);
+    --button-positive-background-hover: var(--ateon-green);
+    --button-positive-background-active: var(--ateon-green);
+    --button-secondary-background: var(--ateon-secondary);
+    --button-secondary-background-hover: var(--ateon-secondary-container);
+    --button-secondary-background-active: var(--ateon-secondary);
+
+    /* Channels and DMs */
+    --channels-default: var(--ateon-outline);
+    --channel-icon: var(--ateon-outline);
+
+    /* Scrollbars */
+    --scrollbar-auto-thumb: var(--ateon-surface-container-high);
+    --scrollbar-auto-track: var(--ateon-surface-container);
+    --scrollbar-thin-thumb: var(--ateon-surface-container-high);
+    --scrollbar-thin-track: transparent;
+
+    /* Status colors */
+    --status-positive: var(--ateon-green);
+    --status-warning: var(--ateon-yellow);
+    --status-danger: var(--ateon-error);
+
+    /* Control elements */
+    --control-brand-foreground: var(--ateon-primary);
+    --focus-primary: var(--ateon-primary);
+    --logo-primary: var(--ateon-primary);
+
+    /* Input elements */
+    --input-background: var(--ateon-surface-container);
+    --input-placeholder-text: var(--ateon-outline-variant);
+
+    /* Mentions */
+    --mention-background: var(--ateon-primary-container);
+    --mention-foreground: var(--ateon-on-primary-container);
+
+    /* Cards */
+    --card-primary-background: var(--ateon-surface-container);
+    --card-secondary-background: var(--ateon-surface-container-low);
+
+    /* Borders */
+    --border-faint: var(--ateon-outline-variant);
+    --border-strong: var(--ateon-outline);
+
+    /* Chat input */
+    --channeltextarea-background: var(--ateon-surface-container);
+
+    /* Font */
+    --font-display: 'Figtree', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-headline: 'Figtree', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-primary: 'Figtree', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-code: 'Consolas', 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', 'Monaco', 'Courier New', Courier, monospace;
+}
+
+/* Apply font to body */
+body {
+    font-family: var(--font-primary) !important;
+}
+
+/* Optional: Add some nice rounded corners and modern styling */
+.container_ca50b9,
+.sidebar_a4d4d9,
+.chat_a7d72e,
+.members_cbd271 {
+    border-radius: 12px;
+}
+
+.messageListItem_d5deea {
+    border-radius: 8px;
+}
+
+/* Optional: Add subtle transparency to some elements */
+.container_ca50b9 {
+    background-color: var(--background-secondary);
+}
+
+.sidebar_a4d4d9 {
+    background-color: var(--background-tertiary);
+}
+
+.chat_a7d72e {
+    background-color: var(--background-primary);
+}
+
+/* Fix any potential text contrast issues */
+.colorStandard_e1d592 {
+    color: var(--text-normal) !important;
+}
+
+.colorMuted_e1d592 {
+    color: var(--text-muted) !important;
+}

@@ -34,7 +34,7 @@ CORE_PKGS=(
     libastal-{hyprland,tray,notifd,apps,wireplumber,mpris,network,bluetooth,cava,battery,powerprofiles}-git
     libgtop dart-sass imagemagick adwaita-icon-theme libadwaita
     ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-material-symbols-variable-git
-    hyprpaper polkit-gnome glib-networking libsoup3
+    hyprpaper polkit-gnome glib-networking libsoup3 resources
 )
 
 TERMINAL_PKGS=(
