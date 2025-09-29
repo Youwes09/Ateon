@@ -7,170 +7,340 @@
  / ___ / /_/  __/ /_/ / / / / 
 /_/  |_\__/\___/\____/_/ /_/  
 ```
-### A complete Hyprland desktop rice with GTK4 Material Design shell
+[![GitHub repo size](https://img.shields.io/github/repo-size/Youwes09/Ateon?style=for-the-badge&logo=gitlfs&logoColor=%23D8B4FE&labelColor=%234C1D95&color=%23D8B4FE)](https://github.com/Youwes09/Ateon)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Youwes09/Ateon?style=for-the-badge&logo=git&logoColor=%23C084FC&labelColor=%234C1D95&color=%23C084FC)](https://github.com/Youwes09/Ateon/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Youwes09/Ateon/main?style=for-the-badge&logo=git&logoColor=%23A855F7&labelColor=%234C1D95&color=%23A855F7)](https://github.com/Youwes09/Ateon/commits/main)
+[![GitHub stars](https://img.shields.io/github/stars/Youwes09/Ateon?style=for-the-badge&logo=github&logoColor=%239333EA&labelColor=%234C1D95&color=%239333EA)](https://github.com/Youwes09/Ateon/stargazers)
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Youwes09/Ateon?style=for-the-badge&logo=gitlfs&logoColor=%23D8B4FE&labelColor=%234C1D95&color=%23D8B4FE)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Youwes09/Ateon?style=for-the-badge&logo=git&logoColor=%23C084FC&labelColor=%234C1D95&color=%23C084FC)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Youwes09/Ateon/main?style=for-the-badge&logo=git&logoColor=%23A855F7&labelColor=%234C1D95&color=%23A855F7)
-![GitHub Repo stars](https://img.shields.io/github/stars/Youwes09/Ateon?style=for-the-badge&logo=github&logoColor=%239333EA&labelColor=%234C1D95&color=%239333EA)
+*Powered by AGSv3 • Built with GTK4 • Designed for Hyprland*
 
 </div>
 
-Ateon is a complete desktop rice featuring a Material Design-inspired shell built with [AGS/Astal](https://github.com/Aylur/astal) for [Hyprland](https://github.com/hyprwm/Hyprland). This comprehensive rice includes configurations for the window manager, shell components, and various system utilities to create a cohesive desktop experience.
+---
 
-Built upon the foundation of [Matshell](https://github.com/neurarian/matshell), Ateon provides a polished, modern desktop environment with elegant animations and thoughtful design choices.
+## Overview
 
-***Powered by AGSv3 and modern tooling.***
+Ateon is a complete desktop rice featuring a Material Design shell built with [AGS/Astal](https://github.com/Aylur/astal) for [Hyprland](https://github.com/hyprwm/Hyprland). Built upon the foundation of [Matshell](https://github.com/neurarian/matshell), it provides a cohesive desktop experience with intelligent theming, smooth animations, and adaptive layouts that work seamlessly across desktop and laptop configurations.
 
-## What's Included
+---
 
-- **Complete Desktop Environment**: Pre-configured Hyprland setup with all necessary components
-- **Material Design Shell**: Beautiful AGS-based interface with dynamic theming
-- **Adaptive Layouts**: Seamlessly works across desktop and laptop configurations  
-- **Multi-monitor Ready**: Optimized for complex display setups
-- **Dynamic Theming**: Real-time theme switching with matugen integration
-- **Comprehensive Configs**: Window manager rules, keybindings, and system integrations
+## Project Structure
+
+```
+~/Ateon/
+├── ags/
+│   ├── app.ts                      # Application entry point
+│   ├── options.ts                  # Configuration options
+│   ├── config.json                 # User configuration
+│   ├── assets/                     # Icons and default wallpaper
+│   ├── matugen/templates/          # Theme generation templates
+│   ├── style/                      # SCSS stylesheets
+│   │   ├── abstracts/              # Variables, mixins, functions
+│   │   ├── base/                   # Reset and base styles
+│   │   ├── components/             # Component-specific styles
+│   │   └── layouts/                # Layout definitions
+│   ├── utils/                      # Utility functions and services
+│   │   ├── battery.ts
+│   │   ├── bluetooth/              # Bluetooth management
+│   │   ├── brightness.ts
+│   │   ├── chromash/               # Color theming utility
+│   │   ├── clipboard/              # Clipboard manager
+│   │   ├── config/                 # Configuration system
+│   │   ├── notifd/                 # Notification daemon
+│   │   ├── picker/                 # App and wallpaper picker
+│   │   ├── weather/                # Weather service
+│   │   └── wifi/                   # WiFi management
+│   └── widgets/                    # UI components
+│       ├── bar/                    # Status bar
+│       ├── clipboard/              # Clipboard interface
+│       ├── control-panel/          # Settings panel
+│       ├── launcher/               # App launcher
+│       ├── logout-menu/            # Power menu
+│       ├── music/                  # Media player with CAVA
+│       ├── notifications/          # Notification popups
+│       ├── osd/                    # On-screen display
+│       ├── picker/                 # Unified picker interface
+│       ├── sidebar/                # Clock and weather sidebar
+│       └── system-menu/            # Quick settings
+├── hypr/                           # Hyprland configuration
+│   ├── hyprland.conf
+│   ├── autostart.conf
+│   ├── keybinds.conf
+│   └── workspaces.conf
+├── fish/                           # Fish shell config
+├── foot/                           # Foot terminal config
+├── fastfetch/                      # System info display
+├── matugen/                        # Matugen configuration
+├── install.sh                      # Installation script
+└── GitDraw.sh                      # Backup utility
+```
+
+---
+
+## Features
 
 <details>
-  <summary>Show detailed components list</summary>
+<summary><strong>Dynamic Theming Engine</strong></summary>
 
-### Components
-
-- Status Bar - Sleek, informative main bar with system information
-
-  - Workspace Management - Themed Hyprland workspace integration
-  - System Tray
-  - Visual Performance Monitoring - CPU & memory
-  - Simple Clock
-
-- Music Player - Media controls, music cover themed
-
-  - Audio Visualization - Extensive library of CAVA visualizer styles to choose from
-
-- System Menu - Minimalistic core system integration
-
-  - Network Management - WiFi scanning, connection management, and status monitoring
-  - Bluetooth Support - Device pairing, management, and status indicators
-  - Brightness Controls
-  - Audio Controls
-  - Battery Metrics
-  - Power Profiles
-  - Notification Center - Intuitive notification management system & DND mode
-
-- Logout Menu - wlogout-like but ags
-
-- App Launcher - Fast fuzzy search application access
-  
-- Wallpaper Manager - Linked with Matugen Theming
-
-- On-Screen Display - Tracks Audio, Brightness, and Bluetooth connections
-
-- Sidebar - Weather display and digital flip clock
-  
-- Customized Terminal
+Automatic color scheme generation from wallpaper selection using matugen. Real-time theme switching across the entire system including shell components, terminal, and applications. Fine-tune specific colors through the chromash utility located at `~/.config/ags/utils/chromash/chromash` for complete control over your aesthetic.
 
 </details>
 
-______________________________________________________________________
+<details>
+<summary><strong>Intelligent Clipboard Manager</strong></summary>
+
+System-wide clipboard history with fuzzy search, live preview, and keyboard-driven navigation. Built with GTK4 and powered by clipvault, supporting multiple content types with efficient memory management. Supports up to 100 entries with smooth scrolling interface limited to 9 visible items.
+
+</details>
+
+<details>
+<summary><strong>Audio Visualization</strong></summary>
+
+CAVA-powered sound visualizer with extensive library of visual styles including bars, catmull-rom splines, circular, dots, jumping bars, mesh, particles, smooth, waterfall, and wave particles. Real-time waveform rendering using advanced interpolation for smooth, responsive animations.
+
+</details>
+
+<details>
+<summary><strong>Unified Picker Interface</strong></summary>
+
+Integrated wallpaper manager with live preview grid and automatic theme generation on selection. Fast fuzzy search application launcher with adaptive results and instant execution. Both modes accessible through a single, elegant interface.
+
+</details>
+
+<details>
+<summary><strong>Notification Center</strong></summary>
+
+Comprehensive notification management with Do Not Disturb mode, grouped notifications by application, action buttons, and notification history. Integrated with system tray for quick access. Live notification popups with customizable timeout.
+
+</details>
+
+<details>
+<summary><strong>System Control Panel</strong></summary>
+
+Unified settings interface featuring network management with WiFi scanning and connection controls, Bluetooth device pairing and status monitoring, audio output and input controls with wireplumber integration, brightness adjustment, battery metrics with power profile switching, and quick toggles for common settings.
+
+</details>
+
+<details>
+<summary><strong>Digital Flip Clock & Weather Widget</strong></summary>
+
+Sidebar featuring animated flip clock with smooth transitions and live weather information with forecast data. Minimalist design with quick action buttons and additional widget templates for customization.
+
+</details>
+
+<details>
+<summary><strong>Performance Monitoring</strong></summary>
+
+Visual CPU and memory usage indicators integrated into the status bar using GTK4 circular progress widgets. Real-time system health tracking with smooth animations.
+
+</details>
+
+<details>
+<summary><strong>Multi-Monitor Support</strong></summary>
+
+Optimized for complex display setups with per-monitor configurations, intelligent workspace management, and seamless monitor hotplugging. Pre-configured Hyprland layer rules ensure optimal blur effects and performance across all displays.
+
+</details>
+
+<details>
+<summary><strong>Status Bar</strong></summary>
+
+Information-dense status bar with themed Hyprland workspace indicators, system tray integration, performance metrics, media controls, and clock. Adaptive layout adjusts to available space and active components. Includes system information display with battery, Bluetooth, and network status.
+
+</details>
+
+---
+
+## Installation
+
+### Quick Start
+
+```bash
+git clone https://github.com/Youwes09/Ateon.git ~/Ateon
+cd ~/Ateon
+bash install.sh
+```
+
+> [!IMPORTANT]
+> The installer preserves existing configurations and will not overwrite files without explicit permission.
 
 ### Dependencies
 
 <details>
-  <summary>Show dependency list</summary>
+<summary><strong>Core Requirements</strong></summary>
 
-#### Required:
-
-- aylurs-gtk-shell-git
-- libastal-hyprland-git
-- libastal-tray-git
-- libastal-notifd-git
-- libastal-apps-git
-- libastal-wireplumber-git
-- libastal-mpris-git
-- libastal-network-git
-- libastal-bluetooth-git
-- libastal-cava-git
-- libastal-battery-git
-- libastal-powerprofiles-git
-- libgtop
-- libadwaita
-- libsoup3
-- hyprland
-- coreutils
-- dart-sass
-- imagemagick
-- networkmanager
-- wireplumber
-- bluez & bluez-utils (will also run fine without, but throws some non-critical errors on startup)
-- adwaita-icon-theme
-- ttf-material-symbols-variable-git
-- ttf-firacode-nerd
-- ***For matugen theming:***
-  - matugen
-  - [chromash](https://github.com/Youwes09/Chromash) (optional; for additional chroma/tone based theming)
-
-#### Not required but useful for laptop device features:
-
-- upower
-- brightnessctl
+```
+aylurs-gtk-shell-git
+libastal-hyprland-git
+libastal-tray-git
+libastal-notifd-git
+libastal-apps-git
+libastal-wireplumber-git
+libastal-mpris-git
+libastal-network-git
+libastal-bluetooth-git
+libastal-cava-git
+libastal-battery-git
+libastal-powerprofiles-git
+libgtop
+libadwaita
+libsoup3
+hyprland
+networkmanager
+wireplumber
+```
 
 </details>
 
-### Installation
+<details>
+<summary><strong>System Utilities</strong></summary>
 
-The installation script will handle everything for you while preserving your existing configurations:
+```
+coreutils
+dart-sass
+imagemagick
+bluez
+bluez-utils
+adwaita-icon-theme
+```
+</details>
 
-```console
-git clone https://github.com/Youwes09/Ateon.git ~/Ateon
-bash ~/Ateon/install.sh
+<details>
+<summary><strong>Fonts</strong></summary>
+
+```
+ttf-material-symbols-variable-git
+ttf-firacode-nerd
 ```
 
-> [!NOTE]  
-> The installer respects existing configurations and won't overwrite your current setup without permission.
+</details>
 
-### Wallpaper Management
+<details>
+<summary><strong>Theming System</strong></summary>
 
-Change your wallpaper and apply matching themes:
+```
+matugen
+chromash(https://github.com/Youwes09/Chromash)
+```
+</details>
 
-```console
-./WallSet.sh /path/to/your/wallpaper.jpg
+<details>
+<summary><strong>Laptop Features (Optional)</strong></summary>
+
+```
+upower
+brightnessctl
 ```
 
-This script automatically generates a color scheme from your wallpaper and applies it system-wide.
+Required for battery monitoring and display brightness control on portable devices.
 
-### Personal Backup System
+</details>
 
-Create backups of your customizations or pull changes from your personal system:
+---
 
-```console
-./GitDraw.sh
+## Usage
+
+### Wallpaper & Theme Management
+
+Access the integrated wallpaper picker through the unified picker interface. Select any wallpaper to automatically generate and apply a matching Material Design color scheme across the entire system.
+
+For advanced color customization, use the chromash utility:
+
+```bash
+~/.config/ags/utils/chromash/chromash
 ```
 
-Use this to maintain your personal fork or backup your modifications.
+This executable provides fine-grained control over specific color values in your generated theme.
 
 ### Configuration
 
-After installation, customize your experience by editing the generated config files:
+#### Shell Settings
 
-- **Shell Settings**: `~/.config/ags/config.json` - Terminal, browser, file manager preferences
-- **Hyprland Config**: Included window manager configuration with optimized rules
-- **Theme Templates**: Automatic theme generation templates for consistent styling
+Edit `~/.config/ags/config.json` to customize:
+- Preferred terminal emulator
+- Default browser
+- File manager
+- Component behavior
+- Animation speeds and effects
 
-> [!TIP]  
-> The rice includes pre-configured Hyprland layer rules for optimal blur effects and performance.
+#### Hyprland Configuration
 
-______________________________________________________________________
+The included Hyprland configuration provides:
+- Optimized window rules for shell components
+- Pre-configured keybindings
+- Layer rules for proper blur effects
+- Multi-monitor workspace assignments
+
+#### Theme Customization
+
+Theme templates are located in `~/.config/ags/matugen/templates/`. These files control:
+- Color scheme application across multiple applications
+- Material Design token mapping
+- GTK, terminal, and application theming
+
+Generated themes are applied to:
+- AGS shell components
+- Hyprland colors
+- Hyprlock lockscreen
+- Foot terminal
+- Fish shell
+- GTK applications
+- Discord (Ateon Midnight theme)
+
+### Personal Backup System
+
+Maintain your customizations across multiple machines:
+
+```bash
+./GitDraw.sh
+```
+
+This utility creates backups of your configuration or syncs changes from your personal fork.
+
+---
+
+## Component Architecture
+
+| Component | Description | Technology |
+|-----------|-------------|------------|
+| **Status Bar** | System information, workspace indicators, system tray | GTK4, Astal |
+| **App Launcher** | Fuzzy search application access with instant execution | libastal-apps |
+| **Wallpaper Manager** | Grid-based wallpaper browser with live preview | GTK4, matugen |
+| **Clipboard Manager** | History management with search and content preview | GTK4, clipvault |
+| **Notification Center** | Grouped notifications with DND mode and actions | libastal-notifd |
+| **System Menu** | Network, Bluetooth, audio, brightness, power controls | Multiple Astal libraries |
+| **Music Player** | Media controls with CAVA visualization | libastal-mpris, libastal-cava |
+| **Sidebar** | Weather display and animated flip clock | GTK4, libsoup3 |
+| **OSD** | On-screen indicators for volume, brightness, Bluetooth | GTK4 |
+| **Logout Menu** | Power management interface with confirmation | GTK4 |
+| **Control Panel** | Centralized settings and configuration interface | GTK4 |
+
+---
 
 ## Acknowledgements
 
-This project wouldn't be possible without:
-- [Neurarian](https://github.com/Neurarian) for the amazing [Matshell](https://github.com/neurarian/matshell) foundation
-- [Aylur](https://github.com/Aylur) for the powerful widget toolkit
-- [fufexan's dotfiles](https://github.com/fufexan/dotfiles) for the initial inspiration and foundation
-- [matugen](https://github.com/InioX/matugen) for the amazing Material Color theming utility
-- [kotontrion](https://github.com/kotontrion/kompass) for the GTK4 CAVA Catmull-Rom spline widget
-- [ARKye03](https://github.com/ARKye03) for the GTK4 circular progress widget which is currently still on its way to be merged into Astal
-- [saimoomedits' eww-widgets](https://github.com/saimoomedits/eww-widgets) for design influence
-- [end-4's dots-hyprland](https://github.com/end-4/dots-hyprland) for some inspiration on the color generation
+This project is built upon the work of numerous talented developers:
 
-Special thanks to the broader community of rice enthusiasts and the developers of the underlying technologies that make Ateon possible.
+**Core Foundation**
+- [Neurarian](https://github.com/Neurarian) - [Matshell](https://github.com/neurarian/matshell) provided the architectural foundation
+- [Aylur](https://github.com/Aylur) - Creator of AGS/Astal widget toolkit
+- [fufexan](https://github.com/fufexan/dotfiles) - Initial inspiration and implementation patterns
+
+**Theming & Visualization**
+- [InioX](https://github.com/InioX/matugen) - Material color theming utility
+- [kotontrion](https://github.com/kotontrion/kompass) - GTK4 CAVA Catmull-Rom spline widget implementation
+- [ARKye03](https://github.com/ARKye03) - GTK4 circular progress widget
+
+**Design Influence**
+- [saimoomedits](https://github.com/saimoomedits/eww-widgets) - UI/UX design patterns
+- [end-4](https://github.com/end-4/dots-hyprland) - Color generation methodology
+
+Special recognition to the Hyprland community and all contributors who make ambitious desktop customization projects possible.
+
+---
+
+<div align="center">
+
+**[⬆ Back to Top](#ateon)**
+
+</div>
