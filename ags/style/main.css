@@ -1349,4 +1349,165 @@ image {
   margin-right: 0.75rem;
 }
 
+/* variables & mixins */
+/* general styles */
+box.clipboard {
+  border-radius: 16px;
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
+  margin: 5px 10px 15px;
+  padding: 0.4rem;
+  min-width: 500px;
+}
+
+.mode-bar {
+  border-radius: calc(16px - 0.4rem - 2px);
+  padding: 8px;
+  background-color: rgba(19, 19, 19, 0.4);
+  border-bottom: 1px solid rgba(226, 226, 226, 0.15);
+  margin: 0.5rem 0.5rem 0;
+}
+.mode-bar .mode-button {
+  border-radius: calc(16px - 0.4rem - 2px);
+  padding: 8px 14px;
+  margin: 0 4px;
+  background-color: transparent;
+  border: 1px solid rgba(226, 226, 226, 0.15);
+  color: rgb(226, 226, 226);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.mode-bar .mode-button:hover {
+  background-color: rgba(226, 226, 226, 0.1);
+  border-color: rgba(226, 226, 226, 0.3);
+}
+.mode-bar .mode-button box {
+  spacing: 6px;
+}
+.mode-bar .clear-all-button {
+  border-radius: calc(16px - 0.4rem - 2px);
+  padding: 8px 14px;
+  margin: 0 8px 0 4px;
+  background-color: rgba(255, 180, 171, 0.15);
+  border: 1px solid rgb(255, 180, 171);
+  color: rgb(226, 226, 226);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.mode-bar .clear-all-button:hover {
+  background-color: rgb(255, 180, 171);
+  color: white;
+}
+.mode-bar .clear-all-button:hover label.mode-icon {
+  color: white;
+}
+.mode-bar .clear-all-button box {
+  spacing: 6px;
+}
+.mode-bar label.mode-icon {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-size: 1.2rem;
+  margin-right: 6px;
+}
+.mode-bar .entry-count {
+  font-size: 0.9rem;
+  color: rgba(226, 226, 226, 0.7);
+  margin: auto 8px auto 0;
+}
+
+.search-section {
+  border-radius: calc(16px - 0.4rem - 2px);
+  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
+  background: rgba(57, 57, 57, 0.6);
+  margin: 0.4rem;
+  padding: 0.4rem;
+  margin: 1rem 0.5rem;
+  background-color: rgba(255, 178, 183, 0.15);
+  padding: 0.4rem;
+}
+.search-section label.search-icon {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-size: 1.5rem;
+  margin: 0 0.3rem;
+}
+.search-section entry.search-entry {
+  font-size: 1.3rem;
+  padding: 0.25rem 0.4rem;
+  min-height: 2.2rem;
+  background: transparent;
+  border: none;
+  color: rgb(226, 226, 226);
+}
+.search-section entry.search-entry:focus {
+  outline: none;
+  box-shadow: none;
+}
+.search-section .shortcut-hint {
+  font-size: 0.85rem;
+  color: rgba(226, 226, 226, 0.6);
+  margin: 0 0.5rem;
+}
+
+.clipboard-list {
+  border-radius: calc(16px - 0.4rem - 2px);
+  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
+  background: rgba(57, 57, 57, 0.6);
+  margin: 0.4rem;
+  padding: 0.4rem;
+  margin: 0 0.5rem 1rem;
+}
+.clipboard-list button.clipboard-entry {
+  border-radius: calc(16px - 0.4rem - 2px);
+  padding: 0.4rem;
+  margin: 2px 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+.clipboard-list button.clipboard-entry:hover {
+  background-color: rgba(255, 178, 183, 0.1);
+  border-color: rgba(255, 178, 183, 0.3);
+}
+.clipboard-list button.clipboard-entry.selected {
+  background-color: rgba(255, 178, 183, 0.15);
+  border-color: rgb(255, 178, 183);
+}
+.clipboard-list button.clipboard-entry.selected .entry-text {
+  color: white;
+  font-weight: 500;
+}
+.clipboard-list button.clipboard-entry.selected .delete-icon {
+  color: white;
+}
+.clipboard-list button.clipboard-entry .entry-text {
+  font-size: 1rem;
+  color: rgb(226, 226, 226);
+  margin-right: auto;
+}
+.clipboard-list button.clipboard-entry label.delete-icon {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-size: 1.2rem;
+  color: rgba(255, 180, 171, 0.7);
+  margin-left: 0.4rem;
+}
+.clipboard-list label.no-entries {
+  padding: 0.75rem;
+  color: rgba(226, 226, 226, 0.6);
+  font-style: italic;
+}
+
+button.invisible-close {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+}
+
 /*# sourceMappingURL=main.css.map */
