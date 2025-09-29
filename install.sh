@@ -39,7 +39,7 @@ CORE_PKGS=(
 
 TERMINAL_PKGS=(
     foot fish starship fastfetch
-    wl-clipboard
+    wl-clipboard clipvault
 )
 
 UTIL_PKGS=(
