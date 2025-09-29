@@ -1493,6 +1493,21 @@ box.clipboard {
   color: rgba(255, 180, 171, 0.7);
   margin-left: 0.4rem;
 }
+.clipboard-list button.clipboard-entry.image-entry {
+  padding: 0.4rem;
+  min-height: auto;
+}
+.clipboard-list button.clipboard-entry.image-entry .entry-image {
+  border-radius: 8px;
+  border: 1px solid rgba(226, 226, 226, 0.15);
+}
+.clipboard-list button.clipboard-entry.image-entry.selected .entry-image {
+  border-color: rgb(255, 178, 183);
+  box-shadow: 0 0 8px rgba(255, 178, 183, 0.5);
+}
+.clipboard-list button.clipboard-entry.image-entry:hover .entry-image {
+  border-color: rgba(255, 178, 183, 0.3);
+}
 .clipboard-list label.no-entries {
   padding: 0.75rem;
   color: rgba(226, 226, 226, 0.6);

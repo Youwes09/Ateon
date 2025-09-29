@@ -221,6 +221,8 @@ export class WallpaperStore extends GObject.Object {
       throw new Error("chromash not found or not executable at " + chromash);
     }
     await execAsync(`"${chromash}" wallpaper "${imagePath}"`);
+
+    await new Promise(resolve => setTimeout(resolve, 100));
     await execAsync(`"${chromash}" export-colors`);
     this.scheduleThemeUpdate(imagePath);
   }

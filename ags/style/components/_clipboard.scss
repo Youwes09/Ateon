@@ -47,7 +47,7 @@ box.clipboard {
     &:hover {
       background-color: $error;
       color: white;
-      
+
       label.mode-icon {
         color: white;
       }
@@ -149,6 +149,30 @@ box.clipboard {
       font-size: 1.2rem;
       color: color.adjust($error, $alpha: -0.3);
       margin-left: $spacing-sm;
+    }
+
+    // Image-specific styles
+    &.image-entry {
+      padding: $spacing-sm;
+      min-height: auto;
+
+      .entry-image {
+        border-radius: 8px;
+        border: 1px solid color.adjust($fg, $alpha: -0.85);
+      }
+    }
+
+    &.image-entry.selected {
+      .entry-image {
+        border-color: $primary;
+        box-shadow: 0 0 8px color.adjust($primary, $alpha: -0.5);
+      }
+    }
+
+    &.image-entry:hover {
+      .entry-image {
+        border-color: color.adjust($primary, $alpha: -0.7);
+      }
     }
   }
 

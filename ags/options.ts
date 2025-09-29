@@ -41,6 +41,7 @@ const options = await (async () => {
       "wallpaper.current": defineOption(currentWallpaper, {
         useCache: true,
       }),
+      "clipboard.show-images": defineOption(true),
       "wallpaper.theme-cache": defineOption<Record<string, CachedThemeEntry>>(
         {},
         { useCache: true },

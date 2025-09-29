@@ -22,19 +22,10 @@ export function ModeBar() {
     }
   };
 
-  // Store the original onUpdate callback if it exists
-  const originalOnUpdate = clipboard.onUpdate;
-  
-  // Add our callback to the callback system instead of overwriting
   clipboard.addUpdateCallback(() => {
     updateEntryCount();
     updateButtons();
   });
-
-  // If there was an original callback, make sure it still works
-  if (originalOnUpdate && typeof originalOnUpdate === 'function') {
-    clipboard.addUpdateCallback(originalOnUpdate);
-  }
 
   return (
     <box cssClasses={["mode-bar"]} orientation={Gtk.Orientation.HORIZONTAL}>
@@ -51,6 +42,7 @@ export function ModeBar() {
           <label label="Select" />
         </box>
       </button>
+
       <button 
         cssClasses={["mode-button"]} 
         onClicked={() => { 
@@ -64,7 +56,9 @@ export function ModeBar() {
           <label label="Delete" />
         </box>
       </button>
+
       <box hexpand />
+
       <button 
         cssClasses={["clear-all-button"]} 
         visible={false}
@@ -72,10 +66,11 @@ export function ModeBar() {
         $={(self) => { clearAllButton = self; }}
       >
         <box orientation={Gtk.Orientation.HORIZONTAL}>
-          <label label="delete_history" cssClasses={["mode-icon"]} />
+          <label label="delete_sweep" cssClasses={["mode-icon"]} />
           <label label="Clear All" />
         </box>
       </button>
+
       <label 
         label="0 entries" 
         cssClasses={["entry-count"]} 

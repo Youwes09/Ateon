@@ -1,8 +1,12 @@
 import { execAsync } from "ags/process";
+import options from "options.ts";
 
 export interface ClipboardEntry {
   content: string;
   preview: string;
+  isImage?: boolean;
+  imageType?: string;
+  imagePath?: string;
 }
 
 class ClipboardManager {
@@ -16,12 +20,19 @@ class ClipboardManager {
   updateCallbacks: (() => void)[] = [];
   focusSearch?: () => void;
 
-  // Method to add update callbacks
+  get showImages() {
+    try {
+      return options["clipboard.show-images"]?.value ?? true;
+    } catch (e) {
+      console.error("Failed to read clipboard.show-images option:", e);
+      return true; // Fallback to showing images if config fails
+    }
+  }
+
   addUpdateCallback(callback: () => void) {
     this.updateCallbacks.push(callback);
   }
 
-  // Method to trigger all update callbacks
   triggerUpdate() {
     this.updateCallbacks.forEach(callback => {
       try {
@@ -32,7 +43,6 @@ class ClipboardManager {
     });
   }
 
-  // Maintain compatibility with existing onUpdate usage
   set onUpdate(callback: (() => void) | undefined) {
     if (callback) {
       this.updateCallbacks = [callback];
@@ -47,21 +57,52 @@ class ClipboardManager {
 
   async load() {
     console.log("Loading clipboard entries...");
-    // Clear existing entries to ensure fresh data
     this.entries = [];
     this.filtered = [];
+    
     try {
       const clip = await execAsync(["clipvault", "list"]);
       const lines = clip.split("\n").filter(Boolean).slice(0, 50);
       console.log(`Found ${lines.length} clipboard entries`);
-      this.entries = lines.map(line => {
-        const parts = line.split('\t');
-        const content = parts.slice(1).join('\t');
+      
+      const entryPromises = lines.map(async (line) => {
+        const [id, ...contentParts] = line.split('\t');
+        const content = contentParts.join('\t');
+        const imageMatch = content.match(/\[\[ binary data (image\/[^\]]+)\]\]/);
+        
+        if (imageMatch) {
+          const imageType = imageMatch[1];
+          const extension = imageType.split('/')[1] || 'png';
+          const imagePath = `/tmp/clipboard_thumb_${id}.${extension}`;
+          
+          try {
+            await execAsync(["bash", "-c", `clipvault get ${id} | cat > ${imagePath}`]);
+            console.log(`Saved image thumbnail: ${imagePath}`);
+            return {
+              content: line,
+              preview: `Image (${imageType})`,
+              isImage: true,
+              imageType,
+              imagePath,
+            };
+          } catch (e) {
+            console.error(`Failed to save image ${id}:`, e);
+            return {
+              content: line,
+              preview: `Image (${imageType}) - failed to load`,
+              isImage: true,
+              imageType,
+            };
+          }
+        }
+        
         return {
           content: line,
           preview: content.length > 100 ? content.slice(0, 97) + "..." : content,
         };
       });
+      
+      this.entries = await Promise.all(entryPromises);
       this.filter();
     } catch (e) {
       console.error("clipvault list failed:", e);
@@ -74,9 +115,7 @@ class ClipboardManager {
   filter() {
     const q = this.query.toLowerCase();
     this.filtered = this.entries.filter(e => e.content.toLowerCase().includes(q));
-    if (this.index >= this.filtered.length) {
-      this.index = Math.max(0, this.filtered.length - 1);
-    }
+    this.index = Math.min(this.index, Math.max(0, this.filtered.length - 1));
     this.triggerUpdate();
   }
 
@@ -90,9 +129,11 @@ class ClipboardManager {
   }
 
   async select(i = this.index) {
-    if (!this.filtered[i]) return;
     const entry = this.filtered[i];
+    if (!entry) return;
+    
     const id = entry.content.split('\t')[0];
+    
     try {
       if (this.mode === "delete") {
         await execAsync(["clipvault", "delete", id]);
@@ -110,7 +151,6 @@ class ClipboardManager {
     console.log("Showing clipboard window...");
     this.isVisible = true;
     if (this.window) this.window.visible = true;
-    // Always refresh clipboard entries when showing the window
     this.load().catch(console.error);
     return Promise.resolve();
   }
@@ -125,7 +165,6 @@ class ClipboardManager {
 
   toggleMode() {
     this.mode = this.mode === "select" ? "delete" : "select";
-    // Force immediate UI update
     setTimeout(() => this.triggerUpdate(), 0);
   }
 

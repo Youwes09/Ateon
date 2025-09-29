@@ -19,5 +19,6 @@
   "wallpaper.dir": "/home/shozikan/Pictures/Wallpapers",
   "wallpaper.cache-size": 50,
   "wallpaper.theme-cache-size": 100,
+  "clipboard.show-images": true,
   "weather.update-interval": 900000
 }
