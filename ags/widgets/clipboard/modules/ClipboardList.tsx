@@ -70,7 +70,7 @@ export function ClipboardList() {
   clipboard.addUpdateCallback(rebuild);
 
   return (
-    <scrolledwindow cssClasses={["clipboard-list"]} vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC} hscrollbarPolicy={Gtk.PolicyType.NEVER} maxContentHeight={400} propagateNaturalHeight>
+    <scrolledwindow cssClasses={["clipboard-list"]} vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC} hscrollbarPolicy={Gtk.PolicyType.NEVER} maxContentHeight={300} propagateNaturalHeight>
       <box orientation={Gtk.Orientation.VERTICAL} $={(self) => { listBox = self; setTimeout(() => clipboard.load(), 100); }} />
     </scrolledwindow>
   );

@@ -43,9 +43,9 @@ TERMINAL_PKGS=(
 )
 
 UTIL_PKGS=(
-    hyprshot swappy grim slurp hyprpicker-git
+    hyprshot swappy grim slurp hyprpicker
     brightnessctl playerctl pipewire pipewire-pulse wireplumber
-    firefox nautilus github-desktop code obsidian spotify-launcher
+    firefox nautilus code obsidian spotify-launcher
     normcap python-zxing-cpp tesseract tesseract-data-eng
     python-pytesseract pyside6 pavucontrol
 )
@@ -81,32 +81,15 @@ is_arch_based() { [[ -f /etc/arch-release ]] || command_exists pacman; }
 
 confirm_action() {
     local message="$1"
-    local is_destructive="${2:-false}"
-    local attempts=1
     
     [[ "$FORCE" == true ]] && return 0
     
-    if [[ "$is_destructive" == "true" ]]; then
-        attempts=3
-        _warn "DESTRUCTIVE OPERATION DETECTED"
-        _warn "This will overwrite existing configurations!"
+    _log "$message"
+    read -rp "Continue? [y/N]: " ans
+    if [[ ! "$ans" =~ ^[Yy]$ ]]; then
+        _log "Operation cancelled by user"
+        return 1
     fi
-    
-    for ((i=1; i<=attempts; i++)); do
-        if [[ $attempts -gt 1 ]]; then
-            _log "Confirmation $i/$attempts: $message"
-        else
-            _log "$message"
-        fi
-        
-        read -rp "Continue? [y/N]: " ans
-        if [[ ! "$ans" =~ ^[Yy]$ ]]; then
-            _log "Operation cancelled by user"
-            return 1
-        fi
-        
-        [[ $attempts -gt 1 && $i -lt $attempts ]] && sleep 1
-    done
     
     return 0
 }
@@ -154,84 +137,108 @@ validate_system() {
     return 0
 }
 
-backup_if_exists() {
-    local path="$1"
-    local backup_name="${2:-$(basename "$path")}"
+backup_existing_configs() {
+    _log "Creating backup of existing configurations..."
     
-    [[ ! -e "$path" ]] && return 0
+    local backed_up=0
+    local backup_needed=false
+    
+    # Check if any configs exist
+    for config_def in "${CONFIG_MAPPINGS[@]}"; do
+        IFS=':' read -r _ dest_path _ _ _ <<< "$config_def"
+        if [[ -e "$dest_path" ]]; then
+            backup_needed=true
+            break
+        fi
+    done
+    
+    # Check utilities
+    [[ -e "$BIN_DEST/gitdraw" ]] && backup_needed=true
+    
+    if [[ "$backup_needed" == false ]]; then
+        _log "No existing configurations to backup"
+        return 0
+    fi
+    
+    if [[ "$DRY_RUN" == true ]]; then
+        _log "[dry-run] Would create backup directory: $BACKUP_DIR"
+        return 0
+    fi
     
     mkdir -p "$BACKUP_DIR" || {
         _err "Failed to create backup directory"
         return 1
     }
     
-    _log "Creating backup of $backup_name"
-    
-    if [[ "$DRY_RUN" == true ]]; then
-        _log "[dry-run] Would backup $path"
-        return 0
-    fi
-    
-    if cp -a "$path" "$BACKUP_DIR/$backup_name" 2>/dev/null; then
-        if [[ -e "$BACKUP_DIR/$backup_name" ]]; then
-            _log "Successfully backed up $backup_name"
-            return 0
+    # Backup all existing configs
+    for config_def in "${CONFIG_MAPPINGS[@]}"; do
+        IFS=':' read -r config_name dest_path display_name _ _ <<< "$config_def"
+        
+        if [[ -e "$dest_path" ]]; then
+            local backup_name=$(basename "$dest_path")
+            _log "Backing up $display_name..."
+            
+            if cp -a "$dest_path" "$BACKUP_DIR/$backup_name" 2>/dev/null; then
+                ((backed_up++))
+            else
+                _warn "Failed to backup $display_name"
+            fi
         fi
+    done
+    
+    # Backup utilities
+    if [[ -e "$BIN_DEST/gitdraw" ]]; then
+        cp -a "$BIN_DEST/gitdraw" "$BACKUP_DIR/gitdraw" 2>/dev/null && ((backed_up++))
     fi
     
-    _err "Failed to backup $backup_name"
-    return 1
+    if [[ $backed_up -gt 0 ]]; then
+        _log "Backed up $backed_up configurations to: $BACKUP_DIR"
+    fi
+    
+    return 0
 }
 
 install_single_config() {
     local src="$1"
     local dest="$2"
-    local name="$3" 
-    local is_critical="$4"
-    local confirm_mode="$5"  # "confirm" or "no_confirm"
+    local name="$3"
     
     if [[ ! -e "$src" ]]; then
         _warn "Source not found: $src"
-        [[ "$is_critical" == "true" ]] && return 1 || return 2
-    fi
-    
-    # Handle existing config
-    if [[ -e "$dest" ]]; then
-        if ! backup_if_exists "$dest" "$(basename "$dest")"; then
-            _err "Failed to create backup for $name"
-            [[ "$is_critical" == "true" ]] && return 1
-        fi
-        
-        case "$confirm_mode" in
-            "confirm")
-                _warn "Existing configuration found: $dest"
-                if ! confirm_action "Replace existing $name?" "true"; then
-                    _log "Skipping installation of $name"
-                    return 2  # Skip code
-                fi
-                ;;
-            "no_confirm")
-                _log "Replacing existing $name"
-                ;;
-        esac
+        return 1
     fi
     
     if [[ "$DRY_RUN" == true ]]; then
-        _log "[dry-run] Would install $name"
+        _log "[dry-run] Would install $name to $dest"
         return 0
     fi
     
-    # Install the config
+    _log "Installing $name..."
+    
+    # Remove existing destination
     [[ -e "$dest" ]] && rm -rf "$dest"
+    
+    # Create parent directory
     mkdir -p "$(dirname "$dest")"
     
-    if cp -a "$src" "$dest" 2>/dev/null && [[ -e "$dest" ]]; then
-        _log "Successfully installed $name"
-        return 0
+    # Install based on type
+    if [[ -d "$src" ]]; then
+        # For directories, copy contents into destination
+        mkdir -p "$dest"
+        if cp -a "$src"/* "$dest/" 2>/dev/null; then
+            _log "Successfully installed $name"
+            return 0
+        fi
     else
-        _err "Failed to install $name"
-        return 1
+        # For files, copy directly
+        if cp -a "$src" "$dest" 2>/dev/null; then
+            _log "Successfully installed $name"
+            return 0
+        fi
     fi
+    
+    _err "Failed to install $name"
+    return 1
 }
 
 install_yay() {
@@ -373,17 +380,13 @@ choose_install_mode() {
 
 install_config_group() {
     local group="$1"
-    local group_description="$2"
-    local confirm_mode="$3"
     
     # Find all configs in this group
     local group_configs=()
-    local group_names=()
     for config_def in "${CONFIG_MAPPINGS[@]}"; do
-        IFS=':' read -r config_name dest_path display_name config_group is_critical <<< "$config_def"
+        IFS=':' read -r config_name dest_path display_name config_group _ <<< "$config_def"
         if [[ "$config_group" == "$group" ]]; then
             group_configs+=("$config_def")
-            group_names+=("$display_name")
         fi
     done
     
@@ -392,62 +395,22 @@ install_config_group() {
         return 0
     fi
     
-    # Check if group should be installed
-    if [[ "$confirm_mode" == "confirm" ]]; then
-        echo
-        _log "Install $group_description?"
-        echo "  Includes: ${group_names[*]}"
-        if ! confirm_action "Install this group?"; then
-            _log "Skipping $group_description"
-            return 0
-        fi
-    fi
-    
-    # Check for existing configs in group
-    local has_existing=false
-    if [[ "$confirm_mode" != "no_confirm" ]]; then
-        for config_def in "${group_configs[@]}"; do
-            IFS=':' read -r config_name dest_path _ _ _ <<< "$config_def"
-            if [[ -e "$dest_path" ]]; then
-                has_existing=true
-                break
-            fi
-        done
-        
-        if [[ "$has_existing" == "true" ]] && [[ "$confirm_mode" == "confirm" ]]; then
-            if ! confirm_action "Replace existing configurations in this group?" "true"; then
-                _log "Skipping $group_description"
-                return 0
-            fi
-        fi
-    fi
-    
     # Install all configs in group
     local installed=0
     local failed=0
     
-    _log "Installing $group_description..."
-    
     for config_def in "${group_configs[@]}"; do
-        IFS=':' read -r config_name dest_path display_name _ is_critical <<< "$config_def"
+        IFS=':' read -r config_name dest_path display_name _ _ <<< "$config_def"
         local src_path="$SCRIPT_DIR/$config_name"
         
-        local result=0
-        install_single_config "$src_path" "$dest_path" "$display_name" "$is_critical" "no_confirm" || result=$?
-        
-        case $result in
-            0) ((installed++)) ;;
-            1) ((failed++)) ;;
-            2) _log "Skipped $display_name (source not found)" ;;
-        esac
+        if install_single_config "$src_path" "$dest_path" "$display_name"; then
+            ((installed++))
+        else
+            ((failed++))
+        fi
     done
     
-    if [[ $installed -gt 0 ]]; then
-        _log "Successfully installed $installed configurations in $group_description"
-    fi
-    
     if [[ $failed -gt 0 ]]; then
-        _warn "$failed configurations failed in $group_description"
         return 1
     fi
     
@@ -459,39 +422,27 @@ install_configs() {
     
     choose_install_mode
     
+    # Create single backup of ALL existing configs before installing
+    backup_existing_configs || {
+        _err "Failed to create backup"
+        return 1
+    }
+    
     local total_installed=0
     local total_failed=0
     
     case "$INSTALL_MODE" in
         "grouped")
-            # Check if any configs exist and ask once for all
-            local has_existing_configs=false
-            for config_def in "${CONFIG_MAPPINGS[@]}"; do
-                IFS=':' read -r config_name dest_path _ _ _ <<< "$config_def"
-                if [[ -e "$dest_path" ]]; then
-                    has_existing_configs=true
-                    break
-                fi
-            done
-            
-            local confirm_mode="no_confirm"
-            if [[ "$has_existing_configs" == "true" ]] && [[ "$FORCE" != "true" ]]; then
-                if ! confirm_action "Replace ALL existing configurations?" "true"; then
-                    _log "Installation cancelled"
-                    return 1
-                fi
-            fi
-            
             # Install desktop group
-            if install_config_group "desktop" "${CONFIG_GROUPS[desktop]}" "$confirm_mode"; then
-                ((total_installed += 3))  # hypr + ags + matugen
+            if install_config_group "desktop"; then
+                ((total_installed += 3))
             else
                 ((total_failed++))
             fi
             
             # Install terminal group
-            if install_config_group "terminal" "${CONFIG_GROUPS[terminal]}" "$confirm_mode"; then
-                ((total_installed += 4))  # foot + fish + starship + fastfetch
+            if install_config_group "terminal"; then
+                ((total_installed += 4))
             else
                 ((total_failed++))
             fi
@@ -500,18 +451,15 @@ install_configs() {
         "individual")
             # Ask for each config individually
             for config_def in "${CONFIG_MAPPINGS[@]}"; do
-                IFS=':' read -r config_name dest_path display_name config_group is_critical <<< "$config_def"
+                IFS=':' read -r config_name dest_path display_name _ _ <<< "$config_def"
                 local src_path="$SCRIPT_DIR/$config_name"
                 
                 if confirm_action "Install $display_name?"; then
-                    local result=0
-                    install_single_config "$src_path" "$dest_path" "$display_name" "$is_critical" "confirm" || result=$?
-                    
-                    case $result in
-                        0) ((total_installed++)) ;;
-                        1) ((total_failed++)) ;;
-                        2) _log "Skipped $display_name" ;;
-                    esac
+                    if install_single_config "$src_path" "$dest_path" "$display_name"; then
+                        ((total_installed++))
+                    else
+                        ((total_failed++))
+                    fi
                 else
                     _log "Skipping $display_name"
                 fi
@@ -522,19 +470,8 @@ install_configs() {
     echo
     _log "Configuration installation summary:"
     _log "  Successfully installed: $total_installed"
-    _log "  Failed: $total_failed"
+    [[ $total_failed -gt 0 ]] && _warn "  Failed: $total_failed"
     
-    # Only fail if critical configs failed
-    local critical_failed=false
-    for config_def in "${CONFIG_MAPPINGS[@]}"; do
-        IFS=':' read -r config_name dest_path display_name config_group is_critical <<< "$config_def"
-        if [[ "$is_critical" == "true" && ! -e "$dest_path" ]]; then
-            critical_failed=true
-            _err "Critical configuration missing: $display_name"
-        fi
-    done
-    
-    [[ "$critical_failed" == "true" ]] && return 1
     return 0
 }
 
@@ -547,7 +484,6 @@ install_utilities() {
     
     if [[ -f "$gitdraw_src" ]]; then
         if [[ ! -f "$gitdraw_dest" ]] || confirm_action "Install/update GitDraw utility?"; then
-            backup_if_exists "$gitdraw_dest" "gitdraw"
             mkdir -p "$BIN_DEST"
             
             if [[ "$DRY_RUN" == true ]]; then
@@ -615,9 +551,8 @@ list_backups() {
             
             # Show what's in the backup
             local backup_contents=()
-            for config_def in "${CONFIG_MAPPINGS[@]}"; do
-                IFS=':' read -r config_name _ _ _ _ <<< "$config_def"
-                [[ -e "$backup_dir/$(basename "${config_name}")" ]] && backup_contents+=("$(basename "${config_name}")")
+            for item in "$backup_dir"/*; do
+                [[ -e "$item" ]] && backup_contents+=("$(basename "$item")")
             done
             
             echo "  $formatted (${#backup_contents[@]} configs: ${backup_contents[*]})"
@@ -640,41 +575,60 @@ restore_backup() {
     
     _log "Restoring from backup: $timestamp"
     
-    # Show available configs in backup
-    local available_configs=()
-    for config_def in "${CONFIG_MAPPINGS[@]}"; do
-        IFS=':' read -r config_name dest_path display_name _ _ <<< "$config_def"
-        local backup_config="$backup_path/$(basename "$config_name")"
-        [[ -e "$backup_config" ]] && available_configs+=("$config_name:$dest_path:$display_name")
+    # Find all items in backup
+    local restore_items=()
+    for item in "$backup_path"/*; do
+        [[ -e "$item" ]] && restore_items+=("$item")
     done
     
-    # Check for utilities
-    [[ -e "$backup_path/gitdraw" ]] && available_configs+=("gitdraw:$BIN_DEST/gitdraw:GitDraw utility")
-    
-    if [[ ${#available_configs[@]} -eq 0 ]]; then
+    if [[ ${#restore_items[@]} -eq 0 ]]; then
         _err "No configurations found in backup"
         return 1
     fi
     
-    _log "Found ${#available_configs[@]} configurations in backup"
-    confirm_action "Restore all configurations from backup?" "true" || return 0
+    _log "Found ${#restore_items[@]} configurations in backup"
+    confirm_action "Restore all configurations from backup?" || return 0
+    
+    # Create backup of current state before restoring
+    backup_existing_configs || _warn "Could not backup current state"
     
     local restored=0
-    for config_def in "${available_configs[@]}"; do
-        IFS=':' read -r config_name dest_path display_name <<< "$config_def"
-        local backup_item="$backup_path/$(basename "$config_name")"
+    for item in "${restore_items[@]}"; do
+        local item_name=$(basename "$item")
+        local dest=""
         
-        [[ -e "$dest_path" ]] && backup_if_exists "$dest_path" "$(basename "$config_name")"
+        # Determine destination
+        case "$item_name" in
+            hypr) dest="$HYPR_DEST" ;;
+            ags) dest="$AGS_DEST" ;;
+            matugen) dest="$MATUGEN_DEST" ;;
+            foot) dest="$FOOT_DEST" ;;
+            fish) dest="$FISH_DEST" ;;
+            starship.toml) dest="$STARSHIP_DEST" ;;
+            fastfetch) dest="$FASTFETCH_DEST" ;;
+            gitdraw) dest="$BIN_DEST/gitdraw" ;;
+            *) _warn "Unknown item in backup: $item_name"; continue ;;
+        esac
         
-        _log "Restoring $display_name..."
-        [[ -e "$dest_path" ]] && rm -rf "$dest_path"
-        mkdir -p "$(dirname "$dest_path")"
+        _log "Restoring $item_name..."
+        [[ -e "$dest" ]] && rm -rf "$dest"
+        mkdir -p "$(dirname "$dest")"
         
-        if cp -a "$backup_item" "$dest_path"; then
-            [[ "$config_name" =~ gitdraw ]] && chmod +x "$dest_path"
-            ((restored++))
+        if [[ -d "$item" ]]; then
+            mkdir -p "$dest"
+            if cp -a "$item"/* "$dest/" 2>/dev/null; then
+                [[ "$item_name" == "gitdraw" ]] && chmod +x "$dest"
+                ((restored++))
+            else
+                _err "Failed to restore $item_name"
+            fi
         else
-            _err "Failed to restore $display_name"
+            if cp -a "$item" "$dest" 2>/dev/null; then
+                [[ "$item_name" == "gitdraw" ]] && chmod +x "$dest"
+                ((restored++))
+            else
+                _err "Failed to restore $item_name"
+            fi
         fi
     done
     
