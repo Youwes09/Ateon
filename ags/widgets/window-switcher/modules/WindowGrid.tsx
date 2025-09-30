@@ -6,60 +6,14 @@ export function WindowGrid() {
   let gridBox: Gtk.Box | null = null;
 
   const iconMap: Record<string, string> = {
-    // Browsers
-    "firefox": "web",
-    "zen": "web",
-    "chromium": "web",
-    "chrome": "web",
-    "brave": "web",
-    "safari": "web",
-    "edge": "web",
-    
-    // Development
-    "code": "code",
-    "vscode": "code",
-    "vim": "code",
-    "neovim": "code",
-    "emacs": "code",
-    
-    // Terminals
-    "terminal": "terminal",
-    "kitty": "terminal",
-    "alacritty": "terminal",
-    "foot": "terminal",
-    "wezterm": "terminal",
-    "konsole": "terminal",
-    "gnome-terminal": "terminal",
-    
-    // File Managers
-    "nautilus": "folder_open",
-    "thunar": "folder_open",
-    "dolphin": "folder_open",
-    "nemo": "folder_open",
-    "pcmanfm": "folder_open",
-    
-    // Communication
-    "discord": "chat_bubble",
-    "slack": "chat_bubble",
-    "telegram": "chat_bubble",
-    "signal": "chat_bubble",
-    
-    // Media
-    "spotify": "library_music",
-    "vlc": "movie",
-    "mpv": "movie",
-    
-    // Graphics
-    "gimp": "palette",
-    "inkscape": "draw",
-    "blender": "view_in_ar",
-    "krita": "palette",
-    
-    // Notes & Productivity
-    "obsidian": "note_alt",
-    "notion": "note_alt",
-    "logseq": "note_alt",
-    "joplin": "note_alt",
+    "firefox": "web", "zen": "web", "chromium": "web", "chrome": "web",
+    "brave": "web", "safari": "web", "edge": "web",
+    "code": "code", "vscode": "code", "vim": "code", "neovim": "code",
+    "terminal": "terminal", "kitty": "terminal", "alacritty": "terminal",
+    "foot": "terminal", "wezterm": "terminal", "konsole": "terminal",
+    "nautilus": "folder_open", "thunar": "folder_open", "dolphin": "folder_open",
+    "discord": "chat_bubble", "slack": "chat_bubble", "telegram": "chat_bubble",
+    "spotify": "library_music", "vlc": "movie", "mpv": "movie",
   };
 
   const getIcon = (className: string): string => {
@@ -70,35 +24,30 @@ export function WindowGrid() {
     return "apps";
   };
 
-  const MAX_ROWS = 2;
-  const MAX_COLS = 5;
+  const ITEMS_PER_ROW = 5;
 
-  // Calculate how many items per row to create a balanced 2-row layout
-  const getBalancedLayout = (total: number): number => {
-    if (total <= MAX_COLS) return total; // Single row
-    return Math.ceil(total / MAX_ROWS); // Divide evenly into 2 rows
-  };
-
-  // Simple up/down navigation through all windows
+  // Simple grid navigation - just move through the list
   windowSwitcher.navigateGrid = (direction: 'up' | 'down' | 'left' | 'right') => {
     const total = windowSwitcher.filtered.length;
     if (total === 0) return;
 
-    console.log(`Navigate ${direction}, current index: ${windowSwitcher.index}, total: ${total}`);
+    const current = windowSwitcher.index;
 
-    if (direction === 'up' || direction === 'left') {
-      // Move up, cycle to bottom if at top
-      windowSwitcher.index = windowSwitcher.index > 0 
-        ? windowSwitcher.index - 1 
-        : total - 1;
-    } else if (direction === 'down' || direction === 'right') {
-      // Move down, cycle to top if at bottom
-      windowSwitcher.index = windowSwitcher.index < total - 1 
-        ? windowSwitcher.index + 1 
-        : 0;
+    switch (direction) {
+      case 'left':
+        windowSwitcher.index = current > 0 ? current - 1 : total - 1;
+        break;
+      case 'right':
+        windowSwitcher.index = current < total - 1 ? current + 1 : 0;
+        break;
+      case 'up':
+        windowSwitcher.index = current >= ITEMS_PER_ROW ? current - ITEMS_PER_ROW : current;
+        break;
+      case 'down':
+        windowSwitcher.index = current + ITEMS_PER_ROW < total ? current + ITEMS_PER_ROW : current;
+        break;
     }
 
-    console.log(`New index: ${windowSwitcher.index}`);
     windowSwitcher.triggerUpdate();
   };
 
@@ -109,29 +58,16 @@ export function WindowGrid() {
 
     button.connect("clicked", () => {
       windowSwitcher.index = i;
-      windowSwitcher.select(i).catch(console.error);
+      windowSwitcher.select(i);
     });
 
-    // Only update selection on mouse enter, don't trigger updates during rebuild
     const motionController = new Gtk.EventControllerMotion();
-    let isEntered = false;
-    
     motionController.connect("enter", () => {
-      // Delay the hover effect to avoid conflicts during initial load
-      GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => {
-        if (windowSwitcher.index !== i && isEntered) {
-          windowSwitcher.index = i;
-          windowSwitcher.triggerUpdate();
-        }
-        return false;
-      });
-      isEntered = true;
+      if (windowSwitcher.index !== i) {
+        windowSwitcher.index = i;
+        windowSwitcher.triggerUpdate();
+      }
     });
-    
-    motionController.connect("leave", () => {
-      isEntered = false;
-    });
-    
     button.add_controller(motionController);
 
     const content = new Gtk.Box({
@@ -156,7 +92,7 @@ export function WindowGrid() {
       max_width_chars: 25,
     }));
 
-    // Workspace highlight
+    // Workspace
     content.append(new Gtk.Label({
       label: `Workspace ${win.workspace.id}`,
       xalign: 0.5,
@@ -202,6 +138,7 @@ export function WindowGrid() {
   const rebuild = () => {
     if (!gridBox) return;
     
+    // Clear grid
     let child = gridBox.get_first_child();
     while (child) {
       const next = child.get_next_sibling();
@@ -209,7 +146,9 @@ export function WindowGrid() {
       child = next;
     }
 
-    if (windowSwitcher.filtered.length === 0) {
+    const total = windowSwitcher.filtered.length;
+
+    if (total === 0) {
       gridBox.append(new Gtk.Label({
         label: windowSwitcher.query ? "No matching windows" : "No windows open",
         css_classes: ["no-entries"],
@@ -217,21 +156,24 @@ export function WindowGrid() {
       return;
     }
 
-    const total = windowSwitcher.filtered.length;
-    const itemsPerRow = getBalancedLayout(total);
-    const rows = Math.min(MAX_ROWS, Math.ceil(total / itemsPerRow));
+    // Clamp index
+    if (windowSwitcher.index >= total) windowSwitcher.index = total - 1;
+    if (windowSwitcher.index < 0) windowSwitcher.index = 0;
 
-    for (let row = 0; row < rows; row++) {
+    // Build simple rows
+    const numRows = Math.ceil(total / ITEMS_PER_ROW);
+
+    for (let row = 0; row < numRows; row++) {
       const rowBox = new Gtk.Box({
         orientation: Gtk.Orientation.HORIZONTAL,
         spacing: 0,
         halign: Gtk.Align.START,
       });
 
-      const startIdx = row * itemsPerRow;
-      const endIdx = Math.min(startIdx + itemsPerRow, total);
+      const start = row * ITEMS_PER_ROW;
+      const end = Math.min(start + ITEMS_PER_ROW, total);
 
-      for (let i = startIdx; i < endIdx; i++) {
+      for (let i = start; i < end; i++) {
         const win = windowSwitcher.filtered[i];
         const isSelected = windowSwitcher.index === i;
         const card = createWindowCard(win, i, isSelected);
@@ -250,8 +192,7 @@ export function WindowGrid() {
       spacing={8}
       cssClasses={["window-grid"]}
       $={(self) => { 
-        gridBox = self; 
-        setTimeout(() => windowSwitcher.load(), 100); 
+        gridBox = self;
       }} 
     />
   );
