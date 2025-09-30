@@ -4,6 +4,7 @@ import { gdkmonitor } from "utils/monitors.ts";
 import { windowSwitcher } from "utils/windowSwitcher";
 import { WindowGrid } from "./modules/WindowGrid.tsx";
 import { SearchBar } from "./modules/SearchBar.tsx";
+import GLib from "gi://GLib";
 
 function WindowSwitcherLayout({ children, onClickOutside }) {
   return (
@@ -43,14 +44,47 @@ export default function WindowSwitcher() {
             windowSwitcher.load().catch(console.error);
           }
         });
+
+        // Add key handler that allows search entry to work
+        const keyController = new Gtk.EventControllerKey();
+        keyController.set_propagation_phase(Gtk.PropagationPhase.BUBBLE); // Changed from CAPTURE
+        
+        keyController.connect("key-pressed", (_, keyval, keycode, state) => {
+          console.log(`Window key event: ${keyval}`);
+          
+          // Get focused widget
+          const focusWidget = self.get_focus();
+          const isFocusedOnEntry = focusWidget && focusWidget.constructor.name === "GtkText";
+          
+          console.log(`Focused widget: ${focusWidget?.constructor.name}, is entry: ${isFocusedOnEntry}`);
+          
+          // If search entry is focused, only handle navigation keys
+          if (isFocusedOnEntry) {
+            // Let typing pass through to entry
+            // Only intercept navigation keys
+            if (keyval === 65307 || // Escape
+                keyval === 65362 || // Up
+                keyval === 65364 || // Down
+                keyval === 65535 || // Delete
+                keyval === 65293) { // Enter (sometimes)
+              console.log("Navigation key while in search - handling");
+              windowSwitcher.key(keyval);
+              return true; // Handled
+            }
+            // Let other keys through to the entry
+            console.log("Typing key - passing to entry");
+            return false;
+          } else {
+            // Not in search entry, handle all keys
+            console.log("Not in search entry - handling key");
+            windowSwitcher.key(keyval);
+            return true;
+          }
+        });
+        
+        self.add_controller(keyController);
       }}
     >
-      <Gtk.EventControllerKey 
-        onKeyPressed={({}, keyval) => { 
-          windowSwitcher.key(keyval); 
-          return true; 
-        }} 
-      />
       <WindowSwitcherLayout onClickOutside={() => windowSwitcher.hide()}>
         <SearchBar />
         <WindowGrid />

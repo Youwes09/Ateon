@@ -26,31 +26,6 @@ export function WindowGrid() {
 
   const ITEMS_PER_ROW = 5;
 
-  // Simple grid navigation - just move through the list
-  windowSwitcher.navigateGrid = (direction: 'up' | 'down' | 'left' | 'right') => {
-    const total = windowSwitcher.filtered.length;
-    if (total === 0) return;
-
-    const current = windowSwitcher.index;
-
-    switch (direction) {
-      case 'left':
-        windowSwitcher.index = current > 0 ? current - 1 : total - 1;
-        break;
-      case 'right':
-        windowSwitcher.index = current < total - 1 ? current + 1 : 0;
-        break;
-      case 'up':
-        windowSwitcher.index = current >= ITEMS_PER_ROW ? current - ITEMS_PER_ROW : current;
-        break;
-      case 'down':
-        windowSwitcher.index = current + ITEMS_PER_ROW < total ? current + ITEMS_PER_ROW : current;
-        break;
-    }
-
-    windowSwitcher.triggerUpdate();
-  };
-
   const createWindowCard = (win: any, i: number, isSelected: boolean) => {
     const button = new Gtk.Button({
       css_classes: ["window-card", ...(isSelected ? ["selected"] : [])],
@@ -61,11 +36,17 @@ export function WindowGrid() {
       windowSwitcher.select(i);
     });
 
+    // Mouse hover - but only if keyboard hasn't been used recently
     const motionController = new Gtk.EventControllerMotion();
     motionController.connect("enter", () => {
-      if (windowSwitcher.index !== i) {
+      const timeSinceKeyboard = Date.now() - windowSwitcher.lastKeyboardAction;
+      // Only respond to mouse if keyboard hasn't been used in last 200ms
+      if (timeSinceKeyboard > 200 && windowSwitcher.index !== i) {
         windowSwitcher.index = i;
-        windowSwitcher.triggerUpdate();
+        GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+          windowSwitcher.triggerUpdate();
+          return false;
+        });
       }
     });
     button.add_controller(motionController);
@@ -160,7 +141,7 @@ export function WindowGrid() {
     if (windowSwitcher.index >= total) windowSwitcher.index = total - 1;
     if (windowSwitcher.index < 0) windowSwitcher.index = 0;
 
-    // Build simple rows
+    // Build rows with cards
     const numRows = Math.ceil(total / ITEMS_PER_ROW);
 
     for (let row = 0; row < numRows; row++) {
