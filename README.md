@@ -31,6 +31,7 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 ├── ags/
 │   ├── app.ts                      # Application entry point
 │   ├── options.ts                  # Configuration options
+│   ├── pickerapps.json             # Pinned Apps (Picker)
 │   ├── config.json                 # User configuration
 │   ├── assets/                     # Icons and default wallpaper
 │   ├── matugen/templates/          # Theme generation templates
@@ -49,10 +50,12 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 │   │   ├── notifd/                 # Notification daemon
 │   │   ├── picker/                 # App and wallpaper picker
 │   │   ├── weather/                # Weather service
-│   │   └── wifi/                   # WiFi management
+│   │   ├── wifi/                   # WiFi management
+│   │   └── windowSwitcher/         # Window Switcher (WIP)
 │   └── widgets/                    # UI components
 │       ├── bar/                    # Status bar
 │       ├── clipboard/              # Clipboard interface
+│       ├── common/                 # Common widgets & panels
 │       ├── control-panel/          # Settings panel
 │       ├── launcher/               # App launcher
 │       ├── logout-menu/            # Power menu
@@ -61,7 +64,8 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 │       ├── osd/                    # On-screen display
 │       ├── picker/                 # Unified picker interface
 │       ├── sidebar/                # Clock and weather sidebar
-│       └── system-menu/            # Quick settings
+│       ├── system-menu/            # Quick settings
+│       └── window-switcher/        # Window switcher (WIP)
 ├── hypr/                           # Hyprland configuration
 │   ├── hyprland.conf
 │   ├── autostart.conf
