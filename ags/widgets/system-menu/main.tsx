@@ -32,11 +32,13 @@ export default function SystemMenu() {
       })}
       keymode={Astal.Keymode.ON_DEMAND}
       visible={visible}
+      exclusivity={Astal.Exclusivity.NORMAL}
     >
       <box
         cssClasses={["system-menu"]}
-        widthRequest={285}
+        widthRequest={350}
         orientation={Gtk.Orientation.VERTICAL}
+        vexpand={false}
       >
         <Toggles />
         {hasProfiles && <PowerProfileBox />}

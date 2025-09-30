@@ -11,7 +11,6 @@ import options from "options";
 import Fuse from "./fuse.js";
 import type { WallpaperItem, CachedThemeEntry, CachedThumbnail, ThemeProperties } from "./types.ts";
 
-// Helper for chromash absolute path
 const CHROMASH_PATH = GLib.build_filenamev([
   GLib.get_home_dir(),
   ".config",
@@ -22,7 +21,6 @@ const CHROMASH_PATH = GLib.build_filenamev([
 ]);
 
 function getChromashPath() {
-  // Optionally make this relative to this file's location, but absolute is easier for ags
   return CHROMASH_PATH;
 }
 
@@ -42,12 +40,13 @@ export class WallpaperStore extends GObject.Object {
   private fuse!: Fuse;
   private thumbnailCache = new Map<string, CachedThumbnail>();
   private themeCache = new Map<string, CachedThemeEntry>();
+  private usageCount = new Map<string, number>();
+  private usageCountPath: string;
   private unsubscribers: (() => void)[] = [];
   private thumbnailCleanupInterval: any;
   private themeDebounceTimer: Timer | null = null;
   private readonly THEME_DEBOUNCE_DELAY = 100;
 
-  // Configuration
   private wallpaperDir: Accessor<string>;
   private currentWallpaper: Accessor<string>;
   private maxThumbnailCacheSize: Accessor<number>;
@@ -56,11 +55,18 @@ export class WallpaperStore extends GObject.Object {
   constructor(params: { includeHidden?: boolean } = {}) {
     super();
     this.includeHidden = params.includeHidden ?? false;
+    this.usageCountPath = GLib.build_filenamev([
+      GLib.get_home_dir(),
+      ".config",
+      "ags",
+      "wallpaper-usage.json"
+    ]);
     this.wallpaperDir = options["wallpaper.dir"]((wd) => String(wd));
     this.currentWallpaper = options["wallpaper.current"]((w) => String(w));
     this.maxThumbnailCacheSize = options["wallpaper.cache-size"]((c) => Number(c));
     this.maxThemeCacheSize = options["wallpaper.theme-cache-size"]((s) => Number(s));
     this.setupWatchers();
+    this.loadUsageCount();
     this.loadThemeCache();
     this.loadWallpapers();
     this.startPeriodicCleanup();
@@ -68,6 +74,51 @@ export class WallpaperStore extends GObject.Object {
 
   private setupWatchers() {
     this.unsubscribers.push(this.wallpaperDir.subscribe(() => this.loadWallpapers()));
+  }
+
+  private loadUsageCount() {
+    try {
+      if (GLib.file_test(this.usageCountPath, GLib.FileTest.EXISTS)) {
+        const file = Gio.File.new_for_path(this.usageCountPath);
+        const [success, contents] = file.load_contents(null);
+        
+        if (success) {
+          const text = new TextDecoder().decode(contents);
+          const data: Record<string, number> = JSON.parse(text);
+          Object.entries(data).forEach(([path, count]) => {
+            this.usageCount.set(path, count);
+          });
+          console.log(`Loaded usage data for ${this.usageCount.size} wallpapers`);
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to load wallpaper usage count:", e);
+    }
+  }
+
+  private saveUsageCount() {
+    setTimeout(() => {
+      try {
+        const data = Object.fromEntries(this.usageCount);
+        const file = Gio.File.new_for_path(this.usageCountPath);
+        const contents = JSON.stringify(data, null, 2);
+        file.replace_contents(
+          new TextEncoder().encode(contents),
+          null,
+          false,
+          Gio.FileCreateFlags.REPLACE_DESTINATION,
+          null
+        );
+      } catch (e) {
+        console.error("Failed to save wallpaper usage count:", e);
+      }
+    }, 0);
+  }
+
+  private incrementUsage(path: string) {
+    const current = this.usageCount.get(path) || 0;
+    this.usageCount.set(path, current + 1);
+    this.saveUsageCount();
   }
 
   private loadThemeCache() {
@@ -166,16 +217,21 @@ export class WallpaperStore extends GObject.Object {
     });
   }
 
-  // Public API
   search(text: string): WallpaperItem[] {
     if (!text?.trim()) return this.getAllWallpapers();
     return this.fuse.search(text, { limit: this.maxItems }).map((r) => r.item);
   }
 
-  // Method to get all wallpapers sorted alphabetically
   getAllWallpapers(): WallpaperItem[] {
     return [...this.wallpapers]
-      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => {
+        const usageA = this.usageCount.get(a.path || "") || 0;
+        const usageB = this.usageCount.get(b.path || "") || 0;
+        if (usageB !== usageA) {
+          return usageB - usageA;
+        }
+        return a.name.localeCompare(b.name);
+      })
       .slice(0, this.maxItems);
   }
 
@@ -202,6 +258,9 @@ export class WallpaperStore extends GObject.Object {
     }
     const prev = this.currentWallpaper.get();
     if (prev === imagePath) return;
+    
+    this.incrementUsage(imagePath);
+    
     options["wallpaper.current"].value = imagePath;
     this.currentWallpaperPath = imagePath;
     try {
@@ -221,7 +280,6 @@ export class WallpaperStore extends GObject.Object {
       throw new Error("chromash not found or not executable at " + chromash);
     }
     await execAsync(`"${chromash}" wallpaper "${imagePath}"`);
-
     await new Promise(resolve => setTimeout(resolve, 100));
     await execAsync(`"${chromash}" export-colors`);
     this.scheduleThemeUpdate(imagePath);
@@ -333,7 +391,6 @@ export class WallpaperStore extends GObject.Object {
     }
   }
 
-  // Thumbnail Management
   async getThumbnail(imagePath: string): Promise<Gdk.Texture | null> {
     const cached = this.thumbnailCache.get(imagePath);
     if (cached) { cached.lastAccessed = Date.now(); return cached.texture; }

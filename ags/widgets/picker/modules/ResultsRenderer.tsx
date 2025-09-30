@@ -15,10 +15,10 @@ export function ResultsRenderer({ picker }: ResultsRendererProps) {
   const hasResults = createBinding(picker, "hasResults");
 
   const viewState = createComputed([hasQuery, isLoading, hasResults], () => {
-    if (!hasQuery.get()) return "empty";
     if (isLoading.get()) return "loading";
     if (hasResults.get()) return "results";
-    return "not-found";
+    if (hasQuery.get()) return "not-found";
+    return "empty";
   });
 
   return (

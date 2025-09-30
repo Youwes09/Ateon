@@ -28,6 +28,14 @@ export class WallpaperProvider
     super();
     this.command = "wallpapers";
     this.wallpapers.maxItems = this.config.maxResults;
+    
+    // Load initial results
+    this.loadInitialResults();
+  }
+
+  private loadInitialResults(): void {
+    const initialResults = this.wallpapers.getAllWallpapers();
+    this.setResults(initialResults);
   }
 
   async search(query: string): Promise<void> {
@@ -35,7 +43,9 @@ export class WallpaperProvider
 
     try {
       if (query.trim().length === 0) {
-        this.setResults([]);
+        // Show all wallpapers when query is empty
+        const allWallpapers = this.wallpapers.getAllWallpapers();
+        this.setResults(allWallpapers);
         return;
       }
       const results = this.wallpapers.search(query);
@@ -54,6 +64,8 @@ export class WallpaperProvider
     this.setLoading(true);
     try {
       await this.wallpapers.refresh();
+      // Reload initial results after refresh
+      this.loadInitialResults();
     } finally {
       this.setLoading(false);
     }

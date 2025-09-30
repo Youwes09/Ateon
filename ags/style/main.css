@@ -13,15 +13,15 @@
 * {
   all: unset;
   font-family: FiraCode Nerd Font;
-  color: rgb(226, 226, 226);
-  text-shadow: 0 2px 3px rgba(19, 19, 19, 0.2);
+  color: rgb(228, 226, 227);
+  text-shadow: 0 2px 3px rgba(19, 19, 20, 0.2);
 }
 
 /* variables & mixins */
 /* general styles */
 tooltip.background,
 tooltip > box {
-  background-color: rgb(19, 19, 19);
+  background-color: rgb(19, 19, 20);
   border-radius: 8px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 rgba(0, 0, 0, 0.4);
 }
@@ -32,14 +32,14 @@ tooltip > box label {
 
 /* scales */
 scale trough {
-  background-color: rgba(57, 57, 57, 0.6);
+  background-color: rgba(57, 57, 58, 0.6);
   border-radius: 0.5rem;
   min-width: calc(0.5rem * 10);
   padding: 0 calc(0.5rem / 2);
 }
 scale highlight,
 scale progress {
-  background: rgba(226, 226, 226, 0.75);
+  background: rgba(228, 226, 227, 0.75);
   border-radius: 0.5rem;
   margin: 0 calc(0px - 0.5rem / 2);
   min-height: 0.5rem;
@@ -47,19 +47,19 @@ scale progress {
 
 /* popovers */
 popover {
-  background: rgb(19, 19, 19);
+  background: rgb(19, 19, 20);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 popover modelbutton {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 popover modelbutton:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 popover modelbutton {
   border-radius: 0;
@@ -78,24 +78,24 @@ popover modelbutton:only-child {
 /* buttons */
 .button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(255, 178, 183, 0.2);
-  border: 1px solid rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.2);
+  border: 1px solid rgba(189, 200, 212, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.3);
 }
 
 .button-disabled {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button-disabled:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 
 /* modules & windows */
@@ -121,7 +121,7 @@ popover modelbutton:only-child {
   -gtk-icon-size: 2rem;
   margin-left: 0.8rem;
   margin-right: -0.5rem;
-  color: rgb(198, 198, 198);
+  color: rgb(200, 198, 199);
 }
 .Bar {
   /* Hyperland */
@@ -136,42 +136,42 @@ popover modelbutton:only-child {
   min-width: 1.5rem;
   min-height: 1.5rem;
   transition: 100ms linear;
-  box-shadow: inset -2px -2px 2px rgba(19, 19, 19, 0.3);
+  box-shadow: inset -2px -2px 2px rgba(19, 19, 20, 0.3);
 }
 .Bar .Workspaces .focused {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(164, 94.1, 102.8);
-  box-shadow: inset -2px -2px 2px rgb(123.6451667328, 69.9298332672, 76.6154327114);
+  background: rgb(108.5, 118.8, 129.4);
+  box-shadow: inset -2px -2px 2px rgb(81.375, 89.1, 97.05);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(196.5, 138.35, 144.3);
-  box-shadow: inset -2px -2px 2px rgb(167.2577183842, 83.8797816158, 92.4111440194);
+  background: rgb(147.25, 157.8, 168.9);
+  box-shadow: inset -2px -2px 2px rgb(105.3153791591, 118.2198768378, 131.7971208409);
 }
 .Bar .Workspaces .monitor1 {
-  background: rgb(174, 143.5, 103.5);
-  box-shadow: inset -2px -2px 2px rgb(135.6169354839, 108.314516129, 72.5080645161);
+  background: rgb(134.5, 150, 166);
+  box-shadow: inset -2px -2px 2px rgb(95.7440334129, 112.4185560859, 129.6309665871);
 }
 .Bar .Workspaces .monitor1:hover {
-  background: rgb(206.4, 174.5, 134.1);
-  box-shadow: inset -2px -2px 2px rgb(181.9924778761, 134.0719026549, 73.3825221239);
+  background: rgb(165.5, 181.2, 198);
+  box-shadow: inset -2px -2px 2px rgb(109.9825085324, 135.421331058, 162.6424914676);
 }
 .Bar .Workspaces .monitor2 {
-  background: rgb(140.9, 109.5, 111.2);
-  box-shadow: inset -2px -2px 2px rgb(105.675, 82.125, 83.4);
+  background: rgb(112.8, 117.8, 124.1);
+  box-shadow: inset -2px -2px 2px rgb(84.6, 88.35, 93.075);
 }
 .Bar .Workspaces .monitor2:hover {
-  background: rgb(181.65, 148.25, 149.7);
-  box-shadow: inset -2px -2px 2px rgb(146.6552956691, 100.7697043309, 102.7617434758);
+  background: rgb(151.8, 156.8, 163.35);
+  box-shadow: inset -2px -2px 2px rgb(111.1758949192, 117.2411374134, 125.1866050808);
 }
 .Bar .Workspaces .monitor3 {
-  background: rgb(181.4, 144.6, 145.9);
-  box-shadow: inset -2px -2px 2px rgb(146.7, 97.8, 99.5274456522);
+  background: rgb(148, 154, 160.7);
+  box-shadow: inset -2px -2px 2px rgb(108.4590536513, 115.359947839, 123.0659463487);
 }
 .Bar .Workspaces .monitor3:hover {
-  background: rgb(140.9, 107.6, 109.15);
-  box-shadow: inset -2px -2px 2px rgb(105.675, 80.7, 81.8625);
+  background: rgb(110.5, 116.5, 122.95);
+  box-shadow: inset -2px -2px 2px rgb(82.875, 87.375, 92.2125);
 }
 .Bar {
   /* music */
@@ -186,7 +186,7 @@ popover modelbutton:only-child {
   opacity: 0.3;
 }
 .Bar .Media.active > box {
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
 }
 .Bar .Media .cover {
   background-size: cover;
@@ -212,7 +212,7 @@ popover modelbutton:only-child {
   margin-right: -0.3rem;
 }
 .Bar .SysTray.active {
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
 }
 .Bar {
   /* hw-monitor */
@@ -222,17 +222,17 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(210.8, 131.42, 138.8);
+  color: rgb(145.82, 156.48, 167.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress radius {
-  color: rgba(19, 19, 19, 0.5);
+  color: rgba(19, 19, 20, 0.5);
 }
 .Bar .bar-hw-ram-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(210.8, 131.42, 138.8);
+  color: rgb(145.82, 156.48, 167.8);
 }
 .Bar .bar-hw-ram-box button label {
   margin: 1px 0px 0px 2px;
@@ -243,17 +243,17 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(210.8, 131.42, 138.8);
+  color: rgb(145.82, 156.48, 167.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress radius {
-  color: rgba(19, 19, 19, 0.5);
+  color: rgba(19, 19, 20, 0.5);
 }
 .Bar .bar-hw-cpu-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(184.08, 149.16, 102.9);
+  color: rgb(140.82, 156.48, 172.46);
 }
 .Bar .bar-hw-cpu-box button label {
   margin: 1px 0px 0px 1px;
@@ -269,11 +269,11 @@ popover modelbutton:only-child {
   -gtk-icon-size: 1.1rem;
 }
 .Bar .system-menu-toggler.active box {
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
 }
 .Bar .separator {
   font-size: 1.8rem;
-  color: rgb(145, 145, 145);
+  color: rgb(145, 144, 145);
 }
 .Bar .clock {
   margin: 0 1.2rem 0 0.4rem;
@@ -284,25 +284,25 @@ popover modelbutton:only-child {
 
 /* Floating elements style */
 .bar-style-floating .centerbox > box {
-  background: rgba(19, 19, 19, 0.5);
+  background: rgba(19, 19, 20, 0.5);
   border-radius: calc(8px * 4);
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 19, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 20, 0.5);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Full-width style */
 .bar-style-expanded {
-  background: rgba(19, 19, 19, 0.5);
+  background: rgba(19, 19, 20, 0.5);
   border-radius: calc(8px * 4);
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 19, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 20, 0.5);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Corner-integrated style */
 .bar-style-corners {
-  background: rgba(19, 19, 19, 0.5);
+  background: rgba(19, 19, 20, 0.5);
   border-radius: 0;
 }
 
@@ -310,19 +310,19 @@ popover modelbutton:only-child {
 /* general styles */
 box.picker {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
 }
 box.picker box.search {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem;
-  background-color: rgba(255, 178, 183, 0.15);
+  background-color: rgba(189, 200, 212, 0.15);
 }
 box.picker box.search label {
   font-family: "Material Symbols Outlined";
@@ -334,22 +334,22 @@ box.picker box.search entry {
   margin: 0.25rem;
 }
 box.picker box.search entry menu {
-  background: rgb(19, 19, 19);
+  background: rgb(19, 19, 20);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 box.picker box.search entry menu separator {
-  background-color: rgba(57, 57, 57, 0.6);
+  background-color: rgba(57, 57, 58, 0.6);
 }
 box.picker box.search entry menu menuitem {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.picker box.search entry menu menuitem:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 box.picker box.search entry menu menuitem {
   border-radius: 0;
@@ -367,7 +367,7 @@ box.picker box.search entry menu menuitem:only-child {
 box.picker box.results-list {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
 }
@@ -384,26 +384,26 @@ box.picker box.results-list button label.name {
   font-size: 1.1rem;
 }
 box.picker box.results-list button label.description {
-  color: rgba(226, 226, 226, 0.8);
+  color: rgba(228, 226, 227, 0.8);
 }
 box.picker box.results-list button:focus, box.picker box.results-list button:hover {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(255, 178, 183, 0.2);
-  border: 1px solid rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.2);
+  border: 1px solid rgba(189, 200, 212, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.picker box.results-list button:focus:hover, box.picker box.results-list button:hover:hover {
-  background: rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.3);
 }
 box.picker box.results-list button:focus, box.picker box.results-list button:hover {
-  background-color: rgba(255, 178, 183, 0.3);
+  background-color: rgba(189, 200, 212, 0.3);
   border: transparent;
 }
 box.picker box.results-grid {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
 }
@@ -418,10 +418,10 @@ box.picker box.not-found {
 }
 box.picker box.not-found image {
   -gtk-icon-size: 6rem;
-  color: rgba(226, 226, 226, 0.7);
+  color: rgba(228, 226, 227, 0.7);
 }
 box.picker box.not-found label {
-  color: rgba(226, 226, 226, 0.9);
+  color: rgba(228, 226, 227, 0.9);
   font-size: 1.2em;
 }
 
@@ -439,7 +439,7 @@ box.picker box.not-found label {
 }
 .mode-bar .mode-button:hover, .mode-bar .mode-button:focus, .mode-bar .mode-button.active {
   border-radius: calc(16px - 0.4rem - 2px);
-  background-color: rgba(255, 178, 183, 0.15);
+  background-color: rgba(189, 200, 212, 0.15);
   border: transparent;
   padding: 6px 12px;
   transition: all 0.2s ease;
@@ -453,15 +453,15 @@ button.wallpaper-thumbnail {
   border: 1px solid transparent;
 }
 button.wallpaper-thumbnail:hover, button.wallpaper-thumbnail:focus {
-  background-color: rgba(226, 226, 226, 0.1);
-  border-color: rgba(226, 226, 226, 0.3);
+  background-color: rgba(228, 226, 227, 0.1);
+  border-color: rgba(228, 226, 227, 0.3);
 }
 button.wallpaper-thumbnail box.wallpaper-preview-container {
   border-radius: calc(16px - 0.4rem - 2px);
   border: 1px solid rgba(0, 0, 0, 0.1);
   min-width: 140px;
   min-height: 100px;
-  background-color: rgba(226, 226, 226, 0.1);
+  background-color: rgba(228, 226, 227, 0.1);
 }
 button.wallpaper-thumbnail picture.wallpaper-picture {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -474,7 +474,7 @@ button.wallpaper-thumbnail box.wallpaper-placeholder {
   border: 2px solid rgba(255, 255, 255, 0.2);
 }
 button.wallpaper-thumbnail label.wallpaper-name {
-  color: rgba(226, 226, 226, 0.9);
+  color: rgba(228, 226, 227, 0.9);
   margin-top: 0.25rem;
   font-weight: 500;
 }
@@ -495,37 +495,37 @@ button.wallpaper-thumbnail label.wallpaper-name {
 /* variables & mixins */
 /* general styles */
 box.logout-background {
-  background-color: rgba(19, 19, 19, 0.5);
+  background-color: rgba(19, 19, 20, 0.5);
 }
 box.logout-background .logout-menu {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(19, 19, 19, 0.7);
+  background-color: rgba(19, 19, 20, 0.7);
 }
 box.logout-background .logout-menu button {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.logout-background .logout-menu button:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 box.logout-background .logout-menu button {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 1rem;
 }
 box.logout-background .logout-menu button:focus {
-  background: rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.3);
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";
@@ -537,8 +537,8 @@ box.logout-background .logout-menu button label {
 /* general styles */
 .music.window {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   background: none;
@@ -549,7 +549,7 @@ box.logout-background .logout-menu button label {
   background-position: center;
   background-size: cover;
   border-radius: 16px;
-  box-shadow: 0 1px 2px -1px rgba(19, 19, 19, 0.5);
+  box-shadow: 0 1px 2px -1px rgba(19, 19, 20, 0.5);
   margin: 0.4rem;
   min-height: 13rem;
   min-width: 13rem;
@@ -601,8 +601,8 @@ box.logout-background .logout-menu button label {
 /* general styles */
 .notification {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -615,18 +615,18 @@ box.logout-background .logout-menu button label {
 .notification .header .app-name {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(226, 226, 226, 0.7);
+  color: rgba(228, 226, 227, 0.7);
 }
 .notification .header .time {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(226, 226, 226, 0.7);
+  color: rgba(228, 226, 227, 0.7);
 }
 .notification .header .dismiss-button {
   margin: -0.5rem 0rem;
 }
 .notification separator {
-  background-color: rgba(226, 226, 226, 0.5);
+  background-color: rgba(228, 226, 227, 0.5);
   min-height: 1px;
 }
 .notification .content {
@@ -650,12 +650,12 @@ box.logout-background .logout-menu button label {
   margin-right: 0.5rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
 }
 .notification .content .body {
   margin-right: 0.5rem;
   font-size: 0.95rem;
-  color: rgba(226, 226, 226, 0.8);
+  color: rgba(228, 226, 227, 0.8);
   margin-top: 0.75rem;
 }
 .notification .actions {
@@ -664,7 +664,7 @@ box.logout-background .logout-menu button label {
 .notification .actions .action-button {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -672,15 +672,15 @@ box.logout-background .logout-menu button label {
   font-size: 0.9rem;
 }
 .notification .actions .action-button:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 
 /* variables & mixins */
 /* general styles */
 .osd {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border-radius: 3rem;
@@ -706,7 +706,7 @@ box.logout-background .logout-menu button label {
 }
 .osd levelbar block.filled {
   border-radius: 1.5rem;
-  background-color: rgb(226, 226, 226);
+  background-color: rgb(228, 226, 227);
 }
 
 /* variables & mixins */
@@ -715,8 +715,8 @@ box.logout-background .logout-menu button label {
 .system-menu {
   -gtk-icon-size: 1.1rem;
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -726,7 +726,7 @@ box.logout-background .logout-menu button label {
 .system-menu > box {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -773,7 +773,7 @@ box.logout-background .logout-menu button label {
 }
 .system-menu .sliders block filled {
   border-radius: 1.5rem;
-  background-color: rgb(226, 226, 226);
+  background-color: rgb(228, 226, 227);
 }
 
 .arrow-indicator {
@@ -787,8 +787,8 @@ box.logout-background .logout-menu button label {
 
 .system-menu-list {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -797,13 +797,13 @@ box.logout-background .logout-menu button label {
 
 .network-item {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .network-item:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 .network-item {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -819,13 +819,13 @@ box.logout-background .logout-menu button label {
 
 .network-item-active {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(255, 178, 183, 0.2);
-  border: 1px solid rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.2);
+  border: 1px solid rgba(189, 200, 212, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .network-item-active:hover {
-  background: rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.3);
 }
 .network-item-active {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -836,7 +836,7 @@ box.logout-background .logout-menu button label {
 .password-dialog {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin-bottom: 0.75rem;
@@ -857,15 +857,15 @@ box.logout-background .logout-menu button label {
 .settings-button {
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .refresh-button:hover,
 .disconnect-button:hover,
 .settings-button:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 .refresh-button,
 .disconnect-button,
@@ -898,29 +898,29 @@ image {
 .password-search {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  background: rgba(19, 19, 20, 0.5);
 }
 .password-search entry menu {
-  background: rgb(19, 19, 19);
+  background: rgb(19, 19, 20);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 .password-search entry menu separator {
-  background-color: rgba(57, 57, 57, 0.6);
+  background-color: rgba(57, 57, 58, 0.6);
 }
 .password-search entry menu menuitem {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .password-search entry menu menuitem:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 .password-search entry menu menuitem {
   border-radius: 0;
@@ -943,13 +943,13 @@ image {
 
 .saved-network {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .saved-network:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 .saved-network {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -975,25 +975,25 @@ image {
 .ScreenCorners.corner-top .corner-content {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset 0 10px 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 20, 0.5), inset 0 10px 10px -10px rgba(0, 0, 0, 0.2);
   min-height: max(12px, 8px * 8);
 }
 .ScreenCorners.corner-bottom .corner-content {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 20, 0.5), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.2);
   min-height: max(12px, 8px * 8);
 }
 .ScreenCorners.corner-left .corner-content {
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset 10px 0 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 20, 0.5), inset 10px 0 10px -10px rgba(0, 0, 0, 0.2);
   min-width: calc(8px * 8);
 }
 .ScreenCorners.corner-right .corner-content {
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset -10px 0 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 20, 0.5), inset -10px 0 10px -10px rgba(0, 0, 0, 0.2);
   min-width: calc(8px * 8);
 }
 
@@ -1009,13 +1009,13 @@ image {
 }
 .quick-actions-widget .actions-grid .action-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 57, 0.6);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: rgba(57, 57, 57, 0.99);
+  background: rgba(57, 57, 58, 0.99);
 }
 .quick-actions-widget .actions-grid .action-button {
   background: transparent;
@@ -1023,8 +1023,8 @@ image {
   margin: 0 0.4rem;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: rgba(255, 178, 183, 0.2);
-  border: 1px solid rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.2);
+  border: 1px solid rgba(189, 200, 212, 0.3);
   transform: translateY(-2px);
 }
 .quick-actions-widget .actions-grid .action-button .action-icon {
@@ -1063,8 +1063,8 @@ image {
 /* general styles */
 .stacked-settings-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1076,17 +1076,17 @@ image {
   margin: 0 0.4rem;
 }
 .stacked-settings-widget .settings-header image {
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
   margin-right: 0.4rem;
 }
 .stacked-settings-widget .settings-header .settings-title {
   margin-top: 0.75rem;
   font-size: 1.1rem;
   font-weight: 700;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
 }
 .stacked-settings-widget separator {
-  background-color: rgba(226, 226, 226, 0.2);
+  background-color: rgba(228, 226, 227, 0.2);
   margin: 0.4rem 0;
   min-height: 1px;
 }
@@ -1110,7 +1110,7 @@ image {
   background-color: transparent;
 }
 .stacked-settings-widget .settings-nav .button-disabled:hover {
-  background-color: rgba(57, 57, 57, 0.99);
+  background-color: rgba(57, 57, 58, 0.99);
 }
 .stacked-settings-widget .settings-stack {
   margin-top: 0.4rem;
@@ -1118,85 +1118,85 @@ image {
 .stacked-settings-widget .settings-stack .subsection-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
   margin: 0.4rem 0 0.25rem 0;
 }
 .stacked-settings-widget .settings-scroll scrollbar {
-  background: rgba(13.9, 13.9, 13.9, 0.5);
+  background: rgba(14.0307692308, 14.0307692308, 14.7692307692, 0.5);
   border-radius: calc(8px * 1);
 }
 .stacked-settings-widget .settings-scroll scrollbar.vertical {
   margin-left: 4px;
 }
 .stacked-settings-widget .settings-scroll scrollbar trough {
-  background: rgba(226, 226, 226, 0.1);
+  background: rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 1);
   min-width: 8px;
 }
 .stacked-settings-widget .settings-scroll scrollbar slider {
-  background: rgba(226, 226, 226, 0.4);
+  background: rgba(228, 226, 227, 0.4);
   border-radius: calc(8px * 1);
   min-width: 8px;
   transition: all 100ms ease;
 }
 .stacked-settings-widget .settings-scroll scrollbar slider:hover {
-  background: rgba(255, 178, 183, 0.7);
+  background: rgba(189, 200, 212, 0.7);
 }
 .stacked-settings-widget .settings-scroll scrollbar slider:active {
-  background: rgb(255, 178, 183);
+  background: rgb(189, 200, 212);
 }
 .stacked-settings-widget .option-row {
-  background: rgba(24.1, 24.1, 24.1, 0.5);
-  border: 1px solid rgba(226, 226, 226, 0.1);
+  background: rgba(23.9692307692, 23.9692307692, 25.2307692308, 0.5);
+  border: 1px solid rgba(228, 226, 227, 0.1);
   border-radius: calc(8px * 2);
   padding: 0.4rem 0.75rem;
   margin: 0.25rem 0;
 }
 .stacked-settings-widget .option-row .option-label {
   font-size: 1.1rem;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
   margin-right: 0.4rem;
 }
 .stacked-settings-widget .option-row .option-switch {
   border-radius: 5rem;
   padding: 0.1rem;
-  background-color: rgba(226, 226, 226, 0.1);
+  background-color: rgba(228, 226, 227, 0.1);
 }
 .stacked-settings-widget .option-row .option-switch slider {
   border-radius: 1.5rem;
   transition: all 200ms ease;
   margin: 0.2rem;
-  background-color: rgba(226, 226, 226, 0.3);
+  background-color: rgba(228, 226, 227, 0.3);
 }
 .stacked-settings-widget .option-row .option-switch:checked {
-  background-color: rgba(255, 178, 183, 0.2);
+  background-color: rgba(189, 200, 212, 0.2);
 }
 .stacked-settings-widget .option-row .option-switch:checked slider {
-  background-color: rgba(255, 178, 183, 0.7);
+  background-color: rgba(189, 200, 212, 0.7);
 }
 .stacked-settings-widget .option-row .option-dropdown {
   min-width: 140px;
 }
 .stacked-settings-widget .option-row .option-dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(255, 178, 183, 0.2);
-  border: 1px solid rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.2);
+  border: 1px solid rgba(189, 200, 212, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .stacked-settings-widget .option-row .option-dropdown button:hover {
-  background: rgba(255, 178, 183, 0.3);
+  background: rgba(189, 200, 212, 0.3);
 }
 .stacked-settings-widget .option-row .option-dropdown button {
   border-radius: calc(8px * 1.5);
   padding: 0.25rem 0.4rem;
-  border-color: rgba(226, 226, 226, 0.1);
+  border-color: rgba(228, 226, 227, 0.1);
 }
 .stacked-settings-widget .option-row .option-dropdown button:hover {
-  border-color: rgba(226, 226, 226, 0.3);
+  border-color: rgba(228, 226, 227, 0.3);
 }
 .stacked-settings-widget separator {
-  background-color: rgba(226, 226, 226, 0.15);
+  background-color: rgba(228, 226, 227, 0.15);
   margin: 0.75rem 0;
   min-height: 1px;
 }
@@ -1205,8 +1205,8 @@ image {
 /* general styles */
 .weather-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1219,7 +1219,7 @@ image {
   font-size: 100px;
   min-width: 72px;
   min-height: 72px;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
   margin-bottom: 0.5rem;
 }
 .weather-widget .current-weather .weather-temp {
@@ -1229,12 +1229,12 @@ image {
 }
 .weather-widget .current-weather .weather-desc {
   font-size: 1.1rem;
-  color: rgb(145, 145, 145);
+  color: rgb(145, 144, 145);
   margin-bottom: 0.2rem;
 }
 .weather-widget .current-weather .weather-extra {
   font-size: 1.1rem;
-  color: rgb(145, 145, 145);
+  color: rgb(145, 144, 145);
 }
 .weather-widget .current-weather .weather-extra-icon {
   font-family: "Material Symbols Outlined";
@@ -1248,26 +1248,26 @@ image {
 }
 .weather-widget .forecast-row .forecast-item .forecast-hour {
   font-size: 1.1rem;
-  color: rgb(145, 145, 145);
+  color: rgb(145, 144, 145);
 }
 .weather-widget .forecast-row .forecast-item .forecast-icon {
   font-family: "Material Symbols Outlined";
   font-size: 32px;
   margin: 0.3rem 0;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
 }
 .weather-widget .forecast-row .forecast-item .forecast-temp {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
 }
 
 /* variables & mixins */
 /* general styles */
 .base-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1282,7 +1282,7 @@ image {
 .base-widget .header-row .header-icon {
   min-width: 72px;
   min-height: 72px;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
   margin-bottom: 0.5rem;
 }
 .base-widget .header-row .header-title {
@@ -1292,12 +1292,12 @@ image {
 }
 .base-widget .header-row .header-subtitle {
   font-size: 1.1rem;
-  color: rgb(145, 145, 145);
+  color: rgb(145, 144, 145);
   margin-bottom: 0.2rem;
 }
 .base-widget .header-row .header-extra {
   font-size: 1.1rem;
-  color: rgb(145, 145, 145);
+  color: rgb(145, 144, 145);
 }
 .base-widget {
   /* Generic "items row" for children */
@@ -1310,22 +1310,22 @@ image {
 }
 .base-widget .items-row .item .item-title {
   font-size: 1.1rem;
-  color: rgb(145, 145, 145);
+  color: rgb(145, 144, 145);
 }
 .base-widget .items-row .item .item-icon {
   margin: 0.3rem 0;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
 }
 .base-widget .items-row .item .item-value {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
 }
 
 .sidebar {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1335,13 +1335,13 @@ image {
 .sidebar > box {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .sidebar separator {
-  background-color: rgba(226, 226, 226, 0.2);
+  background-color: rgba(228, 226, 227, 0.2);
   margin: 0.5rem 0;
   min-height: 1px;
 }
@@ -1353,8 +1353,8 @@ image {
 /* general styles */
 box.clipboard {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
-  background: rgba(19, 19, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   min-width: 500px;
@@ -1363,8 +1363,8 @@ box.clipboard {
 .mode-bar {
   border-radius: calc(16px - 0.4rem - 2px);
   padding: 8px;
-  background-color: rgba(19, 19, 19, 0.4);
-  border-bottom: 1px solid rgba(226, 226, 226, 0.15);
+  background-color: rgba(19, 19, 20, 0.4);
+  border-bottom: 1px solid rgba(228, 226, 227, 0.15);
   margin: 0.5rem 0.5rem 0;
 }
 .mode-bar .mode-button {
@@ -1372,17 +1372,14 @@ box.clipboard {
   padding: 8px 14px;
   margin: 0 4px;
   background-color: transparent;
-  border: 1px solid rgba(226, 226, 226, 0.15);
-  color: rgb(226, 226, 226);
+  border: 1px solid rgba(228, 226, 227, 0.15);
+  color: rgb(228, 226, 227);
   font-weight: 500;
   transition: all 0.2s ease;
 }
 .mode-bar .mode-button:hover {
-  background-color: rgba(226, 226, 226, 0.1);
-  border-color: rgba(226, 226, 226, 0.3);
-}
-.mode-bar .mode-button box {
-  spacing: 6px;
+  background-color: rgba(228, 226, 227, 0.1);
+  border-color: rgba(228, 226, 227, 0.3);
 }
 .mode-bar .clear-all-button {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -1390,7 +1387,7 @@ box.clipboard {
   margin: 0 8px 0 4px;
   background-color: rgba(255, 180, 171, 0.15);
   border: 1px solid rgb(255, 180, 171);
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
   font-weight: 500;
   transition: all 0.2s ease;
 }
@@ -1401,9 +1398,6 @@ box.clipboard {
 .mode-bar .clear-all-button:hover label.mode-icon {
   color: white;
 }
-.mode-bar .clear-all-button box {
-  spacing: 6px;
-}
 .mode-bar label.mode-icon {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
@@ -1412,18 +1406,18 @@ box.clipboard {
 }
 .mode-bar .entry-count {
   font-size: 0.9rem;
-  color: rgba(226, 226, 226, 0.7);
+  color: rgba(228, 226, 227, 0.7);
   margin: auto 8px auto 0;
 }
 
 .search-section {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem;
-  background-color: rgba(255, 178, 183, 0.15);
+  background-color: rgba(189, 200, 212, 0.15);
   padding: 0.4rem;
 }
 .search-section label.search-icon {
@@ -1438,7 +1432,7 @@ box.clipboard {
   min-height: 2.2rem;
   background: transparent;
   border: none;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
 }
 .search-section entry.search-entry:focus {
   outline: none;
@@ -1446,14 +1440,14 @@ box.clipboard {
 }
 .search-section .shortcut-hint {
   font-size: 0.85rem;
-  color: rgba(226, 226, 226, 0.6);
+  color: rgba(228, 226, 227, 0.6);
   margin: 0 0.5rem;
 }
 
 .clipboard-list {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
+  background: rgba(57, 57, 58, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 0 0.5rem 1rem;
@@ -1467,12 +1461,12 @@ box.clipboard {
   transition: all 0.15s ease;
 }
 .clipboard-list button.clipboard-entry:hover {
-  background-color: rgba(255, 178, 183, 0.1);
-  border-color: rgba(255, 178, 183, 0.3);
+  background-color: rgba(189, 200, 212, 0.1);
+  border-color: rgba(189, 200, 212, 0.3);
 }
 .clipboard-list button.clipboard-entry.selected {
-  background-color: rgba(255, 178, 183, 0.15);
-  border-color: rgb(255, 178, 183);
+  background-color: rgba(189, 200, 212, 0.15);
+  border-color: rgb(189, 200, 212);
 }
 .clipboard-list button.clipboard-entry.selected .entry-text {
   color: white;
@@ -1483,7 +1477,7 @@ box.clipboard {
 }
 .clipboard-list button.clipboard-entry .entry-text {
   font-size: 1rem;
-  color: rgb(226, 226, 226);
+  color: rgb(228, 226, 227);
   margin-right: auto;
 }
 .clipboard-list button.clipboard-entry label.delete-icon {
@@ -1499,18 +1493,18 @@ box.clipboard {
 }
 .clipboard-list button.clipboard-entry.image-entry .entry-image {
   border-radius: 8px;
-  border: 1px solid rgba(226, 226, 226, 0.15);
+  border: 1px solid rgba(228, 226, 227, 0.15);
 }
 .clipboard-list button.clipboard-entry.image-entry.selected .entry-image {
-  border-color: rgb(255, 178, 183);
-  box-shadow: 0 0 8px rgba(255, 178, 183, 0.5);
+  border-color: rgb(189, 200, 212);
+  box-shadow: 0 0 8px rgba(189, 200, 212, 0.5);
 }
 .clipboard-list button.clipboard-entry.image-entry:hover .entry-image {
-  border-color: rgba(255, 178, 183, 0.3);
+  border-color: rgba(189, 200, 212, 0.3);
 }
 .clipboard-list label.no-entries {
   padding: 0.75rem;
-  color: rgba(226, 226, 226, 0.6);
+  color: rgba(228, 226, 227, 0.6);
   font-style: italic;
 }
 
@@ -1523,6 +1517,143 @@ button.invisible-close {
   padding: 0;
   margin: 0;
   opacity: 0;
+}
+
+/* variables & mixins */
+/* general styles */
+box.window-switcher-background {
+  background-color: transparent;
+}
+box.window-switcher-background .window-switcher {
+  border-radius: 16px;
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 20, 0.1);
+  background: rgba(19, 19, 20, 0.5);
+  margin: 5px 10px 15px;
+  padding: 0.4rem;
+  background-color: rgba(19, 19, 20, 0.7);
+  padding: 1rem;
+}
+box.window-switcher-background .window-switcher .search-section {
+  border-radius: calc(16px - 0.4rem - 2px);
+  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
+  background: rgba(57, 57, 58, 0.6);
+  margin: 0.4rem;
+  padding: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  background-color: rgba(189, 200, 212, 0.15);
+  padding: 0.4rem;
+}
+box.window-switcher-background .window-switcher .search-section label.search-icon {
+  font-family: "Material Symbols Outlined";
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+}
+box.window-switcher-background .window-switcher .search-section entry.search-entry {
+  font-size: 1rem;
+  padding: 0.25rem 0.4rem;
+  background: transparent;
+  border: none;
+  color: rgb(228, 226, 227);
+}
+box.window-switcher-background .window-switcher .search-section entry.search-entry:focus {
+  outline: none;
+  box-shadow: none;
+}
+box.window-switcher-background .window-switcher .search-section .shortcut-hint {
+  font-size: 0.7rem;
+  color: rgba(228, 226, 227, 0.6);
+  margin: 0 0.5rem;
+}
+box.window-switcher-background .window-switcher .window-grid {
+  padding: 0;
+}
+box.window-switcher-background .window-switcher button.window-card {
+  border-radius: calc(16px - 0.4rem - 2px);
+  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
+  background: rgba(57, 57, 58, 0.6);
+  margin: 0.4rem;
+  padding: 0.4rem;
+  transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
+  background: rgba(57, 57, 58, 0.6);
+  border: 1px solid rgba(228, 226, 227, 0.1);
+  border-radius: calc(8px * 1.97);
+  padding: 0.4rem;
+}
+box.window-switcher-background .window-switcher button.window-card:hover {
+  background: rgba(57, 57, 58, 0.99);
+}
+box.window-switcher-background .window-switcher button.window-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0.5rem;
+  padding: 1rem;
+  min-width: 220px;
+  min-height: 160px;
+}
+box.window-switcher-background .window-switcher button.window-card:focus, box.window-switcher-background .window-switcher button.window-card.selected {
+  background: rgba(189, 200, 212, 0.3);
+  border-color: rgb(189, 200, 212);
+  box-shadow: 0 0 20px rgba(189, 200, 212, 0.5);
+}
+box.window-switcher-background .window-switcher button.window-card:focus .window-card-title, box.window-switcher-background .window-switcher button.window-card.selected .window-card-title {
+  color: rgb(189, 200, 212);
+  font-weight: 600;
+}
+box.window-switcher-background .window-switcher button.window-card:focus .window-icon-large, box.window-switcher-background .window-switcher button.window-card.selected .window-icon-large {
+  color: rgb(189, 200, 212);
+}
+box.window-switcher-background .window-switcher button.window-card:hover {
+  background: rgba(189, 200, 212, 0.2);
+}
+box.window-switcher-background .window-switcher button.window-card .window-icon-large {
+  font-family: "Material Symbols Outlined";
+  font-size: 4rem;
+  color: rgb(228, 226, 227);
+  margin-bottom: 0.5rem;
+}
+box.window-switcher-background .window-switcher button.window-card .window-card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(228, 226, 227);
+  margin: 0.3rem 0;
+}
+box.window-switcher-background .window-switcher button.window-card .window-card-workspace {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgb(189, 200, 212);
+  margin: 0.2rem 0;
+}
+box.window-switcher-background .window-switcher button.window-card .window-card-subtitle {
+  font-size: 0.75rem;
+  color: rgba(228, 226, 227, 0.5);
+}
+box.window-switcher-background .window-switcher button.window-card .window-badge-small {
+  border-radius: calc(16px - 0.4rem - 2px);
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  margin: 2px 4px 0 0;
+}
+box.window-switcher-background .window-switcher button.window-card .window-badge-small.fullscreen-badge {
+  background-color: rgba(189, 200, 212, 0.2);
+  color: rgb(189, 200, 212);
+}
+box.window-switcher-background .window-switcher button.window-card .window-badge-small.floating-badge {
+  background-color: rgba(228, 226, 227, 0.2);
+  color: rgb(228, 226, 227);
+}
+box.window-switcher-background .window-switcher label.no-entries {
+  padding: 2rem;
+  color: rgba(228, 226, 227, 0.6);
+  font-style: italic;
+}
+
+button.invisible-close {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

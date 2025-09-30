@@ -79,6 +79,9 @@ export class PickerCoordinator extends GObject.Object {
       this.searchIcon = provider.config.icon;
       this.placeholderText = provider.config.placeholder;
       this.providerName = provider.config.name;
+      // Set initial results from the provider
+      this.currentResults = provider.results;
+      this.hasResults = provider.hasResults;
     }
   }
 
@@ -106,14 +109,19 @@ export class PickerCoordinator extends GObject.Object {
   setActiveProvider(command: string): boolean {
     if (this.providers.has(command) && this.activeProvider !== command) {
       this.activeProvider = command;
-      this.hasResults = this.currentProvider?.hasResults || false;
-
-      // Update reactive UI properties
       const provider = this.currentProvider;
-      if (provider?.config) {
-        this.searchIcon = provider.config.icon;
-        this.placeholderText = provider.config.placeholder;
-        this.providerName = provider.config.name;
+      
+      // Update results from the new provider
+      if (provider) {
+        this.currentResults = provider.results;
+        this.hasResults = provider.hasResults;
+        
+        // Update reactive UI properties
+        if (provider.config) {
+          this.searchIcon = provider.config.icon;
+          this.placeholderText = provider.config.placeholder;
+          this.providerName = provider.config.name;
+        }
       }
 
       this.emit("provider-changed", command);
@@ -140,7 +148,7 @@ export class PickerCoordinator extends GObject.Object {
   clearSearch(): void {
     this.searchText = "";
     this.hasQuery = false;
-    this.hasResults = false;
+    // Don't clear hasResults here - let the provider handle it
     this.currentProvider?.search("");
     this.emit("search-completed", "");
   }

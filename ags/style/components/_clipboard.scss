@@ -29,9 +29,6 @@ box.clipboard {
       border-color: color.adjust($fg, $alpha: -0.7);
     }
 
-    box {
-      spacing: 6px;
-    }
   }
 
   .clear-all-button {
@@ -51,10 +48,6 @@ box.clipboard {
       label.mode-icon {
         color: white;
       }
-    }
-
-    box {
-      spacing: 6px;
     }
   }
 

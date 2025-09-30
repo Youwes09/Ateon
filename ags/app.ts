@@ -3,7 +3,7 @@ import { exec } from "ags/process";
 import { monitorFile } from "ags/file";
 import GLib from "gi://GLib?version=2.0";
 import { picker } from "utils/picker";
-import { clipboard } from "utils/clipboard"; // Add this import
+
 // Widgets
 import {
   Bar,
@@ -15,6 +15,7 @@ import {
   MusicPlayer,
   Sidebar,
   Clipboard,
+  WindowSwitcher,
 } from "./widgets";
 
 // Style paths
@@ -40,9 +41,13 @@ app.start({
         app.toggle_window("picker");
         res("picker toggled");
         break;
-      case "clipboard": // Add this case
+      case "clipboard":
         app.toggle_window("clipboard");
         res("clipboard toggled");
+        break;
+      case "window-switcher":
+        app.toggle_window("window-switcher");
+        res("window switcher toggled");
         break;
       case "logout":
         app.toggle_window("logout-menu");
@@ -81,5 +86,6 @@ app.start({
     LogoutMenu();
     Sidebar();
     Clipboard();
+    WindowSwitcher();
   },
 });
