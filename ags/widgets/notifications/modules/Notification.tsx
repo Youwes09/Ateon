@@ -45,27 +45,10 @@ export function BaseNotification({
   const titleMaxChars = Math.floor(maxWidthChars * 0.5);
   const bodyMaxChars = Math.floor(maxWidthChars);
 
-  // Default click handling
+  // Simple click handling - just dismiss
   const handleClick = (button: number) => {
     if (onClick) {
       onClick(button, notification);
-    } else {
-      try {
-        switch (button) {
-          case 1: // PRIMARY/LEFT
-            if (notification.actions.length > 0 && onAction) {
-              onAction(notification.id, notification.actions[0].action);
-            }
-            break;
-          case 3: // SECONDARY/RIGHT
-            if (onDismiss) {
-              onDismiss(notification.id);
-            }
-            break;
-        }
-      } catch (error) {
-        console.error("Error handling notification click:", error);
-      }
     }
   };
 
@@ -87,12 +70,13 @@ export function BaseNotification({
       ...cssClasses,
     ];
 
-    // Could be useful at some point
     if (variant === "stored") {
       if (notification.seen) classes.push("notification-seen");
       else classes.push("notification-unseen");
       if (notification.dismissed) classes.push("notification-dismissed");
     }
+
+    if (isHovered.get()) classes.push("notification-hovered");
 
     return classes;
   };
@@ -122,36 +106,27 @@ export function BaseNotification({
         <box cssClasses={["header"]}>
           <label
             cssClasses={["app-name"]}
-            halign={variant === "stored" ? START : CENTER}
+            halign={START}
             label={notification.appName}
             ellipsize={Pango.EllipsizeMode.END}
             singleLineMode={true}
-            maxWidthChars={Math.floor(maxWidthChars * 0.5)}
+            maxWidthChars={Math.floor(maxWidthChars * 0.4)}
           />
-          <label cssClasses={["time"]} hexpand halign={END} label={timeLabel} />
-          {(typeof showDismissButton === "boolean"
-            ? showDismissButton
-            : showDismissButton.get()) && (
-            <button
-              cssClasses={["dismiss-button"]}
-              visible={variant === "stored" ? isHovered : true}
-              onClicked={() => onDismiss?.(notification.id)}
-              tooltipText="Dismiss notification"
-            >
-              <image iconName="window-close-symbolic" pixelSize={12} />
-            </button>
-          )}
+          <label 
+            cssClasses={["time"]} 
+            hexpand 
+            halign={END} 
+            label={timeLabel} 
+          />
         </box>
 
-        <Gtk.Separator cssClasses={["notification-separator"]} />
-
-        {/* Content */}
+        {/* Content - Icon and Text Side by Side */}
         <box cssClasses={["content"]} overflow={Gtk.Overflow.HIDDEN}>
           <box
             cssClasses={["thumb"]}
             visible={Boolean(NotificationIcon(notification))}
             halign={CENTER}
-            valign={CENTER}
+            valign={START}
           >
             {NotificationIcon(notification)}
           </box>
@@ -161,7 +136,7 @@ export function BaseNotification({
             cssClasses={["text-content"]}
             hexpand={true}
             halign={START}
-            valign={START}
+            valign={CENTER}
             overflow={Gtk.Overflow.HIDDEN}
           >
             <label
@@ -183,31 +158,11 @@ export function BaseNotification({
                 label={notification.body}
                 ellipsize={Pango.EllipsizeMode.END}
                 widthChars={bodyMaxChars}
-                lines={5}
+                lines={3}
               />
             )}
           </box>
         </box>
-
-        {/* Actions */}
-        {notification.actions.length > 0 && (
-          <box cssClasses={["actions"]}>
-            {notification.actions.map(({ label, action }) => (
-              <button
-                hexpand
-                cssClasses={["action-button"]}
-                onClicked={() => onAction?.(notification.id, action)}
-              >
-                <label
-                  label={label}
-                  halign={CENTER}
-                  hexpand
-                  ellipsize={Pango.EllipsizeMode.END}
-                />
-              </button>
-            ))}
-          </box>
-        )}
       </box>
     </Adw.Clamp>
   );

@@ -606,75 +606,113 @@ box.logout-background .logout-menu button label {
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  margin: 0.75rem;
-  padding: 0.4rem 0.75rem;
+  margin: 0.4rem 0.75rem;
+  padding: 0.4rem;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.notification.notification-hovered {
+  transform: translateX(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.notification:active {
+  transform: scale(0.98);
+  opacity: 0.8;
 }
 .notification.critical {
-  border: 1px solid #d17678;
+  border-left: 3px solid #d17678;
+}
+.notification.critical .header .app-name {
+  color: #d17678;
+}
+.notification.low {
+  opacity: 0.9;
+}
+.notification .header {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 0.25rem;
 }
 .notification .header .app-name {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: rgba(226, 226, 226, 0.7);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(226, 226, 226, 0.6);
 }
 .notification .header .time {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: rgba(226, 226, 226, 0.7);
-}
-.notification .header .dismiss-button {
-  margin: -0.5rem 0rem;
-}
-.notification separator {
-  background-color: rgba(226, 226, 226, 0.5);
-  min-height: 1px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(226, 226, 226, 0.5);
 }
 .notification .content {
-  margin-top: 0.75rem;
-  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
 }
-.notification .content > box {
-  min-width: 64px;
-  min-height: 64px;
+.notification .content .thumb {
+  flex-shrink: 0;
+}
+.notification .content .thumb > box {
+  min-width: 48px;
+  min-height: 48px;
   border-radius: 8px;
   background-size: contain;
   background-repeat: no-repeat;
 }
-.notification .content image {
-  -gtk-icon-size: 64px;
+.notification .content .thumb image {
+  -gtk-icon-size: 48px;
 }
-.notification .content .thumb {
-  margin-right: 0.5rem;
+.notification .content .text-content {
+  flex: 1;
+  min-width: 0;
 }
-.notification .content .title {
-  margin-right: 0.5rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: rgb(226, 226, 226);
-}
-.notification .content .body {
-  margin-right: 0.5rem;
+.notification .content .text-content .title {
   font-size: 0.95rem;
-  color: rgba(226, 226, 226, 0.8);
-  margin-top: 0.75rem;
+  font-weight: 600;
+  color: rgb(226, 226, 226);
+  line-height: 1.3;
 }
-.notification .actions {
-  margin-top: 1rem;
+.notification .content .text-content .body {
+  font-size: 0.85rem;
+  color: rgba(226, 226, 226, 0.7);
+  margin-top: 0.25rem;
+  line-height: 1.4;
 }
-.notification .actions .action-button {
-  border-radius: calc(16px - 0.4rem - 2px);
-  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 57, 0.6);
-  margin: 0.4rem;
-  padding: 0.4rem;
-  transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+.notification .action-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.4rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(226, 226, 226, 0.1);
+  opacity: 0;
+  animation: fadeIn 150ms ease-out forwards;
 }
-.notification .actions .action-button:hover {
-  background: rgba(57, 57, 57, 0.99);
+.notification .action-indicator .action-hint {
+  font-size: 0.75rem;
+  color: rgba(226, 226, 226, 0.6);
+  font-style: italic;
+}
+.notification .action-indicator .more-actions {
+  font-size: 0.7rem;
+  color: rgba(226, 226, 226, 0.5);
+  background: rgba(226, 226, 226, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* variables & mixins */
 /* general styles */
 .osd {
