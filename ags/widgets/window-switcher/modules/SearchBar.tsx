@@ -1,5 +1,6 @@
 import { Gtk } from "ags/gtk4";
 import { windowSwitcher } from "utils/windowSwitcher";
+import GLib from "gi://GLib";
 
 export function SearchBar() {
   let searchEntry: any = null;
@@ -50,7 +51,7 @@ export function SearchBar() {
         hexpand 
       />
       <label 
-        label="↑↓: Nav • Enter: Focus" 
+        label="↑↓: Nav • Enter: Focus • Tab: Cycle" 
         cssClasses={["shortcut-hint"]} 
         $={(self) => { hintLabel = self; }}
       />

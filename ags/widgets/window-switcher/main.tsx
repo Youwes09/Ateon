@@ -45,9 +45,8 @@ export default function WindowSwitcher() {
           }
         });
 
-        // Add key handler that allows search entry to work
         const keyController = new Gtk.EventControllerKey();
-        keyController.set_propagation_phase(Gtk.PropagationPhase.BUBBLE); // Changed from CAPTURE
+        keyController.set_propagation_phase(Gtk.PropagationPhase.BUBBLE);
         
         keyController.connect("key-pressed", (_, keyval, keycode, state) => {
           console.log(`Window key event: ${keyval}`);
@@ -60,16 +59,16 @@ export default function WindowSwitcher() {
           
           // If search entry is focused, only handle navigation keys
           if (isFocusedOnEntry) {
-            // Let typing pass through to entry
             // Only intercept navigation keys
             if (keyval === 65307 || // Escape
                 keyval === 65362 || // Up
                 keyval === 65364 || // Down
-                keyval === 65535 || // Delete
-                keyval === 65293) { // Enter (sometimes)
+                keyval === 65293 || // Enter
+                keyval === 65289 || // Tab
+                keyval === 65056) { // Shift+Tab
               console.log("Navigation key while in search - handling");
               windowSwitcher.key(keyval);
-              return true; // Handled
+              return true;
             }
             // Let other keys through to the entry
             console.log("Typing key - passing to entry");

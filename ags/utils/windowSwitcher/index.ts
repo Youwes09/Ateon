@@ -24,7 +24,7 @@ class WindowSwitcherManager {
   window: any = null;
   updateCallbacks: (() => void)[] = [];
   focusSearch?: () => void;
-  lastKeyboardAction = 0; // Timestamp of last keyboard action
+  lastKeyboardAction = 0;
 
   addUpdateCallback(callback: () => void) {
     this.updateCallbacks.push(callback);
@@ -123,18 +123,6 @@ class WindowSwitcherManager {
     }
   }
 
-  async closeWindow(i = this.index) {
-    const win = this.filtered[i];
-    if (!win) return;
-    
-    try {
-      await execAsync(["hyprctl", "dispatch", "closewindow", `address:${win.address}`]);
-      await this.load();
-    } catch (e) {
-      console.error("Failed to close window:", e);
-    }
-  }
-
   show() {
     console.log("Showing window switcher");
     this.isVisible = true;
@@ -151,9 +139,28 @@ class WindowSwitcherManager {
     if (this.window) this.window.visible = false;
   }
 
+  // Cycle to next window (wraps around)
+  next() {
+    if (this.filtered.length > 0) {
+      this.index = (this.index + 1) % this.filtered.length;
+      this.lastKeyboardAction = Date.now();
+      this.triggerUpdate();
+    }
+  }
+
+  // Cycle to previous window (wraps around)
+  prev() {
+    if (this.filtered.length > 0) {
+      this.index = (this.index - 1 + this.filtered.length) % this.filtered.length;
+      this.lastKeyboardAction = Date.now();
+      this.triggerUpdate();
+    }
+  }
+
   up() {
     if (this.filtered.length > 0) {
-      this.index = Math.max(0, this.index - 1);
+      // Cycle behavior - wrap to bottom if at top
+      this.index = (this.index - 1 + this.filtered.length) % this.filtered.length;
       this.lastKeyboardAction = Date.now();
       this.triggerUpdate();
     }
@@ -161,7 +168,8 @@ class WindowSwitcherManager {
 
   down() {
     if (this.filtered.length > 0) {
-      this.index = Math.min(this.filtered.length - 1, this.index + 1);
+      // Cycle behavior - wrap to top if at bottom
+      this.index = (this.index + 1) % this.filtered.length;
       this.lastKeyboardAction = Date.now();
       this.triggerUpdate();
     }
@@ -178,6 +186,14 @@ class WindowSwitcherManager {
         console.log("Enter pressed - selecting");
         this.select(); 
         break;
+      case 65289: // Tab key
+        console.log("Tab pressed - cycling forward");
+        this.next();
+        break;
+      case 65056: // Shift+Tab (ISO_Left_Tab)
+        console.log("Shift+Tab pressed - cycling backward");
+        this.prev();
+        break;
       case 65362: 
         console.log("Up pressed");
         this.up(); 
@@ -185,11 +201,6 @@ class WindowSwitcherManager {
       case 65364: 
         console.log("Down pressed");
         this.down(); 
-        break;
-      case 65535:
-      case 65288:
-        console.log("Delete/Backspace pressed - closing window");
-        this.closeWindow();
         break;
       default:
         console.log(`Other key: ${k} - focusing search`);
