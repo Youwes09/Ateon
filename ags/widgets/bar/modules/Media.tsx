@@ -7,7 +7,6 @@ import options from "options.ts";
 
 function Cover({ player }) {
   let measureBox: Gtk.Widget | null = null;
-
   return (
     <overlay
       $={(self) => {
@@ -42,9 +41,14 @@ function Cover({ player }) {
 }
 
 function Title({ player }) {
+  const truncate = options["bar.modules.media.truncate"].get();
+  const maxChars = options["bar.modules.media.max-chars"].get();
+
   return (
     <label
       cssClasses={["title", "module"]}
+      maxWidthChars={truncate ? maxChars : -1}
+      ellipsize={truncate ? 3 : 0}
       label={createBinding(
         player,
         "metadata",
@@ -65,7 +69,6 @@ function MusicBox({ player }) {
     </box>
   );
 }
-``;
 
 export default function Media() {
   return (

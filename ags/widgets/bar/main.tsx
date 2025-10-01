@@ -41,7 +41,8 @@ function Bar({ gdkmonitor, ...props }: any) {
   const showCavaExpanded = createComputed(
     [options["bar.modules.cava.show"], options["bar.style"]],
     (cavaEnabled, barStyle) => {
-      return cavaEnabled && ["expanded", "corners"].includes(String(barStyle));
+      const styleStr = String(barStyle);
+      return cavaEnabled && (styleStr === "expanded" || styleStr === "corners" || styleStr === "beveled");
     },
   );
 

@@ -29,4 +29,5 @@ export const BAR_STYLE_OPTIONS: OptionChoice[] = [
   { label: "Expanded", value: "expanded" },
   { label: "Floating", value: "floating" },
   { label: "Rounded Corners", value: "corners" },
+  { label: "Beveled", value: "beveled" },
 ];

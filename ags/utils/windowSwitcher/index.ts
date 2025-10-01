@@ -35,7 +35,7 @@ class WindowSwitcherManager {
       try {
         callback();
       } catch (e) {
-        console.error("Update callback error:", e);
+        // Silent error handling
       }
     });
   }
@@ -53,7 +53,6 @@ class WindowSwitcherManager {
   }
 
   async load() {
-    console.log("Loading windows...");
     this.windows = [];
     this.filtered = [];
     
@@ -83,10 +82,8 @@ class WindowSwitcherManager {
           return a.at[0] - b.at[0];
         });
 
-      console.log(`Loaded ${this.windows.length} windows (sorted by workspace and position)`);
       this.filter();
     } catch (e) {
-      console.error("Failed to get windows:", e);
       this.windows = [];
       this.filtered = [];
       this.triggerUpdate();
@@ -105,30 +102,24 @@ class WindowSwitcherManager {
 
   async select(i = this.index) {
     const win = this.filtered[i];
-    console.log(`Select called - index: ${i}, window:`, win);
     if (!win) {
-      console.log("No window found at index");
       return;
     }
-    
-    console.log(`Selecting window: ${win.title} on workspace ${win.workspace.id}`);
     
     try {
       await execAsync(["hyprctl", "dispatch", "workspace", win.workspace.id.toString()]);
       await execAsync(["hyprctl", "dispatch", "focuswindow", `address:${win.address}`]);
-      console.log("Window selection complete, hiding...");
       this.hide();
     } catch (e) {
-      console.error("Failed to focus window:", e);
+      // Silent error handling
     }
   }
 
   show() {
-    console.log("Showing window switcher");
     this.isVisible = true;
     this.lastKeyboardAction = 0;
     if (this.window) this.window.visible = true;
-    this.load().catch(console.error);
+    this.load().catch(() => {});
     return Promise.resolve();
   }
 
@@ -176,34 +167,26 @@ class WindowSwitcherManager {
   }
 
   key(k: number) {
-    console.log(`Key pressed: ${k}, filtered length: ${this.filtered.length}, index: ${this.index}`);
     switch (k) {
       case 65307: 
-        console.log("Escape pressed - hiding");
         this.hide(); 
         break;
       case 65293: 
-        console.log("Enter pressed - selecting");
         this.select(); 
         break;
       case 65289: // Tab key
-        console.log("Tab pressed - cycling forward");
         this.next();
         break;
       case 65056: // Shift+Tab (ISO_Left_Tab)
-        console.log("Shift+Tab pressed - cycling backward");
         this.prev();
         break;
       case 65362: 
-        console.log("Up pressed");
         this.up(); 
         break;
       case 65364: 
-        console.log("Down pressed");
         this.down(); 
         break;
       default:
-        console.log(`Other key: ${k} - focusing search`);
         if (this.focusSearch) this.focusSearch();
         break;
     }

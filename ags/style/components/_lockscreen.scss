@@ -1,0 +1,88 @@
+// ~/.config/ags/style/components/lockscreen.scss
+
+.lockscreen-bg {
+    all: unset;
+    background-size: cover;
+    background-position: center;
+    
+    .content-box {
+        padding: 32px;
+    }
+
+    // Indicators at top
+    .indicator-box {
+        padding: 16px 24px;
+        
+        label {
+            font-size: 20px;
+        }
+    }
+
+    // Date and time
+    .lock-date {
+        font-size: 20px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.95);
+        margin-top: 24px;
+        margin-left: 24px;
+    }
+
+    .lock-clock {
+        font-size: 96px;
+        font-weight: 200;
+        color: white;
+        margin-top: 12px;
+        margin-left: 24px;
+        letter-spacing: -3px;
+    }
+
+    // Profile section
+    .profile-container {
+        margin-bottom: 120px;
+    }
+
+    .profile-box {
+        .face-icon {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    .container-box {
+        .username {
+            font-size: 28px;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .password-entry {
+            min-width: 320px;
+            min-height: 48px;
+            padding: 12px 20px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            
+            &:focus {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+            }
+
+            selection {
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
+
+    .unlock-box {
+        .unlock-text {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+    }
+}

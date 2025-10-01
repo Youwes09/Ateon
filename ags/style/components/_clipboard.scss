@@ -2,186 +2,215 @@
 @use "../abstracts" as *;
 @use "sass:color";
 
+// macOS-inspired clipboard manager - compact and refined
 box.clipboard {
   @include window;
-  min-width: 500px;
 }
 
+// Top bar with mode switcher - compact macOS segmented control style
 .mode-bar {
   @include rounding;
-  padding: 8px;
-  background-color: color.adjust($bg, $alpha: -0.1);
-  border-bottom: 1px solid color.adjust($fg, $alpha: -0.85);
-  margin: 0.5rem 0.5rem 0;
-
+  padding: 6px 10px;
+  background-color: transparentize($bg, 0.05);
+  border-bottom: 1px solid transparentize($fg, 0.88);
+  margin: 0.4rem 0.4rem 0;
+  
   .mode-button {
     @include rounding;
-    padding: 8px 14px;
-    margin: 0 4px;
+    padding: 4px 12px;
+    margin: 0 2px;
     background-color: transparent;
-    border: 1px solid color.adjust($fg, $alpha: -0.85);
-    color: $fg;
+    border: 1px solid transparentize($fg, 0.88);
+    color: transparentize($fg, 0.3);
     font-weight: 500;
-    transition: all 0.2s ease;
-
+    font-size: 0.85rem;
+    transition: all 0.18s ease;
+    
     &:hover {
-      background-color: color.adjust($fg, $alpha: -0.9);
-      border-color: color.adjust($fg, $alpha: -0.7);
+      background-color: transparentize($fg, 0.94);
+      border-color: transparentize($fg, 0.8);
+      color: $fg;
     }
-
+    
+    &.active {
+      background-color: transparentize($primary, 0.85);
+      border-color: transparentize($primary, 0.5);
+      color: $primary;
+      font-weight: 600;
+    }
   }
-
+  
   .clear-all-button {
     @include rounding;
-    padding: 8px 14px;
-    margin: 0 8px 0 4px;
-    background-color: color.adjust($error, $alpha: -0.85);
-    border: 1px solid $error;
-    color: $fg;
+    padding: 4px 12px;
+    margin: 0 6px 0 2px;
+    background-color: transparent;
+    border: 1px solid transparentize($error, 0.7);
+    color: $error;
     font-weight: 500;
-    transition: all 0.2s ease;
-
+    font-size: 0.85rem;
+    transition: all 0.18s ease;
+    
     &:hover {
       background-color: $error;
       color: white;
-
+      border-color: $error;
+      
       label.mode-icon {
         color: white;
       }
     }
   }
-
+  
   label.mode-icon {
     font-family: 'Material Symbols Outlined';
     font-weight: normal;
-    font-size: 1.2rem;
-    margin-right: 6px;
+    font-size: 1rem;
+    margin-right: 4px;
+    opacity: 0.85;
   }
-
+  
   .entry-count {
-    font-size: 0.9rem;
-    color: color.adjust($fg, $alpha: -0.3);
+    font-size: 0.8rem;
+    color: transparentize($fg, 0.45);
     margin: auto 8px auto 0;
+    font-weight: 500;
   }
 }
 
+// Search bar - compact macOS spotlight style
 .search-section {
   @include window-box;
-  margin: 1rem 0.5rem;
-  background-color: color.adjust($primary, $alpha: -0.85);
-  padding: $spacing-sm;
-
+  margin: 0.5rem 0.4rem;
+  background-color: transparentize($fg, 0.96);
+  padding: 6px 10px;
+  border: 1px solid transparentize($fg, 0.9);
+  transition: all 0.2s ease;
+  
   label.search-icon {
     font-family: 'Material Symbols Outlined';
     font-weight: normal;
-    font-size: 1.5rem;
-    margin: 0 0.3rem;
+    font-size: 1.1rem;
+    margin: 0 6px 0 2px;
+    color: transparentize($fg, 0.5);
   }
-
+  
   entry.search-entry {
-    font-size: 1.3rem;
-    padding: $spacing-xs $spacing-sm;
-    min-height: 2.2rem;
+    font-size: 0.95rem;
+    padding: 4px 8px;
     background: transparent;
     border: none;
     color: $fg;
-
+    
     &:focus {
       outline: none;
       box-shadow: none;
     }
   }
-
+  
   .shortcut-hint {
-    font-size: 0.85rem;
-    color: color.adjust($fg, $alpha: -0.4);
-    margin: 0 0.5rem;
+    font-size: 0.75rem;
+    color: transparentize($fg, 0.55);
+    margin-left: 4px;
+    margin-right: 4px;
+    font-weight: 500;
   }
 }
 
+// Clipboard entries list - compact macOS list style
 .clipboard-list {
   @include window-box;
-  margin: 0 0.5rem 1rem;
-
+  margin: 0 0.4rem 0.5rem;
+  padding: 2px;
+  
   button.clipboard-entry {
     @include rounding;
-    padding: $spacing-sm;
+    padding: 6px 10px;
     margin: 2px 0;
     background-color: transparent;
     border: 1px solid transparent;
     transition: all 0.15s ease;
-
+    
     &:hover {
-      background-color: color.adjust($primary, $alpha: -0.9);
-      border-color: color.adjust($primary, $alpha: -0.7);
+      background-color: transparentize($fg, 0.96);
+      border-color: transparentize($fg, 0.92);
     }
-
+    
     &.selected {
-      background-color: color.adjust($primary, $alpha: -0.85);
-      border-color: $primary;
-
+      background-color: transparentize($primary, 0.88);
+      border-color: transparentize($primary, 0.75);
+      box-shadow: 0 1px 2px transparentize($primary, 0.85);
+      
       .entry-text {
-        color: white;
+        color: $primary;
         font-weight: 500;
       }
-
-      .delete-icon {
-        color: white;
-      }
     }
-
+    
+    // Active state removed - transform not supported in GTK CSS
+    
     .entry-text {
-      font-size: 1rem;
+      font-size: 0.85rem;
       color: $fg;
       margin-right: auto;
+      line-height: 1.3;
+      font-weight: 400;
     }
-
+    
     label.delete-icon {
       font-family: 'Material Symbols Outlined';
       font-weight: normal;
-      font-size: 1.2rem;
-      color: color.adjust($error, $alpha: -0.3);
-      margin-left: $spacing-sm;
-    }
-
-    // Image-specific styles
-    &.image-entry {
-      padding: $spacing-sm;
-      min-height: auto;
-
-      .entry-image {
-        border-radius: 8px;
-        border: 1px solid color.adjust($fg, $alpha: -0.85);
+      font-size: 1rem;
+      color: transparentize($error, 0.4);
+      margin-left: 8px;
+      transition: color 0.15s ease;
+      
+      &:hover {
+        color: $error;
       }
     }
-
+    
+    // Image-specific styles with macOS preview aesthetic
+    &.image-entry {
+      padding: 8px;
+      
+      .entry-image {
+        border-radius: 4px;
+        border: 1px solid transparentize($fg, 0.9);
+        box-shadow: 0 1px 4px transparentize(black, 0.92);
+        transition: all 0.15s ease;
+      }
+    }
+    
     &.image-entry.selected {
       .entry-image {
-        border-color: $primary;
-        box-shadow: 0 0 8px color.adjust($primary, $alpha: -0.5);
+        border-color: transparentize($primary, 0.6);
+        box-shadow: 0 2px 8px transparentize($primary, 0.7);
       }
     }
-
+    
     &.image-entry:hover {
       .entry-image {
-        border-color: color.adjust($primary, $alpha: -0.7);
+        border-color: transparentize($fg, 0.85);
+        box-shadow: 0 2px 8px transparentize(black, 0.88);
       }
     }
   }
-
+  
   label.no-entries {
-    padding: $spacing-md;
-    color: color.adjust($fg, $alpha: -0.4);
+    padding: 30px 16px;
+    color: transparentize($fg, 0.5);
     font-style: italic;
+    font-size: 0.85rem;
+    font-weight: 400;
   }
 }
 
+// Invisible close button - for keyboard shortcuts
 button.invisible-close {
   background: transparent;
   border: none;
   box-shadow: none;
-  min-width: 0;
-  min-height: 0;
   padding: 0;
   margin: 0;
   opacity: 0;

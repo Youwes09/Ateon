@@ -9,13 +9,13 @@ import GLib from "gi://GLib";
 function WindowSwitcherLayout({ children, onClickOutside }) {
   return (
     <box cssClasses={["window-switcher-background"]}>
-      <box 
-        orientation={Gtk.Orientation.VERTICAL} 
+      <box
+        orientation={Gtk.Orientation.VERTICAL}
         valign={Gtk.Align.CENTER}
         halign={Gtk.Align.CENTER}
       >
-        <box 
-          cssClasses={["window-switcher"]} 
+        <box
+          cssClasses={["window-switcher"]}
           orientation={Gtk.Orientation.VERTICAL}
         >
           {children}
@@ -36,51 +36,36 @@ export default function WindowSwitcher() {
       exclusivity={Astal.Exclusivity.IGNORE}
       keymode={Astal.Keymode.ON_DEMAND}
       application={app}
-      $={(self) => { 
+      $={(self) => {
         windowSwitcher.window = self;
-        
         self.connect("notify::visible", () => {
           if (self.visible) {
-            windowSwitcher.load().catch(console.error);
+            windowSwitcher.load().catch(() => {});
           }
         });
 
         const keyController = new Gtk.EventControllerKey();
         keyController.set_propagation_phase(Gtk.PropagationPhase.BUBBLE);
-        
-        keyController.connect("key-pressed", (_, keyval, keycode, state) => {
-          console.log(`Window key event: ${keyval}`);
-          
-          // Get focused widget
+        keyController.connect("key-pressed", (_ctrl, keyval) => {
           const focusWidget = self.get_focus();
           const isFocusedOnEntry = focusWidget && focusWidget.constructor.name === "GtkText";
-          
-          console.log(`Focused widget: ${focusWidget?.constructor.name}, is entry: ${isFocusedOnEntry}`);
-          
-          // If search entry is focused, only handle navigation keys
+
           if (isFocusedOnEntry) {
-            // Only intercept navigation keys
             if (keyval === 65307 || // Escape
                 keyval === 65362 || // Up
                 keyval === 65364 || // Down
                 keyval === 65293 || // Enter
                 keyval === 65289 || // Tab
                 keyval === 65056) { // Shift+Tab
-              console.log("Navigation key while in search - handling");
               windowSwitcher.key(keyval);
               return true;
             }
-            // Let other keys through to the entry
-            console.log("Typing key - passing to entry");
             return false;
           } else {
-            // Not in search entry, handle all keys
-            console.log("Not in search entry - handling key");
             windowSwitcher.key(keyval);
             return true;
           }
         });
-        
         self.add_controller(keyController);
       }}
     >

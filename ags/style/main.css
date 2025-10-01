@@ -300,6 +300,15 @@ popover modelbutton:only-child {
   margin: 0 0.3rem;
 }
 
+/* Beveled style */
+.bar-style-beveled {
+  background: rgba(19, 19, 19, 0.5);
+  border-radius: 0.8rem;
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 19, 0.5);
+  padding: 0 0.5rem;
+  margin: 0 0.3rem;
+}
+
 /* Corner-integrated style */
 .bar-style-corners {
   background: rgba(19, 19, 19, 0.5);
@@ -609,14 +618,12 @@ box.logout-background .logout-menu button label {
   margin: 0.4rem 0.75rem;
   padding: 0.4rem;
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
 }
 .notification.notification-hovered {
-  transform: translateX(-4px);
+  margin-left: calc(0.75rem - 4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .notification:active {
-  transform: scale(0.98);
   opacity: 0.8;
 }
 .notification.critical {
@@ -629,9 +636,6 @@ box.logout-background .logout-menu button label {
   opacity: 0.9;
 }
 .notification .header {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
   margin-bottom: 0.25rem;
 }
 .notification .header .app-name {
@@ -646,14 +650,6 @@ box.logout-background .logout-menu button label {
   font-weight: 500;
   color: rgba(226, 226, 226, 0.5);
 }
-.notification .content {
-  display: flex;
-  gap: 0.4rem;
-  align-items: flex-start;
-}
-.notification .content .thumb {
-  flex-shrink: 0;
-}
 .notification .content .thumb > box {
   min-width: 48px;
   min-height: 48px;
@@ -663,10 +659,6 @@ box.logout-background .logout-menu button label {
 }
 .notification .content .thumb image {
   -gtk-icon-size: 48px;
-}
-.notification .content .text-content {
-  flex: 1;
-  min-width: 0;
 }
 .notification .content .text-content .title {
   font-size: 0.95rem;
@@ -681,14 +673,14 @@ box.logout-background .logout-menu button label {
   line-height: 1.4;
 }
 .notification .action-indicator {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-top: 0.4rem;
   padding-top: 0.25rem;
   border-top: 1px solid rgba(226, 226, 226, 0.1);
   opacity: 0;
-  animation: fadeIn 150ms ease-out forwards;
+  transition: opacity 150ms ease-out;
+}
+.notification .action-indicator.visible {
+  opacity: 1;
 }
 .notification .action-indicator .action-hint {
   font-size: 0.75rem;
@@ -703,16 +695,6 @@ box.logout-background .logout-menu button label {
   border-radius: 4px;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 /* variables & mixins */
 /* general styles */
 .osd {
@@ -1395,43 +1377,52 @@ box.clipboard {
   background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  min-width: 500px;
 }
 
 .mode-bar {
   border-radius: calc(16px - 0.4rem - 2px);
-  padding: 8px;
-  background-color: rgba(19, 19, 19, 0.4);
-  border-bottom: 1px solid rgba(226, 226, 226, 0.15);
-  margin: 0.5rem 0.5rem 0;
+  padding: 6px 10px;
+  background-color: rgba(19, 19, 19, 0.45);
+  border-bottom: 1px solid rgba(226, 226, 226, 0.12);
+  margin: 0.4rem 0.4rem 0;
 }
 .mode-bar .mode-button {
   border-radius: calc(16px - 0.4rem - 2px);
-  padding: 8px 14px;
-  margin: 0 4px;
+  padding: 4px 12px;
+  margin: 0 2px;
   background-color: transparent;
-  border: 1px solid rgba(226, 226, 226, 0.15);
-  color: rgb(226, 226, 226);
+  border: 1px solid rgba(226, 226, 226, 0.12);
+  color: rgba(226, 226, 226, 0.7);
   font-weight: 500;
-  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  transition: all 0.18s ease;
 }
 .mode-bar .mode-button:hover {
-  background-color: rgba(226, 226, 226, 0.1);
-  border-color: rgba(226, 226, 226, 0.3);
+  background-color: rgba(226, 226, 226, 0.06);
+  border-color: rgba(226, 226, 226, 0.2);
+  color: rgb(226, 226, 226);
+}
+.mode-bar .mode-button.active {
+  background-color: rgba(255, 178, 183, 0.15);
+  border-color: rgba(255, 178, 183, 0.5);
+  color: rgb(255, 178, 183);
+  font-weight: 600;
 }
 .mode-bar .clear-all-button {
   border-radius: calc(16px - 0.4rem - 2px);
-  padding: 8px 14px;
-  margin: 0 8px 0 4px;
-  background-color: rgba(255, 180, 171, 0.15);
-  border: 1px solid rgb(255, 180, 171);
-  color: rgb(226, 226, 226);
+  padding: 4px 12px;
+  margin: 0 6px 0 2px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 180, 171, 0.3);
+  color: rgb(255, 180, 171);
   font-weight: 500;
-  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  transition: all 0.18s ease;
 }
 .mode-bar .clear-all-button:hover {
   background-color: rgb(255, 180, 171);
   color: white;
+  border-color: rgb(255, 180, 171);
 }
 .mode-bar .clear-all-button:hover label.mode-icon {
   color: white;
@@ -1439,13 +1430,15 @@ box.clipboard {
 .mode-bar label.mode-icon {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
-  font-size: 1.2rem;
-  margin-right: 6px;
+  font-size: 1rem;
+  margin-right: 4px;
+  opacity: 0.85;
 }
 .mode-bar .entry-count {
-  font-size: 0.9rem;
-  color: rgba(226, 226, 226, 0.7);
+  font-size: 0.8rem;
+  color: rgba(226, 226, 226, 0.55);
   margin: auto 8px auto 0;
+  font-weight: 500;
 }
 
 .search-section {
@@ -1454,20 +1447,22 @@ box.clipboard {
   background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
-  margin: 1rem 0.5rem;
-  background-color: rgba(255, 178, 183, 0.15);
-  padding: 0.4rem;
+  margin: 0.5rem 0.4rem;
+  background-color: rgba(226, 226, 226, 0.04);
+  padding: 6px 10px;
+  border: 1px solid rgba(226, 226, 226, 0.1);
+  transition: all 0.2s ease;
 }
 .search-section label.search-icon {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
-  font-size: 1.5rem;
-  margin: 0 0.3rem;
+  font-size: 1.1rem;
+  margin: 0 6px 0 2px;
+  color: rgba(226, 226, 226, 0.5);
 }
 .search-section entry.search-entry {
-  font-size: 1.3rem;
-  padding: 0.25rem 0.4rem;
-  min-height: 2.2rem;
+  font-size: 0.95rem;
+  padding: 4px 8px;
   background: transparent;
   border: none;
   color: rgb(226, 226, 226);
@@ -1477,9 +1472,11 @@ box.clipboard {
   box-shadow: none;
 }
 .search-section .shortcut-hint {
-  font-size: 0.85rem;
-  color: rgba(226, 226, 226, 0.6);
-  margin: 0 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(226, 226, 226, 0.45);
+  margin-left: 4px;
+  margin-right: 4px;
+  font-weight: 500;
 }
 
 .clipboard-list {
@@ -1488,70 +1485,77 @@ box.clipboard {
   background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
-  margin: 0 0.5rem 1rem;
+  margin: 0 0.4rem 0.5rem;
+  padding: 2px;
 }
 .clipboard-list button.clipboard-entry {
   border-radius: calc(16px - 0.4rem - 2px);
-  padding: 0.4rem;
+  padding: 6px 10px;
   margin: 2px 0;
   background-color: transparent;
   border: 1px solid transparent;
   transition: all 0.15s ease;
 }
 .clipboard-list button.clipboard-entry:hover {
-  background-color: rgba(255, 178, 183, 0.1);
-  border-color: rgba(255, 178, 183, 0.3);
+  background-color: rgba(226, 226, 226, 0.04);
+  border-color: rgba(226, 226, 226, 0.08);
 }
 .clipboard-list button.clipboard-entry.selected {
-  background-color: rgba(255, 178, 183, 0.15);
-  border-color: rgb(255, 178, 183);
+  background-color: rgba(255, 178, 183, 0.12);
+  border-color: rgba(255, 178, 183, 0.25);
+  box-shadow: 0 1px 2px rgba(255, 178, 183, 0.15);
 }
 .clipboard-list button.clipboard-entry.selected .entry-text {
-  color: white;
+  color: rgb(255, 178, 183);
   font-weight: 500;
 }
-.clipboard-list button.clipboard-entry.selected .delete-icon {
-  color: white;
-}
 .clipboard-list button.clipboard-entry .entry-text {
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: rgb(226, 226, 226);
   margin-right: auto;
+  line-height: 1.3;
+  font-weight: 400;
 }
 .clipboard-list button.clipboard-entry label.delete-icon {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
-  font-size: 1.2rem;
-  color: rgba(255, 180, 171, 0.7);
-  margin-left: 0.4rem;
+  font-size: 1rem;
+  color: rgba(255, 180, 171, 0.6);
+  margin-left: 8px;
+  transition: color 0.15s ease;
+}
+.clipboard-list button.clipboard-entry label.delete-icon:hover {
+  color: rgb(255, 180, 171);
 }
 .clipboard-list button.clipboard-entry.image-entry {
-  padding: 0.4rem;
-  min-height: auto;
+  padding: 8px;
 }
 .clipboard-list button.clipboard-entry.image-entry .entry-image {
-  border-radius: 8px;
-  border: 1px solid rgba(226, 226, 226, 0.15);
+  border-radius: 4px;
+  border: 1px solid rgba(226, 226, 226, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.15s ease;
 }
 .clipboard-list button.clipboard-entry.image-entry.selected .entry-image {
-  border-color: rgb(255, 178, 183);
-  box-shadow: 0 0 8px rgba(255, 178, 183, 0.5);
+  border-color: rgba(255, 178, 183, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 178, 183, 0.3);
 }
 .clipboard-list button.clipboard-entry.image-entry:hover .entry-image {
-  border-color: rgba(255, 178, 183, 0.3);
+  border-color: rgba(226, 226, 226, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 .clipboard-list label.no-entries {
-  padding: 0.75rem;
-  color: rgba(226, 226, 226, 0.6);
+  padding: 30px 16px;
+  color: rgba(226, 226, 226, 0.5);
   font-style: italic;
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 button.invisible-close {
   background: transparent;
   border: none;
   box-shadow: none;
-  min-width: 0;
-  min-height: 0;
   padding: 0;
   margin: 0;
   opacity: 0;

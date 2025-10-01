@@ -12,7 +12,7 @@ export default function ControlPanel() {
 
   // Panel States
   const [visible] = createState(false);
-  const [matshellSettingsExpanded, setMatshellSettingsExpanded] =
+  const [ateonSettingsExpanded, setAteonSettingsExpanded] =
     createState(false);
   const [barExpanded, setBarExpanded] = createState(false);
   const [cavaExpanded, setCavaExpanded] = createState(false);
@@ -86,12 +86,12 @@ export default function ControlPanel() {
 
         <Gtk.Separator />
 
-        {/* Matshell Settings */}
+        {/* Ateon Settings */}
         <CategoryButton
-          title="Matshell Settings"
+          title="Ateon Settings"
           icon="preferences-system-symbolic"
-          expanded={matshellSettingsExpanded}
-          onToggle={() => setMatshellSettingsExpanded((prev) => !prev)}
+          expanded={ateonSettingsExpanded}
+          onToggle={() => setAteonSettingsExpanded((prev) => !prev)}
         >
           <></>
           <box orientation={Gtk.Orientation.VERTICAL}>

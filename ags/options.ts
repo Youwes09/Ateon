@@ -27,6 +27,8 @@ const options = await (async () => {
       "dots", "circular", "particles", "wave_particles","waterfall", "mesh" */
       "bar.modules.cava.style": defineOption("catmull_rom"),
       "bar.modules.media.cava.show": defineOption(true),
+      "bar.modules.media.truncate": defineOption(true),
+      "bar.modules.media.max-chars": defineOption(30),
       "bar.modules.os-icon.type": defineOption("nix-symbolic"), // "nix-symbolic" or "arch-symbolic"
       "bar.modules.os-icon.show": defineOption(true),
       "musicPlayer.modules.cava.show": defineOption(true),
@@ -47,15 +49,10 @@ const options = await (async () => {
         { useCache: true },
       ),
       "weather.update-interval": defineOption(900_000),
-      "weather.cache": defineOption<
-        Record<
-          string,
-          {
-            data: WeatherData;
-            timestamp: number;
-          }
-        >
-      >({}, { useCache: true }),
+      "weather.cache": defineOption<Record<string, { data: WeatherData; timestamp: number }>>(
+        {},
+        { useCache: true },
+      ),
     },
   );
   return config;
