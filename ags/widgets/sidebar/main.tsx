@@ -6,11 +6,11 @@ import ClockWidget from "./modules/ClockWidget";
 import WeatherWidget from "./modules/WeatherWidget";
 import MatshellSettingsWidget from "./modules/MatshellSettingsWidget";
 import QuickActionsWidget from "./modules/QuickActionWidget";
-import TemplateWidget from "./modules/BaseTemplateWidget";
+import TimerWidget from "./modules/TimerWidget";
+import UpdaterWidget from "./modules/UpdaterWidget";
 import options from "options";
 
-// Define available modes
-export type SidebarMode = "settings" | "configs" | "git";
+export type SidebarMode = "widgets" | "settings";
 
 interface ModeConfig {
   id: SidebarMode;
@@ -19,12 +19,10 @@ interface ModeConfig {
 }
 
 const MODES: ModeConfig[] = [
+  { id: "widgets", label: "Widgets", icon: "Widgets" },
   { id: "settings", label: "Settings", icon: "Settings" },
-  { id: "configs", label: "Configs", icon: "Description" },
-  { id: "git", label: "Git", icon: "Code" },
 ];
 
-/** ---------- Sidebar Window ---------- **/
 export default function Sidebar(
   props: {
     children?: Gtk.Widget | JSX.Element | (Gtk.Widget | JSX.Element)[];
@@ -33,15 +31,8 @@ export default function Sidebar(
   const { TOP, LEFT, BOTTOM } = Astal.WindowAnchor;
   const { NORMAL, EXCLUSIVE } = Astal.Exclusivity;
   const [visible] = createState(false);
-  const [currentMode, setCurrentMode] = createState<SidebarMode>("settings");
+  const [currentMode, setCurrentMode] = createState<SidebarMode>("widgets");
   const { children = [] } = props;
-
-  // Cycle to next mode
-  const cycleMode = () => {
-    const currentIndex = MODES.findIndex((m) => m.id === currentMode.get());
-    const nextIndex = (currentIndex + 1) % MODES.length;
-    setCurrentMode(MODES[nextIndex].id);
-  };
 
   return (
     <window
@@ -63,10 +54,9 @@ export default function Sidebar(
         vexpand={true}
         spacing={12}
       >
-        {/* Built-in widgets */}
         <ClockWidget />
         <Gtk.Separator />
-        {/* Mode Selector */}
+
         <box
           class="mode-selector"
           orientation={Gtk.Orientation.HORIZONTAL}
@@ -93,7 +83,6 @@ export default function Sidebar(
 
         <Gtk.Separator />
 
-        {/* Mode Content - Scrollable */}
         <scrolledwindow
           vexpand={true}
           hscrollbarPolicy={Gtk.PolicyType.NEVER}
@@ -106,74 +95,34 @@ export default function Sidebar(
             transitionDuration={200}
             visibleChildName={currentMode((mode) => mode)}
           >
-            {/* Settings Mode */}
+            <box
+              $type="named"
+              name="widgets"
+              orientation={Gtk.Orientation.VERTICAL}
+              spacing={12}
+            >
+              <WeatherWidget />
+              <Gtk.Separator />
+              <TimerWidget />
+            </box>
+
             <box
               $type="named"
               name="settings"
               orientation={Gtk.Orientation.VERTICAL}
               spacing={12}
             >
+              <UpdaterWidget />
+              <Gtk.Separator />
               <MatshellSettingsWidget />
-            </box>
-
-            {/* Configs Mode */}
-            <box
-              $type="named"
-              name="configs"
-              orientation={Gtk.Orientation.VERTICAL}
-              spacing={12}
-            >
-              <box
-                class="placeholder-content"
-                orientation={Gtk.Orientation.VERTICAL}
-                spacing={8}
-              >
-                <label
-                  label="Configs Mode"
-                  cssClasses={["mode-title"]}
-                  halign={Gtk.Align.CENTER}
-                />
-                <label
-                  label="Configuration management coming soon..."
-                  cssClasses={["mode-subtitle"]}
-                  halign={Gtk.Align.CENTER}
-                />
-              </box>
-            </box>
-
-            {/* Git Mode */}
-            <box
-              $type="named"
-              name="git"
-              orientation={Gtk.Orientation.VERTICAL}
-              spacing={12}
-            >
-              <box
-                class="placeholder-content"
-                orientation={Gtk.Orientation.VERTICAL}
-                spacing={8}
-              >
-                <label
-                  label="Git Mode"
-                  cssClasses={["mode-title"]}
-                  halign={Gtk.Align.CENTER}
-                />
-                <label
-                  label="Git repository management coming soon..."
-                  cssClasses={["mode-subtitle"]}
-                  halign={Gtk.Align.CENTER}
-                />
-              </box>
             </box>
           </stack>
         </scrolledwindow>
 
         <Gtk.Separator />
 
-        {/* Quick Actions at bottom */}
         <QuickActionsWidget />
 
-        {/* Extra widgets */}
         {children}
       </box>
     </window>

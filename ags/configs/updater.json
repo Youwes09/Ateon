@@ -1,0 +1,62 @@
+{
+  "repoUrl": "https://github.com/Youwes09/Ateon.git",
+  "branch": "main",
+  "tempDir": "~/temp-ags-update",
+  "files": [
+    {
+      "source": "hypr",
+      "destination": "~/.config/hypr",
+      "enabled": false,
+      "name": "Hyprland"
+    },
+    {
+      "source": "ags",
+      "destination": "~/.config/ags",
+      "enabled": false,
+      "name": "AGS",
+      "exclude": [
+        "matugen/templates"
+      ]
+    },
+    {
+      "source": "ags/matugen/templates",
+      "destination": "~/.config/ags/matugen/templates",
+      "enabled": false,
+      "name": "AGS Matugen Templates"
+    },
+    {
+      "source": "matugen",
+      "destination": "~/.config/matugen",
+      "enabled": true,
+      "name": "Matugen"
+    },
+    {
+      "source": "foot",
+      "destination": "~/.config/foot",
+      "enabled": true,
+      "name": "Foot Terminal"
+    },
+    {
+      "source": "fish",
+      "destination": "~/.config/fish",
+      "enabled": true,
+      "name": "Fish Shell"
+    },
+    {
+      "source": "starship.toml",
+      "destination": "~/.config/starship.toml",
+      "enabled": true,
+      "name": "Starship"
+    },
+    {
+      "source": "fastfetch",
+      "destination": "~/.config/fastfetch",
+      "enabled": true,
+      "name": "Fastfetch"
+    }
+  ],
+  "lastUpdate": {
+    "hash": "68c17c7",
+    "date": "10/1/25"
+  }
+}
