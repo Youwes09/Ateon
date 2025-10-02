@@ -86,8 +86,10 @@ export default function UpdaterWidget() {
     setMessage("Checking for updates...");
 
     try {
+      const httpsUrl = "https://github.com/Youwes09/Ateon.git";
+
       const result = await execAsync(
-        `git ls-remote ${cfg.repoUrl} ${cfg.branch} | awk '{print $1}'`
+        `git ls-remote ${httpsUrl} ${cfg.branch} | awk '{print $1}'`
       );
       const fullHash = result.trim();
       const shortHash = fullHash.substring(0, 7);
@@ -160,9 +162,13 @@ export default function UpdaterWidget() {
       setMessage("Cloning repository...");
 
       await execAsync(`rm -rf ${tempDir}`).catch(() => {});
+      // Force HTTPS clone no matter what repoUrl is
+      const httpsUrl = "https://github.com/Youwes09/Ateon.git";
+
       await execAsync(
-        `git clone --depth 1 --branch ${cfg.branch} ${cfg.repoUrl} ${tempDir}`
+        `git clone --depth 1 --branch ${cfg.branch} ${httpsUrl} ${tempDir}`
       );
+
 
       setStatus("copying");
       const enabledFiles = cfg.files.filter(f => f.enabled);

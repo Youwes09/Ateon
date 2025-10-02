@@ -1,6 +1,5 @@
 // ~/.config/ags/utils/timer.ts
 import { exec, execAsync } from "ags/process";
-import { readFile, writeFile } from "ags/file";
 import { createState } from "ags";
 
 export interface Timer {
@@ -16,41 +15,9 @@ class TimerService {
   private timersState = createState<Timer[]>([]);
   private activeTimerIdState = createState<string | null>(null);
   private intervals = new Map<string, number>();
-  private configPath = `${exec("echo $HOME")}/.config/ags/configs/timers/timers.json`;
 
   constructor() {
-    this.load();
-  }
-
-  private load() {
-    try {
-      const content = readFile(this.configPath);
-      const savedTimers: Omit<Timer, "running" | "notified">[] = JSON.parse(content);
-      
-      const [, setTimers] = this.timersState;
-      setTimers(
-        savedTimers.map((t) => ({
-          ...t,
-          remaining: t.duration,
-          running: false,
-          notified: false,
-        }))
-      );
-    } catch {
-      // File doesn't exist or is invalid, start fresh
-      this.save();
-    }
-  }
-
-  private save() {
-    const [timers] = this.timersState;
-    const timersToSave = timers.get().map(({ id, name, duration }) => ({
-      id,
-      name,
-      duration,
-    }));
-    
-    writeFile(JSON.stringify(timersToSave, null, 2), this.configPath);
+    // Start with empty timers — no file load
   }
 
   private notify(timer: Timer) {
@@ -66,7 +33,6 @@ class TimerService {
       "Your timer has finished!",
     ]).catch(console.error);
 
-    // Play notification sound
     execAsync([
       "paplay",
       "/usr/share/sounds/freedesktop/stereo/complete.oga",
@@ -97,7 +63,7 @@ class TimerService {
 
     const [timers, setTimers] = this.timersState;
     setTimers([...timers.get(), newTimer]);
-    this.save();
+
     return id;
   }
 
@@ -105,7 +71,6 @@ class TimerService {
     this.stopTimer(id);
     const [timers, setTimers] = this.timersState;
     setTimers(timers.get().filter((t) => t.id !== id));
-    this.save();
   }
 
   startTimer(id: string) {
@@ -114,36 +79,38 @@ class TimerService {
     const timer = currentTimers.find((t) => t.id === id);
     if (!timer || timer.running) return;
 
-    // Stop any other running timers
+    // Stop other timers
     currentTimers.forEach((t) => {
-      if (t.running && t.id !== id) {
-        this.stopTimer(t.id);
-      }
+      if (t.running && t.id !== id) this.stopTimer(t.id);
     });
 
-    // Mark timer as running
+    // Mark running
     timer.running = true;
     timer.notified = false;
     const [, setActiveId] = this.activeTimerIdState;
     setActiveId(id);
     setTimers([...currentTimers]);
 
-    // Start interval
+    const start = Date.now();
+    const end = start + timer.remaining * 1000;
+
     const interval = setInterval(() => {
+      const now = Date.now();
+      const remaining = Math.max(0, Math.round((end - now) / 1000));
+
       const [timers, setTimers] = this.timersState;
       const currentTimers = timers.get();
       const currentTimer = currentTimers.find((t) => t.id === id);
-      
+
       if (!currentTimer) {
         clearInterval(interval);
         return;
       }
 
-      if (currentTimer.remaining > 0) {
-        currentTimer.remaining--;
-        setTimers([...currentTimers]);
-      } else {
-        // Timer complete
+      currentTimer.remaining = remaining;
+      setTimers([...currentTimers]);
+
+      if (remaining <= 0) {
         clearInterval(interval);
         this.intervals.delete(id);
         currentTimer.running = false;
@@ -156,6 +123,7 @@ class TimerService {
 
     this.intervals.set(id, interval);
   }
+
 
   stopTimer(id: string) {
     const interval = this.intervals.get(id);
@@ -179,7 +147,7 @@ class TimerService {
 
   resetTimer(id: string) {
     this.stopTimer(id);
-    
+
     const [timers, setTimers] = this.timersState;
     const currentTimers = timers.get();
     const timer = currentTimers.find((t) => t.id === id);
