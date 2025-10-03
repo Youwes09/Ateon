@@ -11,6 +11,11 @@ import {
 } from "utils/config";
 import options from "options.ts";
 
+const TIME_FORMAT_OPTIONS = [
+  { label: "12 Hour", value: "12" },
+  { label: "24 Hour", value: "24" },
+];
+
 function OptionSelect({ option, label, choices = [] }: OptionSelectProps) {
   return (
     <box cssClasses={["option-row", "option-select"]}>
@@ -205,6 +210,12 @@ export default function MatshellSettingsWidget() {
           orientation={Gtk.Orientation.VERTICAL}
           spacing={5}
         >
+          <OptionSelect
+            option="clock.format"
+            label="Time Format"
+            choices={TIME_FORMAT_OPTIONS}
+          />
+          <Gtk.Separator />
           <OptionToggle
             option="system-menu.modules.wifi-advanced.enable"
             label="WiFi Adv. Settings"

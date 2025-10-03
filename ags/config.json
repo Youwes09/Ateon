@@ -14,6 +14,7 @@
   "bar.modules.media.max-chars": 70,
   "bar.modules.os-icon.type": "arch-symbolic",
   "bar.modules.os-icon.show": true,
+  "clock.format": "24",
   "musicPlayer.modules.cava.show": true,
   "musicPlayer.modules.cava.style": "catmull_rom",
   "system-menu.modules.bluetooth-advanced.enable": true,

@@ -1176,7 +1176,6 @@ image {
 }
 
 .clock-widget {
-  /* layout adjustments must be done via margins/padding in AGS */
   margin-top: 12px;
 }
 .clock-widget .digit-stack {
@@ -1186,6 +1185,7 @@ image {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 2.2rem;
   font-weight: bold;
+  transition: all 200ms ease;
 }
 .clock-widget .colon {
   font-family: "JetBrainsMono Nerd Font", monospace;
@@ -1193,15 +1193,62 @@ image {
   font-weight: bold;
   margin: 0 2px;
   opacity: 0.8;
+  transition: opacity 200ms ease;
+  animation: pulse-colon 2s ease-in-out infinite;
+}
+.clock-widget .ampm-indicator {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 0.85;
+  transition: all 200ms ease;
+}
+.clock-widget .ampm-indicator:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.clock-widget .date-label {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-top: 4px;
+  transition: opacity 200ms ease;
+}
+.clock-widget .date-label:hover {
+  opacity: 0.9;
 }
 
 .clock-divider {
   min-height: 2px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
   margin: 8px 0;
   border-radius: 1px;
+  transition: all 200ms ease;
 }
 
+@keyframes pulse-colon {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .clock-widget .digit-stack label,
+  .clock-widget .colon {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+  .clock-widget .ampm-indicator {
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
 /* variables & mixins */
 /* general styles */
 .stacked-settings-widget {
@@ -1915,7 +1962,6 @@ image {
 }
 .updater-widget .updater-button:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
 }
 .updater-widget .updater-button-check {
   background: transparent;

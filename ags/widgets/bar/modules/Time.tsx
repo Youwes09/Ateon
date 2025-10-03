@@ -1,17 +1,29 @@
 import app from "ags/gtk4/app";
 import { Gtk } from "ags/gtk4";
-import { execAsync } from "ags/process";
 import { interval } from "ags/time";
 import { createState } from "ags";
+import options from "options.ts";
 
 export default function Time() {
   const [time, setTime] = createState("");
   const [revealPower, setRevealPower] = createState(false);
 
   interval(1000, () => {
-    execAsync(["date", "+%H 󰇙 %M"])
-      .then((val) => setTime(val.trim()))
-      .catch(console.error);
+    const now = new Date();
+    const format = options["clock.format"].get();
+    
+    let hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    
+    if (format === "12") {
+      const isPM = hours >= 12;
+      hours = hours % 12 || 12;
+      const hh = hours.toString().padStart(2, "0");
+      setTime(`${hh}:${minutes} ${isPM ? "PM" : "AM"}`);
+    } else {
+      const hh = hours.toString().padStart(2, "0");
+      setTime(`${hh}:${minutes}`);
+    }
   });
 
   return (

@@ -31,6 +31,7 @@ const options = await (async () => {
       "bar.modules.media.max-chars": defineOption(30),
       "bar.modules.os-icon.type": defineOption("nix-symbolic"), // "nix-symbolic" or "arch-symbolic"
       "bar.modules.os-icon.show": defineOption(true),
+      "clock.format": defineOption("24"), // "12" or "24"
       "musicPlayer.modules.cava.show": defineOption(true),
       "musicPlayer.modules.cava.style": defineOption("catmull_rom"),
       "system-menu.modules.bluetooth-advanced.enable": defineOption(true),
