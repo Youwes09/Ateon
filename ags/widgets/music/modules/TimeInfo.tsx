@@ -12,7 +12,7 @@ function PositionLabel({ player }: { player: Mpris.Player }) {
         player,
         "position",
       )((pos) => (player.length > 0 ? lengthStr(pos) : ""))}
-    ></label>
+    />
   );
 }
 
@@ -30,6 +30,7 @@ function LengthLabel({ player }: { player: Mpris.Player }) {
 
 function Position({ player }: { player: Mpris.Player }) {
   const length = createBinding(player, "length");
+  let seekTimeout: number | null = null;
 
   return (
     <slider
@@ -39,7 +40,16 @@ function Position({ player }: { player: Mpris.Player }) {
       value={createBinding(player, "position")}
       max={length}
       onChangeValue={({ value }) => {
-        player.setPosition?.(value) ?? (player.position = value);
+        // Clear any pending seek
+        if (seekTimeout !== null) {
+          clearTimeout(seekTimeout);
+        }
+
+        // Wait 100ms after the last change before seeking
+        seekTimeout = setTimeout(() => {
+          player.setPosition?.(value) ?? (player.position = value);
+          seekTimeout = null;
+        }, 75) as unknown as number;
       }}
     />
   );

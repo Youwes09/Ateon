@@ -53,7 +53,6 @@ function MusicBox({ player }: { player: Mpris.Player }) {
           measureBox = self;
         }}
       >
-        <Cover player={player} />
         <Info player={player} />
       </box>
     </overlay>

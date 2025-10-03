@@ -10,6 +10,10 @@ output_path = "~/.config/ags/style/abstracts/_variables.scss"
 input_path = "~/.config/ags/matugen/templates/hyprland_colors.conf"
 output_path = "~/.config/hypr/hyprland_colors.conf"
 
+[templates.gtk]
+input_path = "~/.config/ags/matugen/templates/gtk.css"
+output_path = "~/.config/gtk-4.0/gtk.css"
+
 [templates.fish_colors]
 input_path = "~/.config/ags/matugen/templates/fish_colors.fish"
 output_path = "~/.config/chromash/colors/current.fish"

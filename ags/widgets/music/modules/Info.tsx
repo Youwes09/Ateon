@@ -4,6 +4,7 @@ import { PlayerInfo } from "./PlayerInfo";
 import { Title, Artists } from "./TitleArtists";
 import { Controls } from "./Controls";
 import { TimeInfo } from "./TimeInfo";
+import { VolumeControl } from "./VolumeControl";
 
 export function Info({ player }: { player: Mpris.Player }) {
   return (
@@ -13,6 +14,7 @@ export function Info({ player }: { player: Mpris.Player }) {
       <Artists player={player} />
       <Controls player={player} />
       <TimeInfo player={player} />
+      <VolumeControl player={player} />
     </box>
   );
 }
