@@ -31,22 +31,21 @@ export default function UpdaterWidget() {
       const result = await updaterService.checkForUpdates();
       
       setLatestVersion(result.version);
-      setMessage("Check complete");
-      setStatus("idle");
-
+      
       if (result.isUpToDate) {
-        setMessage("Already up to date");
         setStatus("success");
+        setMessage("Already up to date");
         setTimeout(() => {
           setStatus("idle");
           setMessage("Ready to update");
         }, 3000);
       } else {
+        setStatus("idle");
         setMessage("Update available!");
       }
     } catch (error) {
       console.error("Failed to check for updates:", error);
-      setMessage("Check failed");
+      setMessage(`Check failed: ${error}`);
       setStatus("error");
       setTimeout(() => {
         setStatus("idle");
@@ -76,25 +75,30 @@ export default function UpdaterWidget() {
         }
       });
 
+      // Update is complete - ensure success state is shown
+      setStatus("success");
+      setMessage("Updated successfully!");
+      
       // Refresh config and version after successful update
       setConfig(updaterService.getConfig());
       refreshCurrentVersion();
       
+      // Reset after showing success message
       setTimeout(() => {
         setStatus("idle");
         setMessage("Ready to update");
-      }, 3000);
+        setIsUpdating(false);
+      }, 5000); // Increased to 5 seconds so user can see success
     } catch (error) {
       console.error("Update failed:", error);
       setStatus("error");
-      setMessage("Update failed");
+      setMessage(`Update failed: ${error}`);
+      setIsUpdating(false);
       
       setTimeout(() => {
         setStatus("idle");
         setMessage("Ready to update");
       }, 5000);
-    } finally {
-      setIsUpdating(false);
     }
   };
 
@@ -229,6 +233,7 @@ export default function UpdaterWidget() {
                           cssClasses={["status-message"]}
                           halign={Gtk.Align.START}
                           hexpand
+                          wrap
                         />
                       )}
                     </With>
