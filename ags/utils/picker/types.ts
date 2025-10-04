@@ -18,6 +18,11 @@ export interface WallpaperItem extends BaseItem {
   file: Gio.File;
 }
 
+export interface ClipboardItem extends BaseItem {
+  content: string;
+  searchableText?: string; // Fuzzy search optimization
+}
+
 export interface ProviderConfig {
   command: string;
   icon: string;
@@ -28,6 +33,8 @@ export interface ProviderConfig {
   features?: {
     refresh?: boolean;
     random?: boolean;
+    delete?: boolean;
+    wipe?: boolean;
   };
 }
 
@@ -39,28 +46,13 @@ export interface ISearchProvider<T> {
   dispose?(): void;
   refresh?(): Promise<void>;
   random?(): Promise<void>;
+  delete?(item:T): Promise<void>;
+  wipe?(): Promise<void>;
   getThumbnail?(imagePath: string): Promise<Gdk.Texture | null>;
-}
-
-export interface CachedThumbnail {
-  texture: Gdk.Texture;
-  timestamp: number;
-  lastAccessed: number;
-}
-
-export interface ThemeProperties {
-  tone: number;
-  chroma: number;
-  mode: "light" | "dark";
-  scheme: "scheme-neutral" | "scheme-vibrant";
-}
-
-export interface CachedThemeEntry extends ThemeProperties {
-  timestamp: number;
 }
 
 // Type aliases
 
 export type ComponentType = "list" | "grid";
 
-export type PickerItem = AppItem | WallpaperItem;
+export type PickerItem = AppItem | WallpaperItem | ClipboardItem;

@@ -1,37 +1,36 @@
 import GLib from "gi://GLib?version=2.0";
 import { execAsync } from "ags/process";
-import { WeatherData } from "utils/weather";
-import { CachedThemeEntry } from "utils/picker/types";
+import type { WeatherData } from "utils/weather";
+import type { CachedThemeEntry } from "utils/wallpaper/types";
+import type { UsageEntry } from "utils/picker/frecency/types";
 import { initializeConfig, defineOption } from "./utils/config";
 
 const options = await (async () => {
   const currentWallpaper = await execAsync(
     "hyprctl hyprpaper listloaded",
   ).catch(() => "");
-
+  
   const config = initializeConfig(
-    `${GLib.get_user_config_dir()}/ags/config.json`,
+    `${GLib.get_user_config_dir()}/ags/configs/config.json`,
     {
-      "app.browser": defineOption("zen"),
+      "app.browser": defineOption("firefox"),
       "app.file-manager": defineOption("nautilus"),
       "app.resource-monitor": defineOption("resources"),
-      "app.terminal": defineOption("wezterm"),
+      "app.terminal": defineOption("foot"),
       "app.wifi": defineOption(
         "XDG_CURRENT_DESKTOP=GNOME gnome-control-center wifi",
       ),
       "app.audio": defineOption("pwvucontrol"),
-      "bar.position": defineOption("top"), // "top", "bottom"
-      "bar.style": defineOption("expanded"), // "floating" or "expanded"
-      "bar.modules.cava.show": defineOption(false),
-      /* "catmull_rom", "smooth", "rounded", "bars","jumping_bars",
-      "dots", "circular", "particles", "wave_particles","waterfall", "mesh" */
+      "bar.position": defineOption("top"),
+      "bar.style": defineOption("beveled"),
+      "bar.modules.cava.show": defineOption(true),
       "bar.modules.cava.style": defineOption("catmull_rom"),
       "bar.modules.media.cava.show": defineOption(true),
       "bar.modules.media.truncate": defineOption(true),
-      "bar.modules.media.max-chars": defineOption(30),
-      "bar.modules.os-icon.type": defineOption("nix-symbolic"), // "nix-symbolic" or "arch-symbolic"
+      "bar.modules.media.max-chars": defineOption(70),
+      "bar.modules.os-icon.type": defineOption("arch-symbolic"),
       "bar.modules.os-icon.show": defineOption(true),
-      "clock.format": defineOption("24"), // "12" or "24"
+      "clock.format": defineOption("24"),
       "musicPlayer.modules.cava.show": defineOption(true),
       "musicPlayer.modules.cava.style": defineOption("catmull_rom"),
       "system-menu.modules.bluetooth-advanced.enable": defineOption(true),
@@ -49,6 +48,10 @@ const options = await (async () => {
         {},
         { useCache: true },
       ),
+      "picker.frecency-cache": defineOption<Record<string, UsageEntry>>(
+        {},
+        { useCache: true },
+      ),
       "weather.update-interval": defineOption(900_000),
       "weather.cache": defineOption<Record<string, { data: WeatherData; timestamp: number }>>(
         {},
@@ -56,6 +59,7 @@ const options = await (async () => {
       ),
     },
   );
+  
   return config;
 })();
 

@@ -1,22 +1,32 @@
 import { Gdk, Gtk } from "ags/gtk4";
-import { createState, onCleanup, With } from "ags";
-import { timeout } from "ags/time";
+import {
+  createState,
+  createBinding,
+  createComputed,
+  onCleanup,
+  With,
+} from "ags";
 import Pango from "gi://Pango?version=1.0";
 import { PickerCoordinator } from "utils/picker";
 import type { WallpaperItem } from "utils/picker/types.ts";
+import Adw from "gi://Adw?version=1";
 
 interface WallpaperThumbnailProps {
   item: WallpaperItem;
   picker: PickerCoordinator;
+  itemIndex: number; // Add index
   onActivate: () => void;
 }
 
 export function WallpaperThumbnail({
   item,
   picker,
+  itemIndex,
   onActivate,
 }: WallpaperThumbnailProps) {
   const [texture, setTexture] = createState<Gdk.Texture | null>(null);
+  const selectedIndex = createBinding(picker, "selectedIndex");
+  const hasNavigated = createBinding(picker, "hasNavigated");
 
   onCleanup(() => {
     setTexture(null);
@@ -34,33 +44,54 @@ export function WallpaperThumbnail({
   };
 
   return (
-    <button cssClasses={["wallpaper-thumbnail"]} onClicked={onActivate}>
+    <button
+      cssClasses={createComputed(
+        [selectedIndex, hasNavigated],
+        (s, n): string[] =>
+          s === itemIndex && n
+            ? ["wallpaper-thumbnail", "selected"]
+            : ["wallpaper-thumbnail"],
+      )}
+      onClicked={onActivate}
+    >
       <box orientation={Gtk.Orientation.VERTICAL} spacing={4}>
         {item.path ? (
           <box
             cssClasses={["wallpaper-preview-container"]}
             onRealize={() => {
-              timeout(20, () => {
-                loadImageAsync(item.path!);
-              });
+              loadImageAsync(item.path!);
             }}
           >
             <With value={texture}>
               {(tex) =>
                 tex ? (
-                  <Gtk.Picture
-                    paintable={tex}
-                    cssClasses={["wallpaper-picture"]}
-                    contentFit={Gtk.ContentFit.COVER}
-                  />
+                  <Adw.Clamp maximumSize={160}>
+                    <Gtk.Picture
+                      paintable={tex}
+                      width_request={160}
+                      cssClasses={["wallpaper-picture"]}
+                      contentFit={Gtk.ContentFit.COVER}
+                    />
+                  </Adw.Clamp>
                 ) : (
-                  <box hexpand cssClasses={["loading-placeholder"]} />
+                  <Adw.Clamp maximumSize={160}>
+                    <box
+                      width_request={160}
+                      cssClasses={["loading-placeholder"]}
+                      homogeneous
+                    >
+                      <Adw.Spinner
+                        halign={Gtk.Align.CENTER}
+                        valign={Gtk.Align.CENTER}
+                      />
+                    </box>
+                  </Adw.Clamp>
                 )
               }
             </With>
           </box>
         ) : (
-          <box cssClasses={["wallpaper-placeholder"]} />
+          <></>
         )}
 
         <label

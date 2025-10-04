@@ -4,6 +4,7 @@ import { PickerCoordinator } from "utils/picker/PickerCoordinator";
 import { WallpaperItem } from "utils/picker/types";
 import { ItemButton } from "./ItemButton";
 import { WallpaperGrid } from "./WallpaperGrid";
+import { CommandSuggestions } from "./CommandSuggestions";
 
 interface ResultsRendererProps {
   picker: PickerCoordinator;
@@ -13,28 +14,32 @@ export function ResultsRenderer({ picker }: ResultsRendererProps) {
   const hasQuery = createBinding(picker, "hasQuery");
   const isLoading = createBinding(picker, "isLoading");
   const hasResults = createBinding(picker, "hasResults");
+  const searchText = createBinding(picker, "searchText");
+  const viewState = createComputed(
+    [hasQuery, isLoading, hasResults, searchText],
+    () => {
+      const text = searchText.get();
 
-  const viewState = createComputed([hasQuery, isLoading, hasResults], () => {
-    if (isLoading.get()) return "loading";
-    if (hasResults.get()) return "results";
-    if (hasQuery.get()) return "not-found";
-    return "empty";
-  });
-
+      if (text.startsWith(":")) return "commands";
+      if (!hasQuery.get() && !hasResults.get()) return "empty";
+      if (isLoading.get()) return "loading";
+      if (hasResults.get()) return "results";
+      return "not-found";
+    },
+  );
   return (
     <box orientation={Gtk.Orientation.VERTICAL}>
       <box
         cssClasses={["results-container"]}
         orientation={Gtk.Orientation.VERTICAL}
       >
-        <With value={hasResults}>
-          {(results) => results && <ActionBar picker={picker} />}
-        </With>
         <With value={viewState}>
           {(state) => {
             switch (state) {
               case "loading":
                 return <LoadingState />;
+              case "commands":
+                return <CommandSuggestions picker={picker} />;
               case "results":
                 return <ResultsContainer picker={picker} />;
               case "not-found":
@@ -43,6 +48,9 @@ export function ResultsRenderer({ picker }: ResultsRendererProps) {
                 return <box />;
             }
           }}
+        </With>
+        <With value={viewState}>
+          {(state) => state !== "empty" && <ActionBar picker={picker} />}
         </With>
       </box>
     </box>
@@ -85,7 +93,9 @@ function ResultsContainer({ picker }: { picker: PickerCoordinator }) {
       spacing={4}
     >
       <For each={currentResults}>
-        {(item) => <ItemButton item={item} picker={picker} />}
+        {(item, index) => (
+          <ItemButton item={item} picker={picker} index={index} />
+        )}
       </For>
     </box>
   );
@@ -117,9 +127,13 @@ function ActionBar({ picker }: { picker: PickerCoordinator }) {
       {config?.features?.refresh && (
         <button
           cssClasses={["action-button"]}
-          onClicked={() => picker.refreshCurrentProvider()}
+          onClicked={() => picker.refresh()}
         >
-          <label label="Refresh" cssClasses={["action-icon"]} />
+          <label
+            label="Refresh"
+            tooltipText={"Reload"}
+            cssClasses={["action-icon"]}
+          />
         </button>
       )}
 
@@ -128,9 +142,22 @@ function ActionBar({ picker }: { picker: PickerCoordinator }) {
       {config?.features?.random && (
         <button
           cssClasses={["action-button"]}
-          onClicked={() => picker.randomFromCurrentProvider()}
+          onClicked={() => picker.random()}
         >
-          <label label="Shuffle" cssClasses={["action-icon"]} />
+          <label
+            label="Shuffle"
+            tooltipText={"Select randomly"}
+            cssClasses={["action-icon"]}
+          />
+        </button>
+      )}
+      {config?.features?.wipe && (
+        <button
+          cssClasses={["action-button"]}
+          tooltipText={"Purge history"}
+          onClicked={() => picker.wipe()}
+        >
+          <label label="Delete_History" cssClasses={["action-icon"]} />
         </button>
       )}
     </box>

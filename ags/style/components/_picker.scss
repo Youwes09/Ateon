@@ -28,7 +28,10 @@ box.picker {
   box.results-list {
     @include window-box;
 
-    button {
+    .app-button {
+      .action-icon {
+        @include material-icon;
+      }
       padding: 0.4rem;
 
       image {
@@ -47,10 +50,28 @@ box.picker {
       }
 
       &:focus,
+      &:hover,
+      &.selected {
+        @include button-active;
+        background-color: $buttonEnabledHover;
+        border: transparent;
+      }
+    }
+    .action-button {
+      .action-icon {
+        @include material-icon;
+      }
+      margin-bottom: 0;
+      border-radius: 5rem;
+      padding: 0 0.6rem;
+
+      &:focus,
       &:hover {
         @include button-active;
         background-color: $buttonEnabledHover;
         border: transparent;
+        border-radius: 5rem;
+        padding: 0 0.6rem;
       }
     }
   }
@@ -59,6 +80,46 @@ box.picker {
   box.results-grid {
     @include window-box;
 
+    .wallpaper-thumbnail {
+      @include rounding;
+      @include animate;
+      padding: 0.5rem;
+      background-color: transparent;
+      border: 1px solid transparent;
+
+      &:hover,
+      &:focus,
+      &.selected {
+        background-color: color.adjust($fg, $alpha: -0.9);
+        border-color: color.adjust($fg, $alpha: -0.7);
+      }
+
+      box.wallpaper-preview-container {
+        @include rounding;
+        @include border;
+        min-width: 140px;
+        min-height: 100px;
+        background-color: color.adjust($fg, $alpha: -0.9);
+      }
+
+      .wallpaper-picture {
+        @include rounding;
+      }
+
+      box.wallpaper-placeholder {
+        @include rounding;
+        background-color: rgba(255, 255, 255, 0.1);
+        min-width: 140px;
+        min-height: 100px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .wallpaper-name {
+        color: color.adjust($fg, $alpha: -0.1);
+        margin-top: 0.25rem;
+        font-weight: 500;
+      }
+    }
     box.wallpaper-content {
       padding: 0.5rem;
     }
@@ -106,55 +167,55 @@ box.picker {
   }
 }
 
-button.wallpaper-thumbnail {
-  @include rounding;
-  @include animate;
-  padding: 0.5rem;
-  background-color: transparent;
-  border: 1px solid transparent;
-
-  &:hover,
-  &:focus {
-    background-color: color.adjust($fg, $alpha: -0.9);
-    border-color: color.adjust($fg, $alpha: -0.7);
-  }
-
-  box.wallpaper-preview-container {
-    @include rounding;
-    @include border;
-    min-width: 140px;
-    min-height: 100px;
-    background-color: color.adjust($fg, $alpha: -0.9);
-  }
-
-  picture.wallpaper-picture {
-    @include rounding;
-  }
-
-  box.wallpaper-placeholder {
-    @include rounding;
-    background-color: rgba(255, 255, 255, 0.1);
-    min-width: 140px;
-    min-height: 100px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-  }
-
-  label.wallpaper-name {
-    color: color.adjust($fg, $alpha: -0.1);
-    margin-top: 0.25rem;
-    font-weight: 500;
-  }
-}
-
 .action-bar {
   padding: $spacing-sm;
   .action-icon {
     @include material-icon;
   }
-  button {
-    @include light-mode-shadow;
-    margin-bottom: 0;
+  .action-button {
     border-radius: 5rem;
-    padding: $spacing-xs $spacing-sm;
+    padding: 0.2rem 0.4rem;
+
+    &:focus,
+    &:hover {
+      @include button-active;
+      background-color: $buttonEnabledHover;
+      border: transparent;
+      border-radius: 5rem;
+      padding: 0.2rem 0.4rem;
+    }
+  }
+}
+
+.command-suggestions {
+  @include window-box;
+
+  .command-item {
+    @include animate;
+    padding: 0.4rem;
+
+    .command-icon {
+      @include material-icon(3rem);
+      color: color.adjust($fg, $alpha: -0.2);
+      margin-right: 0.3rem;
+      margin-left: 0.3rem;
+    }
+
+    .command-name {
+      font-weight: bold;
+      color: $primary;
+      font-size: $font;
+    }
+
+    .command-description {
+      color: color.adjust($fg, $alpha: -0.2);
+    }
+
+    &:hover,
+    &:focus {
+      @include button-active;
+      background-color: $buttonEnabledHover;
+      border: transparent;
+    }
   }
 }

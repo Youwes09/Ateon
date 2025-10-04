@@ -1,16 +1,12 @@
 import { register } from "ags/gobject";
-import { BaseProvider } from "../SearchProvider.ts";
-import { WallpaperItem, ProviderConfig, ISearchProvider } from "../types.ts";
-import { WallpaperStore } from "../WallpaperStore.ts";
-import { Gdk } from "ags/gtk4";
+import { BaseProvider } from "../SearchProvider";
+import { WallpaperItem, ProviderConfig } from "../types";
+import { getWallpaperStore } from "utils/wallpaper";
 
 @register({ GTypeName: "WallpaperProvider" })
-export class WallpaperProvider
-  extends BaseProvider
-  implements ISearchProvider<WallpaperItem>
-{
+export class WallpaperProvider extends BaseProvider {
   readonly config: ProviderConfig = {
-    command: "wallpapers",
+    command: "wp",
     icon: "Image_Search",
     name: "Wallpapers",
     placeholder: "Search wallpapers...",
@@ -22,64 +18,46 @@ export class WallpaperProvider
     },
   };
 
-  private wallpapers = new WallpaperStore();
+  private store = getWallpaperStore({ includeHidden: true });
 
   constructor() {
     super();
-    this.command = "wallpapers";
-    this.wallpapers.maxItems = this.config.maxResults;
-    
-    // Load initial results
-    this.loadInitialResults();
-  }
-
-  private loadInitialResults(): void {
-    const initialResults = this.wallpapers.getAllWallpapers();
-    this.setResults(initialResults);
+    this.command = "wp";
   }
 
   async search(query: string): Promise<void> {
     this.setLoading(true);
-
     try {
-      if (query.trim().length === 0) {
+      const trimmedQuery = query.trim();
+      if (trimmedQuery.length === 0) {
         // Show all wallpapers when query is empty
-        const allWallpapers = this.wallpapers.getAllWallpapers();
-        this.setResults(allWallpapers);
-        return;
+        this.setResults(this.store.wallpapers.slice(0, this.config.maxResults));
+      } else {
+        const fuzzyResults = this.store.search(trimmedQuery);
+        this.setResults(fuzzyResults.slice(0, this.config.maxResults));
       }
-      const results = this.wallpapers.search(query);
-      const limitedResults = results.slice(0, this.wallpapers.maxItems);
-      this.setResults(limitedResults);
     } finally {
       this.setLoading(false);
     }
   }
 
   activate(item: WallpaperItem): void {
-    this.wallpapers.setWallpaper(item.file);
+    this.store.setWallpaper(item.file);
   }
 
   async refresh(): Promise<void> {
-    this.setLoading(true);
-    try {
-      await this.wallpapers.refresh();
-      // Reload initial results after refresh
-      this.loadInitialResults();
-    } finally {
-      this.setLoading(false);
-    }
+    await this.store.refresh();
   }
 
   async random(): Promise<void> {
-    await this.wallpapers.setRandomWallpaper();
+    await this.store.setRandomWallpaper();
   }
 
-  async getThumbnail(imagePath: string): Promise<Gdk.Texture | null> {
-    return await this.wallpapers.getThumbnail(imagePath);
+  async getThumbnail(imagePath: string) {
+    return await this.store.getThumbnail(imagePath);
   }
 
   dispose(): void {
-    this.wallpapers.dispose();
+    this.store.dispose();
   }
 }
