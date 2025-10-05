@@ -1,0 +1,301 @@
+@use "../../../../layouts" as *;
+@use "../../../../abstracts" as *;
+@use "sass:color";
+
+.matshell-settings {
+  @include widget-container;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.92),
+    color.adjust($fg, $alpha: -0.95)
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color.adjust($fg, $alpha: -0.9);
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.92),
+      transparent
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.settings-header-compact {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
+  border-bottom: 1px solid color.adjust($fg, $alpha: -0.92);
+  background: transparent;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  position: relative;
+  z-index: 1;
+
+  .settings-title-compact {
+    font-size: calc(#{$font} * 1.1);
+    font-weight: 700;
+    color: $fg;
+    margin-right: auto;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.settings-nav-compact {
+  display: flex;
+  gap: $spacing-xs;
+
+  .nav-icon-button {
+    padding: $spacing-xs calc(#{$spacing-sm} * 1.2);
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: all 150ms ease;
+    min-width: 36px;
+
+    .icon-compact {
+      @include material-icon;
+      font-size: calc(#{$font} * 1.3);
+      color: color.adjust($fg, $alpha: -0.5);
+      transition: all 150ms ease;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.9),
+        color.adjust($fg, $alpha: -0.94)
+      );
+      border-color: color.adjust($fg, $alpha: -0.88);
+
+      .icon-compact {
+        color: $fg;
+      }
+    }
+
+    &.active {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.88),
+        color.adjust($primary, $alpha: -0.92)
+      );
+      border-color: color.adjust($primary, $alpha: -0.8);
+      box-shadow: 
+        0 2px 6px color.adjust($primary, $alpha: -0.85),
+        0 0 12px color.adjust($primary, $alpha: -0.9);
+
+      .icon-compact {
+        color: $primary;
+        text-shadow: 0 0 6px color.adjust($primary, $alpha: -0.8);
+      }
+    }
+  }
+}
+
+.settings-content {
+  padding: $spacing-md;
+  min-height: 280px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  font-size: calc(#{$font} * 0.85);
+  font-weight: 600;
+  color: color.adjust($fg, $alpha: -0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: $spacing-md 0 $spacing-xs 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.option-row {
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.94),
+    color.adjust($fg, $alpha: -0.96)
+  );
+  border: 1px solid color.adjust($fg, $alpha: -0.92);
+  border-radius: 12px;
+  padding: calc(#{$spacing-sm} * 1.2) $spacing-md;
+  margin: $spacing-xs 0;
+  transition: all 150ms ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.9),
+      color.adjust($fg, $alpha: -0.94)
+    );
+    border-color: color.adjust($fg, $alpha: -0.88);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  .option-label {
+    font-size: calc(#{$font} * 0.95);
+    font-weight: 500;
+    color: $fg;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.option-switch {
+  width: 44px;
+  height: 24px;
+  min-width: 44px;
+  min-height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  -gtk-outline-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.88),
+    color.adjust($fg, $alpha: -0.92)
+  );
+  transition: background 200ms ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+
+  slider {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 10px;
+    margin: 2px;
+    margin-left: 2px;
+    margin-right: 22px;
+    background: linear-gradient(
+      135deg,
+      white,
+      color.adjust(white, $lightness: -5%)
+    );
+    transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    -gtk-outline-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  &:checked {
+    background: linear-gradient(
+      135deg,
+      color.adjust($primary, $alpha: -0.2),
+      color.adjust($primary, $alpha: -0.3)
+    );
+    box-shadow: 
+      inset 0 2px 4px rgba(0, 0, 0, 0.15),
+      0 0 12px color.adjust($primary, $alpha: -0.7);
+
+    slider {
+      background: white;
+      margin-left: 22px;
+      margin-right: 2px;
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.25),
+        0 0 8px color.adjust($primary, $alpha: -0.5);
+    }
+  }
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.85),
+      color.adjust($fg, $alpha: -0.9)
+    );
+
+    &:checked {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.15),
+        color.adjust($primary, $alpha: -0.25)
+      );
+    }
+  }
+}
+
+.option-dropdown {
+  min-width: 130px;
+
+  button {
+    @include button-active;
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.92),
+      color.adjust($fg, $alpha: -0.95)
+    );
+    border-radius: 10px;
+    padding: $spacing-xs calc(#{$spacing-sm} * 1.2);
+    border: 1px solid color.adjust($fg, $alpha: -0.9);
+    font-size: calc(#{$font} * 0.95);
+    transition: all 150ms ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    &:hover {
+      border-color: color.adjust($fg, $alpha: -0.85);
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.88),
+        color.adjust($fg, $alpha: -0.92)
+      );
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
+.info-box {
+  padding: calc(#{$spacing-sm} * 1.2) $spacing-md;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    color.adjust($primary, $alpha: -0.94),
+    color.adjust($primary, $alpha: -0.96)
+  );
+  border-left: 3px solid color.adjust($primary, $alpha: -0.6);
+  border: 1px solid color.adjust($primary, $alpha: -0.9);
+  margin-top: $spacing-sm;
+  box-shadow: 
+    0 2px 6px color.adjust($primary, $alpha: -0.9),
+    inset 0 1px 0 color.adjust($primary, $alpha: -0.95);
+
+  .info-text {
+    font-size: calc(#{$font} * 0.85);
+    color: color.adjust($fg, $alpha: -0.3);
+    font-style: italic;
+    line-height: 1.4;
+  }
+}
+
+separator {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color.adjust($fg, $alpha: -0.92),
+    transparent
+  );
+  margin: $spacing-md 0;
+  min-height: 1px;
+  opacity: 0.5;
+}

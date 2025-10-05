@@ -1,0 +1,301 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+box.window-switcher-background {
+  background-color: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  
+  .window-switcher {
+    @include window;
+    background: linear-gradient(
+      135deg,
+      color.adjust($bg, $alpha: -0.12, $lightness: 6%),
+      color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    );
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 8px 20px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+
+    // Glass reflection effect
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.95),
+        transparent
+      );
+      border-radius: 20px 20px 0 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .search-section {
+      @include window-box;
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.9),
+        color.adjust($fg, $alpha: -0.94)
+      );
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid color.adjust($fg, $alpha: -0.85);
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      padding: $spacing-sm;
+      transition: all 0.2s ease;
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.88),
+          transparent
+        );
+        border-radius: 14px 14px 0 0;
+        pointer-events: none;
+      }
+
+      &:focus-within {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.9),
+          color.adjust($fg, $alpha: -0.92)
+        );
+        border-color: color.adjust($primary, $alpha: -0.75);
+        box-shadow: 
+          0 2px 12px color.adjust($primary, $alpha: -0.8),
+          0 0 20px color.adjust($primary, $alpha: -0.88),
+          inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
+      }
+
+      label.search-icon {
+        font-family: 'Material Symbols Outlined';
+        font-weight: normal;
+        font-size: 1.5rem;
+        margin: 0 0.5rem;
+        color: color.adjust($fg, $alpha: -0.5);
+      }
+
+      entry.search-entry {
+        font-size: 1rem;
+        padding: $spacing-xs $spacing-sm;
+        background: transparent;
+        border: none;
+        color: $fg;
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      .shortcut-hint {
+        font-size: 0.7rem;
+        color: color.adjust($fg, $alpha: -0.4);
+        margin: 0 0.5rem;
+      }
+    }
+
+    .window-grid {
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    button.window-card {
+      @include window-box;
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.95)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.88);
+      border-radius: 16px;
+      margin: 0.5rem;
+      padding: 1rem;
+      min-width: 220px;
+      min-height: 160px;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.9),
+          transparent
+        );
+        border-radius: 16px 16px 0 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover:not(.selected) {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.88),
+          color.adjust($fg, $alpha: -0.92)
+        );
+        border-color: color.adjust($fg, $alpha: -0.82);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.15),
+          inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
+        transform: translateY(-2px);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+      
+      &.selected {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.85),
+          color.adjust($primary, $alpha: -0.9)
+        );
+        border-color: color.adjust($primary, $alpha: -0.75);
+        box-shadow: 
+          0 4px 16px color.adjust($primary, $alpha: -0.7),
+          0 0 30px color.adjust($primary, $alpha: -0.85),
+          inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            color.adjust($primary, $alpha: -0.82, $lightness: 12%),
+            transparent
+          );
+          opacity: 1;
+        }
+
+        .window-card-title {
+          color: $primary;
+          font-weight: 600;
+          text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
+        }
+
+        .window-icon-large {
+          color: $primary;
+          filter: drop-shadow(0 0 8px color.adjust($primary, $alpha: -0.7));
+        }
+      }
+
+      .window-icon-large {
+        font-family: 'Material Symbols Outlined';
+        font-weight: normal;
+        font-size: 4rem;
+        color: $fg;
+        margin-bottom: 0.5rem;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        transition: all 0.3s ease;
+      }
+
+      .window-card-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: $fg;
+        margin: 0.3rem 0;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .window-card-workspace {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $primary;
+        margin: 0.2rem 0;
+        text-shadow: 0 0 6px color.adjust($primary, $alpha: -0.8);
+      }
+
+      .window-card-subtitle {
+        font-size: 0.75rem;
+        color: color.adjust($fg, $alpha: -0.5);
+      }
+
+      .window-badge-small {
+        border-radius: 8px;
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        margin: 2px 4px 0 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+        &.fullscreen-badge {
+          background: linear-gradient(
+            135deg,
+            color.adjust($primary, $alpha: -0.8),
+            color.adjust($primary, $alpha: -0.85)
+          );
+          color: $primary;
+          border: 1px solid color.adjust($primary, $alpha: -0.7);
+        }
+
+        &.floating-badge {
+          background: linear-gradient(
+            135deg,
+            color.adjust($fg, $alpha: -0.88),
+            color.adjust($fg, $alpha: -0.92)
+          );
+          color: $fg;
+          border: 1px solid color.adjust($fg, $alpha: -0.85);
+        }
+      }
+    }
+
+    label.no-entries {
+      padding: 2rem;
+      color: color.adjust($fg, $alpha: -0.4);
+      font-style: italic;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
+
+button.invisible-close {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+}

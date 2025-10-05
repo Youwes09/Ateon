@@ -1,4 +1,3 @@
-// widgets/sidebar/modules/MatshellSettingsWidget.tsx
 import { Gtk } from "ags/gtk4";
 import { createState, onCleanup } from "ags";
 import {
@@ -14,6 +13,11 @@ import options from "options.ts";
 const TIME_FORMAT_OPTIONS = [
   { label: "12 Hour", value: "12" },
   { label: "24 Hour", value: "24" },
+];
+
+const THEME_STYLE_OPTIONS = [
+  { label: "Normal", value: "normal" },
+  { label: "Glass", value: "glass" },
 ];
 
 function OptionSelect({ option, label, choices = [] }: OptionSelectProps) {
@@ -33,12 +37,10 @@ function OptionSelect({ option, label, choices = [] }: OptionSelectProps) {
           options[option].value = selectedChoice.value;
         }}
         $={(self) => {
-          // Populate items
           choices.forEach((choice) => {
             self.append_text(choice.label);
           });
 
-          // Find current value and set active index
           const currentValue = String(options[option].get());
           const initialIndex = choices.findIndex(
             (choice) => choice.value === currentValue,
@@ -69,7 +71,6 @@ function OptionToggle({ option, label }: OptionToggleProps) {
         cssClasses={["option-switch"]}
         active={options[option]((value) => Boolean(value))}
         onNotifyActive={(self) => {
-          console.log(`Toggle ${option} changed to: ${self.active}`);
           options[option].value = self.active;
         }}
       />
@@ -77,63 +78,63 @@ function OptionToggle({ option, label }: OptionToggleProps) {
   );
 }
 
+function SectionHeader({ label }: { label: string }) {
+  return (
+    <label 
+      label={label} 
+      cssClasses={["section-header"]} 
+      halign={Gtk.Align.START}
+    />
+  );
+}
+
 export default function MatshellSettingsWidget() {
   const [currentPage, setCurrentPage] = createState("bar");
 
   const pages = [
-    { id: "bar", label: "Bar", icon: "Bottom_Navigation" },
-    { id: "audio", label: "Audio", icon: "Cadence" },
-    { id: "system", label: "System", icon: "Settings_Applications" },
+    { id: "bar", icon: "view_agenda" },
+    { id: "audio", icon: "graphic_eq" },
+    { id: "dock", icon: "apps" },
+    { id: "system", icon: "settings" },
   ];
 
   return (
     <box
-      class="stacked-settings-widget"
+      class="matshell-settings"
       orientation={Gtk.Orientation.VERTICAL}
-      spacing={6}
+      spacing={0}
     >
-      {/* Header */}
+      {/* Compact Header with Inline Navigation */}
       <box
-        class="settings-header"
+        class="settings-header-compact"
         orientation={Gtk.Orientation.HORIZONTAL}
-        spacing={6}
+        spacing={8}
       >
-        <label label="Ateon Settings" class="settings-title" hexpand />
+        <label label="Settings" class="settings-title-compact" hexpand />
+        
+        {/* Compact icon-only navigation */}
+        <box class="settings-nav-compact" spacing={4}>
+          {pages.map((page) => (
+            <button
+              cssClasses={currentPage((current) =>
+                current === page.id
+                  ? ["nav-icon-button", "active"]
+                  : ["nav-icon-button"],
+              )}
+              tooltipText={page.id.charAt(0).toUpperCase() + page.id.slice(1)}
+              onClicked={() => setCurrentPage(page.id)}
+            >
+              <label label={page.icon} cssClasses={["icon-compact"]} />
+            </button>
+          ))}
+        </box>
       </box>
 
-      <Gtk.Separator />
-
-      {/* Navigation */}
-      <box
-        class="settings-nav"
-        orientation={Gtk.Orientation.HORIZONTAL}
-        spacing={2}
-        homogeneous
-      >
-        {pages.map((page) => (
-          <button
-            cssClasses={currentPage((current) =>
-              current === page.id
-                ? ["nav-button", "button"]
-                : ["nav-button", "button-disabled"],
-            )}
-            onClicked={() => {
-              setCurrentPage(page.id);
-            }}
-          >
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={2}>
-              <label label={page.icon} cssClasses={["nav-icon"]} />
-              <label label={page.label} cssClasses={["nav-label"]} />
-            </box>
-          </button>
-        ))}
-      </box>
-
-      {/* Content Stack - No ScrolledWindow, scales naturally */}
+      {/* Content Stack */}
       <stack
-        cssClasses={["settings-stack"]}
-        transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
-        transitionDuration={200}
+        cssClasses={["settings-content"]}
+        transitionType={Gtk.StackTransitionType.CROSSFADE}
+        transitionDuration={150}
         $={(stack) => {
           const unsubscribe = currentPage.subscribe(() => {
             stack.visibleChildName = currentPage.get();
@@ -146,8 +147,9 @@ export default function MatshellSettingsWidget() {
           $type="named"
           name="bar"
           orientation={Gtk.Orientation.VERTICAL}
-          spacing={5}
+          spacing={8}
         >
+          <SectionHeader label="Appearance" />
           <OptionSelect
             option="bar.position"
             label="Position"
@@ -158,14 +160,13 @@ export default function MatshellSettingsWidget() {
             label="Style"
             choices={BAR_STYLE_OPTIONS}
           />
+          
+          <SectionHeader label="OS Icon" />
+          <OptionToggle option="bar.modules.os-icon.show" label="Show Icon" />
           <OptionSelect
             option="bar.modules.os-icon.type"
-            label="OS Icon"
+            label="Icon Type"
             choices={OS_OPTIONS}
-          />
-          <OptionToggle
-            option="bar.modules.os-icon.show"
-            label="Show OS Icon"
           />
         </box>
 
@@ -174,27 +175,24 @@ export default function MatshellSettingsWidget() {
           $type="named"
           name="audio"
           orientation={Gtk.Orientation.VERTICAL}
-          spacing={5}
+          spacing={8}
         >
-          <label label="Bar Visualizer" cssClasses={["subsection-title"]} />
+          <SectionHeader label="Bar Visualizer" />
           <OptionToggle option="bar.modules.cava.show" label="Enable" />
           <OptionSelect
             option="bar.modules.cava.style"
-            label="Cava Style"
+            label="Style"
             choices={CAVA_STYLE_OPTIONS}
           />
           <OptionToggle
             option="bar.modules.media.cava.show"
-            label="Enable Cover Cava"
+            label="Cover Visualizer"
           />
-          <Gtk.Separator />
-          <label
-            label="Music Player Visualizer"
-            cssClasses={["subsection-title"]}
-          />
+          
+          <SectionHeader label="Music Player" />
           <OptionToggle
             option="musicPlayer.modules.cava.show"
-            label="Enable"
+            label="Enable Visualizer"
           />
           <OptionSelect
             option="musicPlayer.modules.cava.style"
@@ -203,26 +201,56 @@ export default function MatshellSettingsWidget() {
           />
         </box>
 
+        {/* Dock Settings */}
+        <box
+          $type="named"
+          name="dock"
+          orientation={Gtk.Orientation.VERTICAL}
+          spacing={8}
+        >
+          <SectionHeader label="Dock" />
+          <OptionToggle option="dock.enabled" label="Enable" />
+          <OptionToggle option="dock.auto-hide" label="Auto-hide" />
+          
+          <box cssClasses={["info-box"]}>
+            <label 
+              label="Dock hides when bar is at bottom"
+              cssClasses={["info-text"]}
+              wrap
+              halign={Gtk.Align.START}
+            />
+          </box>
+        </box>
+
         {/* System Settings */}
         <box
           $type="named"
           name="system"
           orientation={Gtk.Orientation.VERTICAL}
-          spacing={5}
+          spacing={8}
         >
+          <SectionHeader label="Theme" />
+          <OptionSelect
+            option="theme.style"
+            label="Style"
+            choices={THEME_STYLE_OPTIONS}
+          />
+          
+          <SectionHeader label="Clock" />
           <OptionSelect
             option="clock.format"
             label="Time Format"
             choices={TIME_FORMAT_OPTIONS}
           />
-          <Gtk.Separator />
+          
+          <SectionHeader label="Advanced Menus" />
           <OptionToggle
             option="system-menu.modules.wifi-advanced.enable"
-            label="WiFi Adv. Settings"
+            label="WiFi Settings"
           />
           <OptionToggle
             option="system-menu.modules.bluetooth-advanced.enable"
-            label="BT Adv. Settings"
+            label="Bluetooth Settings"
           />
         </box>
       </stack>

@@ -1,0 +1,238 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+
+.music.window {
+  @include window;
+  background: none;
+  padding: 0;
+  margin-top: $spacing-md;
+
+  .blurred-cover {
+    border-radius: $round;
+    opacity: 0.6;
+    filter: blur(40px);
+    transform: scale(1.1);
+    
+    // Fallback when no cover art is available
+    &:not([file]) {
+      background: linear-gradient(135deg, 
+        $primary_container 0%, 
+        $secondary_container 50%, 
+        $tertiary_container 100%);
+    }
+  }
+
+  .cava-container {
+    cava {
+      opacity: 0.25;
+    }
+  }
+}
+
+.music.window .info {
+  margin: $spacing-md;
+  padding: $spacing-md;
+  gap: $spacing-sm;
+  min-width: 20rem;
+  max-width: 24rem;
+  background: rgba($surface_container_high, 0.85);
+  border-radius: $round2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  label,
+  scale {
+    margin: 0.3rem 0;
+  }
+
+  // Light text for better contrast on cover art
+  label,
+  .title,
+  .artists,
+  image {
+    @if not $darkmode {
+      color: $background;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    } @else {
+      color: $on_surface;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  label.position,
+  label.length {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 0.1rem;
+    opacity: 0.85;
+  }
+
+  scale {
+    margin-top: 0.2rem;
+    margin-bottom: 0.4rem;
+    
+    trough {
+      min-height: 4px;
+      border-radius: 2px;
+      background: rgba($outline_variant, 0.4);
+      transition: min-height 0.2s ease;
+    }
+    
+    &:hover trough {
+      min-height: 6px;
+    }
+    
+    highlight {
+      border-radius: 2px;
+      background: $primary;
+      transition: background 0.2s ease;
+    }
+    
+    &:hover highlight {
+      background: $primary_fixed_dim;
+    }
+    
+    slider {
+      min-width: 12px;
+      min-height: 12px;
+      margin: -4px;
+      border-radius: 50;
+      background: $primary;
+      transition: all 0.2s ease;
+      opacity: 0;
+      
+      &:hover {
+        transform: scale(1.15);
+        background: $primary_fixed_dim;
+      }
+    }
+    
+    &:hover slider {
+      opacity: 1;
+    }
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .artists {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.music.window .controls {
+  margin: $spacing-sm 0;
+  
+  button {
+    margin: 0 0.6rem;
+    -gtk-icon-size: 1.2rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: $round2;
+    transition: all 0.2s ease;
+    background: rgba($surface_container_highest, 0.4);
+    
+    @if not $darkmode {
+      color: $background;
+    } @else {
+      color: $on_surface;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      background: rgba($primary_container, 0.5);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    // Make center play/pause button more prominent
+    &[type="center"] {
+      -gtk-icon-size: 1.5rem;
+      padding: 0.6rem 0.8rem;
+      margin: 0 1rem;
+      background: rgba($primary_container, 0.6);
+
+      &:hover {
+        background: rgba($primary_container, 0.8);
+      }
+    }
+  }
+}
+
+.music.window .player-info {
+  margin-bottom: 0.3rem;
+  
+  .player-icon-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    
+    &:hover {
+      background: transparent;
+    }
+  }
+  
+  .player-icon {
+    -gtk-icon-size: 1rem;
+    opacity: 0.75;
+    padding: 0.4rem;
+    border-radius: $round2;
+    background: rgba($surface_container_highest, 0.5);
+    transition: all 0.2s ease;
+    
+    &:hover {
+      opacity: 1;
+      background: rgba($primary_container, 0.4);
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+.music.window .volume-control {
+  margin-top: $spacing-sm;
+  min-height: $spacing-sm;
+  
+  .volume-icon {
+    -gtk-icon-size: $font;
+    margin: $spacing-sm;
+    opacity: 0.8;
+    
+    @if not $darkmode {
+      color: $background;
+    } @else {
+      color: $on_surface;
+    }
+  }
+  
+  scale {
+    trough {
+      margin: $spacing-sm;
+      min-height: $spacing-sm;
+      border-radius: 1.5rem;
+      background: rgba($outline_variant, 0.4);
+    }
+    
+    highlight {
+      border-radius: 1.5rem;
+      background-color: $fg;
+    }
+    
+    slider {
+      min-width: 0;
+      min-height: 0;
+      background: transparent;
+      border: none;
+    }
+  }
+}

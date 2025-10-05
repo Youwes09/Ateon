@@ -17,6 +17,7 @@ function ClipboardLayout({ children, onClickOutside }) {
           <box widthRequest={600} cssClasses={["clipboard"]} orientation={Gtk.Orientation.VERTICAL}>
             {children}
           </box>
+          <button heightRequest={14} onClicked={onClickOutside} cssClasses={["invisible-close"]} />
         </box>
         <button widthRequest={currentMonitorWidth((w) => w / 2)} onClicked={onClickOutside} cssClasses={["invisible-close"]} />
       </box>
@@ -34,9 +35,8 @@ export default function ClipboardWindow() {
       exclusivity={Astal.Exclusivity.IGNORE}
       keymode={Astal.Keymode.ON_DEMAND}
       application={app}
-      $={(self) => { 
+      $={(self) => {
         clipboard.window = self;
-        
         // Watch for visibility changes and refresh clipboard when shown
         self.connect("notify::visible", () => {
           console.log(`Window visibility changed: ${self.visible}`);

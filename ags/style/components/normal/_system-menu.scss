@@ -1,0 +1,184 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+/* general */
+
+.system-menu {
+  -gtk-icon-size: $font;
+  @include window;
+  @include border;
+  margin-top: $spacing-md;
+  margin-right: $spacing-md;
+
+  & > box {
+    @include window-box;
+    @include light-mode-shadow;
+    @include border;
+  }
+}
+
+/* toggles */
+.system-menu .toggle {
+  min-width: 20rem;
+  &:not(:last-child) {
+    margin-bottom: $spacing-sm;
+  }
+
+  button {
+    margin-right: $spacing-sm;
+  }
+}
+
+/* power profiles */
+.system-menu .power-profiles {
+  padding: 0;
+
+  .current-profile {
+    padding: $spacing-sm;
+  }
+
+  image,
+  label {
+    margin: $spacing-sm;
+  }
+
+  .profile-options {
+    box {
+      padding: $spacing-sm;
+    }
+  }
+}
+
+/* sliders */
+.system-menu .sliders {
+  min-height: $spacing-sm;
+  image {
+    margin: $spacing-sm;
+  }
+  trough {
+    margin: $spacing-sm;
+  }
+  block {
+    min-height: $spacing-sm;
+    filled {
+      border-radius: 1.5rem;
+      background-color: $fg;
+    }
+  }
+}
+
+.wifi-menu {
+}
+.arrow-indicator {
+  @include animate;
+}
+
+.arrow-down {
+  @include animate;
+  transform: rotate(90deg);
+}
+.system-menu-list {
+  @include window;
+  @include light-mode-shadow;
+  @include border;
+  margin: $spacing-sm;
+}
+
+.network-item {
+  @include button;
+  @include rounding;
+  margin: $spacing-xs $spacing-sm $spacing-sm $spacing-md;
+  padding: $spacing-md;
+  image {
+    &:first-child {
+      margin-right: $spacing-sm;
+    }
+  }
+  label {
+    margin: 0 $spacing-sm;
+  }
+}
+.network-item-active {
+  @include button-active;
+  @include rounding;
+  margin: $spacing-xs $spacing-sm $spacing-sm $spacing-md;
+  padding: $spacing-md;
+}
+
+.password-dialog {
+  @include window-box;
+  margin-bottom: $spacing-md;
+}
+
+.error-message {
+  color: $red;
+  margin: $spacing-xs 0;
+}
+
+.section-label {
+  font-weight: bold;
+  margin: $spacing-sm 0 $spacing-xs 0;
+}
+
+.refresh-button,
+.disconnect-button,
+.settings-button {
+  @include border;
+  @include button;
+  margin: $spacing-sm;
+}
+
+.disconnect-button {
+  padding: 0.58rem 0;
+}
+
+.connect-button,
+.cancel-button,
+.forget-button,
+.pair-button,
+.trust-button {
+  margin: $spacing-sm;
+  @include light-mode-shadow($shadow-type: "strong");
+}
+
+//avoid artifacts
+.disconnect-button,
+.forget-button,
+.cancel-button {
+  border-radius: calc(#{$round} * 1.6);
+}
+
+image {
+  margin: $spacing-sm;
+}
+.password-search {
+  @include window-box;
+  @include border;
+  background: $bg;
+  entry {
+    menu {
+      @include menu;
+    }
+  }
+}
+
+.empty-label {
+  margin: $spacing-sm;
+  color: $red;
+}
+
+.saved-network {
+  @include button;
+  @include rounding;
+  @include light-mode-shadow;
+  margin: $spacing-sm $spacing-sm $spacing-sm $spacing-md;
+  padding: $spacing-xs;
+  > label {
+    margin-left: $spacing-sm;
+  }
+}
+
+.bt-button-container {
+  margin: 0 $spacing-xs $spacing-sm $spacing-sm;
+}

@@ -1,75 +1,27 @@
-{
-  "packageGroups": [
-    {
-      "name": "Desktop",
-      "description": "Core desktop environment packages",
-      "packages": [
-        "hyprland",
-        "aylurs-gtk-shell-git",
-        "matugen-bin",
-        "libastal-hyprland-git",
-        "libastal-tray-git",
-        "libastal-notifd-git",
-        "libastal-apps-git",
-        "libastal-wireplumber-git",
-        "libastal-mpris-git",
-        "libastal-network-git",
-        "libastal-bluetooth-git",
-        "libastal-cava-git",
-        "libastal-battery-git",
-        "libastal-powerprofiles-git",
-        "libgtop",
-        "dart-sass",
-        "imagemagick",
-        "adwaita-icon-theme",
-        "libadwaita",
-        "ttf-jetbrains-mono-nerd",
-        "ttf-firacode-nerd",
-        "ttf-material-symbols-variable-git",
-        "hyprpaper",
-        "polkit-gnome",
-        "glib-networking",
-        "libsoup3",
-        "resources"
-      ]
-    },
-    {
-      "name": "Terminal",
-      "description": "Terminal emulator and shell utilities",
-      "packages": [
-        "foot",
-        "fish",
-        "starship",
-        "fastfetch",
-        "wl-clipboard",
-        "clipvault"
-      ]
-    },
-    {
-      "name": "Utility",
-      "description": "System utilities and applications",
-      "packages": [
-        "hyprshot",
-        "swappy",
-        "grim",
-        "slurp",
-        "hyprpicker",
-        "brightnessctl",
-        "playerctl",
-        "pipewire",
-        "pipewire-pulse",
-        "wireplumber",
-        "firefox",
-        "nautilus",
-        "code",
-        "normcap",
-        "python-zxing-cpp",
-        "tesseract",
-        "tesseract-data-eng",
-        "python-pytesseract",
-        "pyside6",
-        "pavucontrol"
-      ]
-    }
-  ]
-}
+[
+  {
+    "name": "Core Utilities",
+    "packages": ["git", "curl", "wget", "unzip", "zip", "tar"],
+    "enabled": true
+  },
+  {
+    "name": "Development Tools",
+    "packages": ["nodejs", "npm", "python3", "gcc", "make", "cmake"],
+    "enabled": false
+  },
+  {
+    "name": "Terminal Enhancements",
+    "packages": ["neovim", "tmux", "zsh", "fzf", "ripgrep", "bat", "exa"],
+    "enabled": false
+  },
+  {
+    "name": "Media Tools",
+    "packages": ["ffmpeg", "imagemagick", "gimp", "vlc"],
+    "enabled": false
+  },
+  {
+    "name": "System Monitoring",
+    "packages": ["htop", "btop", "neofetch", "lm_sensors"],
+    "enabled": false
+  }
+]

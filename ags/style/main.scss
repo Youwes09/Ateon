@@ -1,13 +1,20 @@
-
 /* prelude */
 @use "base" as *;
-
 /* variables & mixins */
 @use "abstracts" as *;
-
 /* general styles */
 @use "layouts" as *;
 
-/* modules & windows */
-@use "components" as *;
-
+/* Component imports - loaded from theme directory via --load-path */
+@use "bar";
+@use "clipboard";
+@use "dock";
+@use "logout-menu";
+@use "picker";
+@use "notifications";
+@use "osd";
+@use "music";
+@use "screen-corners";
+@use "sidebar";
+@use "system-menu";
+@use "window-switcher";

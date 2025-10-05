@@ -1,0 +1,708 @@
+@use "../../../../layouts" as *;
+@use "../../../../abstracts" as *;
+@use "sass:color";
+
+.updater-widget {
+  @include widget-container;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.92),
+    color.adjust($fg, $alpha: -0.95)
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color.adjust($fg, $alpha: -0.9);
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.92),
+      transparent
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Header with mode selector
+  .updater-header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
+    border-bottom: 1px solid color.adjust($fg, $alpha: -0.92);
+    background: transparent;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    position: relative;
+    z-index: 1;
+
+    .header-title {
+      font-size: calc(#{$font} * 1.1);
+      font-weight: 700;
+      color: $fg;
+      margin-right: auto;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+      .header-icon {
+        @include material-icon(28px);
+        color: $primary;
+        margin-right: $spacing-xs;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      }
+    }
+  }
+
+  // Mode navigation
+  .updater-nav {
+    display: flex;
+    gap: $spacing-xs;
+
+    .nav-mode-button {
+      padding: $spacing-xs calc(#{$spacing-sm} * 1.2);
+      border-radius: 10px;
+      background-color: transparent;
+      border: 1px solid transparent;
+      transition: all 150ms ease;
+      min-width: 36px;
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 500;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.9),
+          color.adjust($fg, $alpha: -0.94)
+        );
+        border-color: color.adjust($fg, $alpha: -0.88);
+      }
+
+      &.active {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.88),
+          color.adjust($primary, $alpha: -0.92)
+        );
+        border-color: color.adjust($primary, $alpha: -0.8);
+        color: $primary;
+        font-weight: 600;
+        box-shadow: 
+          0 2px 6px color.adjust($primary, $alpha: -0.85),
+          0 0 12px color.adjust($primary, $alpha: -0.9);
+        text-shadow: 0 0 6px color.adjust($primary, $alpha: -0.8);
+      }
+    }
+  }
+
+  // Content area
+  .updater-content {
+    padding: $spacing-md;
+    position: relative;
+    z-index: 1;
+  }
+
+  // Version info
+  .version-info {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.94),
+      color.adjust($fg, $alpha: -0.96)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: 12px;
+    padding: $spacing-sm $spacing-md;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    .version-label {
+      font-size: calc(#{$font} * 0.9);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      min-width: 70px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .version-value {
+      font-family: "JetBrainsMono Nerd Font", monospace;
+      font-size: calc(#{$font} * 0.9);
+      font-weight: 500;
+      color: $fg;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Status box
+  .status-box {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.94),
+      color.adjust($fg, $alpha: -0.96)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: 12px;
+    padding: $spacing-sm $spacing-md;
+    transition: all 250ms ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    .status-icon {
+      @include material-icon(20px);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    .status-message {
+      font-size: calc(#{$font} * 0.9);
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    &.status-idle {
+      .status-icon {
+        color: color.adjust($fg, $alpha: -0.4);
+      }
+
+      .status-message {
+        color: color.adjust($fg, $alpha: -0.3);
+      }
+    }
+
+    &.status-checking,
+    &.status-cloning,
+    &.status-copying,
+    &.status-installing {
+      border-color: color.adjust($primary, $alpha: -0.8);
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.94),
+        color.adjust($primary, $alpha: -0.96)
+      );
+      box-shadow: 
+        0 2px 6px color.adjust($primary, $alpha: -0.9),
+        0 0 12px color.adjust($primary, $alpha: -0.95);
+
+      .status-icon {
+        color: $primary;
+        animation: pulse 2s ease-in-out infinite;
+        text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
+      }
+
+      .status-message {
+        color: $primary;
+      }
+    }
+
+    &.status-success {
+      border-color: color.adjust(#4ade80, $alpha: -0.8);
+      background: linear-gradient(
+        135deg,
+        color.adjust(#4ade80, $alpha: -0.94),
+        color.adjust(#4ade80, $alpha: -0.96)
+      );
+      box-shadow: 
+        0 2px 6px color.adjust(#4ade80, $alpha: -0.9),
+        0 0 12px color.adjust(#4ade80, $alpha: -0.95);
+
+      .status-icon {
+        color: #4ade80;
+        text-shadow: 0 0 8px color.adjust(#4ade80, $alpha: -0.7);
+      }
+
+      .status-message {
+        color: #4ade80;
+        font-weight: 600;
+      }
+    }
+
+    &.status-error {
+      border-color: color.adjust($error, $alpha: -0.8);
+      background: linear-gradient(
+        135deg,
+        color.adjust($error, $alpha: -0.94),
+        color.adjust($error, $alpha: -0.96)
+      );
+      box-shadow: 
+        0 2px 6px color.adjust($error, $alpha: -0.9),
+        0 0 12px color.adjust($error, $alpha: -0.95);
+
+      .status-icon {
+        color: $error;
+        text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
+      }
+
+      .status-message {
+        color: $error;
+        font-weight: 600;
+      }
+    }
+  }
+
+  // Action buttons
+  .updater-button {
+    @include button;
+    border-radius: 12px;
+    padding: $spacing-sm $spacing-md;
+    font-weight: 600;
+    transition: all 250ms ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .button-icon {
+      @include material-icon(18px);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    &-check {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.95)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.88);
+      color: $fg;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+      .button-icon {
+        color: color.adjust($fg, $alpha: -0.3);
+      }
+
+      &::before {
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.9),
+          transparent
+        );
+      }
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.88),
+          color.adjust($fg, $alpha: -0.92)
+        );
+        border-color: color.adjust($fg, $alpha: -0.82);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+
+    &-update {
+      background: linear-gradient(
+        135deg, 
+        color.adjust($primary, $alpha: -0.88), 
+        color.adjust($primary, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($primary, $alpha: -0.75);
+      color: $primary;
+      box-shadow: 
+        0 2px 6px color.adjust($primary, $alpha: -0.85),
+        0 0 12px color.adjust($primary, $alpha: -0.9);
+
+      .button-icon {
+        color: $primary;
+      }
+
+      &::before {
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.82, $lightness: 12%),
+          transparent
+        );
+      }
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(
+          135deg, 
+          color.adjust($primary, $alpha: -0.85), 
+          color.adjust($primary, $alpha: -0.9)
+        );
+        transform: translateY(-2px);
+        border-color: color.adjust($primary, $alpha: -0.6);
+        box-shadow: 
+          0 4px 10px color.adjust($primary, $alpha: -0.75),
+          0 0 20px color.adjust($primary, $alpha: -0.85);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  // Config/Package toggle
+  .config-toggle-button {
+    @include button;
+    background: transparent;
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 12px;
+    padding: $spacing-sm $spacing-md;
+    transition: all 250ms ease;
+
+    .button-icon {
+      @include material-icon(18px);
+      color: color.adjust($fg, $alpha: -0.4);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.95)
+      );
+      border-color: color.adjust($fg, $alpha: -0.82);
+    }
+  }
+
+  // Package categories
+  .package-categories {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.94),
+      color.adjust($fg, $alpha: -0.96)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: 12px;
+    padding: $spacing-md;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    .category-title {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: $spacing-sm;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .package-category {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.96),
+        color.adjust($fg, $alpha: -0.98)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.94);
+      border-radius: 12px;
+      padding: $spacing-sm;
+      margin: $spacing-xs 0;
+      transition: all 200ms ease;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.94),
+          color.adjust($fg, $alpha: -0.96)
+        );
+        border-color: color.adjust($fg, $alpha: -0.9);
+      }
+
+      .category-header {
+        .category-name {
+          font-size: calc(#{$font} * 0.95);
+          font-weight: 600;
+          color: $fg;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-count {
+          font-size: calc(#{$font} * 0.8);
+          color: color.adjust($fg, $alpha: -0.5);
+          background: linear-gradient(
+            135deg,
+            color.adjust($fg, $alpha: -0.92),
+            color.adjust($fg, $alpha: -0.95)
+          );
+          padding: 2px 8px;
+          border-radius: 8px;
+          border: 1px solid color.adjust($fg, $alpha: -0.9);
+        }
+      }
+
+      .package-list {
+        margin-top: $spacing-xs;
+
+        .package-item {
+          font-size: calc(#{$font} * 0.85);
+          color: color.adjust($fg, $alpha: -0.3);
+          font-family: "JetBrainsMono Nerd Font", monospace;
+          padding: 2px 0;
+        }
+      }
+    }
+  }
+
+  // Config list
+  .config-list {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.94),
+      color.adjust($fg, $alpha: -0.96)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: 12px;
+    padding: $spacing-md;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    .config-list-title {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: $spacing-sm;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .config-item {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.96),
+        color.adjust($fg, $alpha: -0.98)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.94);
+      border-radius: 10px;
+      padding: $spacing-sm $spacing-md;
+      margin: $spacing-xs 0;
+      transition: all 200ms ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.94),
+          color.adjust($fg, $alpha: -0.96)
+        );
+        border-color: color.adjust($fg, $alpha: -0.9);
+      }
+
+      .config-name {
+        font-size: calc(#{$font} * 0.95);
+        font-weight: 600;
+        color: $fg;
+        margin-bottom: 2px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .config-path {
+        font-size: calc(#{$font} * 0.75);
+        color: color.adjust($fg, $alpha: -0.5);
+        font-family: "JetBrainsMono Nerd Font", monospace;
+      }
+
+      .config-switch {
+        border-radius: 12px;
+        padding: 0;
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.88),
+          color.adjust($fg, $alpha: -0.92)
+        );
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+        width: 44px;
+        height: 24px;
+
+        slider {
+          border-radius: 10px;
+          transition: all 200ms ease;
+          margin: 2px;
+          width: 20px;
+          height: 20px;
+          background: white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        &:checked {
+          background: linear-gradient(
+            135deg,
+            color.adjust($primary, $alpha: -0.2),
+            color.adjust($primary, $alpha: -0.3)
+          );
+          box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.15),
+            0 0 12px color.adjust($primary, $alpha: -0.7);
+
+          slider {
+            background: white;
+            box-shadow: 
+              0 2px 6px rgba(0, 0, 0, 0.25),
+              0 0 8px color.adjust($primary, $alpha: -0.5);
+          }
+        }
+      }
+    }
+
+    .config-summary,
+    .package-summary {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.94),
+        color.adjust($primary, $alpha: -0.96)
+      );
+      border: 1px solid color.adjust($primary, $alpha: -0.88);
+      border-radius: 10px;
+      padding: $spacing-xs $spacing-sm;
+      margin-top: $spacing-sm;
+      box-shadow: 
+        0 2px 6px color.adjust($primary, $alpha: -0.9),
+        inset 0 1px 0 color.adjust($primary, $alpha: -0.95);
+
+      .summary-text {
+        font-size: calc(#{$font} * 0.85);
+        font-weight: 600;
+        color: $primary;
+        text-shadow: 0 0 6px color.adjust($primary, $alpha: -0.8);
+      }
+    }
+  }
+
+  // Config info
+  .config-info {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.94),
+      color.adjust($fg, $alpha: -0.96)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: 12px;
+    padding: $spacing-sm $spacing-md;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    .config-title {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: $spacing-xs;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .config-detail {
+      font-size: calc(#{$font} * 0.85);
+      color: color.adjust($fg, $alpha: -0.3);
+      font-family: "JetBrainsMono Nerd Font", monospace;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  // Config error
+  .config-error {
+    background: linear-gradient(
+      135deg,
+      color.adjust($error, $alpha: -0.94),
+      color.adjust($error, $alpha: -0.96)
+    );
+    border: 1px solid color.adjust($error, $alpha: -0.85);
+    border-radius: 12px;
+    padding: $spacing-md;
+    box-shadow: 
+      0 2px 6px color.adjust($error, $alpha: -0.9),
+      0 0 12px color.adjust($error, $alpha: -0.95);
+
+    .config-icon {
+      @include material-icon(48px);
+      color: $error;
+      margin-bottom: $spacing-xs;
+      text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
+    }
+
+    .config-error-text {
+      font-size: $font;
+      font-weight: 600;
+      color: $error;
+      margin-bottom: $spacing-xs;
+      text-shadow: 0 0 6px color.adjust($error, $alpha: -0.8);
+    }
+
+    .config-error-hint {
+      font-size: calc(#{$font} * 0.85);
+      color: color.adjust($error, $alpha: -0.3);
+      font-family: "JetBrainsMono Nerd Font", monospace;
+    }
+  }
+
+  // Separators
+  separator {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color.adjust($fg, $alpha: -0.92),
+      transparent
+    );
+    margin: $spacing-xs 0;
+    min-height: 1px;
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Define or update your material-icon mixin
+@mixin material-icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: 1em;
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
+  -moz-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+}
+
+// Your existing style using the mixin
+.icon-compact {
+  @include material-icon;
+  font-size: calc(#{$font} * 1.3);
+  color: color.adjust($fg, $alpha: -0.5);
+  transition: all 150ms ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}

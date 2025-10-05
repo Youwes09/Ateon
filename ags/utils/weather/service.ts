@@ -81,6 +81,7 @@ async function fetchWeather(): Promise<WeatherData> {
         }
       : null,
     forecast: json.weather || [],
+    nearest_area: json.nearest_area || [],
   };
 
   setCachedWeather(weatherData);
@@ -92,7 +93,7 @@ loadWeatherCache();
 
 // Poll
 const weather = createPoll<WeatherData>(
-  { current: null, forecast: [] },
+  { current: null, forecast: [], nearest_area: [] },
   updateInterval,
   async (prev) => {
     try {

@@ -1,0 +1,269 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+.dock-window {
+  background-color: transparent;
+}
+
+.dock-container {
+  background-color: transparent;
+  padding: 8px;
+  padding-bottom: 12px;
+  min-height: 80px;
+}
+
+.dock {
+  background: linear-gradient(
+    to bottom,
+    color.adjust($bg, $alpha: -0.1, $lightness: 8%),
+    color.adjust($bg, $alpha: -0.2, $lightness: 2%)
+  );
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  padding: 5px 10px;
+  border: 1px solid color.adjust($fg, $alpha: -0.82);
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.88),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom center;
+  position: relative;
+
+  // Glass reflection effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.92),
+      transparent
+    );
+    border-radius: 20px 20px 0 0;
+    pointer-events: none;
+  }
+
+  &.hidden {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    pointer-events: none;
+  }
+}
+
+.dock-item {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 16px;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  min-width: 48px;
+  min-height: 48px;
+  transform-origin: bottom center;
+  position: relative;
+
+  .icon-background {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.86),
+      color.adjust($fg, $alpha: -0.9)
+    );
+    border-radius: 14px;
+    padding: 0;
+    min-width: 48px;
+    min-height: 48px;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.15),
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+
+    // Glass shine effect
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.85),
+        transparent
+      );
+      border-radius: 14px 14px 0 0;
+      pointer-events: none;
+    }
+  }
+
+  image {
+    opacity: 0.85;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    min-width: 32px;
+    min-height: 32px;
+    margin: 8px;
+  }
+
+  // Magnification effect on hover
+  &:hover {
+    min-width: 58px;
+    min-height: 58px;
+    margin-bottom: 8px;
+    z-index: 10;
+
+    .icon-background {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.8),
+        color.adjust($fg, $alpha: -0.86)
+      );
+      min-width: 58px;
+      min-height: 58px;
+      box-shadow: 
+        0 6px 14px rgba(0, 0, 0, 0.22),
+        inset 0 1px 2px color.adjust($fg, $alpha: -0.75),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+
+      &::before {
+        height: 45%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.78),
+          transparent
+        );
+      }
+    }
+
+    image {
+      opacity: 1;
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+      min-width: 42px;
+      min-height: 42px;
+      margin: 8px;
+    }
+  }
+
+  // Adjacent items also scale slightly (macOS ripple effect)
+  &:hover + .dock-item,
+  &:has(+ .dock-item:hover) {
+    min-width: 52px;
+    min-height: 52px;
+    margin-bottom: 4px;
+
+    .icon-background {
+      min-width: 52px;
+      min-height: 52px;
+    }
+
+    image {
+      min-width: 36px;
+      min-height: 36px;
+      margin: 8px;
+    }
+  }
+
+  // Active indicator (running app)
+  &.running::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: color.adjust($fg, $alpha: -0.3);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &.running.active::after {
+    opacity: 1;
+    background-color: $primary;
+  }
+
+  &.running:not(.active)::after {
+    opacity: 0.6;
+  }
+
+  // Active app styling
+  &.active {
+    .icon-background {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.75, $lightness: 8%),
+        color.adjust($primary, $alpha: -0.82, $lightness: -3%)
+      );
+      box-shadow: 
+        0 0 20px color.adjust($primary, $alpha: -0.4),
+        0 0 40px color.adjust($primary, $alpha: -0.7),
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px color.adjust($primary, $alpha: -0.65, $lightness: 12%),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+
+      &::before {
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.7, $lightness: 15%),
+          transparent
+        );
+      }
+    }
+
+    image {
+      opacity: 1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+  }
+
+  // Staggered fade animation
+  @for $i from 0 through 9 {
+    &:nth-child(#{$i + 1}) {
+      .dock.hidden & {
+        $distance: abs($i - 4);
+        $delay: $distance * 0.03s;
+        
+        transition-delay: $delay;
+        opacity: 0;
+        transform: translateY(10px) scale(0.8);
+
+        .icon-background {
+          transition-delay: $delay;
+        }
+
+        image {
+          transition-delay: $delay;
+        }
+      }
+    }
+  }
+}
+
+// Bounce animation for launching apps
+@keyframes dock-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  50% {
+    transform: translateY(0) scale(0.98);
+  }
+  75% {
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+.dock-item.launching {
+  animation: dock-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

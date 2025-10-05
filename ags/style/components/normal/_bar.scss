@@ -1,0 +1,183 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+/* general */
+/* Base bar styles */
+.Bar {
+  border-radius: calc(#{$round} * 4);
+  font-size: $font;
+
+  cava {
+    opacity: 0.1;
+    margin: 0 -0.5rem;
+  }
+
+  .module {
+    margin: 0 $spacing-sm;
+  }
+
+  /* OS Icon */
+  .OsIcon {
+    -gtk-icon-size: 2rem;
+    margin-left: 0.8rem;
+    margin-right: -0.5rem;
+    color: $os;
+  }
+
+  /* Hyperland */
+  .Workspaces {
+    margin: 0.4rem 0.8rem;
+
+    button {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 0.7rem;
+      margin: 0.6rem 0.35rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      transition: 100ms linear;
+      box-shadow: inset -2px -2px 2px color.adjust($bg, $alpha: -0.2);
+    }
+
+    .focused {
+      min-width: 2.5rem;
+    }
+
+    .monitor0 {
+      @include hypr-workspace-style($primaryMon, $primaryMonHover);
+    }
+
+    .monitor1 {
+      @include hypr-workspace-style($secondaryMon, $secondaryMonHover);
+    }
+
+    .monitor2 {
+      @include hypr-workspace-style($tertiaryMon, $tertiaryMonHover);
+    }
+
+    .monitor3 {
+      @include hypr-workspace-style($fourthMon, $fourthMonHover);
+    }
+  }
+
+  /* music */
+  .Media {
+    & > box {
+      @include animate;
+      border-radius: $round2;
+      margin: $spacing-sm;
+      font-size: $font;
+      cava {
+        opacity: 0.3;
+      }
+    }
+
+    &.active > box {
+      background: $surface;
+    }
+
+    .cover {
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      min-width: 2.5rem;
+      min-height: 2rem;
+      margin: 0.1rem $spacing-sm;
+    }
+  }
+
+  /* tray */
+  .SysTray {
+    background: none;
+    image {
+      -gtk-icon-size: $font;
+    }
+
+    .tray-item {
+      margin: 0rem 0.3rem;
+    }
+
+    &:not(:last-child) {
+      margin-right: -0.3rem;
+    }
+
+    &.active {
+      background: $surface;
+    }
+  }
+
+  /* hw-monitor */
+  .bar-hw-ram-box {
+    @include hw-monitor-box($ramProc);
+  }
+  .bar-hw-cpu-box {
+    @include hw-monitor-box($cpuProc, 1px 0px 0px 1px, 1.3rem);
+  }
+
+  /* System menu */
+  .system-menu-toggler {
+    box {
+      @include animate;
+      margin: 0.4rem 0;
+      border-radius: $round2;
+      -gtk-icon-size: $font;
+    }
+
+    &.active box {
+      background: $surface;
+    }
+  }
+
+  .separator {
+    font-size: 1.8rem;
+    color: $outline;
+  }
+
+  .clock {
+    margin: 0 1.2rem 0 $spacing-sm;
+  }
+
+  .power-button {
+    margin: 0 1.2rem 0 0rem;
+  }
+}
+/* Floating elements style */
+.bar-style-floating {
+  .centerbox > box {
+    background: $barBg;
+    border-radius: calc(#{$round} * 4);
+    box-shadow:
+      inset -2px -2px 3px rgba(0, 0, 0, 0.4),
+      -1px -1px 2px $bg;
+    padding: 0 0.5rem;
+    margin: 0 0.3rem;
+  }
+}
+
+/* Full-width style */
+.bar-style-expanded {
+  background: $barBg;
+  border-radius: calc(#{$round} * 4);
+  box-shadow:
+    inset -2px -2px 3px rgba(0, 0, 0, 0.4),
+    -1px -1px 2px $bg;
+  padding: 0 0.5rem;
+  margin: 0 0.3rem;
+}
+
+/* Beveled style */
+.bar-style-beveled {
+  background: $barBg;
+  border-radius: 0.8rem;
+  box-shadow:
+    inset -2px -2px 3px rgba(0, 0, 0, 0.4),
+    -1px -1px 2px $bg;
+  padding: 0 0.5rem;
+  margin: 0 0.3rem;
+}
+
+/* Corner-integrated style */
+.bar-style-corners {
+  background: $barBg;
+  border-radius: 0;
+}

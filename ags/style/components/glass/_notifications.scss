@@ -1,0 +1,296 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+.notification {
+  @include window;
+  @include border;
+  margin: $spacing-sm $spacing-md;
+  padding: $spacing-sm;
+  background: linear-gradient(
+    135deg,
+    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
+    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+  );
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+
+  // Glass reflection effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.95),
+      transparent
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Ensure content is above glass overlay
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Hover effect
+  &.notification-hovered {
+    transform: translateX(-4px) translateY(-2px);
+    background: linear-gradient(
+      135deg,
+      color.adjust($bg, $alpha: -0.08, $lightness: 8%),
+      color.adjust($bg, $alpha: -0.15, $lightness: 3%)
+    );
+    border-color: color.adjust($fg, $alpha: -0.82);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.35),
+      0 6px 16px rgba(0, 0, 0, 0.25),
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.88),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+
+    &::before {
+      height: 55%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.92),
+        transparent
+      );
+    }
+  }
+
+  // Active/pressed effect
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.25),
+      inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  }
+
+  &.critical {
+    border-left: 3px solid $red;
+    background: linear-gradient(
+      135deg,
+      color.adjust($error, $alpha: -0.92, $lightness: 3%),
+      color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    );
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 20px color.adjust($error, $alpha: -0.85),
+      0 4px 12px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 color.adjust($error, $alpha: -0.9),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    
+    &::before {
+      background: linear-gradient(
+        to bottom,
+        color.adjust($error, $alpha: -0.95),
+        transparent
+      );
+    }
+
+    .header .app-name {
+      color: $red;
+      text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
+    }
+
+    &.notification-hovered {
+      box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.35),
+        0 0 30px color.adjust($error, $alpha: -0.75),
+        0 6px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 1px color.adjust($error, $alpha: -0.88),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  &.low {
+    opacity: 0.9;
+    background: linear-gradient(
+      135deg,
+      color.adjust($bg, $alpha: -0.15, $lightness: 5%),
+      color.adjust($bg, $alpha: -0.2, $lightness: 1%)
+    );
+  }
+
+  .header {
+    margin-bottom: $spacing-xs;
+    
+    .app-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: color.adjust($fg, $alpha: -0.4);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .time {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: color.adjust($fg, $alpha: -0.5);
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.95)
+      );
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid color.adjust($fg, $alpha: -0.9);
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+    }
+  }
+
+  .content {
+    .thumb {
+      > box {
+        min-width: 48px;
+        min-height: 48px;
+        border-radius: $round;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border: 1px solid color.adjust($fg, $alpha: -0.9);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.15),
+          inset 0 1px 0 color.adjust($fg, $alpha: -0.95);
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 40%;
+          background: linear-gradient(
+            to bottom,
+            color.adjust($fg, $alpha: -0.92),
+            transparent
+          );
+          border-radius: $round $round 0 0;
+          pointer-events: none;
+        }
+      }
+
+      image {
+        -gtk-icon-size: 48px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      }
+    }
+
+    .text-content {
+      .title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $fg;
+        line-height: 1.3;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+      }
+
+      .body {
+        font-size: 0.85rem;
+        color: color.adjust($fg, $alpha: -0.3);
+        margin-top: $spacing-xs;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // Action indicator
+  .action-indicator {
+    margin-top: $spacing-sm;
+    padding-top: $spacing-xs;
+    border-top: 1px solid color.adjust($fg, $alpha: -0.9);
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    .action-hint {
+      font-size: 0.75rem;
+      color: color.adjust($fg, $alpha: -0.4);
+      font-style: italic;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .more-actions {
+      font-size: 0.7rem;
+      color: color.adjust($fg, $alpha: -0.5);
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.95)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.9);
+      padding: 2px 6px;
+      border-radius: 6px;
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.9),
+          transparent
+        );
+        border-radius: 6px 6px 0 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.88),
+          color.adjust($primary, $alpha: -0.92)
+        );
+        border-color: color.adjust($primary, $alpha: -0.8);
+        color: $primary;
+        box-shadow: 
+          0 2px 6px color.adjust($primary, $alpha: -0.85),
+          0 0 12px color.adjust($primary, $alpha: -0.9),
+          inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
+
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            color.adjust($primary, $alpha: -0.85, $lightness: 8%),
+            transparent
+          );
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

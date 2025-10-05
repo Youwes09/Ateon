@@ -1,0 +1,479 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+/* general */
+
+.system-menu {
+  -gtk-icon-size: $font;
+  @include window;
+  background: linear-gradient(
+    135deg,
+    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
+    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+  );
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border-radius: 20px;
+  margin-top: $spacing-md;
+  margin-right: $spacing-md;
+  padding: $spacing-md;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+
+  // Glass reflection effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.95),
+      transparent
+    );
+    border-radius: 20px 20px 0 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  & > box {
+    @include window-box;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+  }
+
+  // Force all direct children to same width
+  > box > * {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Glass container for sections */
+.system-menu-section {
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.92),
+    color.adjust($fg, $alpha: -0.95)
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color.adjust($fg, $alpha: -0.9);
+  border-radius: 14px;
+  padding: $spacing-sm;
+  margin-bottom: $spacing-sm;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.92),
+      transparent
+    );
+    border-radius: 14px 14px 0 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // All content above glass overlay
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* toggles */
+.system-menu .toggle {
+  @extend .system-menu-section;
+  
+  &:not(:last-child) {
+    margin-bottom: $spacing-sm;
+  }
+
+  button {
+    margin-right: $spacing-sm;
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.88),
+      color.adjust($fg, $alpha: -0.92)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.85);
+    border-radius: 10px;
+    padding: 8px 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.85),
+        color.adjust($primary, $alpha: -0.9)
+      );
+      border-color: color.adjust($primary, $alpha: -0.75);
+      box-shadow: 
+        0 2px 10px color.adjust($primary, $alpha: -0.75),
+        0 0 20px color.adjust($primary, $alpha: -0.88);
+    }
+  }
+}
+
+/* power profiles */
+.system-menu .power-profiles {
+  @extend .system-menu-section;
+  
+  .current-profile {
+    padding: $spacing-sm;
+  }
+
+  image,
+  label {
+    margin: $spacing-sm;
+  }
+
+  .profile-options {
+    box {
+      padding: $spacing-sm;
+    }
+  }
+}
+
+/* sliders - Volume/Brightness */
+.system-menu .sliders {
+  @extend .system-menu-section;
+  min-height: $spacing-sm;
+  
+  image {
+    margin: $spacing-sm;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+
+  label {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  }
+
+  trough {
+    margin: $spacing-sm;
+    min-height: $spacing-sm;
+    border-radius: 1.5rem;
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.88),
+      color.adjust($fg, $alpha: -0.92)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.85);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  block {
+    min-height: $spacing-sm;
+  }
+
+  block.filled {
+    border-radius: 1.5rem;
+    background: linear-gradient(
+      135deg,
+      color.adjust($primary, $alpha: -0.15),
+      color.adjust($primary, $alpha: -0.25)
+    );
+    box-shadow: 
+      0 0 12px color.adjust($primary, $alpha: -0.5),
+      inset 0 1px 1px color.adjust($primary, $alpha: -0.3, $lightness: 15%);
+  }
+}
+
+/* Battery Box */
+.system-menu .battery-box {
+  @extend .system-menu-section;
+}
+
+/* Wifi, Bluetooth, Notifications */
+.wifi-menu,
+.bluetooth-menu,
+.notification-center {
+  @extend .system-menu-section;
+}
+
+.arrow-indicator {
+  @include animate;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.arrow-down {
+  @include animate;
+  transform: rotate(90deg);
+}
+
+.system-menu-list {
+  @include window;
+  background: linear-gradient(
+    135deg,
+    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
+    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+  );
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border-radius: 16px;
+  margin: $spacing-sm 0;
+  padding: $spacing-sm;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 6px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.95),
+      transparent
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Inner bezel for list content
+  > box {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.94),
+      color.adjust($fg, $alpha: -0.96)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: 12px;
+    padding: $spacing-xs;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.network-item,
+.bluetooth-item {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: $spacing-xs;
+  padding: $spacing-sm;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.9),
+      color.adjust($fg, $alpha: -0.94)
+    );
+    border-color: color.adjust($fg, $alpha: -0.88);
+  }
+
+  image {
+    &:first-child {
+      margin-right: $spacing-sm;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+  }
+
+  label {
+    margin: 0 $spacing-sm;
+  }
+}
+
+.network-item-active,
+.bluetooth-item-active {
+  background: linear-gradient(
+    135deg,
+    color.adjust($primary, $alpha: -0.85),
+    color.adjust($primary, $alpha: -0.9)
+  );
+  border: 1px solid color.adjust($primary, $alpha: -0.75);
+  border-radius: 10px;
+  margin: $spacing-xs;
+  padding: $spacing-sm;
+  box-shadow: 
+    0 2px 10px color.adjust($primary, $alpha: -0.8),
+    0 0 20px color.adjust($primary, $alpha: -0.88);
+}
+
+.password-dialog {
+  @include window-box;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.92),
+    color.adjust($fg, $alpha: -0.95)
+  );
+  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border-radius: 12px;
+  margin-bottom: $spacing-md;
+  padding: $spacing-md;
+}
+
+.error-message {
+  color: $red;
+  margin: $spacing-xs 0;
+  text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
+  font-weight: 600;
+}
+
+.section-label {
+  font-weight: bold;
+  margin: $spacing-sm 0 $spacing-xs 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.refresh-button,
+.disconnect-button,
+.settings-button {
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.88),
+    color.adjust($fg, $alpha: -0.92)
+  );
+  border: 1px solid color.adjust($fg, $alpha: -0.85);
+  border-radius: 10px;
+  margin: $spacing-sm;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      color.adjust($primary, $alpha: -0.85),
+      color.adjust($primary, $alpha: -0.9)
+    );
+    border-color: color.adjust($primary, $alpha: -0.75);
+    box-shadow: 
+      0 2px 10px color.adjust($primary, $alpha: -0.75),
+      0 0 20px color.adjust($primary, $alpha: -0.88);
+  }
+}
+
+.disconnect-button {
+  padding: 0.58rem 0;
+}
+
+.connect-button,
+.cancel-button,
+.forget-button,
+.pair-button,
+.trust-button {
+  margin: $spacing-sm;
+  background: linear-gradient(
+    135deg,
+    color.adjust($primary, $alpha: -0.82),
+    color.adjust($primary, $alpha: -0.88)
+  );
+  border: 1px solid color.adjust($primary, $alpha: -0.7);
+  border-radius: 10px;
+  padding: 10px 16px;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 4px 12px color.adjust($primary, $alpha: -0.75),
+    0 0 20px color.adjust($primary, $alpha: -0.85);
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      color.adjust($primary, $alpha: -0.75),
+      color.adjust($primary, $alpha: -0.82)
+    );
+    border-color: color.adjust($primary, $alpha: -0.6);
+    box-shadow: 
+      0 6px 16px color.adjust($primary, $alpha: -0.6),
+      0 0 30px color.adjust($primary, $alpha: -0.75);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.disconnect-button,
+.forget-button,
+.cancel-button {
+  border-radius: calc(#{$round} * 1.6);
+}
+
+image {
+  margin: $spacing-sm;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.password-search {
+  @include window-box;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.92),
+    color.adjust($fg, $alpha: -0.95)
+  );
+  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border-radius: 10px;
+  padding: $spacing-sm;
+
+  entry {
+    menu {
+      @include menu;
+    }
+  }
+}
+
+.empty-label {
+  margin: $spacing-sm;
+  color: $red;
+  text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
+  font-style: italic;
+}
+
+.saved-network {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: $spacing-xs;
+  padding: $spacing-sm;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.9),
+      color.adjust($fg, $alpha: -0.94)
+    );
+    border-color: color.adjust($fg, $alpha: -0.88);
+  }
+
+  > label {
+    margin-left: $spacing-sm;
+  }
+}
+
+.bt-button-container {
+  margin: 0 $spacing-xs $spacing-sm $spacing-sm;
+}

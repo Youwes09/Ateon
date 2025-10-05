@@ -1,0 +1,70 @@
+@use "../../../../layouts" as *;
+@use "../../../../abstracts" as *;
+@use "sass:color";
+
+.mode-selector {
+  padding: $spacing-xs $spacing-md;
+  margin: 0 $spacing-sm;
+
+  .mode-button {
+    @include button;
+    background: transparent;
+    border: 1px solid color.adjust($fg, $alpha: -0.9);
+    border-radius: calc(#{$round} * 2);
+    padding: $spacing-sm $spacing-xs;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    @if not $darkmode {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    &:hover {
+      background: color.adjust($barBg, $lightness: if($darkmode, 3%, -3%));
+      border-color: color.adjust($fg, $alpha: -0.7);
+      transform: translateY(-1px);
+
+      @if not $darkmode {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    &.mode-button-active {
+      background: $buttonEnabled;
+      border-color: $primary;
+
+      @if not $darkmode {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .mode-icon {
+        color: color.adjust($primary, $lightness: if($darkmode, 15%, -15%));
+      }
+
+      .mode-label {
+        color: color.adjust($primary, $lightness: if($darkmode, 15%, -15%));
+        font-weight: 600;
+      }
+    }
+
+    .mode-icon {
+      @include material-icon;
+      font-size: 20px;
+      color: $fg;
+      transition: color 200ms ease;
+    }
+
+    .mode-label {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 500;
+      color: $fg;
+      transition: all 200ms ease;
+    }
+  }
+}
+
+.mode-stack {
+  // Smooth transitions between modes
+  & > box {
+    padding: 0 $spacing-sm;
+  }
+}

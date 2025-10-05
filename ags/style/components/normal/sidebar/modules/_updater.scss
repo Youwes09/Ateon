@@ -1,0 +1,580 @@
+@use "../../../../layouts" as *;
+@use "../../../../abstracts" as *;
+@use "sass:color";
+
+.updater-widget {
+  @include widget-container;
+  padding: 0;
+  border-radius: calc(#{$round} * 2);
+  background-color: color.adjust($barBg, $lightness: if($darkmode, 1%, -1%));
+  overflow: hidden;
+
+  /* ---------- Header ---------- */
+  .updater-header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
+    border-bottom: 1px solid color.adjust($fg, $alpha: -0.92);
+    background-color: color.adjust($barBg, $lightness: if($darkmode, 1%, -1%));
+    border-top-left-radius: calc(#{$round} * 2);
+    border-top-right-radius: calc(#{$round} * 2);
+    overflow: hidden;
+
+    .header-title {
+      font-size: calc(#{$font} * 1.1);
+      font-weight: 700;
+      color: $fg;
+      margin-right: auto;
+    }
+
+    .updater-nav {
+      display: flex;
+      gap: $spacing-xs;
+
+      .nav-mode-button {
+        padding: $spacing-xs calc(#{$spacing-sm} * 1.2);
+        border-radius: calc(#{$round} * 1.5);
+        background-color: transparent;
+        border: none;
+        transition: all 150ms ease;
+        min-width: 36px;
+        font-size: calc(#{$font} * 0.85);
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: color.adjust($fg, $alpha: -0.94);
+        }
+
+        &.active {
+          background-color: color.adjust($primary, $alpha: -0.88);
+          color: $primary;
+          font-weight: 600;
+        }
+
+        .icon-compact {
+          @include material-icon;
+          font-size: calc(#{$font} * 1.15);
+        }
+      }
+    }
+  }
+
+  /* ---------- Separator element (Gtk.Separator) ---------- */
+  separator {
+    background-color: color.adjust($fg, $alpha: -0.92);
+    margin: $spacing-md 0;
+    min-height: 1px;
+  }
+
+  /* ---------- Content ---------- */
+  .updater-content {
+    padding: $spacing-md;
+  }
+
+  /* ---------- Version info ---------- */
+  .version-info {
+    background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: calc(#{$round} * 1.5);
+    padding: $spacing-sm $spacing-md;
+    margin-bottom: $spacing-sm;
+    transition: all 150ms ease;
+
+    @if not $darkmode {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    &:hover {
+      background-color: color.adjust($barBg, $lightness: if($darkmode, 3%, -3%));
+      border-color: color.adjust($fg, $alpha: -0.88);
+
+      @if not $darkmode {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    .version-label {
+      font-size: calc(#{$font} * 0.9);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      min-width: 70px;
+    }
+
+    .version-value {
+      font-family: "JetBrainsMono Nerd Font", monospace;
+      font-size: calc(#{$font} * 0.9);
+      font-weight: 500;
+      color: $fg;
+    }
+  }
+
+  /* ---------- Status box ---------- */
+  .status-box {
+    background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: calc(#{$round} * 1.5);
+    padding: $spacing-sm $spacing-md;
+    transition: all 150ms ease;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+
+    @if not $darkmode {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .status-icon {
+      @include material-icon(20px);
+    }
+
+    .status-message {
+      font-size: calc(#{$font} * 0.9);
+      font-weight: 500;
+      color: color.adjust($fg, $alpha: -0.3);
+    }
+
+    &.status-idle {
+      .status-icon { color: color.adjust($fg, $alpha: -0.4); }
+      .status-message { color: color.adjust($fg, $alpha: -0.3); }
+    }
+
+    &.status-checking,
+    &.status-cloning,
+    &.status-copying,
+    &.status-installing {
+      border-color: color.adjust($primary, $alpha: -0.8);
+      background-color: color.adjust($primary, $alpha: -0.94);
+
+      .status-icon {
+        color: $primary;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .status-message { color: $primary; }
+    }
+
+    &.status-success {
+      border-color: color.adjust(#4ade80, $alpha: -0.8);
+      background-color: color.adjust(#4ade80, $alpha: -0.94);
+
+      .status-icon {
+        color: #4ade80;
+      }
+
+      .status-message {
+        color: #4ade80;
+        font-weight: 600;
+      }
+    }
+
+    &.status-error {
+      border-color: color.adjust($error, $alpha: -0.8);
+      background-color: color.adjust($error, $alpha: -0.94);
+
+      .status-icon {
+        color: $error;
+      }
+
+      .status-message {
+        color: $error;
+        font-weight: 600;
+      }
+    }
+  }
+
+  /* ---------- Action buttons ---------- */
+  .updater-button {
+    @include button;
+    border-radius: calc(#{$round} * 1.2);
+    padding: $spacing-sm $spacing-md;
+    font-weight: 600;
+    transition: all 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    .button-icon {
+      @include material-icon(18px);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    &-check {
+      background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+      border: 1px solid color.adjust($fg, $alpha: -0.92);
+      color: $fg;
+
+      @if not $darkmode {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .button-icon { color: color.adjust($fg, $alpha: -0.3); }
+
+      &:hover:not(:disabled) {
+        background-color: color.adjust($barBg, $lightness: if($darkmode, 3%, -3%));
+        border-color: color.adjust($fg, $alpha: -0.88);
+
+        @if not $darkmode {
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+      }
+    }
+
+    &-update {
+      background-color: color.adjust($primary, $alpha: -0.88);
+      border: 1px solid color.adjust($primary, $alpha: -0.8);
+      color: $primary;
+
+      .button-icon { color: $primary; }
+
+      &:hover:not(:disabled) {
+        background-color: color.adjust($primary, $alpha: -0.85);
+        border-color: color.adjust($primary, $alpha: -0.75);
+      }
+
+      &:active:not(:disabled) {
+        background-color: color.adjust($primary, $alpha: -0.82);
+      }
+    }
+  }
+
+  /* ---------- Config / Packages toggles ---------- */
+  .config-toggle-button {
+    @include button;
+    background-color: transparent;
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: calc(#{$round} * 1.2);
+    padding: $spacing-sm $spacing-md;
+    transition: all 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    .button-icon {
+      @include material-icon(18px);
+      color: color.adjust($fg, $alpha: -0.4);
+    }
+
+    &:hover {
+      background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+      border-color: color.adjust($fg, $alpha: -0.88);
+    }
+  }
+
+  /* ---------- Package categories ---------- */
+  .package-categories {
+    background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: calc(#{$round} * 1.5);
+    padding: $spacing-md;
+    margin-top: $spacing-sm;
+
+    @if not $darkmode {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .category-title {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: $spacing-sm;
+    }
+
+    .package-category {
+      background-color: color.adjust($barBg, $lightness: if($darkmode, 3%, -3%));
+      border: 1px solid color.adjust($fg, $alpha: -0.92);
+      border-radius: calc(#{$round} * 1.2);
+      padding: $spacing-sm;
+      margin: $spacing-xs 0;
+      transition: all 150ms ease;
+
+      &:hover {
+        background-color: color.adjust($barBg, $lightness: if($darkmode, 4%, -4%));
+        border-color: color.adjust($fg, $alpha: -0.88);
+      }
+
+      .category-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .category-name {
+          font-size: calc(#{$font} * 0.95);
+          font-weight: 600;
+          color: $fg;
+        }
+
+        .category-count {
+          font-size: calc(#{$font} * 0.8);
+          color: color.adjust($fg, $alpha: -0.5);
+          background-color: color.adjust($fg, $alpha: -0.94);
+          padding: 2px 8px;
+          border-radius: calc(#{$round});
+          border: 1px solid color.adjust($fg, $alpha: -0.92);
+        }
+      }
+
+      .package-list {
+        margin-top: $spacing-xs;
+
+        .package-item {
+          font-size: calc(#{$font} * 0.85);
+          color: color.adjust($fg, $alpha: -0.3);
+          font-family: "JetBrainsMono Nerd Font", monospace;
+          padding: 2px 0;
+        }
+      }
+    }
+
+    .package-summary {
+      margin-top: $spacing-sm;
+      background-color: color.adjust($primary, $alpha: -0.94);
+      border: 1px solid color.adjust($primary, $alpha: -0.88);
+      border-radius: calc(#{$round});
+      padding: $spacing-xs $spacing-sm;
+
+      .summary-text {
+        font-size: calc(#{$font} * 0.85);
+        font-weight: 600;
+        color: $primary;
+      }
+    }
+  }
+
+  /* ---------- Config list ---------- */
+  .config-list {
+    background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: calc(#{$round} * 1.5);
+    padding: $spacing-md;
+    margin-top: $spacing-sm;
+
+    @if not $darkmode {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .config-list-title {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: $spacing-sm;
+    }
+
+    .config-item {
+      background-color: color.adjust($barBg, $lightness: if($darkmode, 3%, -3%));
+      border: 1px solid color.adjust($fg, $alpha: -0.92);
+      border-radius: calc(#{$round});
+      padding: $spacing-sm $spacing-md;
+      margin: $spacing-xs 0;
+      transition: all 150ms ease;
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      justify-content: space-between;
+
+      @if not $darkmode {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      &:hover {
+        background-color: color.adjust($barBg, $lightness: if($darkmode, 4%, -4%));
+        border-color: color.adjust($fg, $alpha: -0.88);
+
+        @if not $darkmode {
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+      }
+
+      .config-name {
+        font-size: calc(#{$font} * 0.95);
+        font-weight: 600;
+        color: $fg;
+        margin-bottom: 2px;
+      }
+
+      .config-path {
+        font-size: calc(#{$font} * 0.75);
+        color: color.adjust($fg, $alpha: -0.5);
+        font-family: "JetBrainsMono Nerd Font", monospace;
+      }
+
+      .config-switch {
+        width: 44px;
+        height: 24px;
+        min-width: 44px;
+        min-height: 24px;
+        border-radius: 12px;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        -gtk-outline-radius: 12px;
+        background-color: color.adjust($fg, $alpha: -0.88);
+        transition: background-color 200ms ease;
+
+        @if not $darkmode {
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        slider {
+          width: 20px;
+          height: 20px;
+          min-width: 20px;
+          min-height: 20px;
+          border-radius: 10px;
+          margin: 2px;
+          margin-left: 2px;
+          margin-right: 22px;
+          background-color: if($darkmode, color.adjust($barBg, $lightness: 8%), white);
+          transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+          -gtk-outline-radius: 10px;
+
+          @if not $darkmode {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          } @else {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+          }
+        }
+
+        &:checked {
+          background-color: $primary;
+
+          slider {
+            background-color: white;
+            margin-left: 22px;
+            margin-right: 2px;
+
+            @if not $darkmode {
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+            }
+          }
+        }
+
+        &:hover {
+          background-color: color.adjust($fg, $alpha: -0.85);
+
+          &:checked {
+            background-color: color.adjust($primary, $lightness: if($darkmode, 5%, -5%));
+          }
+        }
+      }
+    }
+
+    .config-summary {
+      margin-top: $spacing-sm;
+      background-color: color.adjust($primary, $alpha: -0.94);
+      border: 1px solid color.adjust($primary, $alpha: -0.88);
+      border-radius: calc(#{$round});
+      padding: $spacing-xs $spacing-sm;
+
+      .summary-text {
+        font-size: calc(#{$font} * 0.85);
+        font-weight: 600;
+        color: $primary;
+      }
+    }
+  }
+
+  /* ---------- Config info (repo / branch) ---------- */
+  .config-info {
+    background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border-radius: calc(#{$round} * 1.5);
+    padding: $spacing-sm $spacing-md;
+    margin-top: $spacing-sm;
+
+    @if not $darkmode {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .config-title {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 600;
+      color: color.adjust($fg, $alpha: -0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: $spacing-xs;
+    }
+
+    .config-detail {
+      font-size: calc(#{$font} * 0.85);
+      color: color.adjust($fg, $alpha: -0.3);
+      font-family: "JetBrainsMono Nerd Font", monospace;
+    }
+  }
+
+  /* ---------- Config error ---------- */
+  .config-error {
+    background-color: color.adjust($error, $alpha: -0.94);
+    border: 1px solid color.adjust($error, $alpha: -0.85);
+    border-radius: calc(#{$round} * 1.5);
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+
+    .config-icon {
+      @include material-icon(48px);
+      color: $error;
+      margin-bottom: $spacing-xs;
+    }
+
+    .config-error-text {
+      font-size: $font;
+      font-weight: 600;
+      color: $error;
+      margin-bottom: $spacing-xs;
+    }
+
+    .config-error-hint {
+      font-size: calc(#{$font} * 0.85);
+      color: color.adjust($error, $alpha: -0.3);
+      font-family: "JetBrainsMono Nerd Font", monospace;
+      text-align: center;
+    }
+  }
+}
+
+/* ---------- Utilities & animations ---------- */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* material-icon mixin (keeps icon sizing consistent) */
+@mixin material-icon($size: 1em) {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: $size;
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
+  -moz-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+}
+
+/* icon-compact used by multiple labels inside the component */
+.icon-compact {
+  @include material-icon;
+  font-size: calc(#{$font} * 1.3);
+  color: color.adjust($fg, $alpha: -0.5);
+  transition: all 150ms ease;
+}

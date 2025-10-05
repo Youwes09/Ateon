@@ -13,6 +13,7 @@ const options = await (async () => {
   const config = initializeConfig(
     `${GLib.get_user_config_dir()}/ags/configs/config.json`,
     {
+      "theme.style": defineOption("normal", { useCache: true }),
       "app.browser": defineOption("firefox"),
       "app.file-manager": defineOption("nautilus"),
       "app.resource-monitor": defineOption("resources"),
@@ -63,12 +64,12 @@ const options = await (async () => {
       "dock.pinned-apps": defineOption([
         { name: "Firefox", icon: "firefox", class: "firefox" },
         { name: "Code", icon: "code", class: "Code" },
-        { name: "Terminal", icon: "utilities-terminal", class: "kitty" },
+        { name: "Terminal", icon: "utilities-terminal", class: "foot" },
         { name: "Files", icon: "system-file-manager", class: "org.gnome.Nautilus" },
         { name: "Discord", icon: "discord", class: "discord" },
         { name: "Obsidian", icon: "obsidian", class: "obsidian" },
         { name: "Spotify", icon: "spotify", class: "Spotify" },
-        { name: "Slack", icon: "slack", class: "Slack" },
+        { name: "VLC", icon: "vlc", class: "vlc" },
       ]),
     },
   );

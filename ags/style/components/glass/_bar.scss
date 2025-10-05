@@ -1,0 +1,415 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+/* general */
+/* Base bar styles */
+.Bar {
+  border-radius: calc(#{$round} * 4);
+  font-size: $font;
+
+  cava {
+    opacity: 0.1;
+    margin: 0 -0.5rem;
+  }
+
+  .module {
+    margin: 0 $spacing-sm;
+  }
+
+  /* OS Icon */
+  .OsIcon {
+    -gtk-icon-size: 2rem;
+    margin-left: 0.8rem;
+    margin-right: -0.5rem;
+    color: $os;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Hyperland */
+  .Workspaces {
+    margin: 0.4rem 0.8rem;
+
+    button {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.88),
+        color.adjust($fg, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.85);
+      border-radius: 0.7rem;
+      margin: 0.6rem 0.35rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.82),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.87),
+          transparent
+        );
+        border-radius: 0.7rem 0.7rem 0 0;
+        pointer-events: none;
+      }
+    }
+
+    .focused {
+      min-width: 2.5rem;
+    }
+
+    .monitor0 {
+      @include hypr-workspace-style($primaryMon, $primaryMonHover);
+    }
+
+    .monitor1 {
+      @include hypr-workspace-style($secondaryMon, $secondaryMonHover);
+    }
+
+    .monitor2 {
+      @include hypr-workspace-style($tertiaryMon, $tertiaryMonHover);
+    }
+
+    .monitor3 {
+      @include hypr-workspace-style($fourthMon, $fourthMonHover);
+    }
+  }
+
+  /* music */
+  .Media {
+    & > box {
+      border-radius: $round2;
+      margin: $spacing-sm;
+      font-size: $font;
+      transition: all 0.2s ease;
+      
+      cava {
+        opacity: 0.3;
+      }
+    }
+
+    &.active > box {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.88),
+        color.adjust($primary, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($primary, $alpha: -0.8);
+      border-radius: $round2;
+      padding: 4px 8px;
+      box-shadow: 
+        0 2px 8px color.adjust($primary, $alpha: -0.85),
+        0 0 15px color.adjust($primary, $alpha: -0.9),
+        inset 0 1px 1px color.adjust($primary, $alpha: -0.85, $lightness: 8%);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.85, $lightness: 10%),
+          transparent
+        );
+        border-radius: $round2 $round2 0 0;
+        pointer-events: none;
+      }
+    }
+
+    .cover {
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      min-width: 2.5rem;
+      min-height: 2rem;
+      margin: 0.1rem $spacing-sm;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* tray */
+  .SysTray {
+    background: none;
+    
+    image {
+      -gtk-icon-size: $font;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    .tray-item {
+      margin: 0rem 0.3rem;
+      transition: all 0.2s ease;
+      border-radius: 6px;
+      padding: 4px;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.92),
+          color.adjust($fg, $alpha: -0.95)
+        );
+      }
+    }
+
+    &:not(:last-child) {
+      margin-right: -0.3rem;
+    }
+
+    &.active {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.88),
+        color.adjust($primary, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($primary, $alpha: -0.8);
+      border-radius: 8px;
+      padding: 4px 6px;
+      box-shadow: 
+        0 2px 6px color.adjust($primary, $alpha: -0.85),
+        0 0 12px color.adjust($primary, $alpha: -0.9);
+    }
+  }
+
+  /* hw-monitor */
+  .bar-hw-ram-box {
+    @include hw-monitor-box($ramProc);
+  }
+  .bar-hw-cpu-box {
+    @include hw-monitor-box($cpuProc, 1px 0px 0px 1px, 1.3rem);
+  }
+
+  /* System menu */
+  .system-menu-toggler {
+    box {
+      margin: 0.4rem 0;
+      border-radius: $round2;
+      -gtk-icon-size: $font;
+      transition: all 0.2s ease;
+      padding: 6px 10px;
+    }
+
+    &.active box {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.88),
+        color.adjust($primary, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($primary, $alpha: -0.8);
+      box-shadow: 
+        0 2px 8px color.adjust($primary, $alpha: -0.85),
+        0 0 15px color.adjust($primary, $alpha: -0.9),
+        inset 0 1px 1px color.adjust($primary, $alpha: -0.85, $lightness: 8%);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.85, $lightness: 10%),
+          transparent
+        );
+        border-radius: $round2 $round2 0 0;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .separator {
+    font-size: 1.8rem;
+    color: color.adjust($fg, $alpha: -0.7);
+    opacity: 0.5;
+  }
+
+  .clock {
+    margin: 0 1.2rem 0 $spacing-sm;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .power-button {
+    margin: 0 1.2rem 0 0rem;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    padding: 4px 8px;
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        color.adjust($error, $alpha: -0.88),
+        color.adjust($error, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($error, $alpha: -0.8);
+      box-shadow: 
+        0 2px 6px color.adjust($error, $alpha: -0.85),
+        0 0 12px color.adjust($error, $alpha: -0.9);
+    }
+  }
+}
+
+/* Floating elements style */
+.bar-style-floating {
+  .centerbox > box {
+    background: linear-gradient(
+      to bottom,
+      color.adjust($bg, $alpha: -0.1, $lightness: 8%),
+      color.adjust($bg, $alpha: -0.2, $lightness: 2%)
+    );
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid color.adjust($fg, $alpha: -0.82);
+    border-radius: calc(#{$round} * 4);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 color.adjust($fg, $alpha: -0.88),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    padding: 0 0.5rem;
+    margin: 0 0.3rem;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.92),
+        transparent
+      );
+      border-radius: calc(#{$round} * 4) calc(#{$round} * 4) 0 0;
+      pointer-events: none;
+    }
+  }
+}
+
+/* Full-width style */
+.bar-style-expanded {
+  background: linear-gradient(
+    to bottom,
+    color.adjust($bg, $alpha: -0.1, $lightness: 8%),
+    color.adjust($bg, $alpha: -0.2, $lightness: 2%)
+  );
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid color.adjust($fg, $alpha: -0.82);
+  border-radius: calc(#{$round} * 4);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.88),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  padding: 0 0.5rem;
+  margin: 0 0.3rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.92),
+      transparent
+    );
+    border-radius: calc(#{$round} * 4) calc(#{$round} * 4) 0 0;
+    pointer-events: none;
+  }
+}
+
+/* Beveled style */
+.bar-style-beveled {
+  background: linear-gradient(
+    135deg,
+    color.adjust($bg, $alpha: -0.08, $lightness: 6%),
+    color.adjust($bg, $alpha: -0.15, $lightness: 2%)
+  );
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid color.adjust($fg, $alpha: -0.82);
+  border-radius: 0.8rem;
+  box-shadow: 
+    0 6px 24px rgba(0, 0, 0, 0.35),
+    0 3px 10px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.88),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  padding: 0 0.5rem;
+  margin: 0 0.3rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.92),
+      transparent
+    );
+    border-radius: 0.8rem 0.8rem 0 0;
+    pointer-events: none;
+  }
+}
+
+/* Corner-integrated style */
+.bar-style-corners {
+  background: linear-gradient(
+    to bottom,
+    color.adjust($bg, $alpha: -0.05, $lightness: 6%),
+    color.adjust($bg, $alpha: -0.12, $lightness: 2%)
+  );
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-radius: 0;
+  border-bottom: 1px solid color.adjust($fg, $alpha: -0.85);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.9);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.94),
+      transparent
+    );
+    pointer-events: none;
+  }
+}

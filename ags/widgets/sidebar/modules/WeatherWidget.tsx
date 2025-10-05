@@ -9,7 +9,7 @@ import {
 } from "utils/weather";
 
 /** ---------- Components ---------- **/
-interface ExtraWeatherInfoProps {
+interface StatItemProps {
   icon: string;
   value: string;
 }
@@ -18,29 +18,31 @@ interface ForecastItemProps {
   block: WeatherCondition;
 }
 
-function ExtraWeatherInfoBox({ icon, value }: ExtraWeatherInfoProps) {
+function StatItem({ icon, value }: StatItemProps) {
   return (
     <box
+      class="stat-item"
       orientation={Gtk.Orientation.HORIZONTAL}
       spacing={10}
       halign={Gtk.Align.FILL}
-      valign={Gtk.Align.CENTER}
     >
-      <label label={icon} class={"weather-extra-icon"} />
+      <label label={icon} class="weather-extra-icon" />
       <label label={value} hexpand halign={Gtk.Align.END} />
     </box>
   );
 }
+
 function ForecastItem({ block }: ForecastItemProps) {
   const icon = getIcon(block.weatherDesc?.[0]?.value ?? "");
-  const temp = block.tempC ?? "?"; // Use tempC from API
+  const temp = block.tempC ?? "?";
   const time = formatBlockTime(block.time ?? "0");
 
   return (
     <box
       class="forecast-item"
       orientation={Gtk.Orientation.VERTICAL}
-      spacing={2}
+      spacing={4}
+      halign={Gtk.Align.CENTER}
     >
       <label label={time} class="forecast-hour" />
       <label label={icon} class="forecast-icon" />
@@ -55,76 +57,110 @@ export default function WeatherWidget() {
     <box
       class="weather-widget"
       orientation={Gtk.Orientation.VERTICAL}
-      spacing={6}
+      spacing={0}
     >
       <With value={WeatherService.weather}>
         {(data) => {
           if (!data || !data.current) {
             return (
-              <label label="Loading weather..." halign={Gtk.Align.CENTER} />
+              <box class="weather-loading" halign={Gtk.Align.CENTER}>
+                <label label="Loading weather..." />
+              </box>
             );
           }
 
           const current = data.current;
           const today = data.forecast?.[0];
-          const forecastItems = today.hourly
-            .slice(0, 5)
-            .map((block) => <ForecastItem block={block} />);
+          
+          // Extract location from nearest_area if available
+          const nearestArea = (data as any).nearest_area?.[0];
+          const location = nearestArea
+            ? [
+                nearestArea.areaName?.[0]?.value,
+                nearestArea.region?.[0]?.value || nearestArea.country?.[0]?.value
+              ].filter(Boolean).join(", ")
+            : "Unknown Location";
+          
+          // Get forecast items
+          const forecastItems = today?.hourly
+            ?.slice(0, 5)
+            .map((block) => <ForecastItem block={block} />) || [];
 
+          // Current weather data
           const currentIcon = getIcon(current.weatherDesc?.[0]?.value ?? "");
           const currentTemp = current.tempC ?? "?";
+          const feelsLike = current.FeelsLikeC ?? "?";
           const wind = current.windspeedKmph ?? "?";
-          const rainPct = current.precipitation ?? current.humidity ?? "?";
-          const extraWeatherData = [
-            { icon: "Thermometer", value: `${currentTemp}°C` },
-            { icon: "Air", value: `${wind} km/h` },
-            { icon: "Rainy", value: `${rainPct}%` },
+          const humidity = current.humidity ?? "?";
+          const weatherDesc = current.weatherDesc?.[0]?.value ?? "Unknown";
+
+          const statsData = [
+            { icon: "Device_Thermostat", value: `Feels like ${feelsLike}°C` },
+            { icon: "Air", value: `Wind ${wind} km/h` },
+            { icon: "Water_Drop", value: `Humidity ${humidity}%` },
           ];
 
           return (
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={6}>
-              {/* Current weather */}
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={0}>
+              {/* Location Header */}
+              <box
+                class="weather-location"
+                orientation={Gtk.Orientation.HORIZONTAL}
+                spacing={8}
+                halign={Gtk.Align.CENTER}
+              >
+                <label label="Location_On" class="location-icon" />
+                <label label={location} class="location-text" />
+              </box>
+
+              {/* Current Weather */}
               <box
                 class="current-weather"
-                orientation={Gtk.Orientation.HORIZONTAL}
-                spacing={16}
-                valign={Gtk.Align.CENTER}
+                orientation={Gtk.Orientation.VERTICAL}
+                spacing={0}
               >
+                {/* Main temp and icon */}
                 <box
                   orientation={Gtk.Orientation.VERTICAL}
-                  halign={Gtk.Align.START}
-                  spacing={2}
+                  halign={Gtk.Align.CENTER}
+                  spacing={4}
                 >
                   <label label={currentIcon} class="current-icon" />
                   <label
-                    label={current.weatherDesc?.[0]?.value ?? "Unknown"}
+                    label={`${currentTemp}°C`}
+                    class="weather-temp"
+                    halign={Gtk.Align.CENTER}
+                  />
+                  <label
+                    label={weatherDesc}
+                    class="weather-desc"
                     halign={Gtk.Align.CENTER}
                   />
                 </box>
 
+                {/* Weather Stats */}
                 <box
+                  class="weather-stats"
                   orientation={Gtk.Orientation.VERTICAL}
-                  hexpand
-                  valign={Gtk.Align.CENTER}
-                  halign={Gtk.Align.END}
-                  spacing={2}
+                  spacing={4}
                 >
-                  {extraWeatherData.map((item) => (
-                    <ExtraWeatherInfoBox icon={item.icon} value={item.value} />
+                  {statsData.map((stat) => (
+                    <StatItem icon={stat.icon} value={stat.value} />
                   ))}
                 </box>
               </box>
 
-              <Gtk.Separator
-                orientation={Gtk.Orientation.HORIZONTAL}
-                halign={Gtk.Align.FILL}
-                valign={Gtk.Align.CENTER}
-              />
-
-              {/* Forecast Row */}
-              <box class="forecast-row" spacing={16} halign={Gtk.Align.CENTER}>
-                {forecastItems}
-              </box>
+              {/* Forecast */}
+              {forecastItems.length > 0 && (
+                <box 
+                  class="forecast-row" 
+                  orientation={Gtk.Orientation.HORIZONTAL}
+                  spacing={8} 
+                  halign={Gtk.Align.CENTER}
+                >
+                  {forecastItems}
+                </box>
+              )}
             </box>
           );
         }}

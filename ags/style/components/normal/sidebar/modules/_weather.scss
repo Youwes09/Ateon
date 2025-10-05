@@ -1,0 +1,131 @@
+@use "../../../../layouts" as *;
+@use "../../../../abstracts" as *;
+@use "sass:color";
+
+.weather-widget {
+  @include widget-container;
+  padding: $spacing-md;
+  border-radius: calc(#{$round} * 2);
+  background-color: color.adjust($barBg, $lightness: if($darkmode, 2%, -2%));
+
+  @if not $darkmode {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  /** ---------- Location Header ---------- **/
+  .weather-location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-md;
+    color: $fg;
+
+    .location-icon {
+      @include material-icon(20px);
+      margin-right: $spacing-xs;
+      color: color.adjust($fg, $alpha: -0.3);
+    }
+
+    .location-text {
+      font-size: calc(#{$font} * 0.95);
+      font-weight: 500;
+      color: $fg;
+      text-align: center;
+    }
+  }
+
+  /** ---------- Current Weather ---------- **/
+  .current-weather {
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid color.adjust($fg, $alpha: -0.92);
+    margin-bottom: $spacing-md;
+
+    .current-icon {
+      @include material-icon(72px);
+      min-width: 72px;
+      min-height: 72px;
+      color: $fg;
+      margin-bottom: $spacing-sm;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    .weather-temp {
+      font-size: calc(#{$font} * 1.4);
+      font-weight: 700;
+      color: $fg;
+      margin-bottom: $spacing-xs;
+    }
+
+    .weather-desc {
+      font-size: calc(#{$font} * 0.95);
+      color: color.adjust($fg, $alpha: -0.4);
+      margin-bottom: $spacing-xs;
+    }
+
+    /** ---------- Weather Stats ---------- **/
+    .weather-stats {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $spacing-xs 0;
+
+        .weather-extra-icon {
+          @include material-icon(20px);
+          color: color.adjust($fg, $alpha: -0.5);
+          margin-right: $spacing-sm;
+        }
+
+        label {
+          font-size: calc(#{$font} * 0.9);
+          color: color.adjust($fg, $alpha: -0.5);
+        }
+      }
+    }
+  }
+
+  /** ---------- Forecast Section ---------- **/
+  .forecast-row {
+    margin-top: $spacing-md;
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+
+    .forecast-item {
+      min-width: 3.2rem;
+      padding: $spacing-xs;
+      border-radius: calc(#{$round} * 1.2);
+      transition: background-color 120ms ease;
+
+      &:hover {
+        background-color: color.adjust($barBg, $lightness: if($darkmode, 3%, -3%));
+
+        @if not $darkmode {
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+      }
+
+      .forecast-hour {
+        font-size: calc(#{$font} * 0.85);
+        color: color.adjust($fg, $alpha: -0.4);
+        margin-bottom: $spacing-xs;
+      }
+
+      .forecast-icon {
+        @include material-icon(28px);
+        margin: $spacing-xs 0;
+        color: $fg;
+      }
+
+      .forecast-temp {
+        font-size: calc(#{$font} * 0.95);
+        font-weight: 500;
+        color: $fg;
+      }
+    }
+  }
+}

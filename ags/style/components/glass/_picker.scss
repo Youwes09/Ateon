@@ -1,0 +1,640 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+box.picker {
+  @include window;
+
+  box.search {
+    background: linear-gradient(
+      135deg,
+      color.adjust($primary, $alpha: -0.82),
+      color.adjust($primary, $alpha: -0.88)
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid color.adjust($primary, $alpha: -0.75);
+    border-radius: 16px;
+    margin: 1rem 0.5rem;
+    padding: 8px 12px;
+    box-shadow: 
+      0 4px 16px color.adjust($primary, $alpha: -0.75),
+      0 0 30px color.adjust($primary, $alpha: -0.88),
+      inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+
+    // Glass reflection effect
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($primary, $alpha: -0.8, $lightness: 12%),
+        transparent
+      );
+      border-radius: 16px 16px 0 0;
+      pointer-events: none;
+    }
+
+    label {
+      @include material-icon(2rem);
+      margin: 0.3rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    entry {
+      font-size: 1.5rem;
+      margin: $spacing-xs;
+      background: transparent;
+      border: none;
+      position: relative;
+      z-index: 1;
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+
+      menu {
+        @include menu;
+      }
+    }
+  }
+
+  box.results-list {
+    background: linear-gradient(
+      135deg,
+      color.adjust($bg, $alpha: -0.12, $lightness: 6%),
+      color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    );
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 16px;
+    padding: 6px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 4px 12px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+
+    // Glass reflection effect
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.95),
+        transparent
+      );
+      border-radius: 16px 16px 0 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-button {
+      padding: 0.5rem 0.6rem;
+      margin: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 1;
+
+      .action-icon {
+        @include material-icon;
+      }
+
+      image {
+        -gtk-icon-size: 3rem;
+        margin-right: 0.5rem;
+        margin-left: 0.3rem;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+      }
+
+      label.name {
+        font-weight: bold;
+        font-size: $font;
+      }
+
+      label.description {
+        color: color.adjust($fg, $alpha: -0.3);
+      }
+
+      &:focus,
+      &:hover,
+      &.selected {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.85),
+          color.adjust($primary, $alpha: -0.9)
+        );
+        border: 1px solid color.adjust($primary, $alpha: -0.75);
+        border-radius: 12px;
+        box-shadow: 
+          0 2px 10px color.adjust($primary, $alpha: -0.8),
+          0 0 20px color.adjust($primary, $alpha: -0.88),
+          inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 50%;
+          background: linear-gradient(
+            to bottom,
+            color.adjust($primary, $alpha: -0.82, $lightness: 12%),
+            transparent
+          );
+          border-radius: 12px 12px 0 0;
+          pointer-events: none;
+        }
+
+        label.name {
+          color: $primary;
+        }
+      }
+    }
+
+    .action-button {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.88),
+        color.adjust($fg, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.85);
+      border-radius: 20px;
+      padding: 0 0.8rem;
+      margin: 2px;
+      transition: all 0.2s ease;
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.82);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.87),
+          transparent
+        );
+        border-radius: 20px 20px 0 0;
+        pointer-events: none;
+      }
+
+      .action-icon {
+        @include material-icon;
+      }
+
+      &:focus,
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.82),
+          color.adjust($primary, $alpha: -0.88)
+        );
+        border-color: color.adjust($primary, $alpha: -0.75);
+        box-shadow: 
+          0 2px 10px color.adjust($primary, $alpha: -0.8),
+          0 0 20px color.adjust($primary, $alpha: -0.88),
+          inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+        
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            color.adjust($primary, $alpha: -0.8, $lightness: 10%),
+            transparent
+          );
+        }
+      }
+    }
+  }
+
+  // Wallpaper grid styles
+  box.results-grid {
+    background: linear-gradient(
+      135deg,
+      color.adjust($bg, $alpha: -0.12, $lightness: 6%),
+      color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    );
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 16px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 4px 12px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+
+    // Glass reflection effect
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.95),
+        transparent
+      );
+      border-radius: 16px 16px 0 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wallpaper-thumbnail {
+      border-radius: 12px;
+      padding: 0.6rem;
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.94),
+        color.adjust($fg, $alpha: -0.96)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.9);
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
+
+      &:hover,
+      &:focus,
+      &.selected {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.88),
+          color.adjust($primary, $alpha: -0.92)
+        );
+        border-color: color.adjust($primary, $alpha: -0.75);
+        box-shadow: 
+          0 4px 12px color.adjust($primary, $alpha: -0.8),
+          0 0 20px color.adjust($primary, $alpha: -0.88),
+          inset 0 1px 1px color.adjust($primary, $alpha: -0.85, $lightness: 8%);
+        transform: translateY(-2px);
+      }
+
+      box.wallpaper-preview-container {
+        border-radius: 8px;
+        border: 1px solid color.adjust($fg, $alpha: -0.88);
+        min-width: 140px;
+        min-height: 100px;
+        background-color: color.adjust($fg, $alpha: -0.92);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.12),
+          inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+        overflow: hidden;
+      }
+
+      .wallpaper-picture {
+        border-radius: 8px;
+      }
+
+      box.wallpaper-placeholder {
+        border-radius: 8px;
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.92),
+          color.adjust($fg, $alpha: -0.95)
+        );
+        min-width: 140px;
+        min-height: 100px;
+        border: 1px solid color.adjust($fg, $alpha: -0.88);
+      }
+
+      .wallpaper-name {
+        color: color.adjust($fg, $alpha: -0.1);
+        margin-top: 0.3rem;
+        font-weight: 500;
+        font-size: 0.85rem;
+      }
+    }
+
+    box.wallpaper-content {
+      padding: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    box.wallpaper-row {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  box.not-found {
+    padding: 1.5rem;
+    background: transparent;
+    margin: 1rem;
+
+    image {
+      -gtk-icon-size: 6rem;
+      color: color.adjust($fg, $alpha: -0.4);
+      opacity: 0.6;
+    }
+
+    label {
+      color: color.adjust($fg, $alpha: -0.2);
+      font-size: 1.2em;
+      font-weight: 500;
+    }
+  }
+}
+
+// Mode bar styles
+.mode-bar {
+  padding: 8px 12px;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.94),
+    color.adjust($fg, $alpha: -0.96)
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 14px;
+  border: 1px solid color.adjust($fg, $alpha: -0.9);
+  margin: 8px;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
+
+  .mode-button {
+    border-radius: 10px;
+    padding: 6px 14px;
+    margin: 0 3px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.92),
+        transparent
+      );
+      border-radius: 10px 10px 0 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .mode-icon {
+      @include material-icon;
+    }
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.88),
+        color.adjust($fg, $alpha: -0.92)
+      );
+      border-color: color.adjust($fg, $alpha: -0.85);
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &.active {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.82),
+        color.adjust($primary, $alpha: -0.88)
+      );
+      border-color: color.adjust($primary, $alpha: -0.7);
+      box-shadow: 
+        0 2px 10px color.adjust($primary, $alpha: -0.75),
+        0 0 20px color.adjust($primary, $alpha: -0.88),
+        inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+
+      &::before {
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.8, $lightness: 12%),
+          transparent
+        );
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.action-bar {
+  padding: $spacing-sm;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.94),
+    color.adjust($fg, $alpha: -0.96)
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 14px;
+  border: 1px solid color.adjust($fg, $alpha: -0.9);
+  margin: 8px;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
+
+  .action-icon {
+    @include material-icon;
+  }
+
+  .action-button {
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.88),
+      color.adjust($fg, $alpha: -0.92)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.85);
+    border-radius: 20px;
+    padding: 0.3rem 0.6rem;
+    transition: all 0.2s ease;
+    box-shadow: 
+      0 2px 6px rgba(0, 0, 0, 0.1),
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.82);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.87),
+        transparent
+      );
+      border-radius: 20px 20px 0 0;
+      pointer-events: none;
+    }
+
+    &:focus,
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.82),
+        color.adjust($primary, $alpha: -0.88)
+      );
+      border-color: color.adjust($primary, $alpha: -0.75);
+      box-shadow: 
+        0 2px 10px color.adjust($primary, $alpha: -0.8),
+        0 0 20px color.adjust($primary, $alpha: -0.88),
+        inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+
+      &::before {
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.8, $lightness: 10%),
+          transparent
+        );
+      }
+    }
+  }
+}
+
+.command-suggestions {
+  background: linear-gradient(
+    135deg,
+    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
+    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+  );
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border-radius: 16px;
+  padding: 6px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  // Glass reflection effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      color.adjust($fg, $alpha: -0.95),
+      transparent
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .command-item {
+    padding: 0.5rem 0.6rem;
+    margin: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
+
+    .command-icon {
+      @include material-icon(3rem);
+      color: color.adjust($fg, $alpha: -0.3);
+      margin-right: 0.5rem;
+      margin-left: 0.3rem;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    .command-name {
+      font-weight: bold;
+      color: $primary;
+      font-size: $font;
+    }
+
+    .command-description {
+      color: color.adjust($fg, $alpha: -0.3);
+    }
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.85),
+        color.adjust($primary, $alpha: -0.9)
+      );
+      border: 1px solid color.adjust($primary, $alpha: -0.75);
+      border-radius: 12px;
+      box-shadow: 
+        0 2px 10px color.adjust($primary, $alpha: -0.8),
+        0 0 20px color.adjust($primary, $alpha: -0.88),
+        inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.82, $lightness: 12%),
+          transparent
+        );
+        border-radius: 12px 12px 0 0;
+        pointer-events: none;
+      }
+
+      .command-name {
+        color: $primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,159 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+box.logout-background {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  .logout-menu {
+    background: linear-gradient(
+      135deg,
+      color.adjust($primary, $alpha: -0.92, $lightness: 5%),
+      color.adjust($bg, $alpha: -0.2, $lightness: 2%)
+    );
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid color.adjust($primary, $alpha: -0.88);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 8px 20px rgba(0, 0, 0, 0.3),
+      0 0 40px color.adjust($primary, $alpha: -0.85),
+      inset 0 1px 0 color.adjust($primary, $alpha: -0.92),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    
+    // Glass reflection effect
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($primary, $alpha: -0.95),
+        transparent
+      );
+      border-radius: 24px 24px 0 0;
+      pointer-events: none;
+    }
+    
+    button {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.88),
+        color.adjust($fg, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.85);
+      border-radius: 18px;
+      margin: 0.75rem;
+      padding: 1.5rem 2rem;
+      min-width: 180px;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.82),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      
+      // Glass shine effect
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: linear-gradient(
+          to bottom,
+          color.adjust($fg, $alpha: -0.87),
+          transparent
+        );
+        border-radius: 18px 18px 0 0;
+        pointer-events: none;
+        transition: height 0.3s ease;
+      }
+      
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.84),
+          color.adjust($fg, $alpha: -0.88)
+        );
+        transform: translateY(-2px);
+        box-shadow: 
+          0 6px 16px rgba(0, 0, 0, 0.25),
+          inset 0 1px 2px color.adjust($fg, $alpha: -0.78),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+        border-color: color.adjust($fg, $alpha: -0.8);
+        
+        &::before {
+          height: 50%;
+          background: linear-gradient(
+            to bottom,
+            color.adjust($fg, $alpha: -0.82),
+            transparent
+          );
+        }
+        
+        label {
+          transform: scale(1.05);
+        }
+      }
+      
+      &:active {
+        transform: translateY(0);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.2),
+          inset 0 1px 1px color.adjust($fg, $alpha: -0.85),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+      }
+      
+      &:focus {
+        background: linear-gradient(
+          135deg,
+          color.adjust($primary, $alpha: -0.82),
+          color.adjust($primary, $alpha: -0.88)
+        );
+        border-color: color.adjust($primary, $alpha: -0.75);
+        box-shadow: 
+          0 0 0 3px color.adjust($primary, $alpha: -0.9),
+          0 6px 16px rgba(0, 0, 0, 0.25),
+          0 0 30px color.adjust($primary, $alpha: -0.75),
+          inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+        
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            color.adjust($primary, $alpha: -0.8, $lightness: 10%),
+            transparent
+          );
+        }
+      }
+      
+      label {
+        font-family: "Material Symbols Outlined";
+        font-size: 3rem;
+        margin: 0 1rem;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        font-weight: normal;
+        font-style: normal;
+      }
+    }
+  }
+}
+
+// Optional: Add spacing between buttons if they're in a box/flow
+box.logout-menu {
+  button + button {
+    margin-left: 0.5rem;
+  }
+}

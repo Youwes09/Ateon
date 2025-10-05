@@ -3,6 +3,7 @@ import { exec } from "ags/process";
 import { monitorFile } from "ags/file";
 import GLib from "gi://GLib?version=2.0";
 import { picker } from "utils/picker";
+import options from "options.ts";
 // Widgets
 import {
   Bar,
@@ -17,16 +18,30 @@ import {
   WindowSwitcher,
   Dock,
 } from "./widgets";
-// Style paths
-const scss = `${GLib.get_user_config_dir()}/ags/style/main.scss`;
-const css = `${GLib.get_user_config_dir()}/ags/style/main.css`;
-const icons = `${GLib.get_user_config_dir()}/ags/assets/icons`;
-const styleDirectories = ["abstracts", "components", "layouts", "base"];
+
+const configDir = GLib.get_user_config_dir();
+const baseScss = `${configDir}/ags/style/main.scss`;
+const css = `${configDir}/ags/style/main.css`;
+const icons = `${configDir}/ags/assets/icons`;
+const styleDirectories = ["abstracts", "layouts", "base"];
+
+function getComponentsPath() {
+  const themeStyle = options["theme.style"].get();
+  return `${configDir}/ags/style/components/${themeStyle}`;
+}
+
 function reloadCss() {
-  console.log("scss change detected - recompiling...");
-  exec(`sass ${scss} ${css}`);
+  const componentsPath = getComponentsPath();
+  console.log(`Recompiling SCSS with theme: ${options["theme.style"].get()}`);
+  console.log(`Components path: ${componentsPath}`);
+  
+  // Add quotes around paths to handle spaces and ensure proper execution
+  const command = `sass --load-path="${componentsPath}" "${baseScss}" "${css}"`;
+  console.log(`Running: ${command}`);
+  exec(command);
   app.apply_css(css);
 }
+
 app.start({
   icons,
   css,
@@ -67,11 +82,29 @@ app.start({
     }
   },
   main() {
-    // Compile & watch SCSS
-    exec(`sass ${scss} ${css}`);
+    // Initial compilation with theme path
+    const componentsPath = getComponentsPath();
+    console.log(`Initial compilation with theme: ${options["theme.style"].get()}`);
+    console.log(`Components path: ${componentsPath}`);
+    const command = `sass --load-path="${componentsPath}" "${baseScss}" "${css}"`;
+    console.log(`Running: ${command}`);
+    exec(command);
+    
+    // Watch style directories
     styleDirectories.forEach((dir) =>
-      monitorFile(`${GLib.get_user_config_dir()}/ags/style/${dir}`, reloadCss),
+      monitorFile(`${configDir}/ags/style/${dir}`, reloadCss),
     );
+    
+    // Watch both theme directories
+    monitorFile(`${configDir}/ags/style/components/normal`, reloadCss);
+    monitorFile(`${configDir}/ags/style/components/glass`, reloadCss);
+    
+    // Watch for theme option changes
+    options["theme.style"].subscribe((newTheme) => {
+      console.log(`Theme switched to: ${newTheme}`);
+      reloadCss();
+    });
+    
     // Initialize widgets
     Bar();
     Notifications();

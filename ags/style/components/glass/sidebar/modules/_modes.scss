@@ -1,0 +1,111 @@
+@use "../../../../layouts" as *;
+@use "../../../../abstracts" as *;
+@use "sass:color";
+
+.mode-selector {
+  padding: $spacing-xs $spacing-md;
+  margin: 0 $spacing-sm;
+
+  .mode-button {
+    @include button;
+    background: linear-gradient(
+      135deg,
+      color.adjust($fg, $alpha: -0.92),
+      color.adjust($fg, $alpha: -0.95)
+    );
+    border: 1px solid color.adjust($fg, $alpha: -0.9);
+    border-radius: 12px;
+    padding: $spacing-sm $spacing-xs;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(
+        to bottom,
+        color.adjust($fg, $alpha: -0.9),
+        transparent
+      );
+      border-radius: 12px 12px 0 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.88),
+        color.adjust($fg, $alpha: -0.92)
+      );
+      border-color: color.adjust($fg, $alpha: -0.85);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &.mode-button-active {
+      background: linear-gradient(
+        135deg,
+        color.adjust($primary, $alpha: -0.85),
+        color.adjust($primary, $alpha: -0.9)
+      );
+      border-color: color.adjust($primary, $alpha: -0.75);
+      box-shadow: 
+        0 2px 10px color.adjust($primary, $alpha: -0.8),
+        0 0 20px color.adjust($primary, $alpha: -0.88);
+
+      &::before {
+        background: linear-gradient(
+          to bottom,
+          color.adjust($primary, $alpha: -0.82, $lightness: 12%),
+          transparent
+        );
+        opacity: 1;
+      }
+
+      .mode-icon {
+        color: $primary;
+        text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
+      }
+
+      .mode-label {
+        color: $primary;
+        font-weight: 600;
+        text-shadow: 0 0 6px color.adjust($primary, $alpha: -0.8);
+      }
+    }
+
+    .mode-icon {
+      @include material-icon;
+      font-size: 20px;
+      color: $fg;
+      transition: all 200ms ease;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    .mode-label {
+      font-size: calc(#{$font} * 0.85);
+      font-weight: 500;
+      color: $fg;
+      transition: all 200ms ease;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.mode-stack {
+  & > box {
+    padding: 0 $spacing-sm;
+  }
+}

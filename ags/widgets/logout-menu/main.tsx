@@ -10,13 +10,19 @@ function hide() {
 
 function LogoutButton(label: string, command: string) {
   return (
-    <button onClicked={() => execAsync(["sh", "-c", command])} label={label} />
+    <button 
+      onClicked={() => {
+        execAsync(command).catch(err => console.error(`Failed to execute ${command}:`, err));
+        hide();
+      }} 
+      label={label} 
+    />
   );
 }
 
 export default function LogoutMenu() {
   const [visible, _setVisible] = createState(false);
-
+  
   return (
     <window
       name="logout-menu"
@@ -51,25 +57,13 @@ export default function LogoutMenu() {
           >
             <box>
               {LogoutButton("lock", "hyprlock")}
-              {LogoutButton("bedtime", "systemctl suspend || loginctl suspend")}
-              {LogoutButton(
-                "logout",
-                "pkill Hyprland || loginctl terminate-user $USER",
-              )}
+              {LogoutButton("bedtime", "systemctl suspend")}
+              {LogoutButton("logout", "hyprctl dispatch exit")}
             </box>
             <box>
-              {LogoutButton(
-                "power_settings_new",
-                "systemctl poweroff || loginctl poweroff",
-              )}
-              {LogoutButton(
-                "mode_standby",
-                "systemctl hibernate || loginctl hibernate",
-              )}
-              {LogoutButton(
-                "restart_alt",
-                "systemctl reboot || loginctl reboot",
-              )}
+              {LogoutButton("power_settings_new", "systemctl poweroff")}
+              {LogoutButton("mode_standby", "systemctl hibernate")}
+              {LogoutButton("restart_alt", "systemctl reboot")}
             </box>
           </box>
           <button onClicked={hide} />

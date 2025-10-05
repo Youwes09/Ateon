@@ -36,7 +36,7 @@ DESKTOP_PKGS=(
     libastal-battery-git libastal-powerprofiles-git
     libgtop dart-sass imagemagick adwaita-icon-theme libadwaita
     ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-material-symbols-variable-git
-    hyprpaper polkit-gnome glib-networking libsoup3 resources
+    hyprpaper polkit-gnome glib-networking apple-fonts libsoup3 resources
 )
 
 TERMINAL_PKGS=(

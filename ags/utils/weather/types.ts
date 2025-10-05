@@ -6,6 +6,7 @@ export interface WeatherCondition {
   tempF: string;
   time?: string;
   weatherDesc: { value: string }[];
+  windspeedKmph?: string;
   [key: string]: any;
 }
 
@@ -20,4 +21,5 @@ export interface WeatherForecast {
 export interface WeatherData {
   current: WeatherCondition | null;
   forecast: WeatherForecast[];
+  nearest_area?: any[];
 }

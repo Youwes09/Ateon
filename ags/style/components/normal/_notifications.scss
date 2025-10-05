@@ -1,0 +1,111 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+.notification {
+  @include window;
+  @include border;
+  margin: $spacing-sm $spacing-md;
+  padding: $spacing-sm;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Hover effect
+  &.notification-hovered {
+    margin-left: calc(#{$spacing-md} - 4px); // Simulate translateX
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  // Active/pressed effect
+  &:active {
+    opacity: 0.8;
+  }
+
+  &.critical {
+    border-left: 3px solid $red;
+    
+    .header .app-name {
+      color: $red;
+    }
+  }
+
+  &.low {
+    opacity: 0.9;
+  }
+
+  .header {
+    margin-bottom: $spacing-xs;
+    
+    .app-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: color.adjust($fg, $alpha: -0.4);
+    }
+
+    .time {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: color.adjust($fg, $alpha: -0.5);
+    }
+  }
+
+  .content {
+    .thumb {
+      > box {
+        min-width: 48px;
+        min-height: 48px;
+        border-radius: $round;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      image {
+        -gtk-icon-size: 48px;
+      }
+    }
+
+    .text-content {
+      .title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $fg;
+        line-height: 1.3;
+      }
+
+      .body {
+        font-size: 0.85rem;
+        color: color.adjust($fg, $alpha: -0.3);
+        margin-top: $spacing-xs;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // Action indicator
+  .action-indicator {
+    margin-top: $spacing-sm;
+    padding-top: $spacing-xs;
+    border-top: 1px solid color.adjust($fg, $alpha: -0.9);
+    opacity: 0;
+    transition: opacity 150ms ease-out;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    .action-hint {
+      font-size: 0.75rem;
+      color: color.adjust($fg, $alpha: -0.4);
+      font-style: italic;
+    }
+
+    .more-actions {
+      font-size: 0.7rem;
+      color: color.adjust($fg, $alpha: -0.5);
+      background: color.adjust($fg, $alpha: -0.95);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  }
+}

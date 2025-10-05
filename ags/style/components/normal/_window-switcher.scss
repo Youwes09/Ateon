@@ -1,0 +1,136 @@
+@use "../../layouts" as *;
+@use "../../abstracts" as *;
+@use "sass:color";
+
+box.window-switcher-background {
+  background-color: transparent;
+  
+  .window-switcher {
+    @include window;
+    background-color: color.adjust($background, $alpha: -0.3);
+    padding: 1rem;
+    
+    .search-section {
+      @include window-box;
+      @include border;
+      margin-bottom: 1rem;
+      background-color: color.adjust($primary, $alpha: -0.85);
+      padding: $spacing-sm;
+
+      label.search-icon {
+        @include material-icon(1.5rem);
+        margin: 0 0.5rem;
+      }
+
+      entry.search-entry {
+        font-size: 1rem;
+        padding: $spacing-xs $spacing-sm;
+        background: transparent;
+        border: none;
+        color: $fg;
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      .shortcut-hint {
+        font-size: 0.7rem;
+        color: color.adjust($fg, $alpha: -0.4);
+        margin: 0 0.5rem;
+      }
+    }
+
+    .window-grid {
+      padding: 0;
+    }
+
+    button.window-card {
+      @include window-box;
+      @include button;
+      @include border;
+      @include light-mode-shadow($shadow-type: "strong");
+      margin: 0.5rem;
+      padding: 1rem;
+      min-width: 220px;
+      min-height: 160px;
+      
+      &.selected {
+        background: $buttonEnabledHover;
+        border-color: $primary;
+        box-shadow: 0 0 20px color.adjust($primary, $alpha: -0.5);
+
+        .window-card-title {
+          color: $primary;
+          font-weight: 600;
+        }
+
+        .window-icon-large {
+          color: $primary;
+        }
+      }
+
+      .window-icon-large {
+        @include material-icon(4rem);
+        color: $fg;
+        margin-bottom: 0.5rem;
+      }
+
+      .window-card-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: $fg;
+        margin: 0.3rem 0;
+      }
+
+      .window-card-workspace {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $primary;
+        margin: 0.2rem 0;
+      }
+
+      .window-card-subtitle {
+        font-size: 0.75rem;
+        color: color.adjust($fg, $alpha: -0.5);
+      }
+
+      .window-badge-small {
+        @include rounding;
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        margin: 2px 4px 0 0;
+
+        &.fullscreen-badge {
+          background-color: color.adjust($primary, $alpha: -0.8);
+          color: $primary;
+        }
+
+        &.floating-badge {
+          background-color: color.adjust($fg, $alpha: -0.8);
+          color: $fg;
+        }
+      }
+    }
+
+    label.no-entries {
+      padding: 2rem;
+      color: color.adjust($fg, $alpha: -0.4);
+      font-style: italic;
+    }
+  }
+}
+
+button.invisible-close {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+}
+
+
+// -----
+

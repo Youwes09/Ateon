@@ -98,12 +98,12 @@ function TimerItem({ timer }: { timer: Timer }) {
 
 function TimePickerColumn({ 
   label, 
-  value, 
+  valueState, 
   max, 
   onChange 
 }: { 
   label: string; 
-  value: number; 
+  valueState: ReturnType<typeof createState<number>>; 
   max: number; 
   onChange: (val: number) => void;
 }) {
@@ -124,18 +124,24 @@ function TimePickerColumn({
         maxContentHeight={120}
       >
         <box orientation={Gtk.Orientation.VERTICAL} spacing={2}>
-          {items.map((num) => (
-            <button
-              cssClasses={
-                num === value 
-                  ? ["time-picker-item", "time-picker-item-active"]
-                  : ["time-picker-item"]
-              }
-              onClicked={() => onChange(num)}
-            >
-              <label label={num.toString().padStart(2, "0")} />
-            </button>
-          ))}
+          <With value={valueState}>
+            {(currentValue) => (
+              <box orientation={Gtk.Orientation.VERTICAL} spacing={2}>
+                {items.map((num) => (
+                  <button
+                    cssClasses={
+                      num === currentValue
+                        ? ["time-picker-item", "time-picker-item-active"]
+                        : ["time-picker-item"]
+                    }
+                    onClicked={() => onChange(num)}
+                  >
+                    <label label={num.toString().padStart(2, "0")} />
+                  </button>
+                ))}
+              </box>
+            )}
+          </With>
         </box>
       </scrolledwindow>
     </box>
@@ -221,38 +227,24 @@ export default function TimerWidget() {
                   cssClasses={["time-picker-container"]}
                   homogeneous
                 >
-                  <With value={hours}>
-                    {(h) => (
-                      <TimePickerColumn
-                        label="hours"
-                        value={h}
-                        max={23}
-                        onChange={setHours}
-                      />
-                    )}
-                  </With>
-
-                  <With value={minutes}>
-                    {(m) => (
-                      <TimePickerColumn
-                        label="min"
-                        value={m}
-                        max={59}
-                        onChange={setMinutes}
-                      />
-                    )}
-                  </With>
-
-                  <With value={seconds}>
-                    {(s) => (
-                      <TimePickerColumn
-                        label="sec"
-                        value={s}
-                        max={59}
-                        onChange={setSeconds}
-                      />
-                    )}
-                  </With>
+                  <TimePickerColumn
+                    label="hours"
+                    valueState={hours}
+                    max={23}
+                    onChange={setHours}
+                  />
+                  <TimePickerColumn
+                    label="min"
+                    valueState={minutes}
+                    max={59}
+                    onChange={setMinutes}
+                  />
+                  <TimePickerColumn
+                    label="sec"
+                    valueState={seconds}
+                    max={59}
+                    onChange={setSeconds}
+                  />
                 </box>
 
                 <box
