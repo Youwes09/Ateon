@@ -43,12 +43,13 @@ const options = await (async () => {
       "wallpaper.current": defineOption(currentWallpaper, {
         useCache: true,
       }),
-      "clipboard.show-images": defineOption(true),
-      "wallpaper.theme-cache": defineOption<Record<string, CachedThemeEntry>>(
+      "notification-center.max-notifications": defineOption(4),
+      "picker.frecency-cache": defineOption<Record<string, UsageEntry>>(
         {},
         { useCache: true },
       ),
-      "picker.frecency-cache": defineOption<Record<string, UsageEntry>>(
+      "clipboard.show-images": defineOption(true),
+      "wallpaper.theme-cache": defineOption<Record<string, CachedThemeEntry>>(
         {},
         { useCache: true },
       ),
@@ -57,6 +58,18 @@ const options = await (async () => {
         {},
         { useCache: true },
       ),
+      "dock.enabled": defineOption(true),
+      "dock.auto-hide": defineOption(true),
+      "dock.pinned-apps": defineOption([
+        { name: "Firefox", icon: "firefox", class: "firefox" },
+        { name: "Code", icon: "code", class: "Code" },
+        { name: "Terminal", icon: "utilities-terminal", class: "kitty" },
+        { name: "Files", icon: "system-file-manager", class: "org.gnome.Nautilus" },
+        { name: "Discord", icon: "discord", class: "discord" },
+        { name: "Obsidian", icon: "obsidian", class: "obsidian" },
+        { name: "Spotify", icon: "spotify", class: "Spotify" },
+        { name: "Slack", icon: "slack", class: "Slack" },
+      ]),
     },
   );
   

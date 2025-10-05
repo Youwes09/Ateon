@@ -113,18 +113,15 @@ export const WiFiBox = () => {
             }
           });
 
-          const windowListener = (app as any).connect(
-            "window-toggled",
-            (_, window) => {
-              if (
-                window.name === "system-menu" &&
-                !window.visible &&
-                isExpanded.get()
-              ) {
-                setIsExpanded(false);
-              }
-            },
-          );
+          const windowListener = app.connect("window-toggled", (_, window) => {
+            if (
+              window.name === "system-menu" &&
+              !window.visible &&
+              isExpanded.get()
+            ) {
+              setIsExpanded(false);
+            }
+          });
 
           onCleanup(() => {
             scanTimer.get()?.cancel();
@@ -143,77 +140,66 @@ export const WiFiBox = () => {
             <PasswordDialog />
           </box>
 
-          {/* Scrollable Network Lists */}
-          <scrolledwindow
-            vexpand={false}
-            hscrollPolicy={Gtk.ScrollablePolicy.NEVER}
-            vscrollPolicy={Gtk.ScrollablePolicy.AUTOMATIC}
-            propagateNaturalHeight={true}
-            maxContentHeight={300}
-          >
-            <box orientation={Gtk.Orientation.VERTICAL}>
-              {/* Available Networks */}
-              <box orientation={Gtk.Orientation.VERTICAL}>
-                <label label="Available Networks" cssClasses={["section-label"]} />
+          {/* Available Networks */}
+          <box orientation={Gtk.Orientation.VERTICAL}>
+            <label label="Available Networks" cssClasses={["section-label"]} />
 
-                {/* Empty state container */}
-                <box
-                  visible={availableNetworks((networks) => networks.length === 0)}
-                >
-                  <label
-                    label="No networks found"
-                    cssClasses={["empty-label"]}
-                    halign={Gtk.Align.CENTER}
-                    hexpand
-                  />
-                </box>
-
-                {/* Networks list container */}
-                <box
-                  orientation={Gtk.Orientation.VERTICAL}
-                  visible={availableNetworks((networks) => networks.length > 0)}
-                >
-                  <For each={availableNetworks}>
-                    {(network) => <NetworkItem network={network} />}
-                  </For>
-                </box>
-              </box>
-
-              {/* Saved Networks */}
-              <box
-                orientation={Gtk.Orientation.VERTICAL}
-                visible={savedNetworks((saved) => {
-                  const filtered = saved.filter(
-                    (ssid) => !availableNetworks.get().some((n) => n.ssid === ssid),
-                  );
-                  return filtered.length > 0;
-                })}
-              >
-                <label label="Saved Networks" cssClasses={["section-label"]} />
-                <For each={savedNetworks}>
-                  {(ssid) => {
-                    // Only render if not in available networks
-                    const shouldShow = !availableNetworks
-                      .get()
-                      .some((n) => n.ssid === ssid);
-                    return (
-                      <box cssClasses={["saved-network"]} visible={shouldShow}>
-                        <label label={ssid} />
-                        <box hexpand={true} />
-                        <button
-                          label="Forget"
-                          cssClasses={["forget-button", "button"]}
-                          onClicked={() => forgetNetwork(ssid)}
-                        />
-                      </box>
-                    );
-                  }}
-                </For>
-              </box>
+            {/* Empty state container */}
+            <box
+              visible={availableNetworks((networks) => networks.length === 0)}
+            >
+              <label
+                label="No networks found"
+                cssClasses={["empty-label"]}
+                halign={Gtk.Align.CENTER}
+                hexpand
+              />
             </box>
-          </scrolledwindow>
 
-          {/* Controls Container - Outside scroll area */}
+            {/* Networks list container */}
+            <box
+              orientation={Gtk.Orientation.VERTICAL}
+              visible={availableNetworks((networks) => networks.length > 0)}
+            >
+              <For each={availableNetworks}>
+                {(network) => <NetworkItem network={network} />}
+              </For>
+            </box>
+          </box>
+
+          {/* Saved Networks */}
+          <box
+            orientation={Gtk.Orientation.VERTICAL}
+            visible={savedNetworks((saved) => {
+              const filtered = saved.filter(
+                (ssid) => !availableNetworks.get().some((n) => n.ssid === ssid),
+              );
+              return filtered.length > 0;
+            })}
+          >
+            <label label="Saved Networks" cssClasses={["section-label"]} />
+            <For each={savedNetworks}>
+              {(ssid) => {
+                // Only render if not in available networks
+                const shouldShow = !availableNetworks
+                  .get()
+                  .some((n) => n.ssid === ssid);
+                return (
+                  <box cssClasses={["saved-network"]} visible={shouldShow}>
+                    <label label={ssid} />
+                    <box hexpand={true} />
+                    <button
+                      label="Forget"
+                      cssClasses={["forget-button", "button"]}
+                      onClicked={() => forgetNetwork(ssid)}
+                    />
+                  </box>
+                );
+              }}
+            </For>
+          </box>
+
+          {/* Controls Container */}
           <box hexpand>
             {/* Refresh Button */}
             <button
@@ -251,15 +237,11 @@ export const WiFiBox = () => {
               cssClasses={["settings-button"]}
               halign={Gtk.Align.END}
               hexpand={false}
-              visible={options[
-                "system-menu.modules.wifi-advanced.enable"
-              ]((value) => Boolean(value))}
+              visible={options["system-menu.modules.wifi-advanced.enable"](
+                (value) => Boolean(value),
+              )}
               onClicked={() => {
-                execAsync([
-                  "sh",
-                  "-c",
-                  String(options["app.wifi"].get()),
-                ]);
+                execAsync(["sh", "-c", String(options["app.wifi"].get())]);
                 setIsExpanded(false);
               }}
             >

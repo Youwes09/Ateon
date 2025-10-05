@@ -13,15 +13,15 @@
 * {
   all: unset;
   font-family: FiraCode Nerd Font;
-  color: rgb(227, 226, 225);
-  text-shadow: 0 2px 3px rgba(18, 20, 19, 0.2);
+  color: rgb(226, 226, 226);
+  text-shadow: 0 2px 3px rgba(19, 19, 19, 0.2);
 }
 
 /* variables & mixins */
 /* general styles */
 tooltip.background,
 tooltip > box {
-  background-color: rgb(18, 20, 19);
+  background-color: rgb(19, 19, 19);
   border-radius: 8px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 rgba(0, 0, 0, 0.4);
 }
@@ -32,14 +32,14 @@ tooltip > box label {
 
 /* scales */
 scale trough {
-  background-color: rgba(56, 57, 57, 0.6);
+  background-color: rgba(57, 57, 57, 0.6);
   border-radius: 0.5rem;
   min-width: calc(0.5rem * 10);
   padding: 0 calc(0.5rem / 2);
 }
 scale highlight,
 scale progress {
-  background: rgba(227, 226, 225, 0.75);
+  background: rgba(226, 226, 226, 0.75);
   border-radius: 0.5rem;
   margin: 0 calc(0px - 0.5rem / 2);
   min-height: 0.5rem;
@@ -47,19 +47,19 @@ scale progress {
 
 /* popovers */
 popover {
-  background: rgb(18, 20, 19);
+  background: rgb(19, 19, 19);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 popover modelbutton {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 popover modelbutton:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 popover modelbutton {
   border-radius: 0;
@@ -78,24 +78,24 @@ popover modelbutton:only-child {
 /* buttons */
 .button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 
 .button-disabled {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button-disabled:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 
 /* modules & windows */
@@ -121,7 +121,7 @@ popover modelbutton:only-child {
   -gtk-icon-size: 2rem;
   margin-left: 0.8rem;
   margin-right: -0.5rem;
-  color: rgb(199, 198, 197);
+  color: rgb(198, 198, 198);
 }
 .Bar {
   /* Hyperland */
@@ -136,42 +136,42 @@ popover modelbutton:only-child {
   min-width: 1.5rem;
   min-height: 1.5rem;
   transition: 100ms linear;
-  box-shadow: inset -2px -2px 2px rgba(18, 20, 19, 0.3);
+  box-shadow: inset -2px -2px 2px rgba(19, 19, 19, 0.3);
 }
 .Bar .Workspaces .focused {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(103.5, 120.8, 118.5);
-  box-shadow: inset -2px -2px 2px rgb(77.625, 90.6, 88.875);
+  background: rgb(164, 94.1, 102.8);
+  box-shadow: inset -2px -2px 2px rgb(123.6451667328, 69.9298332672, 76.6154327114);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(142.25, 159.8, 157.25);
-  box-shadow: inset -2px -2px 2px rgb(103.7094012984, 122.8280987016, 120.0501683097);
+  background: rgb(196.5, 138.35, 144.3);
+  box-shadow: inset -2px -2px 2px rgb(167.2577183842, 83.8797816158, 92.4111440194);
 }
 .Bar .Workspaces .monitor1 {
-  background: rgb(127, 153.5, 150);
-  box-shadow: inset -2px -2px 2px rgb(93.0416666667, 117.3333333333, 114.125);
+  background: rgb(174, 143.5, 103.5);
+  box-shadow: inset -2px -2px 2px rgb(135.6169354839, 108.314516129, 72.5080645161);
 }
 .Bar .Workspaces .monitor1:hover {
-  background: rgb(157.8, 184.9, 181.2);
-  box-shadow: inset -2px -2px 2px rgb(108.0234907352, 149.0015092648, 143.4067244471);
+  background: rgb(206.4, 174.5, 134.1);
+  box-shadow: inset -2px -2px 2px rgb(181.9924778761, 134.0719026549, 73.3825221239);
 }
 .Bar .Workspaces .monitor2 {
-  background: rgb(109.5, 119.8, 117.5);
-  box-shadow: inset -2px -2px 2px rgb(82.125, 89.85, 88.125);
+  background: rgb(140.9, 109.5, 111.2);
+  box-shadow: inset -2px -2px 2px rgb(105.675, 82.125, 83.4);
 }
 .Bar .Workspaces .monitor2:hover {
-  background: rgb(148.25, 158.8, 156.25);
-  box-shadow: inset -2px -2px 2px rgb(109.1582039911, 121.1292960089, 118.2358093126);
+  background: rgb(181.65, 148.25, 149.7);
+  box-shadow: inset -2px -2px 2px rgb(146.6552956691, 100.7697043309, 102.7617434758);
 }
 .Bar .Workspaces .monitor3 {
-  background: rgb(145.3, 155.7, 153.3);
-  box-shadow: inset -2px -2px 2px rgb(107.2582535885, 118.4917464115, 115.8994019139);
+  background: rgb(181.4, 144.6, 145.9);
+  box-shadow: inset -2px -2px 2px rgb(146.7, 97.8, 99.5274456522);
 }
 .Bar .Workspaces .monitor3:hover {
-  background: rgb(108.05, 117.95, 116.05);
-  box-shadow: inset -2px -2px 2px rgb(81.0375, 88.4625, 87.0375);
+  background: rgb(140.9, 107.6, 109.15);
+  box-shadow: inset -2px -2px 2px rgb(105.675, 80.7, 81.8625);
 }
 .Bar {
   /* music */
@@ -186,7 +186,7 @@ popover modelbutton:only-child {
   opacity: 0.3;
 }
 .Bar .Media.active > box {
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
 }
 .Bar .Media .cover {
   background-size: cover;
@@ -212,7 +212,7 @@ popover modelbutton:only-child {
   margin-right: -0.3rem;
 }
 .Bar .SysTray.active {
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
 }
 .Bar {
   /* hw-monitor */
@@ -222,17 +222,17 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(140.82, 158.48, 155.82);
+  color: rgb(210.8, 131.42, 138.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress radius {
-  color: rgba(18, 20, 19, 0.5);
+  color: rgba(19, 19, 19, 0.5);
 }
 .Bar .bar-hw-ram-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(140.82, 158.48, 155.82);
+  color: rgb(210.8, 131.42, 138.8);
 }
 .Bar .bar-hw-ram-box button label {
   margin: 1px 0px 0px 2px;
@@ -243,17 +243,17 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(140.82, 158.48, 155.82);
+  color: rgb(210.8, 131.42, 138.8);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress radius {
-  color: rgba(18, 20, 19, 0.5);
+  color: rgba(19, 19, 19, 0.5);
 }
 .Bar .bar-hw-cpu-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(133.82, 160.14, 156.48);
+  color: rgb(184.08, 149.16, 102.9);
 }
 .Bar .bar-hw-cpu-box button label {
   margin: 1px 0px 0px 1px;
@@ -269,11 +269,11 @@ popover modelbutton:only-child {
   -gtk-icon-size: 1.1rem;
 }
 .Bar .system-menu-toggler.active box {
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
 }
 .Bar .separator {
   font-size: 1.8rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .Bar .clock {
   margin: 0 1.2rem 0 0.4rem;
@@ -284,34 +284,34 @@ popover modelbutton:only-child {
 
 /* Floating elements style */
 .bar-style-floating .centerbox > box {
-  background: rgba(18, 20, 19, 0.5);
+  background: rgba(19, 19, 19, 0.5);
   border-radius: calc(8px * 4);
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(18, 20, 19, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 19, 0.5);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Full-width style */
 .bar-style-expanded {
-  background: rgba(18, 20, 19, 0.5);
+  background: rgba(19, 19, 19, 0.5);
   border-radius: calc(8px * 4);
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(18, 20, 19, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 19, 0.5);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Beveled style */
 .bar-style-beveled {
-  background: rgba(18, 20, 19, 0.5);
+  background: rgba(19, 19, 19, 0.5);
   border-radius: 0.8rem;
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(18, 20, 19, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(19, 19, 19, 0.5);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Corner-integrated style */
 .bar-style-corners {
-  background: rgba(18, 20, 19, 0.5);
+  background: rgba(19, 19, 19, 0.5);
   border-radius: 0;
 }
 
@@ -319,19 +319,19 @@ popover modelbutton:only-child {
 /* general styles */
 box.picker {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
 }
 box.picker box.search {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem;
-  background-color: rgba(184, 202, 199, 0.15);
+  background-color: rgba(255, 178, 183, 0.15);
 }
 box.picker box.search label {
   font-family: "Material Symbols Outlined";
@@ -343,22 +343,22 @@ box.picker box.search entry {
   margin: 0.25rem;
 }
 box.picker box.search entry menu {
-  background: rgb(18, 20, 19);
+  background: rgb(19, 19, 19);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 box.picker box.search entry menu separator {
-  background-color: rgba(56, 57, 57, 0.6);
+  background-color: rgba(57, 57, 57, 0.6);
 }
 box.picker box.search entry menu menuitem {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.picker box.search entry menu menuitem:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 box.picker box.search entry menu menuitem {
   border-radius: 0;
@@ -376,7 +376,7 @@ box.picker box.search entry menu menuitem:only-child {
 box.picker box.results-list {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
 }
@@ -397,20 +397,20 @@ box.picker box.results-list .app-button label.name {
   font-size: 1.1rem;
 }
 box.picker box.results-list .app-button label.description {
-  color: rgba(227, 226, 225, 0.8);
+  color: rgba(226, 226, 226, 0.8);
 }
 box.picker box.results-list .app-button:focus, box.picker box.results-list .app-button:hover, box.picker box.results-list .app-button.selected {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.picker box.results-list .app-button:focus:hover, box.picker box.results-list .app-button:hover:hover, box.picker box.results-list .app-button.selected:hover {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 box.picker box.results-list .app-button:focus, box.picker box.results-list .app-button:hover, box.picker box.results-list .app-button.selected {
-  background-color: rgba(184, 202, 199, 0.3);
+  background-color: rgba(255, 178, 183, 0.3);
   border: transparent;
 }
 box.picker box.results-list .action-button .action-icon {
@@ -424,16 +424,16 @@ box.picker box.results-list .action-button {
 }
 box.picker box.results-list .action-button:focus, box.picker box.results-list .action-button:hover {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.picker box.results-list .action-button:focus:hover, box.picker box.results-list .action-button:hover:hover {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 box.picker box.results-list .action-button:focus, box.picker box.results-list .action-button:hover {
-  background-color: rgba(184, 202, 199, 0.3);
+  background-color: rgba(255, 178, 183, 0.3);
   border: transparent;
   border-radius: 5rem;
   padding: 0 0.6rem;
@@ -441,7 +441,7 @@ box.picker box.results-list .action-button:focus, box.picker box.results-list .a
 box.picker box.results-grid {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
 }
@@ -453,15 +453,15 @@ box.picker box.results-grid .wallpaper-thumbnail {
   border: 1px solid transparent;
 }
 box.picker box.results-grid .wallpaper-thumbnail:hover, box.picker box.results-grid .wallpaper-thumbnail:focus, box.picker box.results-grid .wallpaper-thumbnail.selected {
-  background-color: rgba(227, 226, 225, 0.1);
-  border-color: rgba(227, 226, 225, 0.3);
+  background-color: rgba(226, 226, 226, 0.1);
+  border-color: rgba(226, 226, 226, 0.3);
 }
 box.picker box.results-grid .wallpaper-thumbnail box.wallpaper-preview-container {
   border-radius: calc(16px - 0.4rem - 2px);
   border: 1px solid rgba(0, 0, 0, 0.1);
   min-width: 140px;
   min-height: 100px;
-  background-color: rgba(227, 226, 225, 0.1);
+  background-color: rgba(226, 226, 226, 0.1);
 }
 box.picker box.results-grid .wallpaper-thumbnail .wallpaper-picture {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -474,7 +474,7 @@ box.picker box.results-grid .wallpaper-thumbnail box.wallpaper-placeholder {
   border: 2px solid rgba(255, 255, 255, 0.2);
 }
 box.picker box.results-grid .wallpaper-thumbnail .wallpaper-name {
-  color: rgba(227, 226, 225, 0.9);
+  color: rgba(226, 226, 226, 0.9);
   margin-top: 0.25rem;
   font-weight: 500;
 }
@@ -489,10 +489,10 @@ box.picker box.not-found {
 }
 box.picker box.not-found image {
   -gtk-icon-size: 6rem;
-  color: rgba(227, 226, 225, 0.7);
+  color: rgba(226, 226, 226, 0.7);
 }
 box.picker box.not-found label {
-  color: rgba(227, 226, 225, 0.9);
+  color: rgba(226, 226, 226, 0.9);
   font-size: 1.2em;
 }
 
@@ -510,7 +510,7 @@ box.picker box.not-found label {
 }
 .mode-bar .mode-button:hover, .mode-bar .mode-button:focus, .mode-bar .mode-button.active {
   border-radius: calc(16px - 0.4rem - 2px);
-  background-color: rgba(184, 202, 199, 0.15);
+  background-color: rgba(255, 178, 183, 0.15);
   border: transparent;
   padding: 6px 12px;
   transition: all 0.2s ease;
@@ -529,16 +529,16 @@ box.picker box.not-found label {
 }
 .action-bar .action-button:focus, .action-bar .action-button:hover {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .action-bar .action-button:focus:hover, .action-bar .action-button:hover:hover {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 .action-bar .action-button:focus, .action-bar .action-button:hover {
-  background-color: rgba(184, 202, 199, 0.3);
+  background-color: rgba(255, 178, 183, 0.3);
   border: transparent;
   border-radius: 5rem;
   padding: 0.2rem 0.4rem;
@@ -547,7 +547,7 @@ box.picker box.not-found label {
 .command-suggestions {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
 }
@@ -558,67 +558,67 @@ box.picker box.not-found label {
 .command-suggestions .command-item .command-icon {
   font-family: "Material Symbols Outlined";
   font-size: 3rem;
-  color: rgba(227, 226, 225, 0.8);
+  color: rgba(226, 226, 226, 0.8);
   margin-right: 0.3rem;
   margin-left: 0.3rem;
 }
 .command-suggestions .command-item .command-name {
   font-weight: bold;
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   font-size: 1.1rem;
 }
 .command-suggestions .command-item .command-description {
-  color: rgba(227, 226, 225, 0.8);
+  color: rgba(226, 226, 226, 0.8);
 }
 .command-suggestions .command-item:hover, .command-suggestions .command-item:focus {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .command-suggestions .command-item:hover:hover, .command-suggestions .command-item:focus:hover {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 .command-suggestions .command-item:hover, .command-suggestions .command-item:focus {
-  background-color: rgba(184, 202, 199, 0.3);
+  background-color: rgba(255, 178, 183, 0.3);
   border: transparent;
 }
 
 /* variables & mixins */
 /* general styles */
 box.logout-background {
-  background-color: rgba(18, 20, 19, 0.5);
+  background-color: rgba(19, 19, 19, 0.5);
 }
 box.logout-background .logout-menu {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(18, 20, 19, 0.7);
+  background-color: rgba(19, 19, 19, 0.7);
 }
 box.logout-background .logout-menu button {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.logout-background .logout-menu button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 box.logout-background .logout-menu button {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 1rem;
 }
 box.logout-background .logout-menu button:focus {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";
@@ -630,8 +630,8 @@ box.logout-background .logout-menu button label {
 /* general styles */
 .music.window {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   background: none;
@@ -645,7 +645,7 @@ box.logout-background .logout-menu button label {
   transform: scale(1.1);
 }
 .music.window .blurred-cover:not([file]) {
-  background: linear-gradient(135deg, rgb(57, 74, 72) 0%, rgb(63, 73, 71) 50%, rgb(50, 75, 72) 100%);
+  background: linear-gradient(135deg, rgb(125, 41, 53) 0%, rgb(92, 63, 65) 50%, rgb(93, 66, 27) 100%);
 }
 .music.window .cava-container cava {
   opacity: 0.25;
@@ -657,7 +657,7 @@ box.logout-background .logout-menu button label {
   gap: 0.4rem;
   min-width: 20rem;
   max-width: 24rem;
-  background: rgba(41, 42, 42, 0.85);
+  background: rgba(42, 42, 42, 0.85);
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -669,7 +669,7 @@ box.logout-background .logout-menu button label {
 .music.window .info .title,
 .music.window .info .artists,
 .music.window .info image {
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 .music.window .info label.position,
@@ -686,7 +686,7 @@ box.logout-background .logout-menu button label {
 .music.window .info scale trough {
   min-height: 4px;
   border-radius: 2px;
-  background: rgba(70, 71, 70, 0.4);
+  background: rgba(71, 71, 71, 0.4);
   transition: min-height 0.2s ease;
 }
 .music.window .info scale:hover trough {
@@ -694,24 +694,24 @@ box.logout-background .logout-menu button label {
 }
 .music.window .info scale highlight {
   border-radius: 2px;
-  background: rgb(184, 202, 199);
+  background: rgb(255, 178, 183);
   transition: background 0.2s ease;
 }
 .music.window .info scale:hover highlight {
-  background: rgb(184, 202, 199);
+  background: rgb(255, 178, 183);
 }
 .music.window .info scale slider {
   min-width: 12px;
   min-height: 12px;
   margin: -4px;
   border-radius: 50;
-  background: rgb(184, 202, 199);
+  background: rgb(255, 178, 183);
   transition: all 0.2s ease;
   opacity: 0;
 }
 .music.window .info scale slider:hover {
   transform: scale(1.15);
-  background: rgb(184, 202, 199);
+  background: rgb(255, 178, 183);
 }
 .music.window .info scale:hover slider {
   opacity: 1;
@@ -738,12 +738,12 @@ box.logout-background .logout-menu button label {
   padding: 0.5rem 0.7rem;
   border-radius: 16px;
   transition: all 0.2s ease;
-  background: rgba(52, 53, 52, 0.4);
-  color: rgb(227, 226, 225);
+  background: rgba(53, 53, 53, 0.4);
+  color: rgb(226, 226, 226);
 }
 .music.window .controls button:hover {
   transform: scale(1.05);
-  background: rgba(57, 74, 72, 0.5);
+  background: rgba(125, 41, 53, 0.5);
 }
 .music.window .controls button:active {
   transform: scale(0.95);
@@ -752,10 +752,10 @@ box.logout-background .logout-menu button label {
   -gtk-icon-size: 1.5rem;
   padding: 0.6rem 0.8rem;
   margin: 0 1rem;
-  background: rgba(57, 74, 72, 0.6);
+  background: rgba(125, 41, 53, 0.6);
 }
 .music.window .controls button[type=center]:hover {
-  background: rgba(57, 74, 72, 0.8);
+  background: rgba(125, 41, 53, 0.8);
 }
 
 .music.window .player-info {
@@ -774,12 +774,12 @@ box.logout-background .logout-menu button label {
   opacity: 0.75;
   padding: 0.4rem;
   border-radius: 16px;
-  background: rgba(52, 53, 52, 0.5);
+  background: rgba(53, 53, 53, 0.5);
   transition: all 0.2s ease;
 }
 .music.window .player-info .player-icon:hover {
   opacity: 1;
-  background: rgba(57, 74, 72, 0.4);
+  background: rgba(125, 41, 53, 0.4);
   transform: scale(1.05);
 }
 .music.window .player-info .player-icon:active {
@@ -794,17 +794,17 @@ box.logout-background .logout-menu button label {
   -gtk-icon-size: 1.1rem;
   margin: 0.4rem;
   opacity: 0.8;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .music.window .volume-control scale trough {
   margin: 0.4rem;
   min-height: 0.4rem;
   border-radius: 1.5rem;
-  background: rgba(70, 71, 70, 0.4);
+  background: rgba(71, 71, 71, 0.4);
 }
 .music.window .volume-control scale highlight {
   border-radius: 1.5rem;
-  background-color: rgb(227, 226, 225);
+  background-color: rgb(226, 226, 226);
 }
 .music.window .volume-control scale slider {
   min-width: 0;
@@ -817,8 +817,8 @@ box.logout-background .logout-menu button label {
 /* general styles */
 .notification {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -850,12 +850,12 @@ box.logout-background .logout-menu button label {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: rgba(227, 226, 225, 0.6);
+  color: rgba(226, 226, 226, 0.6);
 }
 .notification .header .time {
   font-size: 0.7rem;
   font-weight: 500;
-  color: rgba(227, 226, 225, 0.5);
+  color: rgba(226, 226, 226, 0.5);
 }
 .notification .content .thumb > box {
   min-width: 48px;
@@ -870,19 +870,19 @@ box.logout-background .logout-menu button label {
 .notification .content .text-content .title {
   font-size: 0.95rem;
   font-weight: 600;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   line-height: 1.3;
 }
 .notification .content .text-content .body {
   font-size: 0.85rem;
-  color: rgba(227, 226, 225, 0.7);
+  color: rgba(226, 226, 226, 0.7);
   margin-top: 0.25rem;
   line-height: 1.4;
 }
 .notification .action-indicator {
   margin-top: 0.4rem;
   padding-top: 0.25rem;
-  border-top: 1px solid rgba(227, 226, 225, 0.1);
+  border-top: 1px solid rgba(226, 226, 226, 0.1);
   opacity: 0;
   transition: opacity 150ms ease-out;
 }
@@ -891,13 +891,13 @@ box.logout-background .logout-menu button label {
 }
 .notification .action-indicator .action-hint {
   font-size: 0.75rem;
-  color: rgba(227, 226, 225, 0.6);
+  color: rgba(226, 226, 226, 0.6);
   font-style: italic;
 }
 .notification .action-indicator .more-actions {
   font-size: 0.7rem;
-  color: rgba(227, 226, 225, 0.5);
-  background: rgba(227, 226, 225, 0.05);
+  color: rgba(226, 226, 226, 0.5);
+  background: rgba(226, 226, 226, 0.05);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -906,8 +906,8 @@ box.logout-background .logout-menu button label {
 /* general styles */
 .osd {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border-radius: 3rem;
@@ -933,7 +933,7 @@ box.logout-background .logout-menu button label {
 }
 .osd levelbar block.filled {
   border-radius: 1.5rem;
-  background-color: rgb(227, 226, 225);
+  background-color: rgb(226, 226, 226);
 }
 
 /* variables & mixins */
@@ -942,8 +942,8 @@ box.logout-background .logout-menu button label {
 .system-menu {
   -gtk-icon-size: 1.1rem;
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -953,7 +953,7 @@ box.logout-background .logout-menu button label {
 .system-menu > box {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1000,7 +1000,7 @@ box.logout-background .logout-menu button label {
 }
 .system-menu .sliders block filled {
   border-radius: 1.5rem;
-  background-color: rgb(227, 226, 225);
+  background-color: rgb(226, 226, 226);
 }
 
 .arrow-indicator {
@@ -1014,8 +1014,8 @@ box.logout-background .logout-menu button label {
 
 .system-menu-list {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1024,13 +1024,13 @@ box.logout-background .logout-menu button label {
 
 .network-item {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .network-item:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .network-item {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -1046,13 +1046,13 @@ box.logout-background .logout-menu button label {
 
 .network-item-active {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .network-item-active:hover {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 .network-item-active {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -1063,7 +1063,7 @@ box.logout-background .logout-menu button label {
 .password-dialog {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin-bottom: 0.75rem;
@@ -1084,15 +1084,15 @@ box.logout-background .logout-menu button label {
 .settings-button {
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .refresh-button:hover,
 .disconnect-button:hover,
 .settings-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .refresh-button,
 .disconnect-button,
@@ -1125,29 +1125,29 @@ image {
 .password-search {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  background: rgba(19, 19, 19, 0.5);
 }
 .password-search entry menu {
-  background: rgb(18, 20, 19);
+  background: rgb(19, 19, 19);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 .password-search entry menu separator {
-  background-color: rgba(56, 57, 57, 0.6);
+  background-color: rgba(57, 57, 57, 0.6);
 }
 .password-search entry menu menuitem {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .password-search entry menu menuitem:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .password-search entry menu menuitem {
   border-radius: 0;
@@ -1170,13 +1170,13 @@ image {
 
 .saved-network {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .saved-network:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .saved-network {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -1202,25 +1202,25 @@ image {
 .ScreenCorners.corner-top .corner-content {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(18, 20, 19, 0.5), inset 0 10px 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset 0 10px 10px -10px rgba(0, 0, 0, 0.2);
   min-height: max(12px, 8px * 8);
 }
 .ScreenCorners.corner-bottom .corner-content {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(18, 20, 19, 0.5), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.2);
   min-height: max(12px, 8px * 8);
 }
 .ScreenCorners.corner-left .corner-content {
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(18, 20, 19, 0.5), inset 10px 0 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset 10px 0 10px -10px rgba(0, 0, 0, 0.2);
   min-width: calc(8px * 8);
 }
 .ScreenCorners.corner-right .corner-content {
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(18, 20, 19, 0.5), inset -10px 0 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(19, 19, 19, 0.5), inset -10px 0 10px -10px rgba(0, 0, 0, 0.2);
   min-width: calc(8px * 8);
 }
 
@@ -1236,13 +1236,13 @@ image {
 }
 .quick-actions-widget .actions-grid .action-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .quick-actions-widget .actions-grid .action-button {
   background: transparent;
@@ -1250,8 +1250,8 @@ image {
   margin: 0 0.4rem;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   transform: translateY(-2px);
 }
 .quick-actions-widget .actions-grid .action-button .action-icon {
@@ -1337,8 +1337,8 @@ image {
 /* general styles */
 .stacked-settings-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1350,17 +1350,17 @@ image {
   margin: 0 0.4rem;
 }
 .stacked-settings-widget .settings-header image {
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-right: 0.4rem;
 }
 .stacked-settings-widget .settings-header .settings-title {
   margin-top: 0.75rem;
   font-size: 1.1rem;
   font-weight: 700;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .stacked-settings-widget separator {
-  background-color: rgba(227, 226, 225, 0.2);
+  background-color: rgba(226, 226, 226, 0.2);
   margin: 0.4rem 0;
   min-height: 1px;
 }
@@ -1384,7 +1384,7 @@ image {
   background-color: transparent;
 }
 .stacked-settings-widget .settings-nav .button-disabled:hover {
-  background-color: rgba(56, 57, 57, 0.99);
+  background-color: rgba(57, 57, 57, 0.99);
 }
 .stacked-settings-widget .settings-stack {
   margin-top: 0.4rem;
@@ -1392,85 +1392,85 @@ image {
 .stacked-settings-widget .settings-stack .subsection-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin: 0.4rem 0 0.25rem 0;
 }
 .stacked-settings-widget .settings-scroll scrollbar {
-  background: rgba(13.1684210526, 14.6315789474, 13.9, 0.5);
+  background: rgba(13.9, 13.9, 13.9, 0.5);
   border-radius: calc(8px * 1);
 }
 .stacked-settings-widget .settings-scroll scrollbar.vertical {
   margin-left: 4px;
 }
 .stacked-settings-widget .settings-scroll scrollbar trough {
-  background: rgba(227, 226, 225, 0.1);
+  background: rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1);
   min-width: 8px;
 }
 .stacked-settings-widget .settings-scroll scrollbar slider {
-  background: rgba(227, 226, 225, 0.4);
+  background: rgba(226, 226, 226, 0.4);
   border-radius: calc(8px * 1);
   min-width: 8px;
   transition: all 100ms ease;
 }
 .stacked-settings-widget .settings-scroll scrollbar slider:hover {
-  background: rgba(184, 202, 199, 0.7);
+  background: rgba(255, 178, 183, 0.7);
 }
 .stacked-settings-widget .settings-scroll scrollbar slider:active {
-  background: rgb(184, 202, 199);
+  background: rgb(255, 178, 183);
 }
 .stacked-settings-widget .option-row {
-  background: rgba(22.8315789474, 25.3684210526, 24.1, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(24.1, 24.1, 24.1, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 2);
   padding: 0.4rem 0.75rem;
   margin: 0.25rem 0;
 }
 .stacked-settings-widget .option-row .option-label {
   font-size: 1.1rem;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-right: 0.4rem;
 }
 .stacked-settings-widget .option-row .option-switch {
   border-radius: 5rem;
   padding: 0.1rem;
-  background-color: rgba(227, 226, 225, 0.1);
+  background-color: rgba(226, 226, 226, 0.1);
 }
 .stacked-settings-widget .option-row .option-switch slider {
   border-radius: 1.5rem;
   transition: all 200ms ease;
   margin: 0.2rem;
-  background-color: rgba(227, 226, 225, 0.3);
+  background-color: rgba(226, 226, 226, 0.3);
 }
 .stacked-settings-widget .option-row .option-switch:checked {
-  background-color: rgba(184, 202, 199, 0.2);
+  background-color: rgba(255, 178, 183, 0.2);
 }
 .stacked-settings-widget .option-row .option-switch:checked slider {
-  background-color: rgba(184, 202, 199, 0.7);
+  background-color: rgba(255, 178, 183, 0.7);
 }
 .stacked-settings-widget .option-row .option-dropdown {
   min-width: 140px;
 }
 .stacked-settings-widget .option-row .option-dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .stacked-settings-widget .option-row .option-dropdown button:hover {
-  background: rgba(184, 202, 199, 0.3);
+  background: rgba(255, 178, 183, 0.3);
 }
 .stacked-settings-widget .option-row .option-dropdown button {
   border-radius: calc(8px * 1.5);
   padding: 0.25rem 0.4rem;
-  border-color: rgba(227, 226, 225, 0.1);
+  border-color: rgba(226, 226, 226, 0.1);
 }
 .stacked-settings-widget .option-row .option-dropdown button:hover {
-  border-color: rgba(227, 226, 225, 0.3);
+  border-color: rgba(226, 226, 226, 0.3);
 }
 .stacked-settings-widget separator {
-  background-color: rgba(227, 226, 225, 0.15);
+  background-color: rgba(226, 226, 226, 0.15);
   margin: 0.75rem 0;
   min-height: 1px;
 }
@@ -1479,8 +1479,8 @@ image {
 /* general styles */
 .weather-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1493,7 +1493,7 @@ image {
   font-size: 100px;
   min-width: 72px;
   min-height: 72px;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-bottom: 0.5rem;
 }
 .weather-widget .current-weather .weather-temp {
@@ -1503,12 +1503,12 @@ image {
 }
 .weather-widget .current-weather .weather-desc {
   font-size: 1.1rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   margin-bottom: 0.2rem;
 }
 .weather-widget .current-weather .weather-extra {
   font-size: 1.1rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .weather-widget .current-weather .weather-extra-icon {
   font-family: "Material Symbols Outlined";
@@ -1522,26 +1522,26 @@ image {
 }
 .weather-widget .forecast-row .forecast-item .forecast-hour {
   font-size: 1.1rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .weather-widget .forecast-row .forecast-item .forecast-icon {
   font-family: "Material Symbols Outlined";
   font-size: 32px;
   margin: 0.3rem 0;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .weather-widget .forecast-row .forecast-item .forecast-temp {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 
 /* variables & mixins */
 /* general styles */
 .base-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1556,7 +1556,7 @@ image {
 .base-widget .header-row .header-icon {
   min-width: 72px;
   min-height: 72px;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-bottom: 0.5rem;
 }
 .base-widget .header-row .header-title {
@@ -1566,12 +1566,12 @@ image {
 }
 .base-widget .header-row .header-subtitle {
   font-size: 1.1rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   margin-bottom: 0.2rem;
 }
 .base-widget .header-row .header-extra {
   font-size: 1.1rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .base-widget {
   /* Generic "items row" for children */
@@ -1584,16 +1584,16 @@ image {
 }
 .base-widget .items-row .item .item-title {
   font-size: 1.1rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .base-widget .items-row .item .item-icon {
   margin: 0.3rem 0;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .base-widget .items-row .item .item-value {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 
 /* variables & mixins */
@@ -1604,48 +1604,48 @@ image {
 }
 .mode-selector .mode-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .mode-selector .mode-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .mode-selector .mode-button {
   background: transparent;
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 2);
   padding: 0.4rem 0.25rem;
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .mode-selector .mode-button:hover {
-  background: rgba(25.2473684211, 28.0526315789, 26.65, 0.5);
-  border-color: rgba(227, 226, 225, 0.3);
+  background: rgba(26.65, 26.65, 26.65, 0.5);
+  border-color: rgba(226, 226, 226, 0.3);
   transform: translateY(-1px);
 }
 .mode-selector .mode-button.mode-button-active {
-  background: rgba(184, 202, 199, 0.2);
-  border-color: rgb(184, 202, 199);
+  background: rgba(255, 178, 183, 0.2);
+  border-color: rgb(255, 178, 183);
 }
 .mode-selector .mode-button.mode-button-active .mode-icon {
-  color: rgb(227.8024193548, 234.6975806452, 233.5483870968);
+  color: rgb(255, 254.5, 254.5324675325);
 }
 .mode-selector .mode-button.mode-button-active .mode-label {
-  color: rgb(227.8024193548, 234.6975806452, 233.5483870968);
+  color: rgb(255, 254.5, 254.5324675325);
   font-weight: 600;
 }
 .mode-selector .mode-button .mode-icon {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
   font-size: 20px;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   transition: color 200ms ease;
 }
 .mode-selector .mode-button .mode-label {
   font-size: calc(1.1rem * 0.85);
   font-weight: 500;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   transition: all 200ms ease;
 }
 
@@ -1657,8 +1657,8 @@ image {
 /* general styles */
 .timer-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1672,43 +1672,43 @@ image {
 .timer-widget .widget-header .header-icon {
   font-family: "Material Symbols Outlined";
   font-size: 28px;
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   margin-right: 0.25rem;
 }
 .timer-widget .widget-header .header-title {
   font-size: calc(1.1rem * 1.1);
   font-weight: 700;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .timer-widget .timer-add-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-add-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .timer-widget .timer-add-button {
-  background: rgba(184, 202, 199, 0.2);
+  background: rgba(255, 178, 183, 0.2);
   border-radius: 16px;
   padding: 0.4rem 0.75rem;
   margin: 0;
-  border: 1px solid rgba(184, 202, 199, 0.7);
+  border: 1px solid rgba(255, 178, 183, 0.7);
 }
 .timer-widget .timer-add-button:hover {
-  background: rgba(198.6008064516, 212.8991935484, 210.5161290323, 0.2);
+  background: rgba(255, 203.5, 206.8441558442, 0.2);
   transform: translateY(-1px);
 }
 .timer-widget .timer-add-button .timer-add-icon {
   font-family: "Material Symbols Outlined";
   font-size: 20px;
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
 }
 .timer-widget .timer-dialog {
-  background: rgba(25.2473684211, 28.0526315789, 26.65, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.15);
+  background: rgba(26.65, 26.65, 26.65, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.15);
   border-radius: calc(8px * 2);
   padding: 0.75rem;
   margin: 0;
@@ -1716,7 +1716,7 @@ image {
 .timer-widget .timer-dialog .dialog-title {
   font-size: calc(1.1rem * 1.05);
   font-weight: 600;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-bottom: 0.4rem;
 }
 .timer-widget .timer-dialog .time-picker-container {
@@ -1725,13 +1725,13 @@ image {
 .timer-widget .timer-dialog .time-picker-label {
   font-size: calc(1.1rem * 0.85);
   font-weight: 500;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   text-transform: lowercase;
   margin-bottom: 0.25rem;
 }
 .timer-widget .timer-dialog .time-picker-scroll {
-  background: rgba(13.1684210526, 14.6315789474, 13.9, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(13.9, 13.9, 13.9, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.5);
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar {
@@ -1740,28 +1740,28 @@ image {
   min-width: 4px;
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar trough {
-  background: rgba(227, 226, 225, 0.05);
+  background: rgba(226, 226, 226, 0.05);
   border-radius: calc(8px * 1);
   min-width: 4px;
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar slider {
-  background: rgba(227, 226, 225, 0.3);
+  background: rgba(226, 226, 226, 0.3);
   border-radius: calc(8px * 1);
   min-width: 4px;
   transition: all 100ms ease;
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar slider:hover {
-  background: rgba(184, 202, 199, 0.5);
+  background: rgba(255, 178, 183, 0.5);
 }
 .timer-widget .timer-dialog .time-picker-item {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-dialog .time-picker-item:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .timer-widget .timer-dialog .time-picker-item {
   background: transparent;
@@ -1770,31 +1770,31 @@ image {
   padding: 0.25rem 0.4rem;
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: calc(1.1rem * 1.1);
-  color: rgba(227, 226, 225, 0.6);
+  color: rgba(226, 226, 226, 0.6);
   transition: all 150ms ease;
 }
 .timer-widget .timer-dialog .time-picker-item:hover {
-  background: rgba(227, 226, 225, 0.05);
-  color: rgb(227, 226, 225);
+  background: rgba(226, 226, 226, 0.05);
+  color: rgb(226, 226, 226);
 }
 .timer-widget .timer-dialog .time-picker-item-active {
-  background: rgba(184, 202, 199, 0.2);
-  color: rgb(184, 202, 199);
+  background: rgba(255, 178, 183, 0.2);
+  color: rgb(255, 178, 183);
   font-weight: 700;
   font-size: calc(1.1rem * 1.3);
 }
 .timer-widget .timer-dialog .time-picker-item-active:hover {
-  background: rgba(184, 202, 199, 0.2);
+  background: rgba(255, 178, 183, 0.2);
 }
 .timer-widget .timer-dialog .dialog-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-dialog .dialog-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .timer-widget .timer-dialog .dialog-button {
   border-radius: calc(8px * 1.5);
@@ -1803,19 +1803,19 @@ image {
 }
 .timer-widget .timer-dialog .dialog-button-cancel {
   background: transparent;
-  border: 1px solid rgba(227, 226, 225, 0.15);
+  border: 1px solid rgba(226, 226, 226, 0.15);
 }
 .timer-widget .timer-dialog .dialog-button-cancel:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .timer-widget .timer-dialog .dialog-button-confirm {
-  background: rgba(184, 202, 199, 0.2);
-  border: 1px solid rgba(184, 202, 199, 0.7);
-  color: rgb(184, 202, 199);
+  background: rgba(255, 178, 183, 0.2);
+  border: 1px solid rgba(255, 178, 183, 0.7);
+  color: rgb(255, 178, 183);
   font-weight: 600;
 }
 .timer-widget .timer-dialog .dialog-button-confirm:hover {
-  background: rgba(198.6008064516, 212.8991935484, 210.5161290323, 0.2);
+  background: rgba(255, 203.5, 206.8441558442, 0.2);
 }
 .timer-widget .timer-list {
   margin-top: 0.25rem;
@@ -1826,16 +1826,16 @@ image {
 .timer-widget .timer-empty .empty-icon {
   font-family: "Material Symbols Outlined";
   font-size: 64px;
-  color: rgba(227, 226, 225, 0.4);
+  color: rgba(226, 226, 226, 0.4);
   margin-bottom: 0.4rem;
 }
 .timer-widget .timer-empty .empty-text {
   font-size: 1.1rem;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .timer-widget .timer-item {
-  background: rgba(22.8315789474, 25.3684210526, 24.1, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(24.1, 24.1, 24.1, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 2);
   padding: 0.4rem 0.75rem;
   margin: 0.25rem 0;
@@ -1844,58 +1844,58 @@ image {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: calc(1.1rem * 1.5);
   font-weight: 500;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   transition: color 200ms ease;
 }
 .timer-widget .timer-item .timer-active {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   font-weight: 700;
 }
 .timer-widget .timer-item .timer-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-item .timer-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .timer-widget .timer-item .timer-button {
   background: transparent;
-  border: 1px solid rgba(227, 226, 225, 0.15);
+  border: 1px solid rgba(226, 226, 226, 0.15);
   border-radius: calc(8px * 1.5);
   padding: 0.25rem;
   min-width: 36px;
   min-height: 36px;
 }
 .timer-widget .timer-item .timer-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .timer-widget .timer-item .timer-button-icon {
   font-family: "Material Symbols Outlined";
   font-size: 18px;
 }
 .timer-widget .timer-item .timer-button-start {
-  border-color: rgba(184, 202, 199, 0.5);
+  border-color: rgba(255, 178, 183, 0.5);
 }
 .timer-widget .timer-item .timer-button-start .timer-button-icon {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
 }
 .timer-widget .timer-item .timer-button-start:hover {
-  background: rgba(184, 202, 199, 0);
+  background: rgba(255, 178, 183, 0);
 }
 .timer-widget .timer-item .timer-button-stop {
-  border-color: rgba(184, 202, 199, 0.5);
+  border-color: rgba(255, 178, 183, 0.5);
 }
 .timer-widget .timer-item .timer-button-stop .timer-button-icon {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
 }
 .timer-widget .timer-item .timer-button-stop:hover {
-  background: rgba(184, 202, 199, 0.1);
+  background: rgba(255, 178, 183, 0.1);
 }
 .timer-widget .timer-item .timer-button-reset:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .timer-widget .timer-item .timer-button-delete {
   border-color: rgba(255, 180, 171, 0.3);
@@ -1907,17 +1907,17 @@ image {
   background: rgba(255, 180, 171, 0.1);
 }
 .timer-widget .timer-item .timer-progress-container {
-  background: rgba(227, 226, 225, 0.05);
+  background: rgba(226, 226, 226, 0.05);
   border-radius: calc(8px * 1);
   margin-top: 0.25rem;
 }
 .timer-widget .timer-item .timer-progress-bar {
-  background: linear-gradient(90deg, rgb(184, 202, 199), rgb(213.2016129032, 223.7983870968, 222.0322580645));
+  background: linear-gradient(90deg, rgb(255, 178, 183), rgb(255, 229, 230.6883116883));
   border-radius: calc(8px * 1);
   transition: width 1000ms linear;
 }
 .timer-widget separator {
-  background-color: rgba(227, 226, 225, 0.2);
+  background-color: rgba(226, 226, 226, 0.2);
   margin: 0.25rem 0;
   min-height: 1px;
 }
@@ -1926,8 +1926,8 @@ image {
 /* general styles */
 .updater-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1941,35 +1941,35 @@ image {
 .updater-widget .widget-header .header-icon {
   font-family: "Material Symbols Outlined";
   font-size: 28px;
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   margin-right: 0.25rem;
 }
 .updater-widget .widget-header .header-title {
   font-size: calc(1.1rem * 1.1);
   font-weight: 700;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .updater-widget .version-info {
-  background: rgba(22.8315789474, 25.3684210526, 24.1, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(24.1, 24.1, 24.1, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 2);
   padding: 0.4rem 0.75rem;
 }
 .updater-widget .version-info .version-label {
   font-size: calc(1.1rem * 0.9);
   font-weight: 600;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   min-width: 70px;
 }
 .updater-widget .version-info .version-value {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: calc(1.1rem * 0.9);
   font-weight: 500;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .updater-widget .status-box {
-  background: rgba(22.8315789474, 25.3684210526, 24.1, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(24.1, 24.1, 24.1, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 2);
   padding: 0.4rem 0.75rem;
   transition: all 250ms ease;
@@ -1983,24 +1983,24 @@ image {
   font-weight: 500;
 }
 .updater-widget .status-box.status-idle {
-  border-color: rgba(227, 226, 225, 0.1);
+  border-color: rgba(226, 226, 226, 0.1);
 }
 .updater-widget .status-box.status-idle .status-icon {
-  color: rgba(227, 226, 225, 0.6);
+  color: rgba(226, 226, 226, 0.6);
 }
 .updater-widget .status-box.status-idle .status-message {
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .updater-widget .status-box.status-checking, .updater-widget .status-box.status-cloning, .updater-widget .status-box.status-copying {
-  border-color: rgba(184, 202, 199, 0.3);
-  background: rgba(184, 202, 199, 0.05);
+  border-color: rgba(255, 178, 183, 0.3);
+  background: rgba(255, 178, 183, 0.05);
 }
 .updater-widget .status-box.status-checking .status-icon, .updater-widget .status-box.status-cloning .status-icon, .updater-widget .status-box.status-copying .status-icon {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   animation: pulse 2s ease-in-out infinite;
 }
 .updater-widget .status-box.status-checking .status-message, .updater-widget .status-box.status-cloning .status-message, .updater-widget .status-box.status-copying .status-message {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
 }
 .updater-widget .status-box.status-success {
   border-color: rgba(74, 222, 128, 0.3);
@@ -2026,13 +2026,13 @@ image {
 }
 .updater-widget .updater-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .updater-widget .updater-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .updater-widget .updater-button {
   border-radius: calc(8px * 1.5);
@@ -2049,46 +2049,46 @@ image {
 }
 .updater-widget .updater-button-check {
   background: transparent;
-  border: 1px solid rgba(227, 226, 225, 0.15);
-  color: rgb(227, 226, 225);
+  border: 1px solid rgba(226, 226, 226, 0.15);
+  color: rgb(226, 226, 226);
 }
 .updater-widget .updater-button-check .button-icon {
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .updater-widget .updater-button-check:hover:not(:disabled) {
-  background: rgba(227, 226, 225, 0.05);
-  border-color: rgba(227, 226, 225, 0.3);
+  background: rgba(226, 226, 226, 0.05);
+  border-color: rgba(226, 226, 226, 0.3);
   transform: translateY(-1px);
 }
 .updater-widget .updater-button-update {
-  background: linear-gradient(135deg, rgba(184, 202, 199, 0.12), rgba(184, 202, 199, 0.08));
-  border: 1px solid rgba(184, 202, 199, 0.3);
-  color: rgb(184, 202, 199);
+  background: linear-gradient(135deg, rgba(255, 178, 183, 0.12), rgba(255, 178, 183, 0.08));
+  border: 1px solid rgba(255, 178, 183, 0.3);
+  color: rgb(255, 178, 183);
 }
 .updater-widget .updater-button-update .button-icon {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
 }
 .updater-widget .updater-button-update:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(184, 202, 199, 0.15), rgba(184, 202, 199, 0.1));
+  background: linear-gradient(135deg, rgba(255, 178, 183, 0.15), rgba(255, 178, 183, 0.1));
   transform: translateY(-2px);
-  border-color: rgba(184, 202, 199, 0.5);
+  border-color: rgba(255, 178, 183, 0.5);
 }
 .updater-widget .updater-button-update:active:not(:disabled) {
   transform: translateY(-1px);
 }
 .updater-widget .config-toggle-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .updater-widget .config-toggle-button:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 .updater-widget .config-toggle-button {
   background: transparent;
-  border: 1px solid rgba(227, 226, 225, 0.15);
+  border: 1px solid rgba(226, 226, 226, 0.15);
   border-radius: calc(8px * 1.5);
   padding: 0.4rem 0.75rem;
   transition: all 250ms ease;
@@ -2096,69 +2096,69 @@ image {
 .updater-widget .config-toggle-button .button-icon {
   font-family: "Material Symbols Outlined";
   font-size: 18px;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
 }
 .updater-widget .config-toggle-button:hover {
-  background: rgba(227, 226, 225, 0.05);
-  border-color: rgba(227, 226, 225, 0.3);
+  background: rgba(226, 226, 226, 0.05);
+  border-color: rgba(226, 226, 226, 0.3);
 }
 .updater-widget .config-list {
-  background: rgba(22.8315789474, 25.3684210526, 24.1, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(24.1, 24.1, 24.1, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 2);
   padding: 0.75rem;
 }
 .updater-widget .config-list .config-list-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.4rem;
 }
 .updater-widget .config-list .config-item {
-  background: rgba(20.4157894737, 22.6842105263, 21.55, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.08);
+  background: rgba(21.55, 21.55, 21.55, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.08);
   border-radius: calc(8px * 1.5);
   padding: 0.4rem 0.75rem;
   margin: 0.25rem 0;
   transition: all 200ms ease;
 }
 .updater-widget .config-list .config-item:hover {
-  background: rgba(22.8315789474, 25.3684210526, 24.1, 0.5);
-  border-color: rgba(227, 226, 225, 0.15);
+  background: rgba(24.1, 24.1, 24.1, 0.5);
+  border-color: rgba(226, 226, 226, 0.15);
 }
 .updater-widget .config-list .config-item .config-name {
   font-size: calc(1.1rem * 0.95);
   font-weight: 600;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-bottom: 2px;
 }
 .updater-widget .config-list .config-item .config-path {
   font-size: calc(1.1rem * 0.75);
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   font-family: "JetBrainsMono Nerd Font", monospace;
 }
 .updater-widget .config-list .config-item .config-switch {
   border-radius: 5rem;
   padding: 0.1rem;
-  background-color: rgba(227, 226, 225, 0.1);
+  background-color: rgba(226, 226, 226, 0.1);
 }
 .updater-widget .config-list .config-item .config-switch slider {
   border-radius: 1.5rem;
   transition: all 200ms ease;
   margin: 0.2rem;
-  background-color: rgba(227, 226, 225, 0.3);
+  background-color: rgba(226, 226, 226, 0.3);
 }
 .updater-widget .config-list .config-item .config-switch:checked {
-  background-color: rgba(184, 202, 199, 0.2);
+  background-color: rgba(255, 178, 183, 0.2);
 }
 .updater-widget .config-list .config-item .config-switch:checked slider {
-  background-color: rgba(184, 202, 199, 0.7);
+  background-color: rgba(255, 178, 183, 0.7);
 }
 .updater-widget .config-list .config-summary {
-  background: rgba(184, 202, 199, 0.05);
-  border: 1px solid rgba(184, 202, 199, 0.15);
+  background: rgba(255, 178, 183, 0.05);
+  border: 1px solid rgba(255, 178, 183, 0.15);
   border-radius: calc(8px * 1.5);
   padding: 0.25rem 0.4rem;
   margin-top: 0.4rem;
@@ -2166,25 +2166,25 @@ image {
 .updater-widget .config-list .config-summary .summary-text {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
 }
 .updater-widget .config-info {
-  background: rgba(20.4157894737, 22.6842105263, 21.55, 0.5);
-  border: 1px solid rgba(227, 226, 225, 0.08);
+  background: rgba(21.55, 21.55, 21.55, 0.5);
+  border: 1px solid rgba(226, 226, 226, 0.08);
   border-radius: calc(8px * 1.5);
   padding: 0.4rem 0.75rem;
 }
 .updater-widget .config-info .config-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(145, 145, 144);
+  color: rgb(145, 145, 145);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.25rem;
 }
 .updater-widget .config-info .config-detail {
   font-size: calc(1.1rem * 0.85);
-  color: rgba(227, 226, 225, 0.7);
+  color: rgba(226, 226, 226, 0.7);
   font-family: "JetBrainsMono Nerd Font", monospace;
 }
 .updater-widget .config-error {
@@ -2211,7 +2211,7 @@ image {
   font-family: "JetBrainsMono Nerd Font", monospace;
 }
 .updater-widget separator {
-  background-color: rgba(227, 226, 225, 0.2);
+  background-color: rgba(226, 226, 226, 0.2);
   margin: 0.25rem 0;
   min-height: 1px;
 }
@@ -2226,8 +2226,8 @@ image {
 }
 .sidebar {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -2237,13 +2237,13 @@ image {
 .sidebar > box {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .sidebar separator {
-  background-color: rgba(227, 226, 225, 0.2);
+  background-color: rgba(226, 226, 226, 0.2);
   margin: 0.5rem 0;
   min-height: 1px;
 }
@@ -2255,8 +2255,8 @@ image {
 /* general styles */
 box.clipboard {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
 }
@@ -2264,8 +2264,8 @@ box.clipboard {
 .mode-bar {
   border-radius: calc(16px - 0.4rem - 2px);
   padding: 6px 10px;
-  background-color: rgba(18, 20, 19, 0.45);
-  border-bottom: 1px solid rgba(227, 226, 225, 0.12);
+  background-color: rgba(19, 19, 19, 0.45);
+  border-bottom: 1px solid rgba(226, 226, 226, 0.12);
   margin: 0.4rem 0.4rem 0;
 }
 .mode-bar .mode-button {
@@ -2273,21 +2273,21 @@ box.clipboard {
   padding: 4px 12px;
   margin: 0 2px;
   background-color: transparent;
-  border: 1px solid rgba(227, 226, 225, 0.12);
-  color: rgba(227, 226, 225, 0.7);
+  border: 1px solid rgba(226, 226, 226, 0.12);
+  color: rgba(226, 226, 226, 0.7);
   font-weight: 500;
   font-size: 0.85rem;
   transition: all 0.18s ease;
 }
 .mode-bar .mode-button:hover {
-  background-color: rgba(227, 226, 225, 0.06);
-  border-color: rgba(227, 226, 225, 0.2);
-  color: rgb(227, 226, 225);
+  background-color: rgba(226, 226, 226, 0.06);
+  border-color: rgba(226, 226, 226, 0.2);
+  color: rgb(226, 226, 226);
 }
 .mode-bar .mode-button.active {
-  background-color: rgba(184, 202, 199, 0.15);
-  border-color: rgba(184, 202, 199, 0.5);
-  color: rgb(184, 202, 199);
+  background-color: rgba(255, 178, 183, 0.15);
+  border-color: rgba(255, 178, 183, 0.5);
+  color: rgb(255, 178, 183);
   font-weight: 600;
 }
 .mode-bar .clear-all-button {
@@ -2318,7 +2318,7 @@ box.clipboard {
 }
 .mode-bar .entry-count {
   font-size: 0.8rem;
-  color: rgba(227, 226, 225, 0.55);
+  color: rgba(226, 226, 226, 0.55);
   margin: auto 8px auto 0;
   font-weight: 500;
 }
@@ -2326,13 +2326,13 @@ box.clipboard {
 .search-section {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 0.5rem 0.4rem;
-  background-color: rgba(227, 226, 225, 0.04);
+  background-color: rgba(226, 226, 226, 0.04);
   padding: 6px 10px;
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   transition: all 0.2s ease;
 }
 .search-section label.search-icon {
@@ -2340,14 +2340,14 @@ box.clipboard {
   font-weight: normal;
   font-size: 1.1rem;
   margin: 0 6px 0 2px;
-  color: rgba(227, 226, 225, 0.5);
+  color: rgba(226, 226, 226, 0.5);
 }
 .search-section entry.search-entry {
   font-size: 0.95rem;
   padding: 4px 8px;
   background: transparent;
   border: none;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 .search-section entry.search-entry:focus {
   outline: none;
@@ -2355,7 +2355,7 @@ box.clipboard {
 }
 .search-section .shortcut-hint {
   font-size: 0.75rem;
-  color: rgba(227, 226, 225, 0.45);
+  color: rgba(226, 226, 226, 0.45);
   margin-left: 4px;
   margin-right: 4px;
   font-weight: 500;
@@ -2364,7 +2364,7 @@ box.clipboard {
 .clipboard-list {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 0 0.4rem 0.5rem;
@@ -2379,21 +2379,21 @@ box.clipboard {
   transition: all 0.15s ease;
 }
 .clipboard-list button.clipboard-entry:hover {
-  background-color: rgba(227, 226, 225, 0.04);
-  border-color: rgba(227, 226, 225, 0.08);
+  background-color: rgba(226, 226, 226, 0.04);
+  border-color: rgba(226, 226, 226, 0.08);
 }
 .clipboard-list button.clipboard-entry.selected {
-  background-color: rgba(184, 202, 199, 0.12);
-  border-color: rgba(184, 202, 199, 0.25);
-  box-shadow: 0 1px 2px rgba(184, 202, 199, 0.15);
+  background-color: rgba(255, 178, 183, 0.12);
+  border-color: rgba(255, 178, 183, 0.25);
+  box-shadow: 0 1px 2px rgba(255, 178, 183, 0.15);
 }
 .clipboard-list button.clipboard-entry.selected .entry-text {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   font-weight: 500;
 }
 .clipboard-list button.clipboard-entry .entry-text {
   font-size: 0.85rem;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-right: auto;
   line-height: 1.3;
   font-weight: 400;
@@ -2414,21 +2414,21 @@ box.clipboard {
 }
 .clipboard-list button.clipboard-entry.image-entry .entry-image {
   border-radius: 4px;
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   transition: all 0.15s ease;
 }
 .clipboard-list button.clipboard-entry.image-entry.selected .entry-image {
-  border-color: rgba(184, 202, 199, 0.4);
-  box-shadow: 0 2px 8px rgba(184, 202, 199, 0.3);
+  border-color: rgba(255, 178, 183, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 178, 183, 0.3);
 }
 .clipboard-list button.clipboard-entry.image-entry:hover .entry-image {
-  border-color: rgba(227, 226, 225, 0.15);
+  border-color: rgba(226, 226, 226, 0.15);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 .clipboard-list label.no-entries {
   padding: 30px 16px;
-  color: rgba(227, 226, 225, 0.5);
+  color: rgba(226, 226, 226, 0.5);
   font-style: italic;
   font-size: 0.85rem;
   font-weight: 400;
@@ -2450,22 +2450,22 @@ box.window-switcher-background {
 }
 box.window-switcher-background .window-switcher {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 19, 0.1);
-  background: rgba(18, 20, 19, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(19, 19, 19, 0.1);
+  background: rgba(19, 19, 19, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(18, 20, 19, 0.7);
+  background-color: rgba(19, 19, 19, 0.7);
   padding: 1rem;
 }
 box.window-switcher-background .window-switcher .search-section {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
-  background-color: rgba(184, 202, 199, 0.15);
+  background-color: rgba(255, 178, 183, 0.15);
   padding: 0.4rem;
 }
 box.window-switcher-background .window-switcher .search-section label.search-icon {
@@ -2478,7 +2478,7 @@ box.window-switcher-background .window-switcher .search-section entry.search-ent
   padding: 0.25rem 0.4rem;
   background: transparent;
   border: none;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
 }
 box.window-switcher-background .window-switcher .search-section entry.search-entry:focus {
   outline: none;
@@ -2486,7 +2486,7 @@ box.window-switcher-background .window-switcher .search-section entry.search-ent
 }
 box.window-switcher-background .window-switcher .search-section .shortcut-hint {
   font-size: 0.7rem;
-  color: rgba(227, 226, 225, 0.6);
+  color: rgba(226, 226, 226, 0.6);
   margin: 0 0.5rem;
 }
 box.window-switcher-background .window-switcher .window-grid {
@@ -2495,17 +2495,17 @@ box.window-switcher-background .window-switcher .window-grid {
 box.window-switcher-background .window-switcher button.window-card {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(56, 57, 57, 0.6);
+  background: rgba(57, 57, 57, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(56, 57, 57, 0.6);
-  border: 1px solid rgba(227, 226, 225, 0.1);
+  background: rgba(57, 57, 57, 0.6);
+  border: 1px solid rgba(226, 226, 226, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.window-switcher-background .window-switcher button.window-card:hover {
-  background: rgba(56, 57, 57, 0.99);
+  background: rgba(57, 57, 57, 0.99);
 }
 box.window-switcher-background .window-switcher button.window-card {
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -2515,38 +2515,38 @@ box.window-switcher-background .window-switcher button.window-card {
   min-height: 160px;
 }
 box.window-switcher-background .window-switcher button.window-card.selected {
-  background: rgba(184, 202, 199, 0.3);
-  border-color: rgb(184, 202, 199);
-  box-shadow: 0 0 20px rgba(184, 202, 199, 0.5);
+  background: rgba(255, 178, 183, 0.3);
+  border-color: rgb(255, 178, 183);
+  box-shadow: 0 0 20px rgba(255, 178, 183, 0.5);
 }
 box.window-switcher-background .window-switcher button.window-card.selected .window-card-title {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   font-weight: 600;
 }
 box.window-switcher-background .window-switcher button.window-card.selected .window-icon-large {
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
 }
 box.window-switcher-background .window-switcher button.window-card .window-icon-large {
   font-family: "Material Symbols Outlined";
   font-size: 4rem;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin-bottom: 0.5rem;
 }
 box.window-switcher-background .window-switcher button.window-card .window-card-title {
   font-size: 1rem;
   font-weight: 500;
-  color: rgb(227, 226, 225);
+  color: rgb(226, 226, 226);
   margin: 0.3rem 0;
 }
 box.window-switcher-background .window-switcher button.window-card .window-card-workspace {
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgb(184, 202, 199);
+  color: rgb(255, 178, 183);
   margin: 0.2rem 0;
 }
 box.window-switcher-background .window-switcher button.window-card .window-card-subtitle {
   font-size: 0.75rem;
-  color: rgba(227, 226, 225, 0.5);
+  color: rgba(226, 226, 226, 0.5);
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small {
   border-radius: calc(16px - 0.4rem - 2px);
@@ -2555,16 +2555,16 @@ box.window-switcher-background .window-switcher button.window-card .window-badge
   margin: 2px 4px 0 0;
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small.fullscreen-badge {
-  background-color: rgba(184, 202, 199, 0.2);
-  color: rgb(184, 202, 199);
+  background-color: rgba(255, 178, 183, 0.2);
+  color: rgb(255, 178, 183);
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small.floating-badge {
-  background-color: rgba(227, 226, 225, 0.2);
-  color: rgb(227, 226, 225);
+  background-color: rgba(226, 226, 226, 0.2);
+  color: rgb(226, 226, 226);
 }
 box.window-switcher-background .window-switcher label.no-entries {
   padding: 2rem;
-  color: rgba(227, 226, 225, 0.6);
+  color: rgba(226, 226, 226, 0.6);
   font-style: italic;
 }
 
@@ -2575,6 +2575,172 @@ button.invisible-close {
   opacity: 0;
   padding: 0;
   margin: 0;
+}
+
+/* variables & mixins */
+/* general styles */
+.dock-window {
+  background-color: transparent;
+}
+
+.dock-container {
+  background-color: transparent;
+  padding: 6px;
+  min-height: 70px;
+}
+
+.dock {
+  background-color: rgba(19, 19, 19, 0.2);
+  padding: 3px 5px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.dock.hidden {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.dock-item {
+  padding: 2px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  min-width: 44px;
+  max-width: 44px;
+  min-height: 44px;
+  max-height: 44px;
+}
+.dock-item .icon-background {
+  background-color: rgba(226, 226, 226, 0.08);
+  border-radius: calc(8px - 2px);
+  padding: 6px;
+  min-width: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.dock-item image {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.dock-item:hover {
+  margin-top: -6px;
+}
+.dock-item:hover .icon-background {
+  background-color: rgba(226, 226, 226, 0.12);
+}
+.dock-item:hover image {
+  opacity: 1;
+}
+.dock-item.active .icon-background {
+  background-color: rgba(255, 178, 183, 0.25);
+}
+.dock-item.active image {
+  opacity: 1;
+}
+.dock.hidden .dock-item:nth-child(1) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(0 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(1) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(0 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(2) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(1 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(2) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(1 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(3) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(2 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(3) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(2 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(4) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(3 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(4) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(3 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(5) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(4 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(5) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(4 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(6) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(5 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(6) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(5 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(7) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(6 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(7) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(6 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(8) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(7 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(8) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(7 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(9) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(8 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(9) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(8 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(10) .icon-background {
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(9 - var(--last-hovered, 4)) * 0.05s);
+}
+.dock.hidden .dock-item:nth-child(10) image {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-delay: calc(abs(9 - var(--last-hovered, 4)) * 0.05s);
 }
 
 /*# sourceMappingURL=main.css.map */
