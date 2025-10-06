@@ -1,10 +1,13 @@
+# Starship Configuration - SHARP Project Enhanced
+
 format = """
 [┌─────────────────────────────────────────────────────────────────────┐](bold magenta)
-[│](bold magenta)$os$username$hostname$directory$git_branch$git_status$cmd_duration[│](bold magenta)
+[│](bold magenta)$os$username$hostname$directory$python$git_branch$git_status$docker_context$nodejs$rust$golang$cmd_duration[│](bold magenta)
 [└─](bold magenta)$character"""
 
 right_format = """$time"""
 
+# Operating System
 [os]
 format = "[$symbol ]($style)"
 style = "bold blue"
@@ -13,7 +16,13 @@ disabled = false
 [os.symbols]
 Arch = ""
 Linux = ""
+Ubuntu = ""
+Debian = ""
+Fedora = ""
+Macos = ""
+Windows = ""
 
+# User and Host
 [username]
 format = "[$user]($style)"
 style_user = "bold cyan"
@@ -24,19 +33,110 @@ format = "[@$hostname ]($style)"
 style = "bold green"
 ssh_only = false
 
+# Directory
 [directory]
 format = "[$path ]($style)"
 style = "bold red"
 truncation_length = 4
+truncate_to_repo = true
 
+# Python Environment
+[python]
+format = '[(\($virtualenv\) )]($style)'
+style = "bold yellow"
+symbol = " "
+pyenv_version_name = false
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "requirements.txt", "pyproject.toml", "setup.py"]
+detect_folders = []
+
+# Git
 [git_branch]
 format = "[on $branch ]($style)"
 style = "bold magenta"
+symbol = " "
 
 [git_status]
 format = "([$all_status$ahead_behind ]($style))"
 style = "bold red"
+conflicted = "="
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "~"
+deleted = "✗"
 
+[git_commit]
+commit_hash_length = 7
+tag_symbol = " "
+
+# Docker
+[docker_context]
+format = "[via $symbol$context ]($style)"
+style = "bold blue"
+symbol = " "
+only_with_files = true
+detect_extensions = []
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_folders = []
+
+# Node.js
+[nodejs]
+format = "[via $symbol($version )]($style)"
+style = "bold green"
+symbol = " "
+detect_extensions = ["js", "mjs", "cjs", "ts"]
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
+
+# Rust
+[rust]
+format = "[via $symbol($version )]($style)"
+style = "bold red"
+symbol = " "
+detect_extensions = ["rs"]
+detect_files = ["Cargo.toml"]
+detect_folders = []
+
+# Go
+[golang]
+format = "[via $symbol($version )]($style)"
+style = "bold cyan"
+symbol = " "
+detect_extensions = ["go"]
+detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock"]
+detect_folders = []
+
+# C/C++
+[c]
+format = "[via $symbol($version(-$name) )]($style)"
+style = "bold blue"
+symbol = " "
+detect_extensions = ["c", "h"]
+detect_files = []
+detect_folders = []
+
+# Java
+[java]
+format = "[via $symbol($version )]($style)"
+style = "bold red"
+symbol = " "
+detect_extensions = ["java", "class", "jar", "gradle", "clj", "cljc"]
+detect_files = ["pom.xml", "build.gradle.kts", "build.sbt", ".java-version"]
+detect_folders = []
+
+# Package Version
+[package]
+format = "[is $symbol$version ]($style)"
+style = "bold yellow"
+symbol = " "
+display_private = false
+
+# Command Duration
 [character]
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
@@ -45,8 +145,25 @@ error_symbol = "[❯](bold red)"
 format = "[took $duration ]($style)"
 style = "bold cyan"
 min_time = 2_000
+show_milliseconds = false
 
+# Time
 [time]
 format = "[$time]($style)"
 style = "bold blue"
 time_format = "%H:%M:%S"
+disabled = false
+
+# Status
+[status]
+format = "[$symbol$status]($style) "
+style = "bold red"
+symbol = "✖ "
+disabled = false
+
+# Shell
+[shell]
+fish_indicator = ""
+bash_indicator = "bsh"
+zsh_indicator = "zsh"
+disabled = true

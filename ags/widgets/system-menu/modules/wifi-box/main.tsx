@@ -26,12 +26,9 @@ export const WiFiBox = () => {
   const [isExpanded, setIsExpanded] = createState(false);
 
   return (
-    <box
-      orientation={Gtk.Orientation.VERTICAL}
-      cssClasses={["wifi-menu", "toggle"]}
-    >
+    <box cssClasses={["toggle"]} orientation={Gtk.Orientation.VERTICAL}>
       {/* WiFi Toggle Header */}
-      <box cssClasses={["toggle", "wifi-toggle"]}>
+      <box>
         <button
           onClicked={() => {
             network.wifi.enabled
