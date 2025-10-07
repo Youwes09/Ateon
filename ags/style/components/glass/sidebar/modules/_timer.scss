@@ -2,45 +2,43 @@
 @use "../../../../abstracts" as *;
 @use "sass:color";
 
+$is-dark: color.lightness($bg) < 50%;
+
 .timer-widget {
   @include widget-container;
   background: linear-gradient(
     135deg,
-    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
-    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    color.adjust($fg, $alpha: -0.88),
+    color.adjust($fg, $alpha: -0.92)
   );
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid color.adjust($fg, $alpha: -0.88);
-  border-radius: 20px;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color.adjust($fg, $alpha: -0.85);
+  border-radius: 16px;
   padding: $spacing-md;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 8px 20px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+    inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 
-  // Glass reflection effect
   &::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 40%;
     background: linear-gradient(
       to bottom,
-      color.adjust($fg, $alpha: -0.95),
+      color.adjust($fg, $alpha: -0.93),
       transparent
     );
-    border-radius: 20px 20px 0 0;
+    border-radius: inherit;
     pointer-events: none;
     z-index: 0;
   }
 
-  // Widget header
   .widget-header {
     display: flex;
     align-items: center;
@@ -53,38 +51,36 @@
       color: $primary;
       margin-right: $spacing-xs;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-      text-shadow: 0 0 12px color.adjust($primary, $alpha: -0.6);
     }
 
     .header-title {
       font-size: calc(#{$font} * 1.1);
       font-weight: 700;
-      color: $fg;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     }
   }
 
-  // Add timer button
   .timer-add-button {
     @include button;
     background: linear-gradient(
       135deg,
-      color.adjust($primary, $alpha: -0.88),
-      color.adjust($primary, $alpha: -0.92)
+      color.adjust($fg, $alpha: -0.88),
+      color.adjust($fg, $alpha: -0.92)
     );
-    border: 1px solid color.adjust($primary, $alpha: -0.8);
-    border-radius: 14px;
+    border: 1px solid color.adjust($fg, $alpha: -0.85);
+    border-radius: 12px;
     padding: $spacing-sm $spacing-md;
     margin: 0;
-    color: $primary;
+    color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
     font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 
-      0 2px 8px color.adjust($primary, $alpha: -0.85),
-      0 0 15px color.adjust($primary, $alpha: -0.9),
-      inset 0 1px 1px color.adjust($primary, $alpha: -0.85, $lightness: 8%);
+    transition: all 250ms ease;
     position: relative;
     overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.9),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 
     &::before {
       content: "";
@@ -92,52 +88,52 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 50%;
+      height: 40%;
       background: linear-gradient(
         to bottom,
-        color.adjust($primary, $alpha: -0.85, $lightness: 10%),
+        color.adjust($fg, $alpha: -0.9),
         transparent
       );
-      border-radius: 14px 14px 0 0;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      border-radius: inherit;
     }
 
     &:hover {
       background: linear-gradient(
         135deg,
-        color.adjust($primary, $alpha: -0.85),
-        color.adjust($primary, $alpha: -0.9)
+        color.adjust($fg, $alpha: -0.85),
+        color.adjust($fg, $alpha: -0.9)
       );
-      border-color: color.adjust($primary, $alpha: -0.75);
-      transform: translateY(-2px);
-      box-shadow: 
-        0 4px 12px color.adjust($primary, $alpha: -0.75),
-        0 0 20px color.adjust($primary, $alpha: -0.85),
-        inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%);
+      border-color: color.adjust($fg, $alpha: -0.8);
+      transform: translateY(-1px);
+
+      &::before {
+        opacity: 1;
+      }
     }
 
     .timer-add-icon {
       @include material-icon(20px);
-      color: $primary;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-      text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
+      color: if($is-dark, color.adjust($fg, $alpha: -0.3), color.adjust($bg, $lightness: -35%));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
     }
   }
 
-  // Timer dialog
   .timer-dialog {
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.92),
-      color.adjust($fg, $alpha: -0.95)
+      color.adjust($fg, $alpha: -0.9),
+      color.adjust($fg, $alpha: -0.93)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.9);
-    border-radius: 16px;
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 12px;
     padding: $spacing-md;
     margin: $spacing-sm 0 0 0;
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
     position: relative;
     overflow: hidden;
 
@@ -147,25 +143,24 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 50%;
+      height: 40%;
       background: linear-gradient(
         to bottom,
         color.adjust($fg, $alpha: -0.92),
         transparent
       );
-      border-radius: 16px 16px 0 0;
+      border-radius: inherit;
       pointer-events: none;
     }
 
     .dialog-title {
       font-size: calc(#{$font} * 1.05);
       font-weight: 600;
-      color: $fg;
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
       margin-bottom: $spacing-sm;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
-    // Time picker
     .time-picker-container {
       margin: $spacing-sm 0;
     }
@@ -173,23 +168,24 @@
     .time-picker-label {
       font-size: calc(#{$font} * 0.85);
       font-weight: 600;
-      color: color.adjust($fg, $alpha: -0.3);
-      text-transform: lowercase;
+      color: if($is-dark, color.adjust($fg, $alpha: -0.4), color.adjust($bg, $lightness: -30%));
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: $spacing-xs;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     .time-picker-scroll {
       background: linear-gradient(
         135deg,
-        color.adjust($fg, $alpha: -0.94),
-        color.adjust($fg, $alpha: -0.96)
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.94)
       );
-      border: 1px solid color.adjust($fg, $alpha: -0.92);
-      border-radius: 12px;
+      border: 1px solid color.adjust($fg, $alpha: -0.9);
+      border-radius: 10px;
       box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.93),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 
       scrollbar {
         background: transparent;
@@ -206,8 +202,8 @@
         slider {
           background: linear-gradient(
             135deg,
-            color.adjust($primary, $alpha: -0.7),
-            color.adjust($primary, $alpha: -0.8)
+            color.adjust($primary, $alpha: -0.3),
+            color.adjust($primary, $alpha: -0.4)
           );
           border-radius: 10px;
           min-width: 6px;
@@ -217,12 +213,12 @@
           &:hover {
             background: linear-gradient(
               135deg,
-              color.adjust($primary, $alpha: -0.6),
-              color.adjust($primary, $alpha: -0.75)
+              color.adjust($primary, $alpha: -0.2),
+              color.adjust($primary, $alpha: -0.3)
             );
             box-shadow: 
-              0 2px 6px color.adjust($primary, $alpha: -0.7),
-              0 0 10px color.adjust($primary, $alpha: -0.85);
+              0 2px 4px color.adjust($primary, $alpha: -0.7),
+              0 0 8px color.adjust($primary, $alpha: -0.85);
           }
         }
       }
@@ -235,36 +231,35 @@
       border-radius: 8px;
       padding: $spacing-xs $spacing-sm;
       font-family: "JetBrainsMono Nerd Font", monospace;
-      font-size: calc(#{$font} * 1.05);
-      color: color.adjust($fg, $alpha: -0.4);
+      font-size: calc(#{$font} * 0.95);
+      color: if($is-dark, color.adjust($fg, $alpha: -0.5), color.adjust($bg, $lightness: -30%));
       transition: all 150ms ease;
 
       &:hover {
         background: linear-gradient(
           135deg,
-          color.adjust($fg, $alpha: -0.92),
-          color.adjust($fg, $alpha: -0.94)
+          color.adjust($fg, $alpha: -0.9),
+          color.adjust($fg, $alpha: -0.92)
         );
-        border-color: color.adjust($fg, $alpha: -0.88);
-        color: $fg;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        border-color: color.adjust($fg, $alpha: -0.85);
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
       }
     }
 
     .time-picker-item-active {
       background: linear-gradient(
         135deg,
-        color.adjust($primary, $alpha: -0.85),
-        color.adjust($primary, $alpha: -0.9)
+        color.adjust($primary, $alpha: -0.75),
+        color.adjust($primary, $alpha: -0.82)
       );
-      border-color: color.adjust($primary, $alpha: -0.75);
+      border-color: color.adjust($primary, $alpha: -0.7);
       color: $primary;
       font-weight: 700;
-      font-size: calc(#{$font} * 1.2);
+      font-size: calc(#{$font} * 1.1);
       box-shadow: 
-        0 2px 8px color.adjust($primary, $alpha: -0.8),
-        0 0 15px color.adjust($primary, $alpha: -0.88),
-        inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%);
+        inset 0 1px 2px rgba(0, 0, 0, 0.2),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
       position: relative;
       overflow: hidden;
 
@@ -287,13 +282,10 @@
       &:hover {
         background: linear-gradient(
           135deg,
-          color.adjust($primary, $alpha: -0.82),
-          color.adjust($primary, $alpha: -0.88)
+          color.adjust($primary, $alpha: -0.7),
+          color.adjust($primary, $alpha: -0.8)
         );
-        border-color: color.adjust($primary, $alpha: -0.7);
-        box-shadow: 
-          0 4px 12px color.adjust($primary, $alpha: -0.75),
-          0 0 20px color.adjust($primary, $alpha: -0.85);
+        border-color: color.adjust($primary, $alpha: -0.65);
       }
     }
 
@@ -323,12 +315,15 @@
       &-cancel {
         background: linear-gradient(
           135deg,
-          color.adjust($fg, $alpha: -0.92),
-          color.adjust($fg, $alpha: -0.95)
+          color.adjust($fg, $alpha: -0.9),
+          color.adjust($fg, $alpha: -0.93)
         );
         border: 1px solid color.adjust($fg, $alpha: -0.88);
-        color: $fg;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 
+          inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 
         &::before {
           background: linear-gradient(
@@ -341,12 +336,11 @@
         &:hover {
           background: linear-gradient(
             135deg,
-            color.adjust($fg, $alpha: -0.88),
-            color.adjust($fg, $alpha: -0.92)
+            color.adjust($fg, $alpha: -0.85),
+            color.adjust($fg, $alpha: -0.9)
           );
           border-color: color.adjust($fg, $alpha: -0.82);
           transform: translateY(-1px);
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 
           &::before {
             opacity: 1;
@@ -356,35 +350,33 @@
 
       &-confirm {
         background: linear-gradient(
-          135deg,
-          color.adjust($primary, $alpha: -0.88),
-          color.adjust($primary, $alpha: -0.92)
+          135deg, 
+          color.adjust($primary, $alpha: -0.75), 
+          color.adjust($primary, $alpha: -0.82)
         );
-        border: 1px solid color.adjust($primary, $alpha: -0.8);
+        border: 1px solid color.adjust($primary, $alpha: -0.7);
         color: $primary;
         box-shadow: 
-          0 2px 8px color.adjust($primary, $alpha: -0.85),
-          0 0 15px color.adjust($primary, $alpha: -0.9);
+          inset 0 1px 2px rgba(0, 0, 0, 0.2),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
 
         &::before {
           background: linear-gradient(
             to bottom,
-            color.adjust($primary, $alpha: -0.85, $lightness: 10%),
+            color.adjust($primary, $alpha: -0.88, $lightness: 10%),
             transparent
           );
         }
 
         &:hover {
           background: linear-gradient(
-            135deg,
-            color.adjust($primary, $alpha: -0.85),
-            color.adjust($primary, $alpha: -0.9)
+            135deg, 
+            color.adjust($primary, $alpha: -0.7), 
+            color.adjust($primary, $alpha: -0.8)
           );
-          border-color: color.adjust($primary, $alpha: -0.75);
           transform: translateY(-2px);
-          box-shadow: 
-            0 4px 12px color.adjust($primary, $alpha: -0.75),
-            0 0 20px color.adjust($primary, $alpha: -0.85);
+          border-color: color.adjust($primary, $alpha: -0.65);
 
           &::before {
             opacity: 1;
@@ -394,101 +386,76 @@
     }
   }
 
-  // Timer list
   .timer-list {
     margin-top: $spacing-sm;
     position: relative;
     z-index: 1;
   }
 
-  // Empty state
   .timer-empty {
     padding: calc(#{$spacing-md} * 2) 0;
     text-align: center;
 
     .empty-icon {
       @include material-icon(64px);
-      color: color.adjust($fg, $alpha: -0.6);
+      color: if($is-dark, color.adjust($fg, $alpha: -0.6), color.adjust($bg, $lightness: -30%));
       margin-bottom: $spacing-sm;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
 
     .empty-text {
       font-size: $font;
-      color: color.adjust($fg, $alpha: -0.5);
+      color: if($is-dark, color.adjust($fg, $alpha: -0.5), color.adjust($bg, $lightness: -35%));
       font-style: italic;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
   }
 
-  // Timer item
   .timer-item {
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.92),
-      color.adjust($fg, $alpha: -0.95)
+      color.adjust($fg, $alpha: -0.9),
+      color.adjust($fg, $alpha: -0.93)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.9);
-    border-radius: 14px;
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 12px;
     padding: $spacing-sm $spacing-md;
     margin: $spacing-xs 0;
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
     transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.92),
-        transparent
-      );
-      border-radius: 14px 14px 0 0;
-      pointer-events: none;
-    }
 
     &:hover {
       background: linear-gradient(
         135deg,
-        color.adjust($fg, $alpha: -0.9),
-        color.adjust($fg, $alpha: -0.93)
+        color.adjust($fg, $alpha: -0.85),
+        color.adjust($fg, $alpha: -0.9)
       );
-      border-color: color.adjust($fg, $alpha: -0.88);
+      border-color: color.adjust($fg, $alpha: -0.8);
       transform: translateY(-1px);
-      box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
     }
 
     .timer-time {
       font-family: "JetBrainsMono Nerd Font", monospace;
       font-size: calc(#{$font} * 1.5);
       font-weight: 600;
-      color: color.adjust($fg, $alpha: -0.3);
+      color: if($is-dark, color.adjust($fg, $alpha: -0.3), color.adjust($bg, $lightness: -35%));
       transition: all 200ms ease;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     .timer-active {
       color: $primary;
       font-weight: 700;
-      text-shadow: 0 0 12px color.adjust($primary, $alpha: -0.6);
     }
 
-    // Timer buttons
     .timer-button {
       @include button;
       background: linear-gradient(
         135deg,
-        color.adjust($fg, $alpha: -0.94),
-        color.adjust($fg, $alpha: -0.96)
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.94)
       );
       border: 1px solid color.adjust($fg, $alpha: -0.9);
       border-radius: 10px;
@@ -496,9 +463,11 @@
       min-width: 36px;
       min-height: 36px;
       transition: all 200ms ease;
+      box-shadow: 
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.93),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.05);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 
       &::before {
         content: "";
@@ -514,8 +483,7 @@
       }
 
       &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
 
         &::before {
           opacity: 1;
@@ -527,57 +495,20 @@
         filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
       }
 
-      &-start {
-        background: linear-gradient(
-          135deg,
-          color.adjust($primary, $alpha: -0.9),
-          color.adjust($primary, $alpha: -0.93)
-        );
-        border-color: color.adjust($primary, $alpha: -0.85);
-        box-shadow: 
-          0 2px 6px color.adjust($primary, $alpha: -0.88),
-          0 0 12px color.adjust($primary, $alpha: -0.92);
-
-        .timer-button-icon {
-          color: $primary;
-          text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
-        }
-
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($primary, $alpha: -0.88, $lightness: 10%),
-            transparent
-          );
-        }
-
-        &:hover {
-          background: linear-gradient(
-            135deg,
-            color.adjust($primary, $alpha: -0.85),
-            color.adjust($primary, $alpha: -0.9)
-          );
-          border-color: color.adjust($primary, $alpha: -0.75);
-          box-shadow: 
-            0 4px 10px color.adjust($primary, $alpha: -0.8),
-            0 0 20px color.adjust($primary, $alpha: -0.88);
-        }
-      }
-
+      &-start,
       &-stop {
         background: linear-gradient(
           135deg,
-          color.adjust($primary, $alpha: -0.9),
-          color.adjust($primary, $alpha: -0.93)
+          color.adjust($primary, $alpha: -0.85),
+          color.adjust($primary, $alpha: -0.9)
         );
-        border-color: color.adjust($primary, $alpha: -0.85);
+        border-color: color.adjust($primary, $alpha: -0.8);
         box-shadow: 
-          0 2px 6px color.adjust($primary, $alpha: -0.88),
-          0 0 12px color.adjust($primary, $alpha: -0.92);
+          inset 0 1px 1px color.adjust($primary, $alpha: -0.88),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 
         .timer-button-icon {
           color: $primary;
-          text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
         }
 
         &::before {
@@ -591,13 +522,10 @@
         &:hover {
           background: linear-gradient(
             135deg,
-            color.adjust($primary, $alpha: -0.85),
-            color.adjust($primary, $alpha: -0.9)
+            color.adjust($primary, $alpha: -0.8),
+            color.adjust($primary, $alpha: -0.88)
           );
           border-color: color.adjust($primary, $alpha: -0.75);
-          box-shadow: 
-            0 4px 10px color.adjust($primary, $alpha: -0.8),
-            0 0 20px color.adjust($primary, $alpha: -0.88);
         }
       }
 
@@ -613,8 +541,8 @@
         &:hover {
           background: linear-gradient(
             135deg,
-            color.adjust($fg, $alpha: -0.9),
-            color.adjust($fg, $alpha: -0.93)
+            color.adjust($fg, $alpha: -0.88),
+            color.adjust($fg, $alpha: -0.92)
           );
           border-color: color.adjust($fg, $alpha: -0.85);
         }
@@ -623,17 +551,16 @@
       &-delete {
         background: linear-gradient(
           135deg,
-          color.adjust($error, $alpha: -0.92),
-          color.adjust($error, $alpha: -0.95)
+          color.adjust($error, $alpha: -0.9),
+          color.adjust($error, $alpha: -0.93)
         );
         border-color: color.adjust($error, $alpha: -0.85);
         box-shadow: 
-          0 2px 6px color.adjust($error, $alpha: -0.9),
-          0 0 12px color.adjust($error, $alpha: -0.94);
+          inset 0 1px 1px color.adjust($error, $alpha: -0.92),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 
         .timer-button-icon {
           color: $error;
-          text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
         }
 
         &::before {
@@ -647,18 +574,14 @@
         &:hover {
           background: linear-gradient(
             135deg,
-            color.adjust($error, $alpha: -0.88),
-            color.adjust($error, $alpha: -0.92)
+            color.adjust($error, $alpha: -0.85),
+            color.adjust($error, $alpha: -0.9)
           );
           border-color: color.adjust($error, $alpha: -0.75);
-          box-shadow: 
-            0 4px 10px color.adjust($error, $alpha: -0.8),
-            0 0 20px color.adjust($error, $alpha: -0.88);
         }
       }
     }
 
-    // Progress bar
     .timer-progress-container {
       background: linear-gradient(
         135deg,
@@ -674,45 +597,37 @@
 
     .timer-progress-bar {
       background: linear-gradient(
-        90deg,
-        color.adjust($primary, $alpha: -0.3),
-        color.adjust($primary, $alpha: -0.2, $lightness: 10%)
+        135deg,
+        color.adjust($primary, $alpha: -0.2),
+        color.adjust($primary, $alpha: -0.3)
       );
       border-radius: 8px;
       min-height: 6px;
       transition: min-width 1000ms linear;
       box-shadow: 
-        0 0 12px color.adjust($primary, $alpha: -0.6),
-        inset 0 1px 1px color.adjust($primary, $alpha: -0.4, $lightness: 15%);
-      position: relative;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 50%;
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.5, $lightness: 20%),
-          transparent
-        );
-        border-radius: 8px 8px 0 0;
-      }
+        inset 0 1px 1px color.adjust($primary, $alpha: -0.4, $lightness: 15%),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.1);
     }
   }
 
-  // Separators
   separator {
     background: linear-gradient(
       90deg,
       transparent,
-      color.adjust($fg, $alpha: -0.92),
+      color.adjust($fg, $alpha: -0.9),
       transparent
     );
     margin: $spacing-sm 0;
     min-height: 1px;
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
     opacity: 0.5;
   }
 }

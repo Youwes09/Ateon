@@ -9,23 +9,21 @@
   @include window;
   background: linear-gradient(
     135deg,
-    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
-    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    color.adjust($bg, $alpha: -0.15, $lightness: if($darkmode, 8%, -8%)),
+    color.adjust($bg, $alpha: -0.25, $lightness: if($darkmode, 2%, -4%))
   );
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border: 1px solid color.adjust($fg, $alpha: -0.75);
   border-radius: 20px;
   margin-top: $spacing-md;
   margin-right: $spacing-md;
   padding: $spacing-md;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 8px 20px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
 
   // Glass reflection effect
   &::before {
@@ -34,10 +32,10 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 40%;
     background: linear-gradient(
       to bottom,
-      color.adjust($fg, $alpha: -0.95),
+      color.adjust($fg, $alpha: -0.93),
       transparent
     );
     border-radius: 20px 20px 0 0;
@@ -63,18 +61,17 @@
 .system-menu-section {
   background: linear-gradient(
     135deg,
-    color.adjust($fg, $alpha: -0.92),
-    color.adjust($fg, $alpha: -0.95)
+    color.adjust($bg, $alpha: -0.30, $lightness: if($darkmode, 6%, -6%)),
+    color.adjust($bg, $alpha: -0.40, $lightness: if($darkmode, 3%, -3%))
   );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid color.adjust($fg, $alpha: -0.9);
+  border: 1px solid color.adjust($fg, $alpha: -0.75);
   border-radius: 14px;
   padding: $spacing-sm;
   margin-bottom: $spacing-sm;
   box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
   position: relative;
   overflow: hidden;
 
@@ -84,10 +81,10 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 40%;
     background: linear-gradient(
       to bottom,
-      color.adjust($fg, $alpha: -0.92),
+      color.adjust($fg, $alpha: -0.93),
       transparent
     );
     border-radius: 14px 14px 0 0;
@@ -114,25 +111,27 @@
     margin-right: $spacing-sm;
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.88),
-      color.adjust($fg, $alpha: -0.92)
+      color.adjust($fg, $alpha: -0.78),
+      color.adjust($fg, $alpha: -0.85)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.85);
+    border: 1px solid color.adjust($fg, $alpha: -0.75);
     border-radius: 10px;
     padding: 8px 12px;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 
     &:hover {
       background: linear-gradient(
         135deg,
-        color.adjust($primary, $alpha: -0.85),
-        color.adjust($primary, $alpha: -0.9)
+        color.adjust($primary, $alpha: -0.65),
+        color.adjust($primary, $alpha: -0.75)
       );
-      border-color: color.adjust($primary, $alpha: -0.75);
+      border-color: color.adjust($primary, $alpha: -0.6);
       box-shadow: 
-        0 2px 10px color.adjust($primary, $alpha: -0.75),
-        0 0 20px color.adjust($primary, $alpha: -0.88);
+        inset 0 1px 2px color.adjust($fg, $alpha: -0.75),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -148,6 +147,7 @@
   image,
   label {
     margin: $spacing-sm;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   .profile-options {
@@ -164,11 +164,11 @@
   
   image {
     margin: $spacing-sm;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
   }
 
   label {
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   trough {
@@ -177,11 +177,13 @@
     border-radius: 1.5rem;
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.88),
-      color.adjust($fg, $alpha: -0.92)
+      color.adjust($fg, $alpha: -0.78),
+      color.adjust($fg, $alpha: -0.85)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.85);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    border: 1px solid color.adjust($fg, $alpha: -0.75);
+    box-shadow: 
+      inset 0 2px 4px rgba(0, 0, 0, 0.25),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.15);
   }
 
   block {
@@ -196,8 +198,8 @@
       color.adjust($primary, $alpha: -0.25)
     );
     box-shadow: 
-      0 0 12px color.adjust($primary, $alpha: -0.5),
-      inset 0 1px 1px color.adjust($primary, $alpha: -0.3, $lightness: 15%);
+      inset 0 1px 2px color.adjust($primary, $alpha: -0.3, $lightness: 15%),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -215,7 +217,7 @@
 
 .arrow-indicator {
   @include animate;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 .arrow-down {
@@ -227,22 +229,20 @@
   @include window;
   background: linear-gradient(
     135deg,
-    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
-    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    color.adjust($bg, $alpha: -0.25, $lightness: if($darkmode, 8%, -8%)),
+    color.adjust($bg, $alpha: -0.35, $lightness: if($darkmode, 2%, -4%))
   );
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border: 1px solid color.adjust($fg, $alpha: -0.75);
   border-radius: 16px;
   margin: $spacing-sm 0;
   padding: $spacing-sm;
   box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.3),
-    0 6px 16px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
 
   &::before {
     content: "";
@@ -250,10 +250,10 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 40%;
     background: linear-gradient(
       to bottom,
-      color.adjust($fg, $alpha: -0.95),
+      color.adjust($fg, $alpha: -0.93),
       transparent
     );
     border-radius: 16px 16px 0 0;
@@ -265,10 +265,10 @@
   > box {
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.94),
-      color.adjust($fg, $alpha: -0.96)
+      color.adjust($bg, $alpha: -0.35, $lightness: if($darkmode, 4%, -4%)),
+      color.adjust($bg, $alpha: -0.45, $lightness: if($darkmode, 2%, -2%))
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.92);
+    border: 1px solid color.adjust($fg, $alpha: -0.8);
     border-radius: 12px;
     padding: $spacing-xs;
     position: relative;
@@ -288,21 +288,25 @@
   &:hover {
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.9),
-      color.adjust($fg, $alpha: -0.94)
+      color.adjust($fg, $alpha: -0.8),
+      color.adjust($fg, $alpha: -0.87)
     );
-    border-color: color.adjust($fg, $alpha: -0.88);
+    border-color: color.adjust($fg, $alpha: -0.75);
+    box-shadow: 
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.25);
   }
 
   image {
     &:first-child {
       margin-right: $spacing-sm;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     }
   }
 
   label {
     margin: 0 $spacing-sm;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -310,42 +314,42 @@
 .bluetooth-item-active {
   background: linear-gradient(
     135deg,
-    color.adjust($primary, $alpha: -0.85),
-    color.adjust($primary, $alpha: -0.9)
+    color.adjust($primary, $alpha: -0.65),
+    color.adjust($primary, $alpha: -0.75)
   );
-  border: 1px solid color.adjust($primary, $alpha: -0.75);
+  border: 1px solid color.adjust($primary, $alpha: -0.6);
   border-radius: 10px;
   margin: $spacing-xs;
   padding: $spacing-sm;
   box-shadow: 
-    0 2px 10px color.adjust($primary, $alpha: -0.8),
-    0 0 20px color.adjust($primary, $alpha: -0.88);
+    inset 0 1px 2px color.adjust($primary, $alpha: -0.5, $lightness: 15%),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .password-dialog {
   @include window-box;
   background: linear-gradient(
     135deg,
-    color.adjust($fg, $alpha: -0.92),
-    color.adjust($fg, $alpha: -0.95)
+    color.adjust($bg, $alpha: -0.30, $lightness: if($darkmode, 6%, -6%)),
+    color.adjust($bg, $alpha: -0.40, $lightness: if($darkmode, 3%, -3%))
   );
-  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border: 1px solid color.adjust($fg, $alpha: -0.75);
   border-radius: 12px;
   margin-bottom: $spacing-md;
   padding: $spacing-md;
 }
 
 .error-message {
-  color: $red;
+  color: if($darkmode, $error, color.adjust($error, $lightness: -20%));
   margin: $spacing-xs 0;
-  text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   font-weight: 600;
 }
 
 .section-label {
-  font-weight: bold;
+  font-weight: 600;
   margin: $spacing-sm 0 $spacing-xs 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .refresh-button,
@@ -353,25 +357,28 @@
 .settings-button {
   background: linear-gradient(
     135deg,
-    color.adjust($fg, $alpha: -0.88),
-    color.adjust($fg, $alpha: -0.92)
+    color.adjust($fg, $alpha: -0.78),
+    color.adjust($fg, $alpha: -0.85)
   );
-  border: 1px solid color.adjust($fg, $alpha: -0.85);
+  border: 1px solid color.adjust($fg, $alpha: -0.75);
   border-radius: 10px;
   margin: $spacing-sm;
   padding: 8px 12px;
   transition: all 0.2s ease;
+  box-shadow: 
+    inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 
   &:hover {
     background: linear-gradient(
       135deg,
-      color.adjust($primary, $alpha: -0.85),
-      color.adjust($primary, $alpha: -0.9)
+      color.adjust($primary, $alpha: -0.65),
+      color.adjust($primary, $alpha: -0.75)
     );
-    border-color: color.adjust($primary, $alpha: -0.75);
+    border-color: color.adjust($primary, $alpha: -0.6);
     box-shadow: 
-      0 2px 10px color.adjust($primary, $alpha: -0.75),
-      0 0 20px color.adjust($primary, $alpha: -0.88);
+      inset 0 1px 2px color.adjust($fg, $alpha: -0.75),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -387,32 +394,35 @@
   margin: $spacing-sm;
   background: linear-gradient(
     135deg,
-    color.adjust($primary, $alpha: -0.82),
-    color.adjust($primary, $alpha: -0.88)
+    color.adjust($primary, $alpha: -0.60),
+    color.adjust($primary, $alpha: -0.70)
   );
-  border: 1px solid color.adjust($primary, $alpha: -0.7);
+  border: 1px solid color.adjust($primary, $alpha: -0.55);
   border-radius: 10px;
   padding: 10px 16px;
   transition: all 0.2s ease;
   box-shadow: 
-    0 4px 12px color.adjust($primary, $alpha: -0.75),
-    0 0 20px color.adjust($primary, $alpha: -0.85);
+    inset 0 1px 2px color.adjust($primary, $alpha: -0.5, $lightness: 15%),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 
   &:hover {
     background: linear-gradient(
       135deg,
-      color.adjust($primary, $alpha: -0.75),
-      color.adjust($primary, $alpha: -0.82)
+      color.adjust($primary, $alpha: -0.50),
+      color.adjust($primary, $alpha: -0.60)
     );
-    border-color: color.adjust($primary, $alpha: -0.6);
+    border-color: color.adjust($primary, $alpha: -0.45);
     box-shadow: 
-      0 6px 16px color.adjust($primary, $alpha: -0.6),
-      0 0 30px color.adjust($primary, $alpha: -0.75);
-    transform: translateY(-2px);
+      inset 0 1px 3px color.adjust($primary, $alpha: -0.4, $lightness: 20%),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
   }
 
   &:active {
     transform: translateY(0);
+    box-shadow: 
+      inset 0 2px 4px rgba(0, 0, 0, 0.3),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -424,17 +434,17 @@
 
 image {
   margin: $spacing-sm;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 .password-search {
   @include window-box;
   background: linear-gradient(
     135deg,
-    color.adjust($fg, $alpha: -0.92),
-    color.adjust($fg, $alpha: -0.95)
+    color.adjust($bg, $alpha: -0.30, $lightness: if($darkmode, 6%, -6%)),
+    color.adjust($bg, $alpha: -0.40, $lightness: if($darkmode, 3%, -3%))
   );
-  border: 1px solid color.adjust($fg, $alpha: -0.88);
+  border: 1px solid color.adjust($fg, $alpha: -0.75);
   border-radius: 10px;
   padding: $spacing-sm;
 
@@ -447,9 +457,10 @@ image {
 
 .empty-label {
   margin: $spacing-sm;
-  color: $red;
-  text-shadow: 0 0 8px color.adjust($error, $alpha: -0.7);
+  color: if($darkmode, $error, color.adjust($error, $lightness: -20%));
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   font-style: italic;
+  font-weight: 500;
 }
 
 .saved-network {
@@ -463,14 +474,18 @@ image {
   &:hover {
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.9),
-      color.adjust($fg, $alpha: -0.94)
+      color.adjust($fg, $alpha: -0.8),
+      color.adjust($fg, $alpha: -0.87)
     );
-    border-color: color.adjust($fg, $alpha: -0.88);
+    border-color: color.adjust($fg, $alpha: -0.75);
+    box-shadow: 
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.25);
   }
 
   > label {
     margin-left: $spacing-sm;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 }
 

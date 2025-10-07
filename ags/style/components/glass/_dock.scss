@@ -25,8 +25,6 @@
   border: 1px solid color.adjust($fg, $alpha: -0.82);
   border-radius: 20px;
   box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.4),
-    0 4px 12px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.88),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -80,7 +78,6 @@
     min-height: 48px;
     transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.15),
       inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
       inset 0 -1px 1px rgba(0, 0, 0, 0.15);
     position: relative;
@@ -129,7 +126,6 @@
       min-width: 58px;
       min-height: 58px;
       box-shadow: 
-        0 6px 14px rgba(0, 0, 0, 0.22),
         inset 0 1px 2px color.adjust($fg, $alpha: -0.75),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 
@@ -204,9 +200,6 @@
         color.adjust($primary, $alpha: -0.82, $lightness: -3%)
       );
       box-shadow: 
-        0 0 20px color.adjust($primary, $alpha: -0.4),
-        0 0 40px color.adjust($primary, $alpha: -0.7),
-        0 4px 12px rgba(0, 0, 0, 0.3),
         inset 0 1px 2px color.adjust($primary, $alpha: -0.65, $lightness: 12%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 

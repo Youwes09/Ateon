@@ -2,39 +2,44 @@
 @use "../../../../abstracts" as *;
 @use "sass:color";
 
+$is-dark: color.lightness($bg) < 50%;
+
 .base-widget {
   @include widget-container;
 
-  /* Generic "header/content" row */
   .header-row {
     margin-bottom: $spacing-sm;
 
     .header-icon {
       min-width: 72px;
       min-height: 72px;
-      color: $fg;
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
       margin-bottom: 0.5rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     }
 
     .header-title {
       font-size: $font;
       font-weight: 700;
       margin-bottom: 0.2rem;
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     }
 
     .header-subtitle {
       font-size: $font;
-      color: $outline;
+      color: if($is-dark, $outline, color.adjust($bg, $lightness: -35%));
       margin-bottom: 0.2rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     .header-extra {
       font-size: $font;
-      color: $outline;
+      color: if($is-dark, $outline, color.adjust($bg, $lightness: -35%));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
   }
 
-  /* Generic "items row" for children */
   .items-row {
     margin-top: $spacing-sm;
 
@@ -43,18 +48,21 @@
 
       .item-title {
         font-size: $font;
-        color: $outline;
+        color: if($is-dark, $outline, color.adjust($bg, $lightness: -35%));
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       }
 
       .item-icon {
         margin: 0.3rem 0;
-        color: $fg;
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
       }
 
       .item-value {
         font-size: $font;
         font-weight: 500;
-        color: $fg;
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
       }
     }
   }

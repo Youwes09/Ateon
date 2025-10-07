@@ -2,21 +2,23 @@
 @use "../../../../abstracts" as *;
 @use "sass:color";
 
+$is-dark: color.lightness($bg) < 50%;
+
 .quick-actions-widget {
   background: linear-gradient(
     135deg,
-    color.adjust($fg, $alpha: -0.92),
-    color.adjust($fg, $alpha: -0.95)
+    color.adjust($fg, $alpha: -0.88),
+    color.adjust($fg, $alpha: -0.92)
   );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid color.adjust($fg, $alpha: -0.9);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color.adjust($fg, $alpha: -0.85);
   border-radius: 16px;
   padding: $spacing-md;
   margin: $spacing-md;
   box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+    inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 
@@ -26,13 +28,13 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 40%;
     background: linear-gradient(
       to bottom,
-      color.adjust($fg, $alpha: -0.92),
+      color.adjust($fg, $alpha: -0.93),
       transparent
     );
-    border-radius: 16px 16px 0 0;
+    border-radius: inherit;
     pointer-events: none;
     z-index: 0;
   }
@@ -46,13 +48,15 @@
       @include button;
       background: linear-gradient(
         135deg,
-        color.adjust($fg, $alpha: -0.9),
-        color.adjust($fg, $alpha: -0.94)
+        color.adjust($fg, $alpha: -0.85),
+        color.adjust($fg, $alpha: -0.9)
       );
-      border: 1px solid color.adjust($fg, $alpha: -0.88);
+      border: 1px solid color.adjust($fg, $alpha: -0.8);
       border-radius: 14px;
       margin: 0 $spacing-sm;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.88),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.1);
       transition: all 0.2s ease;
       position: relative;
       overflow: hidden;
@@ -69,7 +73,7 @@
           color.adjust($fg, $alpha: -0.88),
           transparent
         );
-        border-radius: 14px 14px 0 0;
+        border-radius: inherit;
         pointer-events: none;
         opacity: 0;
         transition: opacity 0.2s ease;
@@ -78,19 +82,20 @@
       &:hover {
         background: linear-gradient(
           135deg,
-          color.adjust($primary, $alpha: -0.85),
-          color.adjust($primary, $alpha: -0.9)
+          color.adjust($primary, $alpha: -0.75),
+          color.adjust($primary, $alpha: -0.82)
         );
-        border-color: color.adjust($primary, $alpha: -0.75);
+        border-color: color.adjust($primary, $alpha: -0.7);
         transform: translateY(-2px);
         box-shadow: 
-          0 4px 12px color.adjust($primary, $alpha: -0.75),
-          0 0 20px color.adjust($primary, $alpha: -0.85);
+          inset 0 1px 2px rgba(0, 0, 0, 0.2),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
 
         &::before {
           background: linear-gradient(
             to bottom,
-            color.adjust($primary, $alpha: -0.82, $lightness: 12%),
+            color.adjust($primary, $alpha: -0.88, $lightness: 10%),
             transparent
           );
           opacity: 1;
@@ -98,14 +103,15 @@
 
         .action-icon {
           color: $primary;
-          text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
         }
       }
 
       .action-icon {
         font-family: "Material Symbols Outlined";
         font-size: 24px;
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
         filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
         transition: all 0.2s ease;
       }
     }

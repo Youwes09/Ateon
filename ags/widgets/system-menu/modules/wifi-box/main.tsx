@@ -168,29 +168,30 @@ export const WiFiBox = () => {
           <box
             orientation={Gtk.Orientation.VERTICAL}
             visible={savedNetworks((saved) => {
-              const filtered = saved.filter(
-                (ssid) => !availableNetworks.get().some((n) => n.ssid === ssid),
-              );
-              return filtered.length > 0;
+              const availableSSIDs = new Set(availableNetworks.get().map((n) => n.ssid));
+              return saved.some((ssid) => !availableSSIDs.has(ssid));
             })}
           >
             <label label="Saved Networks" cssClasses={["section-label"]} />
             <For each={savedNetworks}>
               {(ssid) => {
-                // Only render if not in available networks
-                const shouldShow = !availableNetworks
-                  .get()
-                  .some((n) => n.ssid === ssid);
+                const isAvailable = availableNetworks.get().some((n) => n.ssid === ssid);
+                if (isAvailable) return null;
+
                 return (
-                  <box cssClasses={["saved-network"]} visible={shouldShow}>
-                    <label label={ssid} />
-                    <box hexpand={true} />
-                    <button
-                      label="Forget"
-                      cssClasses={["forget-button", "button"]}
-                      onClicked={() => forgetNetwork(ssid)}
-                    />
-                  </box>
+                  <button cssClasses={["network-item", "saved-network"]}>
+                    <box hexpand={true} valign={Gtk.Align.CENTER}>
+                      <label label={ssid} hexpand={true} xalign={0} />
+                      <button
+                        label="Forget"
+                        cssClasses={["forget-button"]}
+                        onClicked={(self, event) => {
+                          event?.stopPropagation();
+                          forgetNetwork(ssid);
+                        }}
+                      />
+                    </box>
+                  </button>
                 );
               }}
             </For>

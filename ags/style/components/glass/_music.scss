@@ -4,468 +4,182 @@
 
 .music.window {
   @include window;
-  background: none;
-  padding: 0;
-  margin-top: $spacing-md;
-
-  .blurred-cover {
-    border-radius: $round;
-    opacity: 0.6;
-    filter: blur(40px);
-    transform: scale(1.1);
-    
-    // Fallback when no cover art is available
-    &:not([file]) {
-      background: linear-gradient(135deg, 
-        $primary_container 0%, 
-        $secondary_container 50%, 
-        $tertiary_container 100%);
-    }
-  }
-
-  .cava-container {
-    cava {
-      opacity: 0.25;
-    }
-  }
-}
-
-.music.window .info {
-  margin: $spacing-md;
-  padding: $spacing-md;
-  gap: $spacing-sm;
-  min-width: 20rem;
-  max-width: 24rem;
+  // Semi-opaque base to ensure readability
   background: linear-gradient(
     135deg,
-    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
-    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    color.adjust($bg, $alpha: -0.25, $lightness: if($darkmode, 8%, -8%)),
+    color.adjust($bg, $alpha: -0.35, $lightness: if($darkmode, 2%, -4%))
   );
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid color.adjust($fg, $alpha: -0.88);
-  border-radius: $round2;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  padding: 0rem;
+  margin-top: $spacing-md;
+  border: 1px solid color.adjust($fg, $alpha: -0.75);
+  border-radius: 16px;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 8px 20px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
   position: relative;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 
-  // Glass reflection effect
+  // Subtle internal highlight - stays within container
   &::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 40%;
     background: linear-gradient(
       to bottom,
-      color.adjust($fg, $alpha: -0.95),
+      color.adjust($fg, $alpha: -0.93),
       transparent
     );
-    border-radius: $round2 $round2 0 0;
+    border-radius: 16px 16px 0 0;
     pointer-events: none;
     z-index: 0;
   }
 
-  label,
-  scale {
-    margin: 0.3rem 0;
+  .cover {
+    border-radius: $round2;
+    border: 1px solid color.adjust($fg, $alpha: -0.8);
+    box-shadow: 
+      inset 0 2px 4px rgba(0, 0, 0, 0.25),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 color.adjust($fg, $alpha: -0.85);
+    margin: $spacing-sm;
+    min-height: 13rem;
+    min-width: 13rem;
+    -gtk-icon-size: 15rem;
+    opacity: 0.95;
     position: relative;
     z-index: 1;
   }
 
-  // Light text for better contrast on cover art
+  .blurred-cover {
+    border-radius: $round;
+    opacity: 0.8;
+    box-shadow: 
+      inset 0 3px 6px rgba(0, 0, 0, 0.3),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 color.adjust($fg, $alpha: -0.9);
+  }
+
+  .cava-container {
+    position: relative;
+    z-index: 2;
+    
+    cava {
+      opacity: 0.2;
+    }
+  }
+}
+
+.music.window .info {
+  margin: $spacing-md;
+  position: relative;
+  z-index: 1;
+
+  label,
+  scale {
+    margin: 0.3rem 0;
+  }
+
+  // High contrast text for readability
   label,
   .title,
-  .artists,
   image {
-    @if not $darkmode {
-      color: $background;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    } @else {
-      color: $on_surface;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    }
-    position: relative;
-    z-index: 1;
+    color: if($darkmode, $fg, color.adjust($bg, $lightness: -40%));
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   label.position,
   label.length {
     font-size: 0.8rem;
+    margin-bottom: 0;
     font-weight: 500;
-    margin-bottom: 0.1rem;
-    opacity: 0.85;
   }
 
   scale {
-    margin-top: 0.2rem;
-    margin-bottom: 0.4rem;
-    
-    trough {
-      min-height: 4px;
-      border-radius: 2px;
-      background: linear-gradient(
-        135deg,
-        color.adjust($fg, $alpha: -0.92),
-        color.adjust($fg, $alpha: -0.95)
-      );
-      border: 1px solid color.adjust($fg, $alpha: -0.9);
-      box-shadow: 
-        inset 0 1px 2px rgba(0, 0, 0, 0.15),
-        0 1px 0 color.adjust($fg, $alpha: -0.95);
-      transition: all 0.2s ease;
-    }
-    
-    &:hover trough {
-      min-height: 6px;
-      background: linear-gradient(
-        135deg,
-        color.adjust($fg, $alpha: -0.88),
-        color.adjust($fg, $alpha: -0.92)
-      );
-      border-color: color.adjust($fg, $alpha: -0.85);
-    }
-    
-    highlight {
-      border-radius: 2px;
-      background: linear-gradient(
-        135deg,
-        color.adjust($primary, $alpha: -0.2),
-        color.adjust($primary, $alpha: -0.3)
-      );
-      box-shadow: 
-        0 0 8px color.adjust($primary, $alpha: -0.5),
-        inset 0 1px 0 color.adjust($primary, $alpha: -0.3, $lightness: 10%);
-      transition: all 0.2s ease;
-    }
-    
-    &:hover highlight {
-      background: linear-gradient(
-        135deg,
-        $primary,
-        color.adjust($primary, $alpha: -0.1, $lightness: -5%)
-      );
-      box-shadow: 
-        0 0 12px color.adjust($primary, $alpha: -0.3),
-        0 0 20px color.adjust($primary, $alpha: -0.6),
-        inset 0 1px 1px color.adjust($primary, $alpha: -0.2, $lightness: 15%);
-    }
-    
-    slider {
-      min-width: 12px;
-      min-height: 12px;
-      margin: -4px;
-      border-radius: 50;
-      background: linear-gradient(
-        135deg,
-        color.adjust($primary, $lightness: 10%),
-        $primary
-      );
-      border: 2px solid color.adjust($primary, $alpha: -0.5, $lightness: 15%);
-      box-shadow: 
-        0 2px 6px rgba(0, 0, 0, 0.3),
-        0 0 12px color.adjust($primary, $alpha: -0.5),
-        inset 0 1px 1px color.adjust($primary, $alpha: -0.3, $lightness: 20%);
-      transition: all 0.2s ease;
-      opacity: 0;
-      
-      &:hover {
-        transform: scale(1.15);
-        background: linear-gradient(
-          135deg,
-          color.adjust($primary, $lightness: 15%),
-          color.adjust($primary, $lightness: 5%)
-        );
-        box-shadow: 
-          0 3px 8px rgba(0, 0, 0, 0.4),
-          0 0 16px color.adjust($primary, $alpha: -0.3),
-          0 0 24px color.adjust($primary, $alpha: -0.6),
-          inset 0 1px 2px color.adjust($primary, $alpha: -0.2, $lightness: 25%);
-      }
-    }
-    
-    &:hover slider {
-      opacity: 1;
-    }
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   .title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.1rem;
-    letter-spacing: -0.01em;
-  }
-
-  .artists {
-    font-size: 0.9rem;
-    font-weight: 500;
-    opacity: 0.8;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    min-width: 14rem;
   }
 }
 
 .music.window .controls {
-  margin: $spacing-sm 0;
   position: relative;
   z-index: 1;
-  
+
   button {
-    margin: 0 0.6rem;
-    -gtk-icon-size: 1.2rem;
-    padding: 0.5rem 0.7rem;
-    border-radius: $round2;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    margin: 0 1.6rem;
+    -gtk-icon-size: 1.5rem;
+    border-radius: 10px;
+    padding: 8px;
+    // Higher opacity for better contrast
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.88),
-      color.adjust($fg, $alpha: -0.92)
+      color.adjust($fg, $alpha: -0.85),
+      color.adjust($fg, $alpha: -0.9)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.85);
+    border: 1px solid color.adjust($fg, $alpha: -0.75);
+    transition: all 0.2s ease;
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.15),
-      inset 0 1px 1px color.adjust($fg, $alpha: -0.82),
-      inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.25);
     position: relative;
     overflow: hidden;
-    
-    @if not $darkmode {
-      color: $background;
-    } @else {
-      color: $on_surface;
-    }
+    color: if($darkmode, $fg, color.adjust($bg, $lightness: -40%));
 
-    // Glass shine effect
+    // Subtle shine effect - contained
     &::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 40%;
+      height: 45%;
       background: linear-gradient(
         to bottom,
-        color.adjust($fg, $alpha: -0.87),
+        color.adjust($fg, $alpha: -0.88),
         transparent
       );
-      border-radius: $round2 $round2 0 0;
+      border-radius: 10px 10px 0 0;
       pointer-events: none;
-      transition: height 0.3s ease;
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
 
     &:hover {
-      transform: scale(1.05) translateY(-2px);
       background: linear-gradient(
         135deg,
-        color.adjust($primary, $alpha: -0.85),
-        color.adjust($primary, $alpha: -0.9)
+        color.adjust($fg, $alpha: -0.78),
+        color.adjust($fg, $alpha: -0.85)
       );
-      border-color: color.adjust($primary, $alpha: -0.75);
+      border-color: color.adjust($fg, $alpha: -0.7);
       box-shadow: 
-        0 4px 12px color.adjust($primary, $alpha: -0.7),
-        0 0 20px color.adjust($primary, $alpha: -0.85),
-        inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+        inset 0 1px 2px color.adjust($fg, $alpha: -0.75),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 
       &::before {
-        height: 50%;
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.8, $lightness: 10%),
-          transparent
-        );
-      }
-    }
-
-    &:active {
-      transform: scale(0.95);
-      box-shadow: 
-        0 2px 6px rgba(0, 0, 0, 0.2),
-        inset 0 1px 2px rgba(0, 0, 0, 0.2);
-    }
-
-    // Make center play/pause button more prominent
-    &[type="center"] {
-      -gtk-icon-size: 1.5rem;
-      padding: 0.6rem 0.8rem;
-      margin: 0 1rem;
-      background: linear-gradient(
-        135deg,
-        color.adjust($primary, $alpha: -0.82),
-        color.adjust($primary, $alpha: -0.88)
-      );
-      border-color: color.adjust($primary, $alpha: -0.7);
-      box-shadow: 
-        0 4px 12px color.adjust($primary, $alpha: -0.75),
-        0 0 20px color.adjust($primary, $alpha: -0.85),
-        inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.78, $lightness: 10%),
-          transparent
-        );
-      }
-
-      &:hover {
-        background: linear-gradient(
-          135deg,
-          color.adjust($primary, $alpha: -0.75),
-          color.adjust($primary, $alpha: -0.82)
-        );
-        border-color: color.adjust($primary, $alpha: -0.6);
-        box-shadow: 
-          0 6px 16px color.adjust($primary, $alpha: -0.6),
-          0 0 30px color.adjust($primary, $alpha: -0.75),
-          inset 0 1px 2px color.adjust($primary, $alpha: -0.65, $lightness: 15%),
-          inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+        opacity: 1;
       }
     }
   }
 }
 
 .music.window .player-info {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0;
   position: relative;
   z-index: 1;
-  
-  .player-icon-button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    
-    &:hover {
-      background: transparent;
-    }
-  }
-  
+
   .player-icon {
-    -gtk-icon-size: 1rem;
-    opacity: 0.75;
-    padding: 0.4rem;
-    border-radius: $round2;
-    background: linear-gradient(
-      135deg,
-      color.adjust($fg, $alpha: -0.9),
-      color.adjust($fg, $alpha: -0.94)
-    );
-    border: 1px solid color.adjust($fg, $alpha: -0.88);
-    box-shadow: 
-      0 2px 6px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.88),
-        transparent
-      );
-      border-radius: $round2 $round2 0 0;
-      pointer-events: none;
-    }
-    
-    &:hover {
-      opacity: 1;
-      background: linear-gradient(
-        135deg,
-        color.adjust($primary, $alpha: -0.85),
-        color.adjust($primary, $alpha: -0.9)
-      );
-      border-color: color.adjust($primary, $alpha: -0.75);
-      box-shadow: 
-        0 4px 10px color.adjust($primary, $alpha: -0.75),
-        0 0 18px color.adjust($primary, $alpha: -0.85),
-        inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%);
-      transform: scale(1.05) translateY(-1px);
-
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.8, $lightness: 10%),
-          transparent
-        );
-      }
-    }
-    
-    &:active {
-      transform: scale(0.95);
-      box-shadow: 
-        0 2px 6px rgba(0, 0, 0, 0.15),
-        inset 0 1px 2px rgba(0, 0, 0, 0.15);
-    }
-  }
-}
-
-.music.window .volume-control {
-  margin-top: $spacing-sm;
-  min-height: $spacing-sm;
-  position: relative;
-  z-index: 1;
-  
-  .volume-icon {
     -gtk-icon-size: $font;
-    margin: $spacing-sm;
-    opacity: 0.8;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-    
-    @if not $darkmode {
-      color: $background;
-    } @else {
-      color: $on_surface;
-    }
-  }
-  
-  scale {
-    trough {
-      margin: $spacing-sm;
-      min-height: $spacing-sm;
-      border-radius: 1.5rem;
-      background: linear-gradient(
-        135deg,
-        color.adjust($fg, $alpha: -0.9),
-        color.adjust($fg, $alpha: -0.94)
-      );
-      border: 1px solid color.adjust($fg, $alpha: -0.88);
-      box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.15),
-        0 1px 0 color.adjust($fg, $alpha: -0.95);
-      backdrop-filter: blur(10px);
-    }
-    
-    highlight {
-      border-radius: 1.5rem;
-      background: linear-gradient(
-        90deg,
-        color.adjust($primary, $alpha: -0.2),
-        color.adjust($primary, $alpha: -0.1)
-      );
-      box-shadow: 
-        0 0 10px color.adjust($primary, $alpha: -0.5),
-        inset 0 1px 1px color.adjust($primary, $alpha: -0.3, $lightness: 15%),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.15);
-    }
-    
-    slider {
-      min-width: 0;
-      min-height: 0;
-      background: transparent;
-      border: none;
-    }
   }
 }

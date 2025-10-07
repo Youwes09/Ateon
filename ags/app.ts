@@ -69,6 +69,10 @@ app.start({
         app.toggle_window("sidebar");
         res("sidebar toggled");
         break;
+      case "dock":
+        app.toggle_window("dock");
+        res("dock toggled");
+        break;
       case "reload-css":
         reloadCss();
         res("css reloaded");

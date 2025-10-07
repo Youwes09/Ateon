@@ -14,8 +14,6 @@ box.clipboard {
   border: 1px solid color.adjust($fg, $alpha: -0.88);
   border-radius: 20px;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 8px 20px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.25);
   position: relative;
@@ -54,7 +52,6 @@ box.clipboard {
   border: 1px solid color.adjust($fg, $alpha: -0.85);
   margin: 12px 12px 0;
   box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   position: relative;
@@ -100,7 +97,6 @@ box.clipboard {
       border-color: color.adjust($fg, $alpha: -0.85);
       color: $fg;
       box-shadow: 
-        0 2px 6px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
       
       &::before {
@@ -118,8 +114,6 @@ box.clipboard {
       color: $primary;
       font-weight: 600;
       box-shadow: 
-        0 2px 10px color.adjust($primary, $alpha: -0.75),
-        0 0 20px color.adjust($primary, $alpha: -0.88),
         inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
       
@@ -151,7 +145,6 @@ box.clipboard {
     position: relative;
     overflow: hidden;
     box-shadow: 
-      0 2px 6px rgba(0, 0, 0, 0.1),
       inset 0 1px 0 color.adjust($error, $alpha: -0.85);
     
     &::before {
@@ -180,8 +173,6 @@ box.clipboard {
       color: white;
       border-color: $error;
       box-shadow: 
-        0 2px 10px color.adjust($error, $alpha: -0.6),
-        0 0 20px color.adjust($error, $alpha: -0.8),
         inset 0 1px 2px rgba(255, 255, 255, 0.2),
         inset 0 -1px 1px rgba(0, 0, 0, 0.3);
       
@@ -222,7 +213,6 @@ box.clipboard {
   border: 1px solid color.adjust($fg, $alpha: -0.85);
   transition: all 0.2s ease;
   box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   position: relative;
@@ -236,8 +226,6 @@ box.clipboard {
     );
     border-color: color.adjust($primary, $alpha: -0.75);
     box-shadow: 
-      0 2px 12px color.adjust($primary, $alpha: -0.8),
-      0 0 20px color.adjust($primary, $alpha: -0.88),
       inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
   }
   
@@ -293,7 +281,6 @@ box.clipboard {
     position: relative;
     overflow: hidden;
     box-shadow: 
-      0 1px 3px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
     
     &::before {
@@ -322,7 +309,6 @@ box.clipboard {
       );
       border-color: color.adjust($fg, $alpha: -0.82);
       box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.12),
         inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
       
       &::before {
@@ -338,8 +324,6 @@ box.clipboard {
       );
       border-color: color.adjust($primary, $alpha: -0.75);
       box-shadow: 
-        0 2px 10px color.adjust($primary, $alpha: -0.8),
-        0 0 20px color.adjust($primary, $alpha: -0.88),
         inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
       
@@ -388,7 +372,6 @@ box.clipboard {
         border-radius: 8px;
         border: 1px solid color.adjust($fg, $alpha: -0.88);
         box-shadow: 
-          0 2px 8px rgba(0, 0, 0, 0.15),
           inset 0 1px 0 color.adjust($fg, $alpha: -0.95);
         transition: all 0.2s ease;
       }
@@ -398,8 +381,6 @@ box.clipboard {
       .entry-image {
         border-color: color.adjust($primary, $alpha: -0.7);
         box-shadow: 
-          0 4px 12px color.adjust($primary, $alpha: -0.7),
-          0 0 20px color.adjust($primary, $alpha: -0.85),
           inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
       }
     }
@@ -408,7 +389,6 @@ box.clipboard {
       .entry-image {
         border-color: color.adjust($fg, $alpha: -0.82);
         box-shadow: 
-          0 4px 12px rgba(0, 0, 0, 0.2),
           inset 0 1px 0 color.adjust($fg, $alpha: -0.9);
         transform: scale(1.02);
       }

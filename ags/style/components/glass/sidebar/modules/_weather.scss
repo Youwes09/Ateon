@@ -2,45 +2,43 @@
 @use "../../../../abstracts" as *;
 @use "sass:color";
 
+$is-dark: color.lightness($bg) < 50%;
+
 .weather-widget {
   @include widget-container;
   background: linear-gradient(
     135deg,
-    color.adjust($bg, $alpha: -0.12, $lightness: 6%),
-    color.adjust($bg, $alpha: -0.18, $lightness: 2%)
+    color.adjust($fg, $alpha: -0.88),
+    color.adjust($fg, $alpha: -0.92)
   );
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid color.adjust($fg, $alpha: -0.88);
-  border-radius: 20px;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color.adjust($fg, $alpha: -0.85);
+  border-radius: 16px;
   padding: $spacing-md;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 8px 20px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+    inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 
-  // Glass reflection effect
   &::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 40%;
     background: linear-gradient(
       to bottom,
-      color.adjust($fg, $alpha: -0.95),
+      color.adjust($fg, $alpha: -0.93),
       transparent
     );
-    border-radius: 20px 20px 0 0;
+    border-radius: inherit;
     pointer-events: none;
     z-index: 0;
   }
 
-  // Location header
   .weather-location {
     display: flex;
     align-items: center;
@@ -50,13 +48,13 @@
     background: linear-gradient(
       135deg,
       color.adjust($fg, $alpha: -0.9),
-      color.adjust($fg, $alpha: -0.94)
+      color.adjust($fg, $alpha: -0.93)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.85);
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
     border-radius: 12px;
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
     position: relative;
     z-index: 1;
 
@@ -64,14 +62,13 @@
       @include material-icon(18px);
       color: $primary;
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-      text-shadow: 0 0 8px color.adjust($primary, $alpha: -0.7);
     }
 
     .location-text {
       font-size: calc(#{$font} * 0.85);
       font-weight: 600;
-      color: $fg;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -80,14 +77,14 @@
     margin-bottom: $spacing-sm;
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.92),
-      color.adjust($fg, $alpha: -0.95)
+      color.adjust($fg, $alpha: -0.9),
+      color.adjust($fg, $alpha: -0.93)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.9);
-    border-radius: 16px;
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 12px;
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -98,13 +95,13 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 50%;
+      height: 40%;
       background: linear-gradient(
         to bottom,
         color.adjust($fg, $alpha: -0.92),
         transparent
       );
-      border-radius: 16px 16px 0 0;
+      border-radius: inherit;
       pointer-events: none;
     }
 
@@ -114,72 +111,71 @@
       min-height: 56px;
       color: $primary;
       margin-bottom: $spacing-xs;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-      text-shadow: 0 0 20px color.adjust($primary, $alpha: -0.6);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
       animation: float 3s ease-in-out infinite;
     }
 
     .weather-temp {
       font-size: calc(#{$font} * 1.3);
       font-weight: 700;
-      color: $fg;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     .weather-desc {
       font-size: calc(#{$font} * 0.85);
       font-weight: 500;
-      color: color.adjust($fg, $alpha: -0.3);
+      color: if($is-dark, color.adjust($fg, $alpha: -0.3), color.adjust($bg, $lightness: -35%));
       margin-top: $spacing-xs;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .weather-stats {
       margin-top: $spacing-sm;
       padding-top: $spacing-sm;
-      border-top: 1px solid color.adjust($fg, $alpha: -0.92);
+      border-top: 1px solid color.adjust($fg, $alpha: -0.9);
 
       .stat-item {
         background: linear-gradient(
           135deg,
-          color.adjust($fg, $alpha: -0.94),
-          color.adjust($fg, $alpha: -0.96)
+          color.adjust($fg, $alpha: -0.92),
+          color.adjust($fg, $alpha: -0.94)
         );
-        border: 1px solid color.adjust($fg, $alpha: -0.92);
+        border: 1px solid color.adjust($fg, $alpha: -0.9);
         border-radius: 10px;
         padding: $spacing-xs $spacing-sm;
         margin: $spacing-xs 0;
         transition: all 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        box-shadow: 
+          inset 0 1px 1px color.adjust($fg, $alpha: -0.93),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 
         &:hover {
           background: linear-gradient(
             135deg,
-            color.adjust($fg, $alpha: -0.9),
-            color.adjust($fg, $alpha: -0.94)
+            color.adjust($fg, $alpha: -0.88),
+            color.adjust($fg, $alpha: -0.92)
           );
-          border-color: color.adjust($fg, $alpha: -0.88);
+          border-color: color.adjust($fg, $alpha: -0.85);
           transform: translateX(2px);
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
         }
 
         .weather-extra-icon {
           @include material-icon(18px);
-          color: color.adjust($primary, $alpha: -0.3);
+          color: if($is-dark, color.adjust($primary, $alpha: -0.3), color.adjust($primary, $alpha: -0.4));
           filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
           transition: all 0.2s ease;
         }
 
         &:hover .weather-extra-icon {
           color: $primary;
-          text-shadow: 0 0 6px color.adjust($primary, $alpha: -0.7);
         }
 
         label:last-child {
           font-size: calc(#{$font} * 0.85);
           font-weight: 600;
-          color: $fg;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
       }
     }
@@ -188,15 +184,15 @@
   .forecast-row {
     background: linear-gradient(
       135deg,
-      color.adjust($fg, $alpha: -0.92),
-      color.adjust($fg, $alpha: -0.95)
+      color.adjust($fg, $alpha: -0.9),
+      color.adjust($fg, $alpha: -0.93)
     );
-    border: 1px solid color.adjust($fg, $alpha: -0.9);
-    border-radius: 16px;
+    border: 1px solid color.adjust($fg, $alpha: -0.88);
+    border-radius: 12px;
     padding: $spacing-sm;
     box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
+      inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -207,13 +203,13 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 50%;
+      height: 40%;
       background: linear-gradient(
         to bottom,
         color.adjust($fg, $alpha: -0.92),
         transparent
       );
-      border-radius: 16px 16px 0 0;
+      border-radius: inherit;
       pointer-events: none;
     }
 
@@ -223,12 +219,14 @@
       border-radius: 10px;
       background: linear-gradient(
         135deg,
-        color.adjust($fg, $alpha: -0.94),
-        color.adjust($fg, $alpha: -0.96)
+        color.adjust($fg, $alpha: -0.92),
+        color.adjust($fg, $alpha: -0.94)
       );
-      border: 1px solid color.adjust($fg, $alpha: -0.92);
+      border: 1px solid color.adjust($fg, $alpha: -0.9);
       transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      box-shadow: 
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.93),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.05);
       position: relative;
       overflow: hidden;
 
@@ -244,7 +242,7 @@
           color.adjust($fg, $alpha: -0.9),
           transparent
         );
-        border-radius: 10px 10px 0 0;
+        border-radius: inherit;
         pointer-events: none;
         opacity: 0;
         transition: opacity 0.2s ease;
@@ -253,19 +251,20 @@
       &:hover {
         background: linear-gradient(
           135deg,
-          color.adjust($primary, $alpha: -0.88),
-          color.adjust($primary, $alpha: -0.92)
+          color.adjust($primary, $alpha: -0.75),
+          color.adjust($primary, $alpha: -0.82)
         );
-        border-color: color.adjust($primary, $alpha: -0.8);
+        border-color: color.adjust($primary, $alpha: -0.7);
         transform: translateY(-3px) scale(1.05);
         box-shadow: 
-          0 6px 16px color.adjust($primary, $alpha: -0.8),
-          0 0 20px color.adjust($primary, $alpha: -0.88);
+          inset 0 1px 2px rgba(0, 0, 0, 0.2),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
 
         &::before {
           background: linear-gradient(
             to bottom,
-            color.adjust($primary, $alpha: -0.82, $lightness: 12%),
+            color.adjust($primary, $alpha: -0.88, $lightness: 10%),
             transparent
           );
           opacity: 1;
@@ -273,7 +272,6 @@
 
         .forecast-icon {
           color: $primary;
-          text-shadow: 0 0 12px color.adjust($primary, $alpha: -0.6);
           transform: scale(1.1);
         }
 
@@ -285,15 +283,15 @@
       .forecast-hour {
         font-size: calc(#{$font} * 0.8);
         font-weight: 500;
-        color: color.adjust($fg, $alpha: -0.4);
+        color: if($is-dark, color.adjust($fg, $alpha: -0.4), color.adjust($bg, $lightness: -30%));
         margin-bottom: 2px;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
       }
 
       .forecast-icon {
         @include material-icon(24px);
         margin: 2px 0;
-        color: $fg;
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
         filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         transition: all 0.2s ease;
       }
@@ -301,15 +299,14 @@
       .forecast-temp {
         font-size: calc(#{$font} * 0.9);
         font-weight: 600;
-        color: $fg;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         transition: all 0.2s ease;
       }
     }
   }
 }
 
-// Floating animation for weather icon
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -319,12 +316,12 @@
   }
 }
 
-// Loading state
 .weather-loading {
   padding: calc(#{$spacing-md} * 2);
   text-align: center;
-  color: color.adjust($fg, $alpha: -0.5);
+  color: if($is-dark, color.adjust($fg, $alpha: -0.5), color.adjust($bg, $lightness: -35%));
   font-style: italic;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   animation: pulse 2s ease-in-out infinite;
 }
 
