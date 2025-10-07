@@ -24,6 +24,49 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 
 ---
 
+## Gallery
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="extra/previews/Apple-Terminal-4k.png" alt="Apple Terminal Theme"/>
+      <p align="center"><em>Terminal with Starship Theming</em></p>
+    </td>
+    <td width="50%">
+      <img src="extra/previews/Blossom-Sidebar-4k.png" alt="Blossom Sidebar"/>
+      <p align="center"><em>Sidebar featuring flip clock and integrated settings</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="extra/previews/Earth-Launcher-4k.png" alt="Earth Launcher"/>
+      <p align="center"><em>Application launcher with fuzzy search</em></p>
+    </td>
+    <td width="50%">
+      <img src="extra/previews/MacOS-Generic-4k.png" alt="MacOS Theme"/>
+      <p align="center"><em>MacOS-inspired desktop layout</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="extra/previews/Minion-Multi-4k.png" alt="Multi-Monitor Setup"/>
+      <p align="center"><em>Multi-monitor configuration with widgets</em></p>
+    </td>
+    <td width="50%">
+      <img src="extra/previews/Starry-Clipboard-4k.png" alt="Clipboard Manager"/>
+      <p align="center"><em>Clipboard manager with history</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="extra/previews/Wilderness-Window-4k.png" alt="Wilderness Theme"/>
+      <p align="center"><em>Full desktop showcase with Wilderness theme</em></p>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## Project Structure
 
 ```
@@ -31,14 +74,30 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 ├── ags/
 │   ├── app.ts                      # Application entry point
 │   ├── options.ts                  # Configuration options
-│   ├── pickerapps.json             # Pinned Apps (Picker)
-│   ├── config.json                 # User configuration
+│   ├── configs/
+│   │   ├── config.json             # User configuration
+│   │   ├── pickerapps.json         # Pinned Apps (Picker)
+│   │   └── system/                 # System configuration files
+│   │       ├── iconmappings.json
+│   │       ├── packages.json
+│   │       └── updater.json
 │   ├── assets/                     # Icons and default wallpaper
+│   │   ├── default_wallpaper/
+│   │   └── icons/
 │   ├── matugen/templates/          # Theme generation templates
+│   │   ├── ags.scss
+│   │   ├── ateon-midnight-discord.scss
+│   │   ├── fish_colors.fish
+│   │   ├── foot.ini
+│   │   ├── gtk.css
+│   │   ├── hyprland_colors.conf
+│   │   └── hyprlock_colors.conf
 │   ├── style/                      # SCSS stylesheets
 │   │   ├── abstracts/              # Variables, mixins, functions
 │   │   ├── base/                   # Reset and base styles
 │   │   ├── components/             # Component-specific styles
+│   │   │   ├── glass/              # Glass morphism theme
+│   │   │   └── normal/             # Standard theme
 │   │   └── layouts/                # Layout definitions
 │   ├── utils/                      # Utility functions and services
 │   │   ├── battery.ts
@@ -49,6 +108,8 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 │   │   ├── config/                 # Configuration system
 │   │   ├── notifd/                 # Notification daemon
 │   │   ├── picker/                 # App and wallpaper picker
+│   │   ├── updater/                # System updater utility
+│   │   ├── wallpaper/              # Wallpaper management
 │   │   ├── weather/                # Weather service
 │   │   ├── wifi/                   # WiFi management
 │   │   └── windowSwitcher/         # Window Switcher (WIP)
@@ -57,6 +118,7 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 │       ├── clipboard/              # Clipboard interface
 │       ├── common/                 # Common widgets & panels
 │       ├── control-panel/          # Settings panel
+│       ├── dock/                   # Application dock
 │       ├── launcher/               # App launcher
 │       ├── logout-menu/            # Power menu
 │       ├── music/                  # Media player with CAVA
@@ -69,14 +131,35 @@ Ateon is a complete desktop rice featuring a Material Design shell built with [A
 ├── hypr/                           # Hyprland configuration
 │   ├── hyprland.conf
 │   ├── autostart.conf
+│   ├── general.conf
 │   ├── keybinds.conf
-│   └── workspaces.conf
+│   ├── monitors.conf
+│   ├── workspaces.conf
+│   ├── hyprlock/                   # Lock screen wallpapers
+│   ├── hyprlock.conf
+│   ├── hyprpaper/
+│   ├── hyprpaper.conf
+│   └── scripts/
+│       └── ags-restart.sh
 ├── fish/                           # Fish shell config
+│   ├── config.fish
+│   └── functions/
 ├── foot/                           # Foot terminal config
+│   └── foot.ini
 ├── fastfetch/                      # System info display
+│   ├── Ateon-Block.txt
+│   ├── Ateon-Text.txt
+│   └── config.jsonc
 ├── matugen/                        # Matugen configuration
+│   └── config.toml
+├── extra/                          # Extra assets
+│   ├── ATEON-Banner.png
+│   ├── Ateon Logo.png
+│   └── previews/                   # Preview screenshots
+├── scripts/
+│   └── GitDraw.sh                  # Backup utility
 ├── install.sh                      # Installation script
-└── GitDraw.sh                      # Backup utility
+└── starship.toml                   # Starship prompt config
 ```
 
 ---
@@ -260,7 +343,7 @@ This executable provides fine-grained control over specific color values in your
 
 #### Shell Settings
 
-Edit `~/.config/ags/config.json` to customize:
+Edit `~/.config/ags/configs/config.json` to customize:
 - Preferred terminal emulator
 - Default browser
 - File manager
@@ -296,7 +379,7 @@ Generated themes are applied to:
 Maintain your customizations across multiple machines:
 
 ```bash
-./GitDraw.sh
+./scripts/GitDraw.sh
 ```
 
 This utility creates backups of your configuration or syncs changes from your personal fork.
