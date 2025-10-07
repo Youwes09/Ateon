@@ -1,0 +1,94 @@
+# Maintainer: Youwes <appleiquit>
+pkgname=ateon-meta
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='ATEON Desktop Environment - metapackage for dependencies'
+arch=('any')
+url='https://github.com/Youwes09/Ateon'
+license=('MIT')
+
+# Core desktop environment
+depends=(
+    # Wayland compositor & shell
+    'hyprland'
+    'aylurs-gtk-shell-git'
+    'matugen-bin'
+    
+    # AGS/Astal libraries
+    'libastal-hyprland-git'
+    'libastal-tray-git'
+    'libastal-notifd-git'
+    'libastal-apps-git'
+    'libastal-wireplumber-git'
+    'libastal-mpris-git'
+    'libastal-network-git'
+    'libastal-bluetooth-git'
+    'libastal-cava-git'
+    'libastal-battery-git'
+    'libastal-powerprofiles-git'
+    
+    # System libraries
+    'libgtop'
+    'dart-sass'
+    'imagemagick'
+    'adwaita-icon-theme'
+    'libadwaita'
+    'glib-networking'
+    'libsoup3'
+    
+    # Fonts
+    'ttf-jetbrains-mono-nerd'
+    'ttf-firacode-nerd'
+    'ttf-material-symbols-variable-git'
+    
+    # Desktop utilities
+    'hyprpaper'
+    'polkit-gnome'
+    
+    # Terminal & shell
+    'foot'
+    'fish'
+    'starship'
+    'fastfetch'
+    'wl-clipboard'
+    'clipvault'
+    
+    # Screenshot & color picker
+    'hyprshot'
+    'swappy'
+    'grim'
+    'slurp'
+    'hyprpicker'
+    
+    # Media & system control
+    'brightnessctl'
+    'playerctl'
+    'pipewire'
+    'pipewire-pulse'
+    'wireplumber'
+    
+    # OCR for normcap
+    'normcap'
+    'python-zxing-cpp'
+    'tesseract'
+    'tesseract-data-eng'
+    'python-pytesseract'
+    'pyside6'
+)
+
+# Optional packages
+optdepends=(
+    'firefox: Web browser'
+    'nautilus: File manager'
+    'code: VS Code editor'
+    'pavucontrol: Audio control'
+    'resources: System monitor'
+    'apple-fonts: Apple system fonts'
+)
+
+package() {
+    # No files to install - this is just a metapackage
+    # But we create a marker file for tracking
+    install -dm755 "$pkgdir/usr/share/doc/$pkgname"
+    echo "ATEON Desktop Environment $pkgver" > "$pkgdir/usr/share/doc/$pkgname/README"
+}
