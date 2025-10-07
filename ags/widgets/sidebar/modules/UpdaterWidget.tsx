@@ -216,7 +216,7 @@ export default function UpdaterWidget() {
                   <box class="config-error" orientation={Gtk.Orientation.VERTICAL} spacing={8}>
                     <label label="Warning" cssClasses={["config-icon"]} />
                     <label label="No config file found" cssClasses={["config-error-text"]} halign={Gtk.Align.CENTER} />
-                    <label label="Create updater.json in ~/.config/ags/configs/" cssClasses={["config-error-hint"]} halign={Gtk.Align.CENTER} />
+                    <label label="Create updater.json in ~/.config/ags/configs/system" cssClasses={["config-error-hint"]} halign={Gtk.Align.CENTER} />
                   </box>
                 );
               }

@@ -54,8 +54,8 @@ export interface UpdateProgress {
   totalFiles?: number;
 }
 
-const CONFIG_PATH = `${GLib.get_home_dir()}/.config/ags/configs/updater.json`;
-let PACKAGES_PATH = `${GLib.get_home_dir()}/.config/ags/configs/packages.json`;
+const CONFIG_PATH = `${GLib.get_home_dir()}/.config/ags/configs/system/updater.json`;
+let PACKAGES_PATH = `${GLib.get_home_dir()}/.config/ags/configs/system/packages.json`;
 
 export class UpdaterService {
   private config: UpdateConfig | null = null;
@@ -88,7 +88,7 @@ export class UpdaterService {
       // First try to load from cloned repo if it exists
       if (this.config?.tempDir) {
         const tempDir = this.config.tempDir.replace("~", GLib.get_home_dir());
-        const repoPackagesPath = `${tempDir}/configs/packages.json`;
+        const repoPackagesPath = `${tempDir}/configs/system/packages.json`;
         
         try {
           const [success, contents] = GLib.file_get_contents(repoPackagesPath);
@@ -409,7 +409,7 @@ export class UpdaterService {
       this.saveConfig(this.config);
 
       // Load packages config from the cloned repo
-      const repoPackagesPath = `${tempDir}/configs/packages.json`;
+      const repoPackagesPath = `${tempDir}/configs/system/packages.json`;
       try {
         const [success, contents] = GLib.file_get_contents(repoPackagesPath);
         if (success) {
@@ -457,7 +457,7 @@ export class UpdaterService {
           }
 
           // Save packages config locally
-          const localPackagesPath = `${GLib.get_home_dir()}/.config/ags/configs/packages.json`;
+          const localPackagesPath = `${GLib.get_home_dir()}/.config/ags/configs/system/packages.json`;
           const configDir = localPackagesPath.substring(0, localPackagesPath.lastIndexOf("/"));
           GLib.mkdir_with_parents(configDir, 0o755);
           GLib.file_set_contents(localPackagesPath, JSON.stringify(packagesConfig, null, 2));

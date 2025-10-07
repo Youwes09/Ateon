@@ -10,7 +10,7 @@ export interface PackageCategory {
 
 class PackageService {
   private config: PackageCategory[] | null = null;
-  private configPath = `${GLib.get_home_dir()}/.config/ags/configs/packages.json`;
+  private configPath = `${GLib.get_home_dir()}/.config/ags/configs/system/packages.json`;
 
   constructor() {
     this.loadConfig();

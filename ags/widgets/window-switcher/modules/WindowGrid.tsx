@@ -2,19 +2,58 @@ import { Gtk } from "ags/gtk4";
 import { windowSwitcher } from "utils/windowSwitcher";
 import GLib from "gi://GLib";
 
+// Load icon mappings from config file
+function loadIconMappings(): Record<string, string> {
+  const configPath = `${GLib.get_home_dir()}/.config/ags/configs/system/iconmappings.json`;
+  
+  try {
+    const [success, contents] = GLib.file_get_contents(configPath);
+    if (!success) throw new Error("Failed to read file");
+    
+    const text = new TextDecoder().decode(contents);
+    const mappings: Record<string, string> = {};
+    
+    // Parse the file - supports various formats:
+    // JSON: { "firefox": "web", "code": "code" }
+    // or line-by-line: firefox=web or firefox:web
+    
+    // Try JSON first
+    try {
+      return JSON.parse(text);
+    } catch {
+      // Parse line-by-line format
+      const lines = text.split('\n');
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        
+        // Support both = and : as separators
+        const match = trimmed.match(/^(\S+)\s*[=:]\s*(\S+)$/);
+        if (match) {
+          mappings[match[1]] = match[2];
+        }
+      }
+      return mappings;
+    }
+  } catch (error) {
+    console.warn(`Could not load icon mappings from ${configPath}:`, error);
+    // Return default mappings as fallback
+    return {
+      "firefox": "web", "zen": "web", "chromium": "web", "chrome": "web",
+      "brave": "web", "safari": "web", "edge": "web",
+      "code": "code", "vscode": "code", "vim": "code", "neovim": "code",
+      "terminal": "terminal", "kitty": "terminal", "alacritty": "terminal",
+      "foot": "terminal", "wezterm": "terminal", "konsole": "terminal",
+      "nautilus": "folder_open", "thunar": "folder_open", "dolphin": "folder_open",
+      "discord": "chat_bubble", "slack": "chat_bubble", "telegram": "chat_bubble",
+      "spotify": "library_music", "vlc": "movie", "mpv": "movie",
+    };
+  }
+}
+
 export function WindowGrid() {
   let gridBox: Gtk.Box | null = null;
-
-  const iconMap: Record<string, string> = {
-    "firefox": "web", "zen": "web", "chromium": "web", "chrome": "web",
-    "brave": "web", "safari": "web", "edge": "web",
-    "code": "code", "vscode": "code", "vim": "code", "neovim": "code",
-    "terminal": "terminal", "kitty": "terminal", "alacritty": "terminal",
-    "foot": "terminal", "wezterm": "terminal", "konsole": "terminal",
-    "nautilus": "folder_open", "thunar": "folder_open", "dolphin": "folder_open",
-    "discord": "chat_bubble", "slack": "chat_bubble", "telegram": "chat_bubble",
-    "spotify": "library_music", "vlc": "movie", "mpv": "movie",
-  };
+  const iconMap = loadIconMappings();
 
   const getIcon = (className: string): string => {
     const lower = className.toLowerCase();
