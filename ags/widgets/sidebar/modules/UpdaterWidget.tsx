@@ -3,7 +3,7 @@ import { Gtk } from "ags/gtk4";
 import { createState, With, onCleanup } from "ags";
 import Pango from "gi://Pango";
 import { updaterService, UpdateStatus, UpdateConfig } from "../../../utils/updater/updater";
-import { packageService, PackageCategory } from "../../../utils/updater/packages";
+import { packageService, PackageCategory, PackageInfo } from "../../../utils/updater/packages";
 
 type UpdaterMode = "system" | "packages";
 
@@ -17,7 +17,8 @@ export default function UpdaterWidget() {
   const [showConfig, setShowConfig] = createState(false);
   const [showPackages, setShowPackages] = createState(false);
   const [config, setConfig] = createState<UpdateConfig | null>(updaterService.getConfig());
-  const [packages, setPackages] = createState<PackageCategory[]>(packageService.getPackages());
+  const [packages, setPackages] = createState<PackageCategory[]>([]);
+  const [selectedPackages, setSelectedPackages] = createState<Set<string>>(new Set());
 
   const modes = [
     { id: "system", icon: "update", tooltip: "System" },
@@ -26,6 +27,23 @@ export default function UpdaterWidget() {
 
   const refreshCurrentVersion = () => {
     setCurrentVersion(updaterService.getCurrentVersion());
+  };
+
+  const loadPackages = async () => {
+    try {
+      const pkgCategories = await packageService.scanAvailablePackages();
+      setPackages(pkgCategories);
+    } catch (error) {
+      console.error("Failed to load packages:", error);
+    }
+  };
+
+  // Load packages when switching to packages mode
+  const handleModeChange = (newMode: UpdaterMode) => {
+    setMode(newMode);
+    if (newMode === "packages") {
+      loadPackages();
+    }
   };
 
   const checkForUpdates = async () => {
@@ -108,12 +126,10 @@ export default function UpdaterWidget() {
   };
 
   const installPackages = async () => {
-    const pkgs = packages.get();
-    const selectedPackages = pkgs
-      .filter(cat => cat.enabled)
-      .flatMap(cat => cat.packages);
+    const selected = selectedPackages.get();
+    const packageNames = Array.from(selected);
 
-    if (selectedPackages.length === 0) {
+    if (packageNames.length === 0) {
       setMessage("No packages selected");
       setStatus("error");
       setTimeout(() => {
@@ -124,16 +140,26 @@ export default function UpdaterWidget() {
     }
 
     setIsUpdating(true);
-    setStatus("installing");
-    setMessage(`Installing ${selectedPackages.length} packages...`);
+    setStatus("copying");
 
     try {
-      await packageService.installPackages(selectedPackages, (progress) => {
-        setMessage(progress);
-      });
+      const result = await packageService.installPackages(
+        packageNames,
+        (current, total, pkgName, msg) => {
+          setMessage(`${msg} (${current}/${total})`);
+        }
+      );
 
-      setStatus("success");
-      setMessage("Packages installed successfully!");
+      if (result.failed.length > 0) {
+        setStatus("error");
+        setMessage(`Installed ${result.installed.length}, failed ${result.failed.length}`);
+      } else {
+        setStatus("success");
+        setMessage(`Successfully installed ${result.installed.length} packages!`);
+      }
+
+      // Refresh package list
+      await loadPackages();
       
       setTimeout(() => {
         setStatus("idle");
@@ -153,16 +179,65 @@ export default function UpdaterWidget() {
     }
   };
 
+  const updatePackages = async () => {
+    setIsUpdating(true);
+    setStatus("copying");
+
+    try {
+      const result = await packageService.updateAllInstalledPackages(
+        (current, total, pkgName, msg) => {
+          setMessage(`${msg} (${current}/${total})`);
+        }
+      );
+
+      if (result.updated.length === 0) {
+        setStatus("idle");
+        setMessage("No packages to update");
+      } else if (result.failed.length > 0) {
+        setStatus("error");
+        setMessage(`Updated ${result.updated.length}, failed ${result.failed.length}, skipped ${result.skipped.length}`);
+      } else {
+        setStatus("success");
+        setMessage(`Successfully updated ${result.updated.length} packages!`);
+      }
+
+      // Refresh package list
+      await loadPackages();
+      
+      setTimeout(() => {
+        setStatus("idle");
+        setMessage("Ready to update");
+        setIsUpdating(false);
+      }, 5000);
+    } catch (error) {
+      console.error("Package update failed:", error);
+      setStatus("error");
+      setMessage(`Update failed: ${error}`);
+      setIsUpdating(false);
+      
+      setTimeout(() => {
+        setStatus("idle");
+        setMessage("Ready to update");
+      }, 5000);
+    }
+  };
+
   const toggleFile = (index: number) => {
     if (updaterService.toggleFile(index)) {
       setConfig(updaterService.getConfig());
     }
   };
 
-  const toggleCategory = (index: number) => {
-    if (packageService.toggleCategory(index)) {
-      setPackages(packageService.getPackages());
-    }
+  const togglePackage = (pkgName: string) => {
+    setSelectedPackages(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(pkgName)) {
+        newSet.delete(pkgName);
+      } else {
+        newSet.add(pkgName);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -180,7 +255,7 @@ export default function UpdaterWidget() {
                   : ["nav-mode-button"],
               )}
               tooltipText={m.tooltip}
-              onClicked={() => setMode(m.id as UpdaterMode)}
+              onClicked={() => handleModeChange(m.id as UpdaterMode)}
             >
               <label label={m.icon} cssClasses={["icon-compact"]} />
             </button>
@@ -315,7 +390,6 @@ export default function UpdaterWidget() {
                     </With>
                   </box>
 
-                  {/* Fixed: use functional updater for toggle */}
                   <button
                     cssClasses={["config-toggle-button"]}
                     onClicked={() => setShowConfig(prev => !prev)}
@@ -402,7 +476,7 @@ export default function UpdaterWidget() {
               >
                 <label
                   label={
-                    s === "installing" ? "Download" :
+                    s === "copying" ? "Download" :
                     s === "success" ? "Check_Circle" :
                     s === "error" ? "Error" : "Package"
                   }
@@ -423,29 +497,44 @@ export default function UpdaterWidget() {
             )}
           </With>
 
-          <With value={isUpdating}>
-            {(updating) => (
-              <button
-                cssClasses={["updater-button", "updater-button-update"]}
-                onClicked={installPackages}
-                sensitive={!updating}
-              >
-                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-                  <label label="Download" cssClasses={["button-icon"]} />
-                  <label label={updating ? "Installing..." : "Install Selected"} />
-                </box>
-              </button>
-            )}
-          </With>
+          <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8} homogeneous>
+            <With value={isUpdating}>
+              {(updating) => (
+                <button
+                  cssClasses={["updater-button", "updater-button-update"]}
+                  onClicked={installPackages}
+                  sensitive={!updating}
+                >
+                  <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+                    <label label="Download" cssClasses={["button-icon"]} />
+                    <label label={updating ? "Installing..." : "Install"} />
+                  </box>
+                </button>
+              )}
+            </With>
+            <With value={isUpdating}>
+              {(updating) => (
+                <button
+                  cssClasses={["updater-button", "updater-button-check"]}
+                  onClicked={updatePackages}
+                  sensitive={!updating}
+                >
+                  <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+                    <label label="Refresh" cssClasses={["button-icon"]} />
+                    <label label={updating ? "Updating..." : "Update"} />
+                  </box>
+                </button>
+              )}
+            </With>
+          </box>
 
-          {/* Fixed: use functional updater for toggle */}
           <button
             cssClasses={["config-toggle-button"]}
             onClicked={() => setShowPackages(prev => !prev)}
           >
             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
               <label label="Category" cssClasses={["button-icon"]} />
-              <label label="Package Categories" hexpand halign={Gtk.Align.START} />
+              <label label="Available Packages" hexpand halign={Gtk.Align.START} />
               <With value={showPackages}>
                 {(show) => (
                   <label
@@ -462,51 +551,80 @@ export default function UpdaterWidget() {
               if (!show) return null;
 
               return (
-                <With value={packages}>
-                  {(pkgs) => (
-                    <box class="package-categories" orientation={Gtk.Orientation.VERTICAL} spacing={4}>
-                      <label
-                        label="Select categories to install:"
-                        cssClasses={["category-title"]}
-                        halign={Gtk.Align.START}
-                      />
-                      {pkgs.map((category, index) => (
-                        <box cssClasses={["package-category"]} orientation={Gtk.Orientation.VERTICAL} spacing={4}>
-                          <box cssClasses={["category-header"]} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-                            <box hexpand orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-                              <label label={category.name} cssClasses={["category-name"]} halign={Gtk.Align.START} />
-                              <label label={`${category.packages.length} pkgs`} cssClasses={["category-count"]} />
-                            </box>
-                            <switch
-                              cssClasses={["config-switch"]}
-                              active={category.enabled}
-                              onNotifyActive={() => toggleCategory(index)}
-                            />
+                <box class="package-categories" orientation={Gtk.Orientation.VERTICAL} spacing={8}>
+                  <With value={packages}>
+                    {(pkgCategories) => {
+                      if (pkgCategories.length === 0) {
+                        return (
+                          <box class="package-empty" orientation={Gtk.Orientation.VERTICAL} spacing={8}>
+                            <label label="⚠" cssClasses={["empty-icon"]} />
+                            <label label="No packages available" cssClasses={["empty-text"]} halign={Gtk.Align.CENTER} />
+                            <label label="Switch to System tab and run Update first" cssClasses={["empty-hint"]} halign={Gtk.Align.CENTER} wrap />
                           </box>
-                          {category.enabled && (
-                            <box cssClasses={["package-list"]} orientation={Gtk.Orientation.VERTICAL} spacing={2}>
-                              {category.packages.map((pkg) => (
-                                <label label={`• ${pkg}`} cssClasses={["package-item"]} halign={Gtk.Align.START} />
-                              ))}
+                        );
+                      }
+
+                      return (
+                        <>
+                          {pkgCategories.map((category) => (
+                            <box cssClasses={["package-category"]} orientation={Gtk.Orientation.VERTICAL} spacing={4}>
+                              <label
+                                label={category.name}
+                                cssClasses={["category-title"]}
+                                halign={Gtk.Align.START}
+                              />
+                              <label
+                                label={category.description}
+                                cssClasses={["category-description"]}
+                                halign={Gtk.Align.START}
+                                wrap
+                              />
+                              <box class="package-list" orientation={Gtk.Orientation.VERTICAL} spacing={2}>
+                                {category.packages.map((pkg) => (
+                                  <box cssClasses={["package-item"]} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+                                    <box hexpand orientation={Gtk.Orientation.VERTICAL}>
+                                      <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+                                        <label label={pkg.name} cssClasses={["package-name"]} halign={Gtk.Align.START} />
+                                        {pkg.installed && (
+                                          <label label="✓" cssClasses={["package-installed"]} tooltipText="Installed" />
+                                        )}
+                                      </box>
+                                      <label label={pkg.description} cssClasses={["package-description"]} halign={Gtk.Align.START} wrap />
+                                      {pkg.version && (
+                                        <label label={`v${pkg.version}`} cssClasses={["package-version"]} halign={Gtk.Align.START} />
+                                      )}
+                                    </box>
+                                    <With value={selectedPackages}>
+                                      {(selected) => (
+                                        <switch
+                                          cssClasses={["config-switch"]}
+                                          active={selected.has(pkg.name)}
+                                          onNotifyActive={() => togglePackage(pkg.name)}
+                                        />
+                                      )}
+                                    </With>
+                                  </box>
+                                ))}
+                              </box>
                             </box>
-                          )}
-                        </box>
-                      ))}
-                      <box class="package-summary" orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-                        <label
-                          label={(() => {
-                            const enabledCount = pkgs.filter(c => c.enabled).length;
-                            const totalPackages = pkgs.filter(c => c.enabled).reduce((sum, c) => sum + c.packages.length, 0);
-                            return `${enabledCount}/${pkgs.length} categories • ${totalPackages} packages`;
-                          })()}
-                          cssClasses={["summary-text"]}
-                          halign={Gtk.Align.START}
-                          hexpand
-                        />
-                      </box>
-                    </box>
-                  )}
-                </With>
+                          ))}
+                          <With value={selectedPackages}>
+                            {(selected) => (
+                              <box class="package-summary" orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+                                <label
+                                  label={`${selected.size} packages selected`}
+                                  cssClasses={["summary-text"]}
+                                  halign={Gtk.Align.START}
+                                  hexpand
+                                />
+                              </box>
+                            )}
+                          </With>
+                        </>
+                      );
+                    }}
+                  </With>
+                </box>
               );
             }}
           </With>
