@@ -7,18 +7,15 @@
   padding: 0;
   border-radius: calc(#{$round} * 2);
   background-color: color.adjust($barBg, $lightness: if($darkmode, 1%, -1%));
-  overflow: hidden;
 
   /* ---------- Header ---------- */
   .updater-header {
-    display: flex;
     align-items: center;
     padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
     border-bottom: 1px solid color.adjust($fg, $alpha: -0.92);
     background-color: color.adjust($barBg, $lightness: if($darkmode, 1%, -1%));
     border-top-left-radius: calc(#{$round} * 2);
     border-top-right-radius: calc(#{$round} * 2);
-    overflow: hidden;
 
     .header-title {
       font-size: calc(#{$font} * 1.1);
@@ -28,7 +25,6 @@
     }
 
     .updater-nav {
-      display: flex;
       gap: $spacing-xs;
 
       .nav-mode-button {
@@ -40,7 +36,6 @@
         min-width: 36px;
         font-size: calc(#{$font} * 0.85);
         font-weight: 500;
-        display: inline-flex;
         align-items: center;
         justify-content: center;
 
@@ -118,7 +113,6 @@
     border-radius: calc(#{$round} * 1.5);
     padding: $spacing-sm $spacing-md;
     transition: all 150ms ease;
-    display: flex;
     align-items: center;
     gap: $spacing-sm;
     margin-bottom: $spacing-sm;
@@ -193,7 +187,6 @@
     padding: $spacing-sm $spacing-md;
     font-weight: 600;
     transition: all 150ms ease;
-    display: inline-flex;
     align-items: center;
     gap: $spacing-xs;
 
@@ -252,7 +245,6 @@
     border-radius: calc(#{$round} * 1.2);
     padding: $spacing-sm $spacing-md;
     transition: all 150ms ease;
-    display: inline-flex;
     align-items: center;
     gap: $spacing-sm;
 
@@ -302,7 +294,6 @@
       }
 
       .category-header {
-        display: flex;
         align-items: center;
         justify-content: space-between;
 
@@ -377,7 +368,6 @@
       padding: $spacing-sm $spacing-md;
       margin: $spacing-xs 0;
       transition: all 150ms ease;
-      display: flex;
       align-items: center;
       gap: $spacing-sm;
       justify-content: space-between;
@@ -414,7 +404,6 @@
         min-width: 44px;
         min-height: 24px;
         border-radius: 12px;
-        overflow: hidden;
         padding: 0;
         margin: 0;
         -gtk-outline-radius: 12px;
@@ -518,7 +507,6 @@
     border: 1px solid color.adjust($error, $alpha: -0.85);
     border-radius: calc(#{$round} * 1.5);
     padding: $spacing-md;
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: $spacing-xs;
@@ -559,15 +547,9 @@
   font-style: normal;
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   font-size: $size;
-  display: inline-block;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
-  -webkit-font-feature-settings: 'liga';
-  -moz-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
 }
 

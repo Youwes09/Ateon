@@ -7,21 +7,17 @@
   padding: 0;
   border-radius: calc(#{$round} * 2);
   background-color: color.adjust($barBg, $lightness: if($darkmode, 1%, -1%));
-  overflow: hidden; // clips internal dark corners
 }
 
 // Compact unified header with inline navigation
 .settings-header-compact {
-  display: flex;
   align-items: center;
   padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
   border-bottom: 1px solid color.adjust($fg, $alpha: -0.92);
   background-color: color.adjust($barBg, $lightness: if($darkmode, 1%, -1%));
 
-  // ✨ add this
   border-top-left-radius: calc(#{$round} * 2);
   border-top-right-radius: calc(#{$round} * 2);
-  overflow: hidden;
 
   .settings-title-compact {
     font-size: calc(#{$font} * 1.1);
@@ -34,7 +30,6 @@
 
 // Compact icon-only navigation
 .settings-nav-compact {
-  display: flex;
   gap: $spacing-xs;
 
   .nav-icon-button {
@@ -128,9 +123,6 @@
   min-height: 24px;
   // Fully rounded track
   border-radius: 12px;
-  // Critical: clip everything
-  overflow: hidden;
-  // Remove internal spacing that causes layout shift
   padding: 0;
   margin: 0;
   // GTK-specific: round focus ring

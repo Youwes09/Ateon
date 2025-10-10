@@ -104,9 +104,7 @@ export class BluetoothAgent extends Service {
     }
   }
 
-  /**
-   * Generic helper method for making DBus calls to BlueZ AgentManager
-   */
+  // Generic helper method for making DBus calls to BlueZ AgentManager
   private async callAgentManager(
     methodName: string,
     parameters: GLib.Variant,
@@ -159,6 +157,7 @@ export class BluetoothAgent extends Service {
 
     try {
       await this.unregisterFromBlueZ();
+      this.stop();
       this.isRegistered = false;
       return true;
     } catch (error) {

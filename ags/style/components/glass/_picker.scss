@@ -11,8 +11,6 @@ box.picker {
       color.adjust($primary, $alpha: -0.82),
       color.adjust($primary, $alpha: -0.88)
     );
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid color.adjust($primary, $alpha: -0.75);
     border-radius: 16px;
     margin: 1rem 0.5rem;
@@ -22,13 +20,10 @@ box.picker {
       0 0 30px color.adjust($primary, $alpha: -0.88),
       inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%),
       inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
 
     // Glass reflection effect
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -39,15 +34,12 @@ box.picker {
         transparent
       );
       border-radius: 16px 16px 0 0;
-      pointer-events: none;
     }
 
     label {
       @include material-icon(2rem);
       margin: 0.3rem;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 1;
     }
 
     entry {
@@ -55,8 +47,6 @@ box.picker {
       margin: $spacing-xs;
       background: transparent;
       border: none;
-      position: relative;
-      z-index: 1;
 
       &:focus {
         box-shadow: none;
@@ -75,8 +65,6 @@ box.picker {
       color.adjust($bg, $alpha: -0.12, $lightness: 6%),
       color.adjust($bg, $alpha: -0.18, $lightness: 2%)
     );
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 1px solid color.adjust($fg, $alpha: -0.88);
     border-radius: 16px;
     padding: 6px;
@@ -85,12 +73,10 @@ box.picker {
       0 4px 12px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
 
     // Glass reflection effect
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -101,8 +87,6 @@ box.picker {
         transparent
       );
       border-radius: 16px 16px 0 0;
-      pointer-events: none;
-      z-index: 0;
     }
 
     .app-button {
@@ -112,8 +96,6 @@ box.picker {
       border: none;
       border-radius: 0;
       transition: all 0.2s ease;
-      position: relative;
-      z-index: 1;
 
       .action-icon {
         @include material-icon;
@@ -153,7 +135,6 @@ box.picker {
 
         &::before {
           content: "";
-          position: absolute;
           top: 0;
           left: 0;
           right: 0;
@@ -164,7 +145,6 @@ box.picker {
             transparent
           );
           border-radius: 12px 12px 0 0;
-          pointer-events: none;
         }
 
         label.name {
@@ -187,12 +167,9 @@ box.picker {
       box-shadow: 
         0 2px 6px rgba(0, 0, 0, 0.1),
         inset 0 1px 1px color.adjust($fg, $alpha: -0.82);
-      position: relative;
-      overflow: hidden;
 
       &::before {
         content: "";
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
@@ -203,7 +180,6 @@ box.picker {
           transparent
         );
         border-radius: 20px 20px 0 0;
-        pointer-events: none;
       }
 
       .action-icon {
@@ -242,8 +218,6 @@ box.picker {
       color.adjust($bg, $alpha: -0.12, $lightness: 6%),
       color.adjust($bg, $alpha: -0.18, $lightness: 2%)
     );
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 1px solid color.adjust($fg, $alpha: -0.88);
     border-radius: 16px;
     box-shadow: 
@@ -251,12 +225,10 @@ box.picker {
       0 4px 12px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
 
     // Glass reflection effect
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -267,8 +239,6 @@ box.picker {
         transparent
       );
       border-radius: 16px 16px 0 0;
-      pointer-events: none;
-      z-index: 0;
     }
 
     .wallpaper-thumbnail {
@@ -281,8 +251,6 @@ box.picker {
       );
       border: 1px solid color.adjust($fg, $alpha: -0.9);
       transition: all 0.2s ease;
-      position: relative;
-      z-index: 1;
       box-shadow: 
         0 1px 3px rgba(0, 0, 0, 0.08),
         inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
@@ -312,7 +280,6 @@ box.picker {
         box-shadow: 
           0 2px 6px rgba(0, 0, 0, 0.12),
           inset 0 1px 0 color.adjust($fg, $alpha: -0.94);
-        overflow: hidden;
       }
 
       .wallpaper-picture {
@@ -341,8 +308,6 @@ box.picker {
 
     box.wallpaper-content {
       padding: 0.5rem;
-      position: relative;
-      z-index: 1;
     }
 
     box.wallpaper-row {
@@ -377,8 +342,6 @@ box.picker {
     color.adjust($fg, $alpha: -0.94),
     color.adjust($fg, $alpha: -0.96)
   );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-radius: 14px;
   border: 1px solid color.adjust($fg, $alpha: -0.9);
   margin: 8px;
@@ -393,12 +356,9 @@ box.picker {
     background: transparent;
     border: 1px solid transparent;
     transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
 
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -409,7 +369,6 @@ box.picker {
         transparent
       );
       border-radius: 10px 10px 0 0;
-      pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s ease;
     }
@@ -467,8 +426,6 @@ box.picker {
     color.adjust($fg, $alpha: -0.94),
     color.adjust($fg, $alpha: -0.96)
   );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-radius: 14px;
   border: 1px solid color.adjust($fg, $alpha: -0.9);
   margin: 8px;
@@ -493,12 +450,9 @@ box.picker {
     box-shadow: 
       0 2px 6px rgba(0, 0, 0, 0.1),
       inset 0 1px 1px color.adjust($fg, $alpha: -0.82);
-    position: relative;
-    overflow: hidden;
 
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -509,7 +463,6 @@ box.picker {
         transparent
       );
       border-radius: 20px 20px 0 0;
-      pointer-events: none;
     }
 
     &:focus,
@@ -543,8 +496,6 @@ box.picker {
     color.adjust($bg, $alpha: -0.12, $lightness: 6%),
     color.adjust($bg, $alpha: -0.18, $lightness: 2%)
   );
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
   border: 1px solid color.adjust($fg, $alpha: -0.88);
   border-radius: 16px;
   padding: 6px;
@@ -553,12 +504,10 @@ box.picker {
     0 4px 12px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-  position: relative;
 
   // Glass reflection effect
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -569,8 +518,6 @@ box.picker {
       transparent
     );
     border-radius: 16px 16px 0 0;
-    pointer-events: none;
-    z-index: 0;
   }
 
   .command-item {
@@ -580,8 +527,6 @@ box.picker {
     border: none;
     border-radius: 0;
     transition: all 0.2s ease;
-    position: relative;
-    z-index: 1;
 
     .command-icon {
       @include material-icon(3rem);
@@ -618,7 +563,6 @@ box.picker {
 
       &::before {
         content: "";
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
@@ -629,7 +573,6 @@ box.picker {
           transparent
         );
         border-radius: 12px 12px 0 0;
-        pointer-events: none;
       }
 
       .command-name {

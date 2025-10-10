@@ -11,20 +11,15 @@ $is-dark: color.lightness($bg) < 50%;
     color.adjust($fg, $alpha: -0.88),
     color.adjust($fg, $alpha: -0.92)
   );
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid color.adjust($fg, $alpha: -0.85);
   border-radius: 16px;
   padding: $spacing-md;
   box-shadow: 
     inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
 
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -35,12 +30,9 @@ $is-dark: color.lightness($bg) < 50%;
       transparent
     );
     border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
   }
 
   .weather-location {
-    display: flex;
     align-items: center;
     gap: $spacing-xs;
     padding: $spacing-xs $spacing-sm;
@@ -55,8 +47,6 @@ $is-dark: color.lightness($bg) < 50%;
     box-shadow: 
       inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-    position: relative;
-    z-index: 1;
 
     .location-icon {
       @include material-icon(18px);
@@ -85,13 +75,9 @@ $is-dark: color.lightness($bg) < 50%;
     box-shadow: 
       inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
 
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -102,7 +88,6 @@ $is-dark: color.lightness($bg) < 50%;
         transparent
       );
       border-radius: inherit;
-      pointer-events: none;
     }
 
     .current-icon {
@@ -193,13 +178,9 @@ $is-dark: color.lightness($bg) < 50%;
     box-shadow: 
       inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
 
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -210,7 +191,6 @@ $is-dark: color.lightness($bg) < 50%;
         transparent
       );
       border-radius: inherit;
-      pointer-events: none;
     }
 
     .forecast-item {
@@ -227,12 +207,9 @@ $is-dark: color.lightness($bg) < 50%;
       box-shadow: 
         inset 0 1px 1px color.adjust($fg, $alpha: -0.93),
         inset 0 -1px 1px rgba(0, 0, 0, 0.05);
-      position: relative;
-      overflow: hidden;
 
       &::before {
         content: "";
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
@@ -243,7 +220,6 @@ $is-dark: color.lightness($bg) < 50%;
           transparent
         );
         border-radius: inherit;
-        pointer-events: none;
         opacity: 0;
         transition: opacity 0.2s ease;
       }

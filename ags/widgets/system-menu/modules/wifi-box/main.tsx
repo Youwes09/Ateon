@@ -20,56 +20,53 @@ import {
 } from "utils/wifi";
 import options from "options.ts";
 
+// Main WiFi Box component
 export const WiFiBox = () => {
   const network = Network.get_default();
   const [isExpanded, setIsExpanded] = createState(false);
 
-  // Safe getter to avoid null refs
-  const wifi = () => network?.wifi ?? null;
-
   return (
-    <box cssClasses={["toggle"]} orientation={Gtk.Orientation.VERTICAL}>
-      {/* === WiFi Toggle Header === */}
-      <box>
-        {/* Toggle WiFi on/off */}
+    <box
+      orientation={Gtk.Orientation.VERTICAL}
+      cssClasses={["wifi-menu", "toggle"]}
+    >
+      {/* WiFi Toggle Header */}
+      <box cssClasses={["toggle", "wifi-toggle"]}>
         <button
           onClicked={() => {
-            const w = wifi();
-            if (!w) return;
-            w.set_enabled(!w.enabled);
+            network.wifi.enabled
+              ? network.wifi.set_enabled(false)
+              : network.wifi.set_enabled(true);
           }}
-          cssClasses={createBinding(network, "wifi")((w) =>
-            w?.enabled ? ["button"] : ["button-disabled"],
-          )}
+          cssClasses={createBinding(
+            network.wifi,
+            "enabled",
+          )((enabled) => (enabled ? ["button"] : ["button-disabled"]))}
         >
-          <image
-            iconName={createBinding(network, "wifi")(
-              (w) => w?.icon_name ?? "network-offline-symbolic",
-            )}
-          />
+          <image iconName={createBinding(network.wifi, "icon_name")} />
         </button>
-
-        {/* Expand available networks */}
         <button
-          hexpand
+          hexpand={true}
           onClicked={() => {
-            const w = wifi();
-            if (!w?.enabled) return;
-            setIsExpanded((prev) => !prev);
-            if (!isExpanded.get()) {
-              scanNetworks();
-              getSavedNetworks();
+            if (network.wifi.enabled) {
+              setIsExpanded((prev) => !prev);
+              if (!isExpanded.get()) {
+                scanNetworks();
+                getSavedNetworks();
+              }
             }
           }}
         >
-          <box hexpand>
+          <box hexpand={true}>
             <label
-              hexpand
+              hexpand={true}
               xalign={0}
-              label={createBinding(network, "wifi")(
-                (w) =>
-                  w?.ssid ||
-                  (w?.enabled ? "Not Connected" : "Wi-Fi Off"),
+              label={createBinding(
+                network.wifi,
+                "ssid",
+              )(
+                (ssid) =>
+                  ssid || (network.wifi.enabled ? "Not Connected" : "WiFi Off"),
               )}
             />
             <image
@@ -85,7 +82,6 @@ export const WiFiBox = () => {
         </button>
       </box>
 
-      {/* === Revealer Section === */}
       <revealer
         transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
         transitionDuration={300}
@@ -99,15 +95,18 @@ export const WiFiBox = () => {
         $={(self) => {
           const unsubscribeExpanded = isExpanded.subscribe(() => {
             const expanded = isExpanded.get();
-            const w = wifi();
 
-            if (expanded && w?.enabled) {
+            if (expanded) {
               scanTimer.get()?.cancel();
-              const newTimer = interval(10000, () => {
-                scanNetworks();
-                getSavedNetworks();
-              });
-              setScanTimer(newTimer);
+              setScanTimer(null);
+
+              if (network.wifi?.enabled) {
+                const newTimer = interval(10000, () => {
+                  scanNetworks();
+                  getSavedNetworks();
+                });
+                setScanTimer(newTimer);
+              }
             } else {
               scanTimer.get()?.cancel();
               setScanTimer(null);
@@ -132,18 +131,23 @@ export const WiFiBox = () => {
           });
         }}
       >
-        <box orientation={Gtk.Orientation.VERTICAL} cssClasses={["system-menu-list"]}>
-          {/* === Password Dialog === */}
+        <box
+          orientation={Gtk.Orientation.VERTICAL}
+          cssClasses={["system-menu-list"]}
+        >
+          {/* Password Dialog */}
           <box visible={showPasswordDialog}>
             <PasswordDialog />
           </box>
 
-          {/* === Available Networks === */}
+          {/* Available Networks */}
           <box orientation={Gtk.Orientation.VERTICAL}>
             <label label="Available Networks" cssClasses={["section-label"]} />
 
-            {/* Empty state */}
-            <box visible={availableNetworks((nets) => nets.length === 0)}>
+            {/* Empty state container */}
+            <box
+              visible={availableNetworks((networks) => networks.length === 0)}
+            >
               <label
                 label="No networks found"
                 cssClasses={["empty-label"]}
@@ -152,55 +156,50 @@ export const WiFiBox = () => {
               />
             </box>
 
-            {/* Networks list */}
+            {/* Networks list container */}
             <box
               orientation={Gtk.Orientation.VERTICAL}
-              visible={availableNetworks((nets) => nets.length > 0)}
+              visible={availableNetworks((networks) => networks.length > 0)}
             >
               <For each={availableNetworks}>
-                {(n) => <NetworkItem network={n} />}
+                {(network) => <NetworkItem network={network} />}
               </For>
             </box>
           </box>
 
-          {/* === Saved Networks === */}
+          {/* Saved Networks */}
           <box
             orientation={Gtk.Orientation.VERTICAL}
             visible={savedNetworks((saved) => {
-              const availableSSIDs = new Set(
-                availableNetworks.get().map((n) => n.ssid),
+              const filtered = saved.filter(
+                (ssid) => !availableNetworks.get().some((n) => n.ssid === ssid),
               );
-              return saved.some((ssid) => !availableSSIDs.has(ssid));
+              return filtered.length > 0;
             })}
           >
             <label label="Saved Networks" cssClasses={["section-label"]} />
             <For each={savedNetworks}>
               {(ssid) => {
-                const isAvailable = availableNetworks
+                // Only render if not in available networks
+                const shouldShow = !availableNetworks
                   .get()
                   .some((n) => n.ssid === ssid);
-                if (isAvailable) return null;
-
                 return (
-                  <button cssClasses={["network-item", "saved-network"]}>
-                    <box hexpand valign={Gtk.Align.CENTER}>
-                      <label label={ssid} hexpand xalign={0} />
-                      <button
-                        label="Forget"
-                        cssClasses={["forget-button"]}
-                        onClicked={(self, event) => {
-                          event?.stopPropagation();
-                          forgetNetwork(ssid);
-                        }}
-                      />
-                    </box>
-                  </button>
+                  <box cssClasses={["saved-network"]} visible={shouldShow}>
+                    <label label={ssid} />
+                    <box hexpand={true} />
+                    <button
+                      label="Forget"
+                      cssClasses={["forget-button", "button"]}
+                      onClicked={() => forgetNetwork(ssid)}
+                    />
+                  </box>
                 );
               }}
             </For>
           </box>
 
-          {/* === Controls === */}
+          {/* Controls Container */}
           <box hexpand>
             {/* Refresh Button */}
             <button
@@ -214,7 +213,7 @@ export const WiFiBox = () => {
               <image iconName="view-refresh-symbolic" />
             </button>
 
-            {/* Disconnect Option */}
+            {/* Connected Network Options */}
             <box hexpand>
               <box
                 orientation={Gtk.Orientation.VERTICAL}
@@ -233,19 +232,20 @@ export const WiFiBox = () => {
               </box>
             </box>
 
-            {/* Advanced Settings */}
+            {/* Advanced Settings Button */}
             <button
               cssClasses={["settings-button"]}
               halign={Gtk.Align.END}
+              hexpand={false}
               visible={options["system-menu.modules.wifi-advanced.enable"](
-                (v) => Boolean(v),
+                (value) => Boolean(value),
               )}
               onClicked={() => {
                 execAsync(["sh", "-c", String(options["app.wifi"].get())]);
                 setIsExpanded(false);
               }}
             >
-              <image iconName="emblem-system-symbolic" />
+              <image iconName={"emblem-system-symbolic"} />
             </button>
           </box>
         </box>

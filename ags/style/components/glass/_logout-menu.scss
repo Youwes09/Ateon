@@ -4,8 +4,6 @@
 
 box.logout-background {
   background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   
   .logout-menu {
     background: linear-gradient(
@@ -13,8 +11,6 @@ box.logout-background {
       color.adjust($primary, $alpha: -0.92, $lightness: 5%),
       color.adjust($bg, $alpha: -0.2, $lightness: 2%)
     );
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 1px solid color.adjust($primary, $alpha: -0.88);
     border-radius: 24px;
     padding: 2rem;
@@ -24,12 +20,10 @@ box.logout-background {
       0 0 40px color.adjust($primary, $alpha: -0.85),
       inset 0 1px 0 color.adjust($primary, $alpha: -0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-    position: relative;
     
     // Glass reflection effect
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -40,7 +34,6 @@ box.logout-background {
         transparent
       );
       border-radius: 24px 24px 0 0;
-      pointer-events: none;
     }
     
     button {
@@ -59,13 +52,10 @@ box.logout-background {
         0 4px 12px rgba(0, 0, 0, 0.15),
         inset 0 1px 1px color.adjust($fg, $alpha: -0.82),
         inset 0 -1px 1px rgba(0, 0, 0, 0.15);
-      position: relative;
-      overflow: hidden;
       
       // Glass shine effect
       &::before {
         content: "";
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
@@ -76,7 +66,6 @@ box.logout-background {
           transparent
         );
         border-radius: 18px 18px 0 0;
-        pointer-events: none;
         transition: height 0.3s ease;
       }
       

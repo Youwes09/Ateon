@@ -6,8 +6,8 @@ import { Sliders } from "./modules/Sliders.tsx";
 import { Toggles } from "./modules/Toggles.tsx";
 import { PowerProfileBox } from "./modules/PowerProfileBox.tsx";
 import { BatteryBox } from "./modules/BatteryBox.tsx";
-import { NotificationBox } from "./modules/notification-center/main.tsx";
 import options from "options.ts";
+import { gdkmonitor } from "utils/monitors.ts";
 
 export default function SystemMenu() {
   const powerprofiles = PowerProfiles.get_default();
@@ -32,19 +32,17 @@ export default function SystemMenu() {
       })}
       keymode={Astal.Keymode.ON_DEMAND}
       visible={visible}
-      exclusivity={Astal.Exclusivity.NORMAL}
+      gdkmonitor={gdkmonitor}
     >
       <box
         cssClasses={["system-menu"]}
-        widthRequest={350}
+        widthRequest={285}
         orientation={Gtk.Orientation.VERTICAL}
-        vexpand={false}
       >
         <Toggles />
         {hasProfiles && <PowerProfileBox />}
         <Sliders />
         <BatteryBox />
-        <NotificationBox />
       </box>
     </window>
   );

@@ -14,7 +14,6 @@
 
   /** ---------- Location Header ---------- **/
   .weather-location {
-    display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: $spacing-md;
@@ -64,12 +63,10 @@
 
     /** ---------- Weather Stats ---------- **/
     .weather-stats {
-      display: flex;
       flex-direction: column;
       gap: $spacing-xs;
 
       .stat-item {
-        display: flex;
         align-items: center;
         justify-content: space-between;
         padding: $spacing-xs 0;
@@ -91,7 +88,6 @@
   /** ---------- Forecast Section ---------- **/
   .forecast-row {
     margin-top: $spacing-md;
-    display: flex;
     justify-content: center;
     gap: $spacing-sm;
 

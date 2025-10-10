@@ -1,35 +1,46 @@
-import { ThumbnailManager } from "./ThumbnailManager";
-import { WallpaperStore } from "./WallpaperStore";
+import { Gdk } from "ags/gtk4";
 
-// Classes
-export { WallpaperStore } from "./WallpaperStore";
-export { ThumbnailManager } from "./ThumbnailManager";
-
-// Types
-export type {
-  CachedThumbnail,
-  ThemeProperties,
-  CachedThemeEntry,
-  ThumbnailRequest,
-} from "./types";
-
-// Thumbnail manager singleton management
-let thumbnailManagerInstance: ThumbnailManager | null = null;
-export function getThumbnailManager(): ThumbnailManager {
-  if (!thumbnailManagerInstance) {
-    thumbnailManagerInstance = new ThumbnailManager();
-  }
-  return thumbnailManagerInstance;
+export interface CachedThumbnail {
+  texture: Gdk.Texture;
+  timestamp: number;
+  lastAccessed: number;
 }
 
-// Wallpaper store singleton
-let wallpaperStoreInstance: WallpaperStore | null = null;
+export const THEME_MODE_OPTIONS = [
+  { value: "auto", label: "Auto" },
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+] as const;
 
-export function getWallpaperStore(params?: {
-  includeHidden?: boolean;
-}): WallpaperStore {
-  if (!wallpaperStoreInstance) {
-    wallpaperStoreInstance = new WallpaperStore(params);
-  }
-  return wallpaperStoreInstance;
+export const THEME_SCHEME_OPTIONS = [
+  { value: "auto", label: "Auto" },
+  { value: "scheme-tonal-spot", label: "Tonal Spot" },
+  { value: "scheme-vibrant", label: "Vibrant" },
+  { value: "scheme-neutral", label: "Neutral" },
+  { value: "scheme-expressive", label: "Expressive" },
+  { value: "scheme-monochrome", label: "Monochrome" },
+  { value: "scheme-fidelity", label: "Fidelity" },
+  { value: "scheme-content", label: "Content" },
+  { value: "scheme-rainbow", label: "Rainbow" },
+  { value: "scheme-fruit-salad", label: "Fruit Salad" },
+] as const;
+
+export type ThemeMode = (typeof THEME_MODE_OPTIONS)[number]["value"];
+export type ThemeScheme = (typeof THEME_SCHEME_OPTIONS)[number]["value"];
+
+export interface ThemeProperties {
+  tone: number;
+  chroma: number;
+  mode: ThemeMode;
+  scheme: ThemeScheme;
+}
+
+export interface CachedThemeEntry extends ThemeProperties {
+  timestamp: number;
+}
+
+export interface ThumbnailRequest {
+  path: string;
+  resolve: (texture: Gdk.Texture | null) => void;
+  reject: (error: any) => void;
 }

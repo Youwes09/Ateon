@@ -21,14 +21,11 @@
     inset 0 2px 4px rgba(0, 0, 0, 0.2),
     inset 0 -2px 4px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
-  position: relative;
-  overflow: hidden;
   transform: translateZ(0);
 
   // Glass reflection effect
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -39,15 +36,11 @@
       transparent
     );
     border-radius: 20px 20px 0 0;
-    pointer-events: none;
-    z-index: 0;
   }
 
   & > box {
     @include window-box;
     background: transparent;
-    position: relative;
-    z-index: 1;
   }
 
   // Force all direct children to same width
@@ -72,12 +65,9 @@
     inset 0 2px 4px rgba(0, 0, 0, 0.2),
     inset 0 -2px 4px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
-  position: relative;
-  overflow: hidden;
 
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -88,14 +78,6 @@
       transparent
     );
     border-radius: 14px 14px 0 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  // All content above glass overlay
-  > * {
-    position: relative;
-    z-index: 1;
   }
 }
 
@@ -240,13 +222,10 @@
     inset 0 2px 4px rgba(0, 0, 0, 0.2),
     inset 0 -2px 4px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
-  position: relative;
-  overflow: hidden;
   transform: translateZ(0);
 
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -257,8 +236,6 @@
       transparent
     );
     border-radius: 16px 16px 0 0;
-    pointer-events: none;
-    z-index: 0;
   }
 
   // Inner bezel for list content
@@ -271,8 +248,6 @@
     border: 1px solid color.adjust($fg, $alpha: -0.8);
     border-radius: 12px;
     padding: $spacing-xs;
-    position: relative;
-    z-index: 1;
   }
 }
 

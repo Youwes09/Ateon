@@ -8,6 +8,7 @@
 @use "./modules/modes.scss";
 @use "./modules/timer.scss";
 @use "./modules/updater.scss";
+@use "./modules/hardware.scss";
 
 .sidebar {
   @include window;

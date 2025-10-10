@@ -9,20 +9,15 @@ box.clipboard {
     color.adjust($bg, $alpha: -0.12, $lightness: 6%),
     color.adjust($bg, $alpha: -0.18, $lightness: 2%)
   );
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
   border: 1px solid color.adjust($fg, $alpha: -0.88);
   border-radius: 20px;
   box-shadow: 
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-  position: relative;
-  overflow: hidden;
   
   // Glass reflection effect
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -33,8 +28,6 @@ box.clipboard {
       transparent
     );
     border-radius: 20px 20px 0 0;
-    pointer-events: none;
-    z-index: 0;
   }
 }
 
@@ -45,8 +38,6 @@ box.clipboard {
     color.adjust($fg, $alpha: -0.9),
     color.adjust($fg, $alpha: -0.94)
   );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-radius: 14px;
   padding: 8px 12px;
   border: 1px solid color.adjust($fg, $alpha: -0.85);
@@ -54,8 +45,6 @@ box.clipboard {
   box-shadow: 
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-  position: relative;
-  z-index: 1;
   
   .mode-button {
     border-radius: 10px;
@@ -67,12 +56,9 @@ box.clipboard {
     font-weight: 500;
     font-size: 0.85rem;
     transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
     
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -83,7 +69,6 @@ box.clipboard {
         transparent
       );
       border-radius: 10px 10px 0 0;
-      pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s ease;
     }
@@ -142,14 +127,11 @@ box.clipboard {
     font-weight: 500;
     font-size: 0.85rem;
     transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
     box-shadow: 
       inset 0 1px 0 color.adjust($error, $alpha: -0.85);
     
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -160,7 +142,6 @@ box.clipboard {
         transparent
       );
       border-radius: 10px 10px 0 0;
-      pointer-events: none;
       transition: opacity 0.2s ease;
     }
     
@@ -205,8 +186,6 @@ box.clipboard {
     color.adjust($fg, $alpha: -0.9),
     color.adjust($fg, $alpha: -0.94)
   );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-radius: 14px;
   margin: 10px 12px;
   padding: 10px 14px;
@@ -215,8 +194,6 @@ box.clipboard {
   box-shadow: 
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-  position: relative;
-  z-index: 1;
   
   &:focus-within {
     background: linear-gradient(
@@ -264,8 +241,6 @@ box.clipboard {
   border-radius: 14px;
   margin: 0 12px 12px;
   padding: 4px;
-  position: relative;
-  z-index: 1;
   
   button.clipboard-entry {
     border-radius: 12px;
@@ -278,14 +253,11 @@ box.clipboard {
     );
     border: 1px solid color.adjust($fg, $alpha: -0.88);
     transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
     box-shadow: 
       inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
     
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -296,7 +268,6 @@ box.clipboard {
         transparent
       );
       border-radius: 12px 12px 0 0;
-      pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s ease;
     }

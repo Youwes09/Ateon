@@ -4,6 +4,7 @@ import Bluetooth from "gi://AstalBluetooth";
 import Network from "gi://AstalNetwork";
 import { WiFiBox } from "./wifi-box/main.tsx";
 import { BluetoothBox } from "./bluetooth-box/main.tsx";
+import NotificationBox from "./notification-center/main.tsx";
 
 export const Toggles = () => {
   const bluetooth = Bluetooth.get_default();
@@ -20,10 +21,11 @@ export const Toggles = () => {
     <box orientation={Gtk.Orientation.VERTICAL} visible={renderToggleBox}>
       {/* WiFi Box */}
       <box visible={networkPrimary((p) => p !== Network.Primary.WIRED)}>
-        <WiFiBox />
+        {network?.wifi ? <WiFiBox /> : <></>}
       </box>
       {/* Bluetooth Box */}
       {bluetooth?.adapter ? <BluetoothBox /> : <></>}
+      <NotificationBox />
     </box>
   );
 };

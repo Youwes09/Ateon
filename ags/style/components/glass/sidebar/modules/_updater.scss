@@ -11,20 +11,15 @@ $is-dark: color.lightness($bg) < 50%;
     color.adjust($fg, $alpha: -0.88),
     color.adjust($fg, $alpha: -0.92)
   );
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid color.adjust($fg, $alpha: -0.85);
   padding: 0;
   border-radius: 16px;
   box-shadow: 
     inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
 
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -35,20 +30,15 @@ $is-dark: color.lightness($bg) < 50%;
       transparent
     );
     border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
   }
 
   .updater-header {
-    display: flex;
     align-items: center;
     padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
     border-bottom: 1px solid color.adjust($fg, $alpha: -0.9);
     background: transparent;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    position: relative;
-    z-index: 1;
 
     .header-title {
       font-size: calc(#{$font} * 1.1);
@@ -67,7 +57,6 @@ $is-dark: color.lightness($bg) < 50%;
   }
 
   .updater-nav {
-    display: flex;
     gap: $spacing-xs;
 
     .nav-mode-button {
@@ -110,8 +99,6 @@ $is-dark: color.lightness($bg) < 50%;
 
   .updater-content {
     padding: $spacing-md;
-    position: relative;
-    z-index: 1;
   }
 
   .version-info {
@@ -252,17 +239,12 @@ $is-dark: color.lightness($bg) < 50%;
     padding: $spacing-sm $spacing-md;
     font-weight: 600;
     transition: all 250ms ease;
-    position: relative;
-    overflow: hidden;
-
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 40%;
-      pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s ease;
       border-radius: inherit;
@@ -686,15 +668,9 @@ $is-dark: color.lightness($bg) < 50%;
   font-style: normal;
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   font-size: 1em;
-  display: inline-block;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
-  -webkit-font-feature-settings: 'liga';
-  -moz-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
 }
 

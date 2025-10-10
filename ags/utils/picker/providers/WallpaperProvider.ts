@@ -2,9 +2,17 @@ import { register } from "ags/gobject";
 import { BaseProvider } from "../SearchProvider";
 import { WallpaperItem, ProviderConfig } from "../types";
 import { getWallpaperStore } from "utils/wallpaper";
+import type { ThemeMode, ThemeScheme } from "utils/wallpaper/types";
+
+interface ThemeProvider {
+  set ThemeMode(mode: ThemeMode);
+  set ThemeScheme(scheme: ThemeScheme);
+  get ThemeMode(): ThemeMode;
+  get ThemeScheme(): ThemeScheme;
+}
 
 @register({ GTypeName: "WallpaperProvider" })
-export class WallpaperProvider extends BaseProvider {
+export class WallpaperProvider extends BaseProvider implements ThemeProvider {
   readonly config: ProviderConfig = {
     command: "wp",
     icon: "Image_Search",
@@ -27,11 +35,12 @@ export class WallpaperProvider extends BaseProvider {
 
   async search(query: string): Promise<void> {
     this.setLoading(true);
+
     try {
       const trimmedQuery = query.trim();
+
       if (trimmedQuery.length === 0) {
-        // Show all wallpapers when query is empty
-        this.setResults(this.store.wallpapers.slice(0, this.config.maxResults));
+        this.setDefaultResults(this.store.wallpapers);
       } else {
         const fuzzyResults = this.store.search(trimmedQuery);
         this.setResults(fuzzyResults.slice(0, this.config.maxResults));
@@ -55,6 +64,22 @@ export class WallpaperProvider extends BaseProvider {
 
   async getThumbnail(imagePath: string) {
     return await this.store.getThumbnail(imagePath);
+  }
+
+  set ThemeMode(mode: ThemeMode) {
+    this.store.setManualMode(mode);
+  }
+
+  set ThemeScheme(scheme: ThemeScheme) {
+    this.store.setManualScheme(scheme);
+  }
+
+  get ThemeMode(): ThemeMode {
+    return this.store.manualMode;
+  }
+
+  get ThemeScheme(): ThemeScheme {
+    return this.store.manualScheme;
   }
 
   dispose(): void {

@@ -8,6 +8,8 @@ import MatshellSettingsWidget from "./modules/MatshellSettingsWidget";
 import QuickActionsWidget from "./modules/QuickActionWidget";
 import TimerWidget from "./modules/TimerWidget";
 import UpdaterWidget from "./modules/UpdaterWidget";
+import HardwareMonitorWidget from "./modules/HardwareWidget/main";
+import { gdkmonitor } from "utils/monitors";
 import options from "options";
 
 export type SidebarMode = "widgets" | "settings";
@@ -103,7 +105,9 @@ export default function Sidebar(
             >
               <WeatherWidget />
               <Gtk.Separator />
+              <HardwareMonitorWidget />
               <TimerWidget />
+
             </box>
 
             <box

@@ -11,20 +11,15 @@ $is-dark: color.lightness($bg) < 50%;
     color.adjust($fg, $alpha: -0.88),
     color.adjust($fg, $alpha: -0.92)
   );
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid color.adjust($fg, $alpha: -0.85);
   padding: 0;
   border-radius: 16px;
   box-shadow: 
     inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
 
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -35,21 +30,16 @@ $is-dark: color.lightness($bg) < 50%;
       transparent
     );
     border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
   }
 }
 
 .settings-header-compact {
-  display: flex;
   align-items: center;
   padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
   border-bottom: 1px solid color.adjust($fg, $alpha: -0.9);
   background: transparent;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  position: relative;
-  z-index: 1;
 
   .settings-title-compact {
     font-size: calc(#{$font} * 1.1);
@@ -61,7 +51,6 @@ $is-dark: color.lightness($bg) < 50%;
 }
 
 .settings-nav-compact {
-  display: flex;
   gap: $spacing-xs;
 
   .nav-icon-button {
@@ -115,8 +104,6 @@ $is-dark: color.lightness($bg) < 50%;
 .settings-content {
   padding: $spacing-md;
   min-height: 280px;
-  position: relative;
-  z-index: 1;
 }
 
 .section-header {
@@ -171,7 +158,6 @@ $is-dark: color.lightness($bg) < 50%;
   min-width: 44px;
   min-height: 24px;
   border-radius: 12px;
-  overflow: hidden;
   padding: 0;
   margin: 0;
   -gtk-outline-radius: 12px;

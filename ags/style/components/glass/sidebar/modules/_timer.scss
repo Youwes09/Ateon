@@ -11,20 +11,15 @@ $is-dark: color.lightness($bg) < 50%;
     color.adjust($fg, $alpha: -0.88),
     color.adjust($fg, $alpha: -0.92)
   );
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid color.adjust($fg, $alpha: -0.85);
   border-radius: 16px;
   padding: $spacing-md;
   box-shadow: 
     inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
 
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -35,16 +30,11 @@ $is-dark: color.lightness($bg) < 50%;
       transparent
     );
     border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
   }
 
   .widget-header {
-    display: flex;
     align-items: center;
     margin-bottom: $spacing-sm;
-    position: relative;
-    z-index: 1;
 
     .header-icon {
       @include material-icon(24px);
@@ -75,8 +65,6 @@ $is-dark: color.lightness($bg) < 50%;
     color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
     font-weight: 600;
     transition: all 250ms ease;
-    position: relative;
-    overflow: hidden;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     box-shadow: 
       inset 0 1px 1px color.adjust($fg, $alpha: -0.9),
@@ -84,7 +72,6 @@ $is-dark: color.lightness($bg) < 50%;
 
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -94,7 +81,6 @@ $is-dark: color.lightness($bg) < 50%;
         color.adjust($fg, $alpha: -0.9),
         transparent
       );
-      pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s ease;
       border-radius: inherit;
@@ -134,12 +120,9 @@ $is-dark: color.lightness($bg) < 50%;
     box-shadow: 
       inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
 
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -150,7 +133,6 @@ $is-dark: color.lightness($bg) < 50%;
         transparent
       );
       border-radius: inherit;
-      pointer-events: none;
     }
 
     .dialog-title {
@@ -260,12 +242,9 @@ $is-dark: color.lightness($bg) < 50%;
         inset 0 1px 2px rgba(0, 0, 0, 0.2),
         inset 0 -1px 2px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
-      position: relative;
-      overflow: hidden;
 
       &::before {
         content: "";
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
@@ -276,7 +255,6 @@ $is-dark: color.lightness($bg) < 50%;
           transparent
         );
         border-radius: 8px 8px 0 0;
-        pointer-events: none;
       }
 
       &:hover {
@@ -296,17 +274,13 @@ $is-dark: color.lightness($bg) < 50%;
       font-size: calc(#{$font} * 0.95);
       font-weight: 600;
       transition: all 200ms ease;
-      position: relative;
-      overflow: hidden;
 
       &::before {
         content: "";
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
         height: 40%;
-        pointer-events: none;
         opacity: 0;
         transition: opacity 0.2s ease;
         border-radius: 12px 12px 0 0;
@@ -388,8 +362,6 @@ $is-dark: color.lightness($bg) < 50%;
 
   .timer-list {
     margin-top: $spacing-sm;
-    position: relative;
-    z-index: 1;
   }
 
   .timer-empty {
@@ -466,17 +438,13 @@ $is-dark: color.lightness($bg) < 50%;
       box-shadow: 
         inset 0 1px 1px color.adjust($fg, $alpha: -0.93),
         inset 0 -1px 1px rgba(0, 0, 0, 0.05);
-      position: relative;
-      overflow: hidden;
 
       &::before {
         content: "";
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
         height: 40%;
-        pointer-events: none;
         opacity: 0;
         transition: opacity 0.2s ease;
         border-radius: 10px 10px 0 0;
@@ -591,7 +559,6 @@ $is-dark: color.lightness($bg) < 50%;
       border: 1px solid color.adjust($fg, $alpha: -0.92);
       border-radius: 8px;
       margin-top: $spacing-sm;
-      overflow: hidden;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 

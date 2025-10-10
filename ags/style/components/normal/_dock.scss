@@ -19,8 +19,6 @@
     color.adjust($bg, $alpha: -0.1, $lightness: 8%),
     color.adjust($bg, $alpha: -0.2, $lightness: 2%)
   );
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
   padding: 5px 10px;
   border: 1px solid color.adjust($fg, $alpha: -0.82);
   border-radius: 20px;
@@ -31,12 +29,10 @@
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: bottom center;
-  position: relative;
 
   // Glass reflection effect
   &::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -47,13 +43,11 @@
       transparent
     );
     border-radius: 20px 20px 0 0;
-    pointer-events: none;
   }
 
   &.hidden {
     opacity: 0;
     transform: translateY(20px) scale(0.9);
-    pointer-events: none;
   }
 }
 
@@ -66,7 +60,6 @@
   min-width: 48px;
   min-height: 48px;
   transform-origin: bottom center;
-  position: relative;
 
   .icon-background {
     background: linear-gradient(
@@ -83,13 +76,10 @@
       0 2px 8px rgba(0, 0, 0, 0.15),
       inset 0 1px 1px color.adjust($fg, $alpha: -0.8),
       inset 0 -1px 1px rgba(0, 0, 0, 0.15);
-    position: relative;
-    overflow: hidden;
 
     // Glass shine effect
     &::before {
       content: "";
-      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -100,7 +90,6 @@
         transparent
       );
       border-radius: 14px 14px 0 0;
-      pointer-events: none;
     }
   }
 
@@ -118,7 +107,6 @@
     min-width: 58px;
     min-height: 58px;
     margin-bottom: 8px;
-    z-index: 10;
 
     .icon-background {
       background: linear-gradient(
@@ -174,7 +162,6 @@
   // Active indicator (running app)
   &.running::after {
     content: "";
-    position: absolute;
     bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
