@@ -23,7 +23,9 @@ export function HorizontalDiskBar({
           label={mountPoint}
           cssClasses={["disk-bar-mount"]}
           halign={Gtk.Align.START}
-          hexpand
+          hexpand={true}
+          ellipsize={Gtk.EllipsizeMode.END}
+          maxWidthChars={20}
         />
         <label
           label={`${used} / ${total}`}

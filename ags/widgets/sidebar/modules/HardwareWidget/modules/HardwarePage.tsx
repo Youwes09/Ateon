@@ -35,14 +35,15 @@ export function HardwarePage({
   };
 
   return (
-    <box orientation={Gtk.Orientation.VERTICAL} spacing={16} hexpand>
+    <box orientation={Gtk.Orientation.VERTICAL} spacing={16} hexpand={false}>
       <box
         cssClasses={["hw-main-content"]}
         orientation={Gtk.Orientation.HORIZONTAL}
         halign={Gtk.Align.CENTER}
+        hexpand={false}
       >
         <Metric config={leftMetric} />
-        <box valign={Gtk.Align.CENTER}>
+        <box valign={Gtk.Align.CENTER} hexpand={false}>
           <CircularProgressBar
             percentage={mainPercentage}
             radiusFilled={true}
@@ -69,6 +70,7 @@ export function HardwarePage({
           cssClasses={["hw-disk-list"]}
           orientation={Gtk.Orientation.VERTICAL}
           spacing={8}
+          hexpand={false}
         >
           <label
             label="Partitions"

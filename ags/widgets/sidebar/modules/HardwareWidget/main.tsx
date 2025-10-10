@@ -201,10 +201,6 @@ export default function HardwareMonitorWidget() {
           cssClasses={["hw-stack"]}
           transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
           transitionDuration={200}
-          hexpand={false}
-          vexpand={false}
-          halign={Gtk.Align.CENTER}
-          valign={Gtk.Align.CENTER}
           $={(stack) => {
             const unsubscribe = currentPage.subscribe(() => {
               stack.visibleChildName = currentPage.get();
@@ -219,8 +215,6 @@ export default function HardwareMonitorWidget() {
               <box
                 $type="named"
                 name={config.id}
-                hexpand={false}
-                vexpand={false}
                 cssClasses={[`hw-page-${config.id}`]}
                 orientation={Gtk.Orientation.VERTICAL}
               >

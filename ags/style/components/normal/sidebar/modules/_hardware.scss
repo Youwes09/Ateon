@@ -4,6 +4,9 @@
 
 .hardware-monitor-widget {
   @include widget-container;
+  // 🔑 CRITICAL: Add max-width to prevent expansion
+  max-width: 280px;
+  width: 100%;
 
   .hw-header {
     @include widget-header;
@@ -18,6 +21,25 @@
 
     .nav-button {
       @include nav-button;
+      
+      // 🔑 CRITICAL: Prevent expansion
+      min-width: 0;
+      min-height: 0;
+      padding: $spacing-xs $spacing-sm; // explicit padding, not auto
+      
+      // Ensure inner box doesn't stretch
+      > box {
+        min-width: 0;
+        min-height: 0;
+        
+        .nav-icon,
+        .nav-label {
+          // Prevent labels from requesting extra space
+          min-width: 0;
+          text-align: center;
+          white-space: nowrap;
+        }
+      }
     }
   }
 
@@ -26,11 +48,19 @@
 
     .hw-scroll {
       @include scrollbar(vertical);
+      // 🔑 Constrain scrollable area
+      max-width: 280px;
     }
 
     .hw-stack {
+      // 🔑 Stack should not expand
+      max-width: 280px;
+
       .hw-main-content {
         padding: 0 $spacing-md;
+        // 🔑 Constrain the main content row
+        max-width: 240px;
+        width: 100%;
       }
 
       .circular-progress-bar-widget {
@@ -42,7 +72,10 @@
 
       .hw-main-circle {
         @include animate;
-        min-width: 8rem;
+        // 🔑 Use FIXED width/height instead of min-width
+        width: 8rem;
+        height: 8rem;
+        min-width: 8rem; // keep for safety
         min-height: 8rem;
 
         &:active {
@@ -53,30 +86,63 @@
           font-size: calc(#{$font} * 1.5);
           font-weight: 700;
           color: $fg;
+          // 🔑 Prevent label from affecting size
+          text-align: center;
         }
       }
 
       .hw-vertical-metric {
         @include vertical-metric-container;
+        // 🔑 Constrain metric width
+        max-width: 60px;
+        width: 100%;
 
         .vertical-metric-label {
           @include metric-label;
+          // 🔑 Prevent label overflow
+          max-width: 60px;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .vertical-metric-bar-container {
+          // 🔑 Ensure bar container doesn't stretch
+          max-width: 30px;
         }
 
         .vertical-metric-bar {
           @include progress-bar(vertical);
+          // 🔑 Explicit width for vertical bar
+          min-width: 12px;
+          width: 12px;
         }
 
         .vertical-metric-detail {
           @include metric-detail;
+          // 🔑 Constrain detail text
+          max-width: 60px;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
 
       .hw-vertical-display {
         @include vertical-metric-container;
+        // 🔑 Same constraints as metric bar
+        max-width: 60px;
+        width: 100%;
 
         .vertical-display-label {
           @include metric-label;
+          max-width: 60px;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .vertical-display-icon {
@@ -85,10 +151,17 @@
           color: $fg;
           opacity: 0.8;
           margin: $spacing-xs 0;
+          // 🔑 Constrain icon container
+          max-width: 60px;
         }
 
         .vertical-display-detail {
           @include metric-detail;
+          max-width: 60px;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
 
@@ -96,10 +169,14 @@
         margin: 0 $spacing-md;
         padding: $spacing-sm;
         border-radius: $round;
+        // 🔑 Constrain disk list width
+        max-width: 240px;
 
         .disk-list-title {
           @include metric-label(0.85);
           margin-bottom: $spacing-xs;
+          // 🔑 Prevent title from stretching
+          max-width: 240px;
         }
 
         .hw-disk-bar {
@@ -108,15 +185,30 @@
 
           .disk-bar-mount {
             @include metric-detail(0.8);
+            // 🔑 Allow mount point to ellipsize
+            max-width: 140px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 0 1 auto; // don't expand
           }
 
           .disk-bar-detail {
             @include metric-detail(0.75, 500, $outline);
+            // 🔑 Constrain detail width
+            max-width: 80px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 0 0 auto; // don't expand
           }
 
           .disk-bar-level {
             @include progress-bar(horizontal, $secondary, 0, 0.6rem);
             border-radius: calc(#{$round} * 0.5);
+            // 🔑 Ensure level bar doesn't cause expansion
+            min-width: 0;
+            width: 100%;
 
             trough {
               border-radius: calc(#{$round} * 0.5);
@@ -129,6 +221,7 @@
         }
       }
 
+      // Page-specific themes remain unchanged
       .hw-page-cpu {
         @include hw-circular-progress-theme($cpuProc);
 

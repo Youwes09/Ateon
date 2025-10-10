@@ -4,13 +4,28 @@
 
 .hardware-monitor-widget {
   @include widget-container;
+  max-width: 280px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  border-radius: $round * 1.2;
 
   .hw-header {
     @include widget-header;
+    max-width: 200px;      // constrain width
+    margin: $spacing-sm auto 0 auto; // top margin + center horizontally
+    padding: $spacing-xs $spacing-xs;
+    text-align: center;
+    font-weight: 700;
+    font-size: calc(#{$font} * 1.1);
+    color: rgba(255, 255, 255, 0.95);
   }
 
   separator {
     @include separator;
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .hw-nav {
@@ -18,6 +33,32 @@
 
     .nav-button {
       @include nav-button;
+      min-width: 0;
+      min-height: 0;
+      padding: $spacing-xs $spacing-sm;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border-radius: $round * 0.75;
+      transition: background 0.2s ease, border 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      > box {
+        min-width: 0;
+        min-height: 0;
+
+        .nav-icon,
+        .nav-label {
+          min-width: 0;
+          text-align: center;
+          color: $fg;
+          opacity: 0.85;
+        }
+      }
     }
   }
 
@@ -26,69 +67,122 @@
 
     .hw-scroll {
       @include scrollbar(vertical);
+      max-width: 280px;
     }
 
     .hw-stack {
+      max-width: 280px;
+
       .hw-main-content {
         padding: 0 $spacing-md;
+        max-width: 240px;
+        width: 100%;
       }
 
       .circular-progress-bar-widget {
         @include hw-circular-progress-theme(
           $ramProc,
-          color.adjust($procBg, $alpha: -0.5)
+          rgba(255, 255, 255, 0.08)
         );
       }
 
       .hw-main-circle {
         @include animate;
+        width: 8rem;
+        height: 8rem;
         min-width: 8rem;
         min-height: 8rem;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0.05)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:active {
-          transform: scale(0.8);
+          transform: scale(0.9);
         }
 
         .hw-main-label {
           font-size: calc(#{$font} * 1.5);
           font-weight: 700;
-          color: $fg;
+          color: rgba(255, 255, 255, 0.9);
+          text-align: center;
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
       }
 
       .hw-vertical-metric {
         @include vertical-metric-container;
+        max-width: 60px;
+        width: 100%;
+        padding: $spacing-xs;
 
         .vertical-metric-label {
           @include metric-label;
+          color: rgba(255, 255, 255, 0.85);
+        }
+
+        .vertical-metric-bar-container {
+          max-width: 30px;
+          margin: $spacing-xs auto;
         }
 
         .vertical-metric-bar {
-          @include progress-bar(vertical);
+          @include progress-bar(vertical, $primary);
+
+          // Filled gradient (unchanged)
+          background: linear-gradient(
+            to top,
+            color.adjust($primary, $lightness: 40%),
+            color.adjust($primary, $lightness: -10%)
+          );
+          border-radius: $round * 0.5;
+          min-width: 12px;
+          width: 12px;
+          box-shadow: 0 0 10px rgba($primary, 0.5);
+
+          // Empty portion: solid grey for better contrast
+          trough {
+            background: rgba(128, 128, 128, 0.4); // adjust opacity if needed
+            border-radius: $round * 0.5;
+          }
         }
 
         .vertical-metric-detail {
           @include metric-detail;
+          color: rgba(255, 255, 255, 0.75);
         }
       }
 
+
       .hw-vertical-display {
         @include vertical-metric-container;
+        max-width: 60px;
+        width: 100%;
+        padding: $spacing-xs;
 
         .vertical-display-label {
           @include metric-label;
+          color: rgba(255, 255, 255, 0.85);
         }
 
         .vertical-display-icon {
           @include material-icon(32px);
-          min-height: 6.5rem;
-          color: $fg;
-          opacity: 0.8;
+          color: rgba(255, 255, 255, 0.9);
+          opacity: 0.85;
           margin: $spacing-xs 0;
         }
 
         .vertical-display-detail {
           @include metric-detail;
+          color: rgba(255, 255, 255, 0.75);
         }
       }
 
@@ -96,10 +190,14 @@
         margin: 0 $spacing-md;
         padding: $spacing-sm;
         border-radius: $round;
+        max-width: 240px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
 
         .disk-list-title {
           @include metric-label(0.85);
-          margin-bottom: $spacing-xs;
+          color: rgba(255, 255, 255, 0.8);
         }
 
         .hw-disk-bar {
@@ -108,10 +206,11 @@
 
           .disk-bar-mount {
             @include metric-detail(0.8);
+            color: rgba(255, 255, 255, 0.85);
           }
 
           .disk-bar-detail {
-            @include metric-detail(0.75, 500, $outline);
+            @include metric-detail(0.75, 500, rgba(255, 255, 255, 0.6));
           }
 
           .disk-bar-level {
@@ -119,41 +218,32 @@
             border-radius: calc(#{$round} * 0.5);
 
             trough {
-              border-radius: calc(#{$round} * 0.5);
+              background: rgba(255, 255, 255, 0.08);
             }
 
             block.filled {
-              border-radius: calc(#{$round} * 0.5);
+              background: linear-gradient(
+                to right,
+                color.adjust($secondary, $lightness: 40%),
+                color.adjust($secondary, $lightness: -10%)
+              );
+              box-shadow: 0 0 8px rgba($secondary, 0.5);
             }
           }
         }
       }
 
+      // Page-specific themes
       .hw-page-cpu {
         @include hw-circular-progress-theme($cpuProc);
-
-        circularprogress progress {
-        }
-
-        block.filled {
-          background: $cpuProc;
-        }
       }
 
       .hw-page-memory {
         @include hw-circular-progress-theme($ramProc);
-
-        block.filled {
-          background: $ramProc;
-        }
       }
 
       .hw-page-gpu {
         @include hw-circular-progress-theme($primary);
-
-        block.filled {
-          background: $primary;
-        }
       }
 
       .hw-page-disk {
