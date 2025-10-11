@@ -14,15 +14,9 @@ export const THEME_MODE_OPTIONS = [
 
 export const THEME_SCHEME_OPTIONS = [
   { value: "auto", label: "Auto" },
-  { value: "scheme-tonal-spot", label: "Tonal Spot" },
-  { value: "scheme-vibrant", label: "Vibrant" },
   { value: "scheme-neutral", label: "Neutral" },
-  { value: "scheme-expressive", label: "Expressive" },
-  { value: "scheme-monochrome", label: "Monochrome" },
-  { value: "scheme-fidelity", label: "Fidelity" },
-  { value: "scheme-content", label: "Content" },
+  { value: "scheme-vibrant", label: "Vibrant" },
   { value: "scheme-rainbow", label: "Rainbow" },
-  { value: "scheme-fruit-salad", label: "Fruit Salad" },
 ] as const;
 
 export type ThemeMode = (typeof THEME_MODE_OPTIONS)[number]["value"];

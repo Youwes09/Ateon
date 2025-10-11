@@ -11,7 +11,11 @@ export type {
   ThemeProperties,
   CachedThemeEntry,
   ThumbnailRequest,
+  ThemeMode,
+  ThemeScheme,
 } from "./types";
+
+export { THEME_MODE_OPTIONS, THEME_SCHEME_OPTIONS } from "./types";
 
 // Thumbnail manager singleton management
 let thumbnailManagerInstance: ThumbnailManager | null = null;

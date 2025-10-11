@@ -6,15 +6,16 @@ import { Accessor } from "ags";
 import { execAsync } from "ags/process";
 import { timeout, Timer } from "ags/time";
 import { register, property, signal } from "ags/gobject";
-import { getThumbnailManager, ThumbnailManager } from "./index.ts";
+import { getThumbnailManager, ThumbnailManager } from "./index";
 import options from "options";
 import Fuse from "../fuse.js";
 import type { WallpaperItem } from "utils/picker/types.ts";
 import type {
   CachedThemeEntry,
-  CachedThumbnail,
   ThemeProperties,
-} from "./types.ts";
+  ThemeMode,
+  ThemeScheme,
+} from "./types";
 
 const CHROMASH_PATH = GLib.build_filenamev([
   GLib.get_home_dir(),
@@ -35,12 +36,17 @@ export class WallpaperStore extends GObject.Object {
   @property(String) currentWallpaperPath: string = "";
   @property(Boolean) includeHidden: boolean = false;
   @property(Number) maxItems: number = 12;
+  @property(Object) manualMode: ThemeMode = "auto";
+  @property(String) manualScheme: ThemeScheme = "auto";
 
   @signal([Array], GObject.TYPE_NONE, { default: false })
   wallpapersChanged(wallpapers: WallpaperItem[]): undefined {}
 
   @signal([String], GObject.TYPE_NONE, { default: false })
   wallpaperSet(path: string): undefined {}
+
+  @signal([String, String], GObject.TYPE_NONE, { default: false })
+  themeSettingsChanged(mode: string, scheme: string): undefined {}
 
   private files: Gio.File[] = [];
   private fuse!: Fuse;
@@ -53,9 +59,7 @@ export class WallpaperStore extends GObject.Object {
   private unsubscribers: (() => void)[] = [];
 
   // Caching
-  private thumbnailCache = new Map<string, CachedThumbnail>();
   private themeCache = new Map<string, CachedThemeEntry>();
-  private thumbnailCleanupInterval: any;
 
   // Debounce fast theme changes
   private themeDebounceTimer: Timer | null = null;
@@ -74,7 +78,7 @@ export class WallpaperStore extends GObject.Object {
     // Setup accessors from options
     this.wallpaperDir = options["wallpaper.dir"]((wd) => String(wd));
     this.currentWallpaper = options["wallpaper.current"]((w) => String(w));
-    this.maxThemeCacheSize = options["wallpaper.theme-cache-size"]((s) =>
+    this.maxThemeCacheSize = options["wallpaper.theme.cache-size"]((s) =>
       Number(s),
     );
 
@@ -96,7 +100,7 @@ export class WallpaperStore extends GObject.Object {
 
   private loadThemeCache(): void {
     try {
-      const persistentCache = options["wallpaper.theme-cache"].get() as Record<
+      const persistentCache = options["wallpaper.theme.cache"].get() as Record<
         string,
         any
       >;
@@ -118,7 +122,7 @@ export class WallpaperStore extends GObject.Object {
         for (const [path, entry] of this.themeCache) {
           persistentCache[path] = entry;
         }
-        options["wallpaper.theme-cache"].value = persistentCache as any;
+        options["wallpaper.theme.cache"].value = persistentCache as any;
       } catch (error) {
         console.error("Failed to save theme cache:", error);
         this.emit("error", "Failed to save theme cache");
@@ -270,6 +274,72 @@ export class WallpaperStore extends GObject.Object {
     this.loadWallpapers();
   }
 
+  // Manual Theme Control Methods
+  setManualMode(mode: ThemeMode): void {
+    if (this.manualMode !== mode) {
+      this.manualMode = mode;
+      this.emit("theme-settings-changed", mode, this.manualScheme);
+
+      if (this.currentWallpaperPath) {
+        this.applyManualThemeSettings();
+      }
+    }
+  }
+
+  setManualScheme(scheme: ThemeScheme): void {
+    if (this.manualScheme !== scheme) {
+      this.manualScheme = scheme;
+      this.emit("theme-settings-changed", this.manualMode, scheme);
+
+      if (this.currentWallpaperPath) {
+        this.applyManualThemeSettings();
+      }
+    }
+  }
+
+  private applyManualThemeSettings(): void {
+    const chromash = getChromashPath();
+    if (!GLib.file_test(chromash, GLib.FileTest.IS_EXECUTABLE)) {
+      console.warn("chromash not found, cannot apply manual theme settings");
+      return;
+    }
+
+    if (!this.currentWallpaperPath) {
+      console.warn("No wallpaper set, cannot apply manual theme");
+      return;
+    }
+
+    // Build wallpaper command with manual overrides
+    let cmd = `"${chromash}" wallpaper "${this.currentWallpaperPath}"`;
+    
+    if (this.manualMode !== "auto") {
+      cmd += ` --mode ${this.manualMode}`;
+    }
+    
+    if (this.manualScheme !== "auto") {
+      const chromashScheme = this.manualScheme === "scheme-neutral" ? "neutral" : 
+                            this.manualScheme === "scheme-vibrant" ? "vibrant" :
+                            this.manualScheme; // Pass through other schemes
+      cmd += ` --scheme ${chromashScheme}`;
+    }
+
+    execAsync(cmd)
+      .then(() => {
+        console.log(`Applied manual theme: mode=${this.manualMode}, scheme=${this.manualScheme}`);
+        const analysis: ThemeProperties = {
+          mode: this.manualMode === "auto" ? "dark" : this.manualMode,
+          scheme: this.manualScheme === "auto" ? "scheme-vibrant" : this.manualScheme,
+          tone: this.manualMode === "light" ? 80 : 20,
+          chroma: this.manualScheme === "scheme-neutral" ? 10 : 40,
+        };
+        this.sendThemeNotification(this.currentWallpaperPath, analysis);
+      })
+      .catch((error) => {
+        console.error("Failed to apply manual theme settings:", error);
+        this.emit("error", `Failed to apply theme: ${error}`);
+      });
+  }
+
   // Wallpaper Setting & Theme Application
   async setWallpaper(file: Gio.File): Promise<void> {
     const imagePath = file.get_path();
@@ -306,10 +376,21 @@ export class WallpaperStore extends GObject.Object {
       throw new Error("chromash not found or not executable at " + chromash);
     }
 
-    await execAsync(`"${chromash}" wallpaper "${imagePath}"`);
-    await new Promise(resolve => setTimeout(resolve, 100));
-    await execAsync(`"${chromash}" export-colors`);
+    // Build wallpaper command with any manual overrides
+    let cmd = `"${chromash}" wallpaper "${imagePath}"`;
     
+    if (this.manualMode !== "auto") {
+      cmd += ` --mode ${this.manualMode}`;
+    }
+    
+    if (this.manualScheme !== "auto") {
+      const chromashScheme = this.manualScheme === "scheme-neutral" ? "neutral" : 
+                            this.manualScheme === "scheme-vibrant" ? "vibrant" :
+                            this.manualScheme;
+      cmd += ` --scheme ${chromashScheme}`;
+    }
+
+    await execAsync(cmd);
     this.scheduleThemeUpdate(imagePath);
   }
 
@@ -319,29 +400,40 @@ export class WallpaperStore extends GObject.Object {
     }
 
     this.themeDebounceTimer = timeout(this.THEME_DEBOUNCE_DELAY, () => {
-      this.cacheThemeFromChromash(imagePath).catch((error) => {
-        console.error("Theme caching failed:", error);
-        this.emit("error", `Theme caching failed: ${error}`);
+      this.applyThemeWithManualOverrides(imagePath).catch((error) => {
+        console.error("Theme application failed:", error);
+        this.emit("error", `Theme application failed: ${error}`);
       });
       this.themeDebounceTimer = null;
     });
   }
 
-  private async cacheThemeFromChromash(imagePath: string): Promise<void> {
+  private async applyThemeWithManualOverrides(imagePath: string): Promise<void> {
     try {
       const chromash = getChromashPath();
       if (!GLib.file_test(chromash, GLib.FileTest.IS_EXECUTABLE)) {
         return;
       }
 
+      // Get the theme info from chromash
       const themeOutput = await execAsync(`"${chromash}" theme`);
-      const analysis = this.parseChromashThemeOutput(themeOutput) ?? this.fallbackColorAnalysis(imagePath);
-      
-      this.cacheThemeAnalysis(imagePath, analysis);
-      setTimeout(() => this.sendThemeNotification(imagePath, analysis), 0);
+      const autoAnalysis = this.parseChromashThemeOutput(themeOutput) ?? this.fallbackColorAnalysis(imagePath);
+
+      // Cache the auto-detected analysis
+      this.cacheThemeAnalysis(imagePath, autoAnalysis);
+
+      // Determine final analysis based on manual overrides
+      const finalAnalysis: ThemeProperties = {
+        tone: autoAnalysis.tone,
+        chroma: autoAnalysis.chroma,
+        mode: this.manualMode === "auto" ? autoAnalysis.mode : this.manualMode,
+        scheme: this.manualScheme === "auto" ? autoAnalysis.scheme : this.manualScheme,
+      };
+
+      setTimeout(() => this.sendThemeNotification(imagePath, finalAnalysis), 0);
     } catch (error) {
-      console.error("Failed to cache theme from chromash:", error);
-      this.cacheThemeAnalysis(imagePath, this.fallbackColorAnalysis(imagePath));
+      console.error("Failed to apply theme with manual overrides:", error);
+      throw error;
     }
   }
 
@@ -478,14 +570,9 @@ export class WallpaperStore extends GObject.Object {
   }
 
   // Utility Methods
-  clearThumbnailCache(): void {
-    this.thumbnailCache.clear();
-    console.log("Thumbnail cache cleared");
-  }
-
   clearThemeCache(): void {
     this.themeCache.clear();
-    options["wallpaper.theme-cache"].value = {};
+    options["wallpaper.theme.cache"].value = {};
     console.log("Theme cache cleared");
   }
 
@@ -506,12 +593,6 @@ export class WallpaperStore extends GObject.Object {
     });
     this.unsubscribers = [];
 
-    if (this.thumbnailCleanupInterval) {
-      clearInterval(this.thumbnailCleanupInterval);
-      this.thumbnailCleanupInterval = undefined;
-    }
-
-    this.clearThumbnailCache();
-    this.clearThemeCache();
+    this.themeCache.clear();
   }
 }

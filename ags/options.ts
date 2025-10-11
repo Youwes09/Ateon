@@ -1,9 +1,9 @@
 import GLib from "gi://GLib?version=2.0";
 import { execAsync } from "ags/process";
 import type { WeatherData } from "utils/weather";
-import type { CachedThemeEntry } from "utils/wallpaper/types";
 import type { UsageEntry } from "utils/picker/frecency/types";
 import { initializeConfig, defineOption } from "./utils/config";
+import { ThemeProperties } from "utils/wallpaper";
 
 const options = await (async () => {
   const currentWallpaper = await execAsync(
@@ -40,20 +40,19 @@ const options = await (async () => {
         `${GLib.get_home_dir()}/Pictures/wallpapers`,
       ),
       "wallpaper.cache-size": defineOption(50),
-      "wallpaper.theme-cache-size": defineOption(100),
+      "wallpaper.theme.cache-size": defineOption(100),
       "wallpaper.current": defineOption(currentWallpaper, {
         useCache: true,
       }),
+      "wallpaper.theme.cache": defineOption<
+        Record<string, CacheEntry<ThemeProperties>>
+      >({}, { useCache: true }),
       "notification-center.max-notifications": defineOption(4),
       "picker.frecency-cache": defineOption<Record<string, UsageEntry>>(
         {},
         { useCache: true },
       ),
       "clipboard.show-images": defineOption(true),
-      "wallpaper.theme-cache": defineOption<Record<string, CachedThemeEntry>>(
-        {},
-        { useCache: true },
-      ),
       "weather.update-interval": defineOption(900_000),
       "weather.cache": defineOption<Record<string, { data: WeatherData; timestamp: number }>>(
         {},
