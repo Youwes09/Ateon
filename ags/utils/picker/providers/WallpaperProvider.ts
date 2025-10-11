@@ -40,7 +40,8 @@ export class WallpaperProvider extends BaseProvider implements ThemeProvider {
       const trimmedQuery = query.trim();
 
       if (trimmedQuery.length === 0) {
-        this.setDefaultResults(this.store.wallpapers);
+        // Show all wallpapers when query is empty
+        this.setResults(this.store.wallpapers);
       } else {
         const fuzzyResults = this.store.search(trimmedQuery);
         this.setResults(fuzzyResults.slice(0, this.config.maxResults));
