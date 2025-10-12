@@ -5,7 +5,6 @@
 .hardware-monitor-widget {
   @include widget-container;
   max-width: 280px;
-  width: 100%;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -76,7 +75,6 @@
       .hw-main-content {
         padding: 0 $spacing-md;
         max-width: 240px;
-        width: 100%;
       }
 
       .circular-progress-bar-widget {
@@ -88,7 +86,6 @@
 
       .hw-main-circle {
         @include animate;
-        width: 8rem;
         height: 8rem;
         min-width: 8rem;
         min-height: 8rem;
@@ -121,7 +118,6 @@
       .hw-vertical-metric {
         @include vertical-metric-container;
         max-width: 60px;
-        width: 100%;
         padding: $spacing-xs;
 
         .vertical-metric-label {
@@ -145,7 +141,6 @@
           );
           border-radius: $round * 0.5;
           min-width: 12px;
-          width: 12px;
           box-shadow: 0 0 10px rgba($primary, 0.5);
 
           // Empty portion: solid grey for better contrast
@@ -165,7 +160,6 @@
       .hw-vertical-display {
         @include vertical-metric-container;
         max-width: 60px;
-        width: 100%;
         padding: $spacing-xs;
 
         .vertical-display-label {

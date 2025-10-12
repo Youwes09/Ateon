@@ -4,9 +4,6 @@
 
 .hardware-monitor-widget {
   @include widget-container;
-  // 🔑 CRITICAL: Add max-width to prevent expansion
-  max-width: 280px;
-  width: 100%;
 
   .hw-header {
     @include widget-header;
@@ -22,7 +19,6 @@
     .nav-button {
       @include nav-button;
       
-      // 🔑 CRITICAL: Prevent expansion
       min-width: 0;
       min-height: 0;
       padding: $spacing-xs $spacing-sm; // explicit padding, not auto
@@ -48,19 +44,12 @@
 
     .hw-scroll {
       @include scrollbar(vertical);
-      // 🔑 Constrain scrollable area
-      max-width: 280px;
     }
 
     .hw-stack {
-      // 🔑 Stack should not expand
-      max-width: 280px;
 
       .hw-main-content {
         padding: 0 $spacing-md;
-        // 🔑 Constrain the main content row
-        max-width: 240px;
-        width: 100%;
       }
 
       .circular-progress-bar-widget {
@@ -72,8 +61,6 @@
 
       .hw-main-circle {
         @include animate;
-        // 🔑 Use FIXED width/height instead of min-width
-        width: 8rem;
         height: 8rem;
         min-width: 8rem; // keep for safety
         min-height: 8rem;
@@ -86,46 +73,29 @@
           font-size: calc(#{$font} * 1.5);
           font-weight: 700;
           color: $fg;
-          // 🔑 Prevent label from affecting size
           text-align: center;
         }
       }
 
       .hw-vertical-metric {
         @include vertical-metric-container;
-        // 🔑 Constrain metric width
-        max-width: 60px;
-        width: 100%;
 
         .vertical-metric-label {
           @include metric-label;
-          // 🔑 Prevent label overflow
-          max-width: 60px;
           text-align: center;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
-        .vertical-metric-bar-container {
-          // 🔑 Ensure bar container doesn't stretch
-          max-width: 30px;
-        }
-
         .vertical-metric-bar {
           @include progress-bar(vertical);
-          // 🔑 Explicit width for vertical bar
           min-width: 12px;
-          width: 12px;
         }
 
         .vertical-metric-detail {
           @include metric-detail;
-          // 🔑 Constrain detail text
-          max-width: 60px;
           text-align: center;
-          white-space: nowrap;
-          overflow: hidden;
           text-overflow: ellipsis;
         }
       }
