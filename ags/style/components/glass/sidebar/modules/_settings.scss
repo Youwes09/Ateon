@@ -4,7 +4,8 @@
 
 $is-dark: color.lightness($bg) < 50%;
 
-.matshell-settings {
+.matshell-settings,
+.stacked-settings-widget {
   @include widget-container;
   background: linear-gradient(
     135deg,
@@ -17,23 +18,11 @@ $is-dark: color.lightness($bg) < 50%;
   box-shadow: 
     inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.93),
-      transparent
-    );
-    border-radius: inherit;
-  }
 }
 
-.settings-header-compact {
+// Header styles
+.settings-header-compact,
+.settings-header {
   align-items: center;
   padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
   border-bottom: 1px solid color.adjust($fg, $alpha: -0.9);
@@ -41,7 +30,8 @@ $is-dark: color.lightness($bg) < 50%;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 
-  .settings-title-compact {
+  .settings-title-compact,
+  .header-title {
     font-size: calc(#{$font} * 1.1);
     font-weight: 700;
     color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
@@ -50,10 +40,14 @@ $is-dark: color.lightness($bg) < 50%;
   }
 }
 
-.settings-nav-compact {
+// Navigation styles
+.settings-nav-compact,
+.settings-nav {
   gap: $spacing-xs;
+  margin: $spacing-sm 0;
 
-  .nav-icon-button {
+  .nav-icon-button,
+  .nav-button {
     padding: $spacing-xs calc(#{$spacing-sm} * 1.2);
     border-radius: 10px;
     background-color: transparent;
@@ -61,12 +55,19 @@ $is-dark: color.lightness($bg) < 50%;
     transition: all 150ms ease;
     min-width: 36px;
 
-    .icon-compact {
+    .icon-compact,
+    .nav-icon,
+    label {
       @include material-icon;
       font-size: calc(#{$font} * 1.3);
       color: if($is-dark, color.adjust($fg, $alpha: -0.5), color.adjust($bg, $lightness: -35%));
       transition: all 150ms ease;
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    .nav-label {
+      font-size: calc(#{$font} * 0.85);
+      margin-top: $spacing-xs;
     }
 
     &:hover {
@@ -77,12 +78,15 @@ $is-dark: color.lightness($bg) < 50%;
       );
       border-color: color.adjust($fg, $alpha: -0.8);
 
-      .icon-compact {
+      .icon-compact,
+      .nav-icon,
+      label {
         color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
       }
     }
 
-    &.active {
+    &.active,
+    &.mode-button-active {
       background: linear-gradient(
         135deg,
         color.adjust($primary, $alpha: -0.75),
@@ -94,19 +98,44 @@ $is-dark: color.lightness($bg) < 50%;
         inset 0 -1px 2px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
 
-      .icon-compact {
+      .icon-compact,
+      .nav-icon,
+      label {
         color: $primary;
+      }
+    }
+
+    &.button-disabled {
+      background-color: transparent;
+      opacity: 0.5;
+      
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.9),
+          color.adjust($fg, $alpha: -0.93)
+        );
       }
     }
   }
 }
 
-.settings-content {
+// Content area
+.settings-content,
+.settings-stack {
   padding: $spacing-md;
   min-height: 280px;
+  margin-top: $spacing-sm;
 }
 
-.section-header {
+// Scrollable areas
+.settings-scroll {
+  @include scrollbar(vertical);
+}
+
+// Section headers
+.section-header,
+.subsection-title {
   font-size: calc(#{$font} * 0.85);
   font-weight: 600;
   color: if($is-dark, color.adjust($fg, $alpha: -0.4), color.adjust($bg, $lightness: -30%));
@@ -120,6 +149,12 @@ $is-dark: color.lightness($bg) < 50%;
   }
 }
 
+.subsection-title {
+  font-size: $font;
+  text-transform: none;
+}
+
+// Option rows
 .option-row {
   background: linear-gradient(
     135deg,
@@ -149,9 +184,78 @@ $is-dark: color.lightness($bg) < 50%;
     font-weight: 500;
     color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin-right: $spacing-sm;
+  }
+
+  // Widget Manager specific styling
+  &.widget-item {
+    padding: $spacing-xs;
+    margin-bottom: $spacing-xs;
+
+    .widget-info {
+      .widget-icon {
+        @include material-icon(20px);
+        color: color.adjust($primary, $alpha: -0.3);
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      }
+
+      .widget-name {
+        margin: 0;
+        color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+        font-weight: 500;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .widget-description {
+        font-size: calc(#{$font} * 0.8);
+        color: if($is-dark, color.adjust($fg, $alpha: -0.3), color.adjust($bg, $lightness: -30%));
+        opacity: 0.8;
+      }
+    }
+
+    .widget-controls {
+      .reorder-button {
+        @include button-active;
+        padding: $spacing-xs;
+        margin-right: $spacing-sm;
+        border-radius: 8px;
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.88),
+          color.adjust($fg, $alpha: -0.92)
+        );
+        border: 1px solid color.adjust($fg, $alpha: -0.85);
+        transition: all 150ms ease;
+
+        .icon {
+          @include material-icon(14px);
+          color: if($is-dark, color.adjust($fg, $alpha: -0.4), color.adjust($bg, $lightness: -35%));
+        }
+
+        &:hover {
+          background: linear-gradient(
+            135deg,
+            color.adjust($fg, $alpha: -0.85),
+            color.adjust($fg, $alpha: -0.9)
+          );
+          border-color: color.adjust($fg, $alpha: -0.8);
+        }
+
+        &.button-disabled {
+          opacity: 0.3;
+          background: transparent;
+          border-color: transparent;
+
+          &:hover {
+            background: transparent;
+          }
+        }
+      }
+    }
   }
 }
 
+// Switch styles
 .option-switch {
   width: 44px;
   height: 24px;
@@ -159,7 +263,7 @@ $is-dark: color.lightness($bg) < 50%;
   min-height: 24px;
   border-radius: 12px;
   padding: 0;
-  margin: 0;
+  margin: 0.4rem;
   -gtk-outline-radius: 12px;
   background: linear-gradient(
     135deg,
@@ -225,6 +329,26 @@ $is-dark: color.lightness($bg) < 50%;
   }
 }
 
+.option-switch-placeholder {
+  @include light-mode-shadow;
+  padding: 0 $spacing-md;
+  margin: 0.5rem;
+  border-radius: 5rem;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.9),
+    color.adjust($fg, $alpha: -0.93)
+  );
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  .placeholder-icon {
+    @include material-icon(20px);
+    color: if($is-dark, color.adjust($fg, $alpha: -0.5), $outline);
+    opacity: 0.6;
+  }
+}
+
+// Dropdown styles
 .option-dropdown {
   min-width: 130px;
 
@@ -255,6 +379,7 @@ $is-dark: color.lightness($bg) < 50%;
   }
 }
 
+// Info box
 .info-box {
   padding: calc(#{$spacing-sm} * 1.2) $spacing-md;
   border-radius: 12px;
@@ -278,6 +403,14 @@ $is-dark: color.lightness($bg) < 50%;
   }
 }
 
+.helper-text {
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-bottom: $spacing-sm;
+  color: if($is-dark, color.adjust($fg, $alpha: -0.4), color.adjust($bg, $lightness: -30%));
+}
+
+// Separator
 separator {
   background: linear-gradient(
     90deg,

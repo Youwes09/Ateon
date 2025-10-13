@@ -9,6 +9,7 @@
 @use "./modules/timer.scss";
 @use "./modules/updater.scss";
 @use "./modules/hardware.scss";
+@use "./modules/notes.scss";
 
 .sidebar {
   @include window;

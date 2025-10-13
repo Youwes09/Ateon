@@ -21,21 +21,6 @@ box.picker {
       inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%),
       inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 
-    // Glass reflection effect
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($primary, $alpha: -0.8, $lightness: 12%),
-        transparent
-      );
-      border-radius: 16px 16px 0 0;
-    }
-
     label {
       @include material-icon(2rem);
       margin: 0.3rem;
@@ -73,21 +58,6 @@ box.picker {
       0 4px 12px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-
-    // Glass reflection effect
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.95),
-        transparent
-      );
-      border-radius: 16px 16px 0 0;
-    }
 
     .app-button {
       padding: 0.5rem 0.6rem;
@@ -133,20 +103,6 @@ box.picker {
           inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%),
           inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 
-        &::before {
-          content: "";
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 50%;
-          background: linear-gradient(
-            to bottom,
-            color.adjust($primary, $alpha: -0.82, $lightness: 12%),
-            transparent
-          );
-          border-radius: 12px 12px 0 0;
-        }
-
         label.name {
           color: $primary;
         }
@@ -168,20 +124,6 @@ box.picker {
         0 2px 6px rgba(0, 0, 0, 0.1),
         inset 0 1px 1px color.adjust($fg, $alpha: -0.82);
 
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 50%;
-        background: linear-gradient(
-          to bottom,
-          color.adjust($fg, $alpha: -0.87),
-          transparent
-        );
-        border-radius: 20px 20px 0 0;
-      }
-
       .action-icon {
         @include material-icon;
       }
@@ -199,14 +141,6 @@ box.picker {
           0 0 20px color.adjust($primary, $alpha: -0.88),
           inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
           inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-        
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($primary, $alpha: -0.8, $lightness: 10%),
-            transparent
-          );
-        }
       }
     }
   }
@@ -225,21 +159,6 @@ box.picker {
       0 4px 12px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-
-    // Glass reflection effect
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.95),
-        transparent
-      );
-      border-radius: 16px 16px 0 0;
-    }
 
     .wallpaper-thumbnail {
       border-radius: 12px;
@@ -357,22 +276,6 @@ box.picker {
     border: 1px solid transparent;
     transition: all 0.2s ease;
 
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.92),
-        transparent
-      );
-      border-radius: 10px 10px 0 0;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
     .mode-icon {
       @include material-icon;
     }
@@ -388,10 +291,6 @@ box.picker {
       box-shadow: 
         0 2px 6px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
-
-      &::before {
-        opacity: 1;
-      }
     }
 
     &.active {
@@ -406,15 +305,6 @@ box.picker {
         0 0 20px color.adjust($primary, $alpha: -0.88),
         inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.8, $lightness: 12%),
-          transparent
-        );
-        opacity: 1;
-      }
     }
   }
 }
@@ -446,24 +336,12 @@ box.picker {
     border: 1px solid color.adjust($fg, $alpha: -0.85);
     border-radius: 20px;
     padding: 0.3rem 0.6rem;
+    margin: 0 2px;
+    min-width: 32px;
     transition: all 0.2s ease;
     box-shadow: 
       0 2px 6px rgba(0, 0, 0, 0.1),
       inset 0 1px 1px color.adjust($fg, $alpha: -0.82);
-
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.87),
-        transparent
-      );
-      border-radius: 20px 20px 0 0;
-    }
 
     &:focus,
     &:hover {
@@ -478,14 +356,6 @@ box.picker {
         0 0 20px color.adjust($primary, $alpha: -0.88),
         inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.8, $lightness: 10%),
-          transparent
-        );
-      }
     }
   }
 }
@@ -504,21 +374,6 @@ box.picker {
     0 4px 12px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-
-  // Glass reflection effect
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.95),
-      transparent
-    );
-    border-radius: 16px 16px 0 0;
-  }
 
   .command-item {
     padding: 0.5rem 0.6rem;
@@ -560,20 +415,6 @@ box.picker {
         0 0 20px color.adjust($primary, $alpha: -0.88),
         inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 50%;
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.82, $lightness: 12%),
-          transparent
-        );
-        border-radius: 12px 12px 0 0;
-      }
 
       .command-name {
         color: $primary;

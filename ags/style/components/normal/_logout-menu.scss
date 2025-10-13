@@ -4,7 +4,7 @@
 
 box.logout-background {
   background-color: rgba(0, 0, 0, 0.6);
-
+  
   .logout-menu {
     background: linear-gradient(
       135deg,
@@ -14,28 +14,13 @@ box.logout-background {
     border: 1px solid color.adjust($primary, $alpha: -0.88);
     border-radius: 24px;
     padding: 2rem;
-    box-shadow: 
+    box-shadow:
       0 20px 60px rgba(0, 0, 0, 0.5),
       0 8px 20px rgba(0, 0, 0, 0.3),
       0 0 40px color.adjust($primary, $alpha: -0.85),
       inset 0 1px 0 color.adjust($primary, $alpha: -0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-    
-    // Glass reflection effect
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($primary, $alpha: -0.95),
-        transparent
-      );
-      border-radius: 24px 24px 0 0;
-    }
-    
+
     button {
       background: linear-gradient(
         135deg,
@@ -48,27 +33,11 @@ box.logout-background {
       padding: 1.5rem 2rem;
       min-width: 180px;
       transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 
+      box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.15),
         inset 0 1px 1px color.adjust($fg, $alpha: -0.82),
         inset 0 -1px 1px rgba(0, 0, 0, 0.15);
-      
-      // Glass shine effect
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 40%;
-        background: linear-gradient(
-          to bottom,
-          color.adjust($fg, $alpha: -0.87),
-          transparent
-        );
-        border-radius: 18px 18px 0 0;
-        transition: height 0.3s ease;
-      }
-      
+
       &:hover {
         background: linear-gradient(
           135deg,
@@ -76,34 +45,25 @@ box.logout-background {
           color.adjust($fg, $alpha: -0.88)
         );
         transform: translateY(-2px);
-        box-shadow: 
+        box-shadow:
           0 6px 16px rgba(0, 0, 0, 0.25),
           inset 0 1px 2px color.adjust($fg, $alpha: -0.78),
           inset 0 -1px 1px rgba(0, 0, 0, 0.2);
         border-color: color.adjust($fg, $alpha: -0.8);
-        
-        &::before {
-          height: 50%;
-          background: linear-gradient(
-            to bottom,
-            color.adjust($fg, $alpha: -0.82),
-            transparent
-          );
-        }
-        
+
         label {
           transform: scale(1.05);
         }
       }
-      
+
       &:active {
         transform: translateY(0);
-        box-shadow: 
+        box-shadow:
           0 2px 8px rgba(0, 0, 0, 0.2),
           inset 0 1px 1px color.adjust($fg, $alpha: -0.85),
           inset 0 -1px 1px rgba(0, 0, 0, 0.1);
       }
-      
+
       &:focus {
         background: linear-gradient(
           135deg,
@@ -111,22 +71,14 @@ box.logout-background {
           color.adjust($primary, $alpha: -0.88)
         );
         border-color: color.adjust($primary, $alpha: -0.75);
-        box-shadow: 
+        box-shadow:
           0 0 0 3px color.adjust($primary, $alpha: -0.9),
           0 6px 16px rgba(0, 0, 0, 0.25),
           0 0 30px color.adjust($primary, $alpha: -0.75),
           inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
           inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-        
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($primary, $alpha: -0.8, $lightness: 10%),
-            transparent
-          );
-        }
       }
-      
+
       label {
         font-family: "Material Symbols Outlined";
         font-size: 3rem;

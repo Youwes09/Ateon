@@ -10,9 +10,14 @@
 
   cava {
     opacity: 0.1;
-    margin: 0 -0.5rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    min-width: 16px;
+    min-height: 1px;
   }
-
+  
   .module {
     margin: 0 $spacing-sm;
   }

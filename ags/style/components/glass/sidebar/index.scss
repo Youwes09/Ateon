@@ -9,6 +9,7 @@
 @use "./modules/timer.scss";
 @use "./modules/updater.scss";
 @use "./modules/hardware.scss";
+@use "./modules/notes.scss";
 
 // Detect if background is dark (lightness < 50%)
 $is-dark: color.lightness($bg) < 50%;
@@ -26,24 +27,9 @@ $adaptive-lightness-2: if($is-dark, 2%, -3%);
   border-radius: 20px;
   min-width: 300px;
   margin: $spacing-md;
-  box-shadow: 
+  box-shadow:
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-
-  // Glass reflection effect
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.95),
-      transparent
-    );
-    border-radius: inherit;
-  }
 
   & > box {
     @include window-box;

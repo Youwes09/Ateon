@@ -14,21 +14,6 @@ box.clipboard {
   box-shadow: 
     inset 0 1px 0 color.adjust($fg, $alpha: -0.92),
     inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-  
-  // Glass reflection effect
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.95),
-      transparent
-    );
-    border-radius: 20px 20px 0 0;
-  }
 }
 
 // Top bar with mode switcher
@@ -57,22 +42,6 @@ box.clipboard {
     font-size: 0.85rem;
     transition: all 0.2s ease;
     
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.92),
-        transparent
-      );
-      border-radius: 10px 10px 0 0;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    
     &:hover:not(.active) {
       background: linear-gradient(
         135deg,
@@ -83,10 +52,6 @@ box.clipboard {
       color: $fg;
       box-shadow: 
         inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
-      
-      &::before {
-        opacity: 1;
-      }
     }
     
     &.active {
@@ -101,15 +66,6 @@ box.clipboard {
       box-shadow: 
         inset 0 1px 1px color.adjust($primary, $alpha: -0.8, $lightness: 10%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-      
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.8, $lightness: 12%),
-          transparent
-        );
-        opacity: 1;
-      }
     }
   }
   
@@ -129,21 +85,6 @@ box.clipboard {
     transition: all 0.2s ease;
     box-shadow: 
       inset 0 1px 0 color.adjust($error, $alpha: -0.85);
-    
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($error, $alpha: -0.85, $lightness: 8%),
-        transparent
-      );
-      border-radius: 10px 10px 0 0;
-      transition: opacity 0.2s ease;
-    }
     
     &:hover {
       background: linear-gradient(
@@ -256,22 +197,6 @@ box.clipboard {
     box-shadow: 
       inset 0 1px 0 color.adjust($fg, $alpha: -0.92);
     
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.9),
-        transparent
-      );
-      border-radius: 12px 12px 0 0;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    
     &:hover:not(.selected) {
       background: linear-gradient(
         135deg,
@@ -281,10 +206,6 @@ box.clipboard {
       border-color: color.adjust($fg, $alpha: -0.82);
       box-shadow: 
         inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
-      
-      &::before {
-        opacity: 1;
-      }
     }
     
     &.selected {
@@ -297,15 +218,6 @@ box.clipboard {
       box-shadow: 
         inset 0 1px 1px color.adjust($primary, $alpha: -0.82, $lightness: 10%),
         inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-      
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.82, $lightness: 12%),
-          transparent
-        );
-        opacity: 1;
-      }
       
       .entry-text {
         color: $primary;

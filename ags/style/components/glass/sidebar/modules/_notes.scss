@@ -1,0 +1,145 @@
+@use "../../../../layouts" as *;
+@use "../../../../abstracts" as *;
+@use "sass:color";
+
+$is-dark: color.lightness($bg) < 50%;
+
+.notes-widget {
+  @include widget-container;
+  background: linear-gradient(
+    135deg,
+    color.adjust($fg, $alpha: -0.88),
+    color.adjust($fg, $alpha: -0.92)
+  );
+  border: 1px solid color.adjust($fg, $alpha: -0.85);
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 
+    inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+
+  .notes-header {
+    padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
+    border-bottom: 1px solid color.adjust($fg, $alpha: -0.9);
+    background: transparent;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+
+    label {
+      font-size: calc(#{$font} * 1.1);
+      font-weight: 700;
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  separator {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color.adjust($fg, $alpha: -0.9),
+      transparent
+    );
+    margin: $spacing-sm 0;
+    min-height: 1px;
+    opacity: 0.5;
+  }
+
+  .notes-scroll {
+    @include scrollbar(vertical);
+    padding: $spacing-md;
+
+    .notes-textview {
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.93),
+        color.adjust($fg, $alpha: -0.95)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.88);
+      border-radius: 12px;
+      padding: $spacing-md;
+      font-family: monospace;
+      font-size: $font;
+      color: if($is-dark, $fg, color.adjust($bg, $lightness: -40%));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      box-shadow: 
+        inset 0 1px 2px color.adjust($fg, $alpha: -0.92),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+      transition: all 150ms ease;
+
+      &:focus {
+        border-color: color.adjust($primary, $alpha: -0.7);
+        box-shadow: 
+          inset 0 1px 2px color.adjust($fg, $alpha: -0.92),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.08),
+          0 0 12px color.adjust($primary, $alpha: -0.8);
+      }
+
+      text {
+        background: transparent;
+
+        selection {
+          background: linear-gradient(
+            135deg,
+            color.adjust($primary, $alpha: -0.6),
+            color.adjust($primary, $alpha: -0.7)
+          );
+          color: if($is-dark, white, $bg);
+        }
+      }
+    }
+  }
+
+  .notes-footer {
+    padding: $spacing-sm $spacing-md $spacing-md $spacing-md;
+    border-top: 1px solid color.adjust($fg, $alpha: -0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+
+    .notes-char-count {
+      font-weight: 500;
+      font-size: calc(#{$font} * 0.75);
+      color: if($is-dark, color.adjust($fg, $alpha: -0.4), color.adjust($bg, $lightness: -30%));
+      opacity: 0.8;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .notes-clear-button {
+      padding: $spacing-xs calc(#{$spacing-sm} * 1.2);
+      border-radius: 10px;
+      background: linear-gradient(
+        135deg,
+        color.adjust($fg, $alpha: -0.88),
+        color.adjust($fg, $alpha: -0.92)
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.85);
+      transition: all 150ms ease;
+      box-shadow: 
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.9),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($fg, $alpha: -0.85),
+          color.adjust($fg, $alpha: -0.9)
+        );
+        border-color: color.adjust($fg, $alpha: -0.8);
+      }
+
+      &:active {
+        transform: scale(0.95);
+        box-shadow: 
+          inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      label {
+        @include material-icon(16px);
+        color: if($is-dark, color.adjust($fg, $alpha: -0.4), color.adjust($bg, $lightness: -35%));
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      }
+    }
+  }
+}

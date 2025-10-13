@@ -1,29 +1,13 @@
 // widgets/sidebar/Sidebar.tsx
 import app from "ags/gtk4/app";
 import { Astal, Gtk } from "ags/gtk4";
-import { createState } from "ags";
+import { createState, For } from "ags";
 import ClockWidget from "./modules/ClockWidget";
-import WeatherWidget from "./modules/WeatherWidget";
-import MatshellSettingsWidget from "./modules/MatshellSettingsWidget";
 import QuickActionsWidget from "./modules/QuickActionWidget";
-import TimerWidget from "./modules/TimerWidget";
-import UpdaterWidget from "./modules/UpdaterWidget";
-import HardwareMonitorWidget from "./modules/HardwareWidget/main";
-import { gdkmonitor } from "utils/monitors";
 import options from "options";
-
-export type SidebarMode = "widgets" | "settings";
-
-interface ModeConfig {
-  id: SidebarMode;
-  label: string;
-  icon: string;
-}
-
-const MODES: ModeConfig[] = [
-  { id: "widgets", label: "Widgets", icon: "Widgets" },
-  { id: "settings", label: "Settings", icon: "Settings" },
-];
+import { gdkmonitor } from "utils/monitors";
+import { SIDEBAR_WIDGETS } from "./widgetRegistry";
+import { DEFAULT_WIDGET_ORDER, DEFAULT_ENABLED_WIDGETS, SidebarWidgetId, MODES, SidebarMode } from "./types";
 
 export default function Sidebar(
   props: {
@@ -36,6 +20,44 @@ export default function Sidebar(
   const [currentMode, setCurrentMode] = createState<SidebarMode>("widgets");
   const { children = [] } = props;
 
+  const [filteredWidgets, setFilteredWidgets] = createState<SidebarWidgetId[]>(
+    [],
+  );
+
+  const [widgetsForCurrentMode, setWidgetsForCurrentMode] = createState<SidebarWidgetId[]>(
+    [],
+  );
+
+  const updateFilteredWidgets = () => {
+    const order =
+      (options["sidebar.widget-order"]?.get() as SidebarWidgetId[]) ||
+      DEFAULT_WIDGET_ORDER;
+    const enabled =
+      (options["sidebar.enabled-widgets"]?.get() as SidebarWidgetId[]) ||
+      DEFAULT_ENABLED_WIDGETS;
+    const filtered = order.filter((id) => enabled.includes(id));
+    setFilteredWidgets(filtered);
+    updateWidgetsForMode(filtered);
+  };
+
+  const updateWidgetsForMode = (widgets?: SidebarWidgetId[]) => {
+    const mode = currentMode.get();
+    const widgetList = widgets || filteredWidgets.get();
+    // Filter out clock since it's always shown at the top
+    const forMode = widgetList.filter((id) => {
+      if (id === "clock") return false;
+      const widget = SIDEBAR_WIDGETS[id];
+      return widget && widget.mode === mode;
+    });
+    setWidgetsForCurrentMode(forMode);
+  };
+
+  options["sidebar.widget-order"]?.subscribe(updateFilteredWidgets);
+  options["sidebar.enabled-widgets"]?.subscribe(updateFilteredWidgets);
+  currentMode.subscribe(() => updateWidgetsForMode());
+
+  updateFilteredWidgets();
+
   return (
     <window
       name="sidebar"
@@ -46,9 +68,11 @@ export default function Sidebar(
         return EXCLUSIVE;
       })}
       layer={Astal.Layer.TOP}
+      keymode={Astal.Keymode.ON_DEMAND}
       application={app}
       visible={visible}
       widthRequest={320}
+      gdkmonitor={gdkmonitor}
     >
       <box
         orientation={Gtk.Orientation.VERTICAL}
@@ -56,9 +80,11 @@ export default function Sidebar(
         vexpand={true}
         spacing={12}
       >
+        {/* Clock always at top */}
         <ClockWidget />
         <Gtk.Separator />
 
+        {/* Mode Selector */}
         <box
           class="mode-selector"
           orientation={Gtk.Orientation.HORIZONTAL}
@@ -85,48 +111,40 @@ export default function Sidebar(
 
         <Gtk.Separator />
 
+        {/* Dynamic widgets based on mode - with proper expansion */}
         <scrolledwindow
           vexpand={true}
+          hexpand={false}
           hscrollbarPolicy={Gtk.PolicyType.NEVER}
           vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}
           cssClasses={["mode-content-scroll"]}
+          minContentHeight={100}
         >
-          <stack
-            cssClasses={["mode-stack"]}
-            transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
-            transitionDuration={200}
-            visibleChildName={currentMode((mode) => mode)}
-          >
-            <box
-              $type="named"
-              name="widgets"
-              orientation={Gtk.Orientation.VERTICAL}
-              spacing={12}
-            >
-              <WeatherWidget />
-              <Gtk.Separator />
-              <HardwareMonitorWidget />
-              <TimerWidget />
+          <box orientation={Gtk.Orientation.VERTICAL} spacing={12}>
+            <For each={widgetsForCurrentMode}>
+              {(widgetId, index) => {
+                const widgetDef = SIDEBAR_WIDGETS[widgetId];
+                if (!widgetDef) return <box />;
 
-            </box>
+                const Component = widgetDef.component;
+                const showSeparator =
+                  (widgetDef.separatorAfter ?? false) &&
+                  index.get() < widgetsForCurrentMode.get().length - 1;
 
-            <box
-              $type="named"
-              name="settings"
-              orientation={Gtk.Orientation.VERTICAL}
-              spacing={12}
-            >
-              <UpdaterWidget />
-              <Gtk.Separator />
-              <MatshellSettingsWidget />
-            </box>
-          </stack>
+                return (
+                  <box orientation={Gtk.Orientation.VERTICAL} spacing={0}>
+                    <Component />
+                    {showSeparator && <Gtk.Separator />}
+                  </box>
+                );
+              }}
+            </For>
+          </box>
         </scrolledwindow>
 
+        {/* Spacer removed - let scrolledwindow handle expansion */}
         <Gtk.Separator />
-
         <QuickActionsWidget />
-
         {children}
       </box>
     </window>

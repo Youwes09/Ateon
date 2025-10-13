@@ -18,20 +18,6 @@ $is-dark: color.lightness($bg) < 50%;
     inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.93),
-      transparent
-    );
-    border-radius: inherit;
-  }
-
   .widget-header {
     align-items: center;
     margin-bottom: $spacing-sm;
@@ -70,22 +56,6 @@ $is-dark: color.lightness($bg) < 50%;
       inset 0 1px 1px color.adjust($fg, $alpha: -0.9),
       inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.9),
-        transparent
-      );
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      border-radius: inherit;
-    }
-
     &:hover {
       background: linear-gradient(
         135deg,
@@ -94,10 +64,6 @@ $is-dark: color.lightness($bg) < 50%;
       );
       border-color: color.adjust($fg, $alpha: -0.8);
       transform: translateY(-1px);
-
-      &::before {
-        opacity: 1;
-      }
     }
 
     .timer-add-icon {
@@ -120,20 +86,6 @@ $is-dark: color.lightness($bg) < 50%;
     box-shadow: 
       inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
       inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($fg, $alpha: -0.92),
-        transparent
-      );
-      border-radius: inherit;
-    }
 
     .dialog-title {
       font-size: calc(#{$font} * 1.05);
@@ -243,20 +195,6 @@ $is-dark: color.lightness($bg) < 50%;
         inset 0 -1px 2px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
 
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 50%;
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.82, $lightness: 12%),
-          transparent
-        );
-        border-radius: 8px 8px 0 0;
-      }
-
       &:hover {
         background: linear-gradient(
           135deg,
@@ -275,17 +213,6 @@ $is-dark: color.lightness($bg) < 50%;
       font-weight: 600;
       transition: all 200ms ease;
 
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 40%;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        border-radius: 12px 12px 0 0;
-      }
-
       &-cancel {
         background: linear-gradient(
           135deg,
@@ -299,14 +226,6 @@ $is-dark: color.lightness($bg) < 50%;
           inset 0 1px 1px color.adjust($fg, $alpha: -0.92),
           inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($fg, $alpha: -0.9),
-            transparent
-          );
-        }
-
         &:hover {
           background: linear-gradient(
             135deg,
@@ -315,10 +234,6 @@ $is-dark: color.lightness($bg) < 50%;
           );
           border-color: color.adjust($fg, $alpha: -0.82);
           transform: translateY(-1px);
-
-          &::before {
-            opacity: 1;
-          }
         }
       }
 
@@ -335,14 +250,6 @@ $is-dark: color.lightness($bg) < 50%;
           inset 0 -1px 2px rgba(0, 0, 0, 0.1),
           inset 0 1px 0 color.adjust($primary, $alpha: -0.88);
 
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($primary, $alpha: -0.88, $lightness: 10%),
-            transparent
-          );
-        }
-
         &:hover {
           background: linear-gradient(
             135deg, 
@@ -351,10 +258,6 @@ $is-dark: color.lightness($bg) < 50%;
           );
           transform: translateY(-2px);
           border-color: color.adjust($primary, $alpha: -0.65);
-
-          &::before {
-            opacity: 1;
-          }
         }
       }
     }
@@ -439,23 +342,8 @@ $is-dark: color.lightness($bg) < 50%;
         inset 0 1px 1px color.adjust($fg, $alpha: -0.93),
         inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 40%;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        border-radius: 10px 10px 0 0;
-      }
-
       &:hover {
         transform: translateY(-1px);
-
-        &::before {
-          opacity: 1;
-        }
       }
 
       &-icon {
@@ -479,14 +367,6 @@ $is-dark: color.lightness($bg) < 50%;
           color: $primary;
         }
 
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($primary, $alpha: -0.88, $lightness: 10%),
-            transparent
-          );
-        }
-
         &:hover {
           background: linear-gradient(
             135deg,
@@ -498,14 +378,6 @@ $is-dark: color.lightness($bg) < 50%;
       }
 
       &-reset {
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($fg, $alpha: -0.9),
-            transparent
-          );
-        }
-
         &:hover {
           background: linear-gradient(
             135deg,
@@ -529,14 +401,6 @@ $is-dark: color.lightness($bg) < 50%;
 
         .timer-button-icon {
           color: $error;
-        }
-
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($error, $alpha: -0.9, $lightness: 8%),
-            transparent
-          );
         }
 
         &:hover {

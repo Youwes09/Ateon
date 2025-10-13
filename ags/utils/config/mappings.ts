@@ -31,3 +31,8 @@ export const BAR_STYLE_OPTIONS: OptionChoice[] = [
   { label: "Rounded Corners", value: "corners" },
   { label: "Beveled", value: "beveled" },
 ];
+
+export const THEME_STYLE_OPTIONS = [
+  { label: "Normal", value: "normal" },
+  { label: "Glass", value: "glass" },
+];

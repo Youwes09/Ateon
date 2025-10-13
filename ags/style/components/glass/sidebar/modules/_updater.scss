@@ -18,20 +18,6 @@ $is-dark: color.lightness($bg) < 50%;
     inset 0 1px 2px color.adjust($fg, $alpha: -0.9),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.93),
-      transparent
-    );
-    border-radius: inherit;
-  }
-
   .updater-header {
     align-items: center;
     padding: $spacing-md $spacing-md $spacing-sm $spacing-md;
@@ -239,16 +225,6 @@ $is-dark: color.lightness($bg) < 50%;
     padding: $spacing-sm $spacing-md;
     font-weight: 600;
     transition: all 250ms ease;
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      border-radius: inherit;
-    }
 
     .button-icon {
       @include material-icon(18px);
@@ -276,14 +252,6 @@ $is-dark: color.lightness($bg) < 50%;
         color: if($is-dark, color.adjust($fg, $alpha: -0.3), color.adjust($bg, $lightness: -35%));
       }
 
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($fg, $alpha: -0.9),
-          transparent
-        );
-      }
-
       &:hover:not(:disabled) {
         background: linear-gradient(
           135deg,
@@ -292,10 +260,6 @@ $is-dark: color.lightness($bg) < 50%;
         );
         border-color: color.adjust($fg, $alpha: -0.8);
         transform: translateY(-1px);
-
-        &::before {
-          opacity: 1;
-        }
       }
     }
 
@@ -316,14 +280,6 @@ $is-dark: color.lightness($bg) < 50%;
         color: $primary;
       }
 
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          color.adjust($primary, $alpha: -0.88, $lightness: 10%),
-          transparent
-        );
-      }
-
       &:hover:not(:disabled) {
         background: linear-gradient(
           135deg, 
@@ -332,10 +288,6 @@ $is-dark: color.lightness($bg) < 50%;
         );
         transform: translateY(-2px);
         border-color: color.adjust($primary, $alpha: -0.65);
-
-        &::before {
-          opacity: 1;
-        }
       }
 
       &:active:not(:disabled) {

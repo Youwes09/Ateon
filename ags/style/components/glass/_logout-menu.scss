@@ -21,21 +21,6 @@ box.logout-background {
       inset 0 1px 0 color.adjust($primary, $alpha: -0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.3);
     
-    // Glass reflection effect
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($primary, $alpha: -0.95),
-        transparent
-      );
-      border-radius: 24px 24px 0 0;
-    }
-    
     button {
       background: linear-gradient(
         135deg,
@@ -53,22 +38,6 @@ box.logout-background {
         inset 0 1px 1px color.adjust($fg, $alpha: -0.82),
         inset 0 -1px 1px rgba(0, 0, 0, 0.15);
       
-      // Glass shine effect
-      &::before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 40%;
-        background: linear-gradient(
-          to bottom,
-          color.adjust($fg, $alpha: -0.87),
-          transparent
-        );
-        border-radius: 18px 18px 0 0;
-        transition: height 0.3s ease;
-      }
-      
       &:hover {
         background: linear-gradient(
           135deg,
@@ -81,15 +50,6 @@ box.logout-background {
           inset 0 1px 2px color.adjust($fg, $alpha: -0.78),
           inset 0 -1px 1px rgba(0, 0, 0, 0.2);
         border-color: color.adjust($fg, $alpha: -0.8);
-        
-        &::before {
-          height: 50%;
-          background: linear-gradient(
-            to bottom,
-            color.adjust($fg, $alpha: -0.82),
-            transparent
-          );
-        }
         
         label {
           transform: scale(1.05);
@@ -117,14 +77,6 @@ box.logout-background {
           0 0 30px color.adjust($primary, $alpha: -0.75),
           inset 0 1px 2px color.adjust($primary, $alpha: -0.75, $lightness: 12%),
           inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-        
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            color.adjust($primary, $alpha: -0.8, $lightness: 10%),
-            transparent
-          );
-        }
       }
       
       label {

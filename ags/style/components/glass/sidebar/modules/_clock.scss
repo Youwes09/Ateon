@@ -20,20 +20,6 @@ $is-dark: color.lightness($bg) < 50%;
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   min-width: 0;
 
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.93),
-      transparent
-    );
-    border-radius: inherit;
-  }
-
   .digit-stack {
     min-width: 0.9em;
     text-align: center;
@@ -83,20 +69,6 @@ $is-dark: color.lightness($bg) < 50%;
       inset 0 1px 1px color.adjust($primary, $alpha: -0.88),
       inset 0 -1px 1px rgba(0, 0, 0, 0.15);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        color.adjust($primary, $alpha: -0.9, $lightness: 8%),
-        transparent
-      );
-      border-radius: inherit;
-    }
     
     &:hover {
       opacity: 1;
@@ -137,22 +109,6 @@ $is-dark: color.lightness($bg) < 50%;
   border-radius: 2px;
   transition: all 300ms ease;
   opacity: 0.5;
-  
-  &::after {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      color.adjust($primary, $alpha: -0.8),
-      transparent
-    );
-    border-radius: 2px;
-    animation: divider-shimmer 3s ease-in-out infinite;
-  }
 }
 
 @keyframes pulse-colon {
@@ -173,16 +129,5 @@ $is-dark: color.lightness($bg) < 50%;
   }
   100% {
     transform: scale(1);
-  }
-}
-
-@keyframes divider-shimmer {
-  0%, 100% {
-    opacity: 0.3;
-    transform: translateX(-100%);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(100%);
   }
 }

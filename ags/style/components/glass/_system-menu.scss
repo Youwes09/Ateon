@@ -23,21 +23,6 @@
     inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
   transform: translateZ(0);
 
-  // Glass reflection effect
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.93),
-      transparent
-    );
-    border-radius: 20px 20px 0 0;
-  }
-
   & > box {
     @include window-box;
     background: transparent;
@@ -65,20 +50,6 @@
     inset 0 2px 4px rgba(0, 0, 0, 0.2),
     inset 0 -2px 4px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
-
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.93),
-      transparent
-    );
-    border-radius: 14px 14px 0 0;
-  }
 }
 
 /* toggles */
@@ -223,20 +194,6 @@
     inset 0 -2px 4px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 color.adjust($fg, $alpha: -0.88);
   transform: translateZ(0);
-
-  &::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(
-      to bottom,
-      color.adjust($fg, $alpha: -0.93),
-      transparent
-    );
-    border-radius: 16px 16px 0 0;
-  }
 
   // Inner bezel for list content
   > box {
