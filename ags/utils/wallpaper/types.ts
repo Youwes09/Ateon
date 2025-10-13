@@ -15,8 +15,10 @@ export const THEME_MODE_OPTIONS = [
 export const THEME_SCHEME_OPTIONS = [
   { value: "auto", label: "Auto" },
   { value: "scheme-neutral", label: "Neutral" },
-  { value: "scheme-vibrant", label: "Vibrant" },
+  { value: "scheme-tonal-spot", label: "Tonal Spot" },
+  { value: "scheme-expressive", label: "Expressive" },
   { value: "scheme-rainbow", label: "Rainbow" },
+  { value: "scheme-content", label: "Content" },
 ] as const;
 
 export type ThemeMode = (typeof THEME_MODE_OPTIONS)[number]["value"];

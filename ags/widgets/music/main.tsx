@@ -8,6 +8,7 @@ import { Cover } from "./modules/Cover";
 import { Info } from "./modules/Info";
 import { CavaDraw } from "./modules/cava";
 import options from "options.ts";
+import { gdkmonitor } from "utils/monitors";
 
 function MusicBox({ player }: { player: Mpris.Player }) {
   const [blurredCover, setBlurredCover] = createState(player.cover_art || "");
@@ -46,6 +47,18 @@ function MusicBox({ player }: { player: Mpris.Player }) {
         />
       </Gtk.ScrolledWindow>
       <box
+        cssClasses={["cava-container"]}
+        $type="overlay"
+        canTarget={false}
+        visible={options["music-player.modules.cava.enable"]}
+      >
+        <CavaDraw
+          hexpand
+          vexpand
+          style={options["music-player.modules.cava.style"]}
+        />
+      </box>
+      <box
         $type="overlay"
         $={(self) => {
           measureBox = self;
@@ -53,22 +66,6 @@ function MusicBox({ player }: { player: Mpris.Player }) {
       >
         <Cover player={player} />
         <Info player={player} />
-      </box>
-      <box
-        cssClasses={["cava-container"]}
-        $type="overlay"
-        canTarget={false}
-        visible={options["musicPlayer.modules.cava.show"]((value) =>
-          Boolean(value),
-        )}
-      >
-        <CavaDraw
-          hexpand
-          vexpand
-          style={options["musicPlayer.modules.cava.style"]((value) =>
-            String(value),
-          )}
-        />
       </box>
     </overlay>
   );
@@ -78,12 +75,28 @@ export default function MusicPlayer() {
   const mpris = Mpris.get_default();
   const { TOP, BOTTOM } = Astal.WindowAnchor;
   const [visible, _setVisible] = createState(false);
+
+  const topMargin = options["bar.position"]((pos) => {
+    if (pos === "top") {
+      return 45;
+    }
+    return 0;
+  });
+
+  const bottomMargin = options["bar.position"]((pos) => {
+    if (pos === "bottom") {
+      return 45;
+    }
+    return 0;
+  });
+
   return (
     <window
       name="music-player"
       cssClasses={["music", "window"]}
       application={app}
       layer={Astal.Layer.OVERLAY}
+      exclusivity={Astal.Exclusivity.IGNORE}
       anchor={options["bar.position"]((pos) => {
         switch (pos) {
           case "top":
@@ -96,6 +109,9 @@ export default function MusicPlayer() {
       })}
       keymode={Astal.Keymode.ON_DEMAND}
       visible={visible}
+      gdkmonitor={gdkmonitor}
+      marginTop={topMargin}
+      marginBottom={bottomMargin}
     >
       <box>
         <With value={createBinding(mpris, "players")}>

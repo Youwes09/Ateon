@@ -9,6 +9,8 @@ const options = initializeConfig(
   `${GLib.get_user_config_dir()}/ags/configs/config.json`,
   {
     "theme.style": defineOption("normal", { useCache: true }),
+    "app.audio": defineOption("pwvucontrol"),
+    "app.bluetooth": defineOption("overskride"),
     "app.browser": defineOption("firefox"),
     "app.file-manager": defineOption("nautilus"),
     "app.resource-monitor": defineOption("resources"),
@@ -16,7 +18,6 @@ const options = initializeConfig(
     "app.wifi": defineOption(
       "XDG_CURRENT_DESKTOP=GNOME gnome-control-center wifi",
     ),
-    "app.audio": defineOption("pwvucontrol"),
     "bar.position": defineOption("top"),
     "bar.style": defineOption("beveled"),
     "bar.modules.cava.show": defineOption(true),
@@ -65,7 +66,7 @@ const options = initializeConfig(
     "dock.auto-hide": defineOption(true),
     "dock.pinned-apps": defineOption([
       { name: "Firefox", icon: "firefox", class: "firefox" },
-      { name: "Code", icon: "code", class: "Code" },
+      { name: "Code", icon: "code-oss", class: "Code" },
       { name: "Terminal", icon: "utilities-terminal", class: "foot" },
       { name: "Files", icon: "system-file-manager", class: "org.gnome.Nautilus" },
       { name: "Discord", icon: "discord", class: "discord" },

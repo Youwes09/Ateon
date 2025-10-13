@@ -28,22 +28,21 @@ export function HardwarePage({
 }: Omit<PageConfig, "id" | "label" | "icon">) {
   const openResourceMonitor = async () => {
     try {
-      await execAsync(String(options["app.resource-monitor"].get()));
+      await execAsync(options["app.resource-monitor"].get());
     } catch (error) {
       console.error("Error opening resource monitor:", error);
     }
   };
 
   return (
-    <box orientation={Gtk.Orientation.VERTICAL} spacing={16} hexpand={false}>
+    <box orientation={Gtk.Orientation.VERTICAL} spacing={16} hexpand>
       <box
         cssClasses={["hw-main-content"]}
         orientation={Gtk.Orientation.HORIZONTAL}
         halign={Gtk.Align.CENTER}
-        hexpand={false}
       >
         <Metric config={leftMetric} />
-        <box valign={Gtk.Align.CENTER} hexpand={false}>
+        <box valign={Gtk.Align.CENTER}>
           <CircularProgressBar
             percentage={mainPercentage}
             radiusFilled={true}
@@ -70,7 +69,6 @@ export function HardwarePage({
           cssClasses={["hw-disk-list"]}
           orientation={Gtk.Orientation.VERTICAL}
           spacing={8}
-          hexpand={false}
         >
           <label
             label="Partitions"

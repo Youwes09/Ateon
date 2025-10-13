@@ -318,7 +318,7 @@ export class WallpaperStore extends GObject.Object {
     
     if (this.manualScheme !== "auto") {
       const chromashScheme = this.manualScheme === "scheme-neutral" ? "neutral" : 
-                            this.manualScheme === "scheme-vibrant" ? "vibrant" :
+                            this.manualScheme === "scheme-rainbow" ? "rainbow" :
                             this.manualScheme; // Pass through other schemes
       cmd += ` --scheme ${chromashScheme}`;
     }
@@ -328,7 +328,7 @@ export class WallpaperStore extends GObject.Object {
         console.log(`Applied manual theme: mode=${this.manualMode}, scheme=${this.manualScheme}`);
         const analysis: ThemeProperties = {
           mode: this.manualMode === "auto" ? "dark" : this.manualMode,
-          scheme: this.manualScheme === "auto" ? "scheme-vibrant" : this.manualScheme,
+          scheme: this.manualScheme === "auto" ? "scheme-rainbow" : this.manualScheme,
           tone: this.manualMode === "light" ? 80 : 20,
           chroma: this.manualScheme === "scheme-neutral" ? 10 : 40,
         };
@@ -385,7 +385,7 @@ export class WallpaperStore extends GObject.Object {
     
     if (this.manualScheme !== "auto") {
       const chromashScheme = this.manualScheme === "scheme-neutral" ? "neutral" : 
-                            this.manualScheme === "scheme-vibrant" ? "vibrant" :
+                            this.manualScheme === "scheme-rainbow" ? "rainbow" :
                             this.manualScheme;
       cmd += ` --scheme ${chromashScheme}`;
     }
@@ -440,7 +440,7 @@ export class WallpaperStore extends GObject.Object {
   private parseChromashThemeOutput(output: string): ThemeProperties | null {
     try {
       let mode: "light" | "dark" = "dark";
-      let scheme: "scheme-neutral" | "scheme-vibrant" = "scheme-vibrant";
+      let scheme: "scheme-neutral" | "scheme-rainbow" = "scheme-rainbow";
       let tone = 20;
       let chroma = 40;
 
@@ -457,8 +457,8 @@ export class WallpaperStore extends GObject.Object {
         if (line.includes("neutral")) {
           scheme = "scheme-neutral";
           chroma = 10;
-        } else if (line.includes("vibrant") || line.includes("rainbow")) {
-          scheme = "scheme-vibrant";
+        } else if (line.includes("rainbow") || line.includes("rainbow")) {
+          scheme = "scheme-rainbow";
           chroma = 40;
         }
       }
@@ -474,7 +474,7 @@ export class WallpaperStore extends GObject.Object {
     const basename = GLib.path_get_basename(imagePath).toLowerCase();
 
     let mode: "light" | "dark" = "dark";
-    let scheme: "scheme-neutral" | "scheme-vibrant" = "scheme-vibrant";
+    let scheme: "scheme-neutral" | "scheme-rainbow" = "scheme-rainbow";
 
     // Filename-based heuristics
     if (
@@ -508,7 +508,7 @@ export class WallpaperStore extends GObject.Object {
 
     return {
       tone: mode === "light" ? 80 : 20,
-      chroma: scheme === "scheme-vibrant" ? 40 : 10,
+      chroma: scheme === "scheme-rainbow" ? 40 : 10,
       mode,
       scheme,
     };
