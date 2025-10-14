@@ -4,19 +4,15 @@
 
 .hardware-monitor-widget {
   @include widget-container;
-  max-width: 280px;
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
   border-radius: $round * 1.2;
 
   .hw-header {
     @include widget-header;
-    max-width: 200px;      // constrain width
     margin: $spacing-sm auto 0 auto; // top margin + center horizontally
     padding: $spacing-xs $spacing-xs;
-    text-align: center;
     font-weight: 700;
     font-size: calc(#{$font} * 1.1);
     color: rgba(255, 255, 255, 0.95);
@@ -37,7 +33,6 @@
       padding: $spacing-xs $spacing-sm;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(8px);
       border-radius: $round * 0.75;
       transition: background 0.2s ease, border 0.2s ease;
 
@@ -53,7 +48,6 @@
         .nav-icon,
         .nav-label {
           min-width: 0;
-          text-align: center;
           color: $fg;
           opacity: 0.85;
         }
@@ -66,15 +60,12 @@
 
     .hw-scroll {
       @include scrollbar(vertical);
-      max-width: 280px;
     }
 
     .hw-stack {
-      max-width: 280px;
 
       .hw-main-content {
         padding: 0 $spacing-md;
-        max-width: 240px;
       }
 
       .circular-progress-bar-widget {
@@ -86,7 +77,6 @@
 
       .hw-main-circle {
         @include animate;
-        height: 8rem;
         min-width: 8rem;
         min-height: 8rem;
         border-radius: 50%;
@@ -96,11 +86,7 @@
           rgba(255, 255, 255, 0.05)
         );
         border: 1px solid rgba(255, 255, 255, 0.18);
-        backdrop-filter: blur(10px);
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.08);
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
         &:active {
           transform: scale(0.9);
@@ -110,14 +96,12 @@
           font-size: calc(#{$font} * 1.5);
           font-weight: 700;
           color: rgba(255, 255, 255, 0.9);
-          text-align: center;
           text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
       }
 
       .hw-vertical-metric {
         @include vertical-metric-container;
-        max-width: 60px;
         padding: $spacing-xs;
 
         .vertical-metric-label {
@@ -126,7 +110,6 @@
         }
 
         .vertical-metric-bar-container {
-          max-width: 30px;
           margin: $spacing-xs auto;
         }
 
@@ -159,7 +142,6 @@
 
       .hw-vertical-display {
         @include vertical-metric-container;
-        max-width: 60px;
         padding: $spacing-xs;
 
         .vertical-display-label {
@@ -184,10 +166,8 @@
         margin: 0 $spacing-md;
         padding: $spacing-sm;
         border-radius: $round;
-        max-width: 240px;
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
 
         .disk-list-title {
           @include metric-label(0.85);

@@ -22,7 +22,6 @@ $is-dark: color.lightness($bg) < 50%;
 
   .digit-stack {
     min-width: 0.9em;
-    text-align: center;
     
     label {
       font-family: "JetBrainsMono Nerd Font", monospace;

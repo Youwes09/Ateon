@@ -97,9 +97,8 @@
     }
   }
 
-  // Adjacent items also scale slightly (macOS ripple effect)
-  &:hover + .dock-item,
-  &:has(+ .dock-item:hover) {
+  // Adjacent item scale (Only the NEXT item is supported without :has)
+  &:hover + .dock-item {
     min-width: 52px;
     min-height: 52px;
     margin-bottom: 4px;

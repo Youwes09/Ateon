@@ -115,7 +115,7 @@ box.clipboard {
   .entry-count {
     font-size: 0.8rem;
     color: color.adjust($fg, $alpha: -0.45);
-    margin: auto 8px auto 0;
+    margin: 20px;
     font-weight: 500;
   }
 }
@@ -228,7 +228,7 @@ box.clipboard {
     .entry-text {
       font-size: 0.88rem;
       color: $fg;
-      margin-right: auto;
+      margin-right: 0px;
       line-height: 1.5;
       font-weight: 400;
     }

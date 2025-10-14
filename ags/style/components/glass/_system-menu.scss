@@ -31,7 +31,6 @@
   // Force all direct children to same width
   > box > * {
     min-width: 100%;
-    max-width: 100%;
   }
 }
 

@@ -15,7 +15,6 @@
   // Widget header - consistent with other widgets
   .widget-header {
     margin: 0 $spacing-sm $spacing-sm $spacing-sm;
-    align-items: center;
 
     .header-icon {
       @include material-icon(24px);
@@ -189,7 +188,6 @@
   // Empty state - consistent with other widgets
   .timer-empty {
     padding: $spacing-md 0;
-    text-align: center;
 
     .empty-icon {
       @include material-icon(64px);

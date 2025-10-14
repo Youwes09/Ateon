@@ -14,8 +14,6 @@
 
   /** ---------- Location Header ---------- **/
   .weather-location {
-    align-items: center;
-    justify-content: center;
     margin-bottom: $spacing-md;
     color: $fg;
 
@@ -29,7 +27,6 @@
       font-size: calc(#{$font} * 0.95);
       font-weight: 500;
       color: $fg;
-      text-align: center;
     }
   }
 
@@ -64,11 +61,8 @@
     /** ---------- Weather Stats ---------- **/
     .weather-stats {
       flex-direction: column;
-      gap: $spacing-xs;
 
       .stat-item {
-        align-items: center;
-        justify-content: space-between;
         padding: $spacing-xs 0;
 
         .weather-extra-icon {
@@ -88,8 +82,6 @@
   /** ---------- Forecast Section ---------- **/
   .forecast-row {
     margin-top: $spacing-md;
-    justify-content: center;
-    gap: $spacing-sm;
 
     .forecast-item {
       min-width: 3.2rem;

@@ -19,7 +19,6 @@ $is-dark: color.lightness($bg) < 50%;
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 
   .widget-header {
-    align-items: center;
     margin-bottom: $spacing-sm;
 
     .header-icon {
@@ -269,7 +268,6 @@ $is-dark: color.lightness($bg) < 50%;
 
   .timer-empty {
     padding: calc(#{$spacing-md} * 2) 0;
-    text-align: center;
 
     .empty-icon {
       @include material-icon(64px);
