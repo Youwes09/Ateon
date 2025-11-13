@@ -6,6 +6,7 @@ import Separator from "./modules/Separator.tsx";
 import Workspaces from "./modules/Workspaces.tsx";
 import Mem from "./modules/Mem.tsx";
 import Cpu from "./modules/Cpu.tsx";
+import { CavaDraw } from "widgets/music/modules/cava";
 import Media from "./modules/Media.tsx";
 import { hasActivePlayers } from "utils/mpris.ts";
 import SystemInfo from "./modules/SystemInfo/main.tsx";
@@ -37,6 +38,21 @@ function Bar({ gdkmonitor, ...props }: any) {
     style === "corners" ? 0 : 5,
   );
 
+  const showCavaExpanded = createComputed(
+    [options["bar.modules.cava.show"], options["bar.style"]],
+    (cavaEnabled, barStyle) => {
+      const styleStr = String(barStyle);
+      return cavaEnabled && (styleStr === "expanded" || styleStr === "corners" || styleStr === "beveled");
+    },
+  );
+
+  const showCavaFloating = createComputed(
+    [options["bar.modules.cava.show"], options["bar.style"]],
+    (cavaEnabled, barStyle) => {
+      return cavaEnabled && barStyle === "floating";
+    },
+  );
+
   return (
     <window
       visible
@@ -65,37 +81,65 @@ function Bar({ gdkmonitor, ...props }: any) {
       marginBottom={marginBottom}
       {...props}
     >
-      <centerbox cssClasses={["centerbox"]}>
-        <box hexpand halign={Gtk.Align.START} $type="start">
+      <overlay>
+        <box
+          $type={"overlay"}
+          canTarget={false}
+          visible={showCavaExpanded((s) => Boolean(s))}
+        >
+          <CavaDraw
+            vexpand
+            hexpand
+            style={options["bar.modules.cava.style"]((value) => String(value))}
+          />
+        </box>
+        <centerbox cssClasses={["centerbox"]}>
+          <box hexpand halign={Gtk.Align.START} $type="start">
+            <box
+              visible={options["bar.modules.os-icon.show"]((value) =>
+                Boolean(value),
+              )}
+            >
+              <OsIcon />
+            </box>
+            <Workspaces />
+          </box>
           <box
-            visible={options["bar.modules.os-icon.show"]((value) =>
-              Boolean(value),
+            visible={hasActivePlayers}
+            $type="center"
+            overflow={options["bar.style"]((style) =>
+              style === "floating" ? Gtk.Overflow.HIDDEN : Gtk.Overflow.VISIBLE,
             )}
           >
-            <OsIcon />
+            <overlay>
+              <box
+                $type={"overlay"}
+                canTarget={false}
+                visible={showCavaFloating((s) => Boolean(s))}
+              >
+                <CavaDraw
+                  vexpand
+                  hexpand
+                  style={options["bar.modules.cava.style"]((value) =>
+                    String(value),
+                  )}
+                />
+              </box>
+              <Media />
+            </overlay>
           </box>
-          <Workspaces />
-        </box>
-        <box
-          visible={hasActivePlayers}
-          $type="center"
-          overflow={options["bar.style"]((style) =>
-            style === "floating" ? Gtk.Overflow.HIDDEN : Gtk.Overflow.VISIBLE,
-          )}
-        >
-          <Media />
-        </box>
-        <box hexpand halign={Gtk.Align.END} $type="end">
-          <SysTray />
-          <Separator visible={hasTrayItems} />
-          <Mem />
-          <Cpu />
-          <Separator />
-          <SystemInfo />
-          <Separator />
-          <Time />
-        </box>
-      </centerbox>
+          <box hexpand halign={Gtk.Align.END} $type="end">
+            <SysTray />
+            <Separator visible={hasTrayItems} />
+            <Mem />
+            <Cpu />
+            <Separator />
+            <SystemInfo />
+            <Separator />
+            <Time />
+          </box>
+        </centerbox>
+      </overlay>
     </window>
   );
 }

@@ -56,9 +56,10 @@ export class CavaWidget extends Gtk.Widget {
 
     super(gtkParams);
 
-    this.cava.connect("notify::values", () => {
-      this.queue_draw();
-    });
+    // Temporarily disable CAVA signal connection for testing
+    // this.cava.connect("notify::values", () => {
+    //   this.queue_draw();
+    // });
 
     this.connect("notify::style", () => {
       this.queue_draw();
@@ -76,7 +77,6 @@ export class CavaWidget extends Gtk.Widget {
 
   @setter(CavaStyleSpec)
   set style(value: CavaStyle | string | number) {
-    // Convert string/number to enum
     const enumValue =
       typeof value === "string" || typeof value === "number"
         ? getStyleEnum(value)
@@ -91,18 +91,26 @@ export class CavaWidget extends Gtk.Widget {
   getColor(): Gdk.RGBA {
     const rgba = new Gdk.RGBA();
     rgba.parse("#a6da95");
-
-    const styleContext = this.get_style_context();
-    if (styleContext) {
-      return styleContext.get_color();
-    }
-
     return rgba;
   }
 
   vfunc_snapshot(snapshot: Gtk.Snapshot): void {
     super.vfunc_snapshot(snapshot);
 
+    // TEMPORARILY DISABLED - Just draw a simple rectangle to test
+    // If this works, the problem is definitely CAVA
+    
+    const width = this.get_width();
+    const height = this.get_height();
+    const color = this.getColor();
+
+    // Draw a simple test rectangle
+    const rect = new Graphene.Rect();
+    rect.init(0, 0, width, height);
+    snapshot.append_color(color, rect);
+
+    // ORIGINAL CODE COMMENTED OUT FOR TESTING:
+    /*
     const values = this.cava.get_values();
     const bars = this.cava.get_bars();
 
@@ -140,6 +148,7 @@ export class CavaWidget extends Gtk.Widget {
       default:
         drawCatmullRom(this, snapshot, values, bars);
     }
+    */
   }
 
   vfunc_dispose(): void {

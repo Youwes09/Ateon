@@ -114,7 +114,7 @@ app.start({
     Notifications();
     OnScreenDisplay();
     SystemMenu();
-    MusicPlayer();
+    // MusicPlayer();
     PickerWindow();
     LogoutMenu();
     Sidebar();
