@@ -12,7 +12,7 @@ import {
   Notifications,
   LogoutMenu,
   PickerWindow,
-  MusicPlayer,
+  // MusicPlayer,
   Sidebar,
   Clipboard,
   WindowSwitcher,

@@ -13,22 +13,53 @@ import { gdkmonitor } from "utils/monitors";
 function MusicBox({ player }: { player: Mpris.Player }) {
   const [blurredCover, setBlurredCover] = createState(player.cover_art || "");
   let measureBox: Gtk.Box | null = null;
+  let isGeneratingBackground = false;
 
   const coverBinding = createBinding(player, "cover_art");
+  
   const unsubscribe = coverBinding.subscribe(() => {
     const coverArt = player.cover_art;
-    if (coverArt) {
-      generateBackground(coverArt).then(setBlurredCover);
+    
+    // Prevent multiple simultaneous background generation calls
+    if (coverArt && !isGeneratingBackground) {
+      isGeneratingBackground = true;
+      
+      generateBackground(coverArt)
+        .then((path) => {
+          if (path) {
+            setBlurredCover(path);
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to generate background:", error);
+        })
+        .finally(() => {
+          isGeneratingBackground = false;
+        });
     }
   });
 
   onCleanup(() => {
     unsubscribe();
+    measureBox = null;
   });
 
-  // initial blur
-  if (player.cover_art) {
-    generateBackground(player.cover_art).then(setBlurredCover);
+  // Initial blur generation
+  if (player.cover_art && !isGeneratingBackground) {
+    isGeneratingBackground = true;
+    
+    generateBackground(player.cover_art)
+      .then((path) => {
+        if (path) {
+          setBlurredCover(path);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to generate initial background:", error);
+      })
+      .finally(() => {
+        isGeneratingBackground = false;
+      });
   }
 
   return (
@@ -42,22 +73,34 @@ function MusicBox({ player }: { player: Mpris.Player }) {
       <Gtk.ScrolledWindow $type="overlay">
         <Gtk.Picture
           cssClasses={["blurred-cover"]}
-          file={blurredCover((path) => Gio.file_new_for_path(path))}
+          file={blurredCover((path) => {
+            try {
+              return Gio.file_new_for_path(path);
+            } catch (error) {
+              console.error("Invalid file path:", error);
+              return null;
+            }
+          })}
           contentFit={Gtk.ContentFit.COVER}
         />
       </Gtk.ScrolledWindow>
-      <box
-        cssClasses={["cava-container"]}
-        $type="overlay"
-        canTarget={false}
-        visible={options["music-player.modules.cava.enable"]}
-      >
-        <CavaDraw
-          hexpand
-          vexpand
-          style={options["music-player.modules.cava.style"]}
-        />
-      </box>
+      
+      {/* CAVA visualization - wrapped in conditional for safety */}
+      {options["music-player.modules.cava.enable"] && (
+        <box
+          cssClasses={["cava-container"]}
+          $type="overlay"
+          canTarget={false}
+          visible={true}
+        >
+          <CavaDraw
+            hexpand
+            vexpand
+            style={options["music-player.modules.cava.style"]}
+          />
+        </box>
+      )}
+      
       <box
         $type="overlay"
         $={(self) => {
@@ -77,17 +120,22 @@ export default function MusicPlayer() {
   const [visible, _setVisible] = createState(false);
 
   const topMargin = options["bar.position"]((pos) => {
-    if (pos === "top") {
-      return 45;
-    }
-    return 0;
+    return pos === "top" ? 45 : 0;
   });
 
   const bottomMargin = options["bar.position"]((pos) => {
-    if (pos === "bottom") {
-      return 45;
+    return pos === "bottom" ? 45 : 0;
+  });
+
+  const anchorPosition = options["bar.position"]((pos) => {
+    switch (pos) {
+      case "top":
+        return TOP;
+      case "bottom":
+        return BOTTOM;
+      default:
+        return TOP;
     }
-    return 0;
   });
 
   return (
@@ -97,16 +145,7 @@ export default function MusicPlayer() {
       application={app}
       layer={Astal.Layer.OVERLAY}
       exclusivity={Astal.Exclusivity.IGNORE}
-      anchor={options["bar.position"]((pos) => {
-        switch (pos) {
-          case "top":
-            return TOP;
-          case "bottom":
-            return BOTTOM;
-          default:
-            return TOP;
-        }
-      })}
+      anchor={anchorPosition}
       keymode={Astal.Keymode.ON_DEMAND}
       visible={visible}
       gdkmonitor={gdkmonitor}
@@ -115,11 +154,16 @@ export default function MusicPlayer() {
     >
       <box>
         <With value={createBinding(mpris, "players")}>
-          {(players: Mpris.Player[]) =>
-            players.length > 0 ? (
-              <MusicBox player={findPlayer(players)} />
-            ) : null
-          }
+          {(players: Mpris.Player[]) => {
+            try {
+              return players && players.length > 0 ? (
+                <MusicBox player={findPlayer(players)} />
+              ) : null;
+            } catch (error) {
+              console.error("Error rendering MusicBox:", error);
+              return null;
+            }
+          }}
         </With>
       </box>
     </window>

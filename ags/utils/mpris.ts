@@ -8,14 +8,19 @@ const MEDIA_CACHE_PATH = GLib.get_user_cache_dir() + "/media";
 const blurredPath = MEDIA_CACHE_PATH + "/blurred";
 
 export function findPlayer(players: Mpris.Player[]): Mpris.Player | undefined {
-  // try to get the first active player
+  if (!players || !Array.isArray(players) || players.length === 0) {
+    return undefined;
+  }
+
+  // Try to get the first active player
   const activePlayer = players.find(
-    (p) => p.playback_status === Mpris.PlaybackStatus.PLAYING,
+    (p) => p && p.playback_status === Mpris.PlaybackStatus.PLAYING,
   );
+  
   if (activePlayer) return activePlayer;
 
-  // otherwise get the first "working" player
-  return players.find((p) => p.title !== undefined);
+  // Otherwise get the first "working" player
+  return players.find((p) => p && p.title !== undefined && p.title !== null);
 }
 
 export function mprisStateIcon(status: Mpris.PlaybackStatus): string {
@@ -27,40 +32,74 @@ export function mprisStateIcon(status: Mpris.PlaybackStatus): string {
 export async function generateBackground(
   coverpath: string | null,
 ): Promise<string> {
-  if (!coverpath) return "";
-
-  const relativePath = coverpath.substring(MEDIA_CACHE_PATH.length + 1);
-  const blurred = GLib.build_filenamev([blurredPath, relativePath]);
-
-  if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) {
-    return blurred;
-  }
-
-  const blurredDir = GLib.path_get_dirname(blurred);
-  if (!GLib.file_test(blurredDir, GLib.FileTest.EXISTS)) {
-    GLib.mkdir_with_parents(blurredDir, 0o755);
+  if (!coverpath || typeof coverpath !== 'string' || coverpath.length === 0) {
+    return "";
   }
 
   try {
-    await execAsync(`magick "${coverpath}" -blur 0x22 "${blurred}"`);
-    return blurred;
+    // Validate input path exists
+    if (!GLib.file_test(coverpath, GLib.FileTest.EXISTS)) {
+      console.warn("Cover art file does not exist:", coverpath);
+      return "";
+    }
+
+    const relativePath = coverpath.substring(MEDIA_CACHE_PATH.length + 1);
+    const blurred = GLib.build_filenamev([blurredPath, relativePath]);
+
+    // Return cached version if exists
+    if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) {
+      return blurred;
+    }
+
+    // Create directory structure safely
+    const blurredDir = GLib.path_get_dirname(blurred);
+    if (!GLib.file_test(blurredDir, GLib.FileTest.EXISTS)) {
+      const mkdirResult = GLib.mkdir_with_parents(blurredDir, 0o755);
+      if (mkdirResult !== 0) {
+        console.error("Failed to create directory:", blurredDir);
+        return coverpath; // Fallback to original
+      }
+    }
+
+    // Generate blurred version - FIXED SYNTAX ERROR
+    await execAsync`magick "${coverpath}" -blur 0x22 "${blurred}"`;
+    
+    // Verify the blurred file was created
+    if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) {
+      return blurred;
+    } else {
+      console.warn("Blurred file was not created successfully");
+      return coverpath;
+    }
+
   } catch (e) {
     console.error("Background generation failed:", e);
     // Fallback to original
-    return coverpath;
+    return coverpath || "";
   }
 }
 
-export function lengthStr(length: number) {
+export function lengthStr(length: number): string {
+  if (typeof length !== 'number' || !isFinite(length) || length < 0) {
+    return "0:00";
+  }
+
   const min = Math.floor(length / 60).toString();
   const sec = Math.floor(length % 60)
     .toString()
     .padStart(2, "0");
+  
   return min + ":" + sec;
 }
 
-export function filterActivePlayers(players: Mpris.Player[]) {
+export function filterActivePlayers(players: Mpris.Player[]): Mpris.Player[] {
+  if (!players || !Array.isArray(players)) {
+    return [];
+  }
+
   return players.filter((player: Mpris.Player) => {
+    if (!player) return false;
+
     // Check for essential properties that indicate a usable player
     if (!player.title && !player.artist) {
       return false;
@@ -79,22 +118,48 @@ export function filterActivePlayers(players: Mpris.Player[]) {
   });
 }
 
-export const activePlayers = createExternal(mpris.get_players(), (set) => {
-  // poll players periodically as binding to "players" does not seem to work reliably
-  const interval = setInterval(() => {
-    set(mpris.get_players());
-  }, 1000);
+export const activePlayers = createExternal(
+  mpris.get_players() || [], 
+  (set) => {
+    // Poll players periodically
+    const interval = setInterval(() => {
+      try {
+        const players = mpris.get_players();
+        // Validate players before setting
+        if (players && Array.isArray(players)) {
+          set(players);
+        } else {
+          set([]);
+        }
+      } catch (error) {
+        console.error("Error getting MPRIS players:", error);
+        set([]);
+      }
+    }, 1000);
 
-  return () => {
-    clearInterval(interval);
-  };
-});
+    return () => {
+      clearInterval(interval);
+    };
+  }
+);
 
 export const hasActivePlayers = activePlayers(
-  (players) => filterActivePlayers(players).length > 0,
+  (players) => {
+    try {
+      return filterActivePlayers(players).length > 0;
+    } catch (error) {
+      console.error("Error in hasActivePlayers:", error);
+      return false;
+    }
+  }
 );
 
 export const firstActivePlayer = activePlayers((players) => {
-  const active = filterActivePlayers(players);
-  return active.length > 0 ? active[0] : null;
+  try {
+    const active = filterActivePlayers(players);
+    return active.length > 0 ? active[0] : null;
+  } catch (error) {
+    console.error("Error in firstActivePlayer:", error);
+    return null;
+  }
 });

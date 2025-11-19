@@ -64,24 +64,24 @@ popover.background row {
 }
 popover.background modelbutton:hover,
 popover.background row:hover {
-  background-color: rgba(191, 194, 255, 0.2);
+  background-color: rgba(190, 194, 255, 0.2);
 }
 popover.background modelbutton:selected, popover.background modelbutton:active,
 popover.background row:selected,
 popover.background row:active {
-  background-color: rgba(191, 194, 255, 0.2);
+  background-color: rgba(190, 194, 255, 0.2);
 }
 
 /* buttons */
 .button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(191, 194, 255, 0.2);
-  border: 1px solid rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.2);
+  border: 1px solid rgba(190, 194, 255, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.3);
 }
 
 .button-disabled {
@@ -98,13 +98,13 @@ popover.background row:active {
 /* dropdowns */
 .dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(191, 194, 255, 0.2);
-  border: 1px solid rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.2);
+  border: 1px solid rgba(190, 194, 255, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .dropdown button:hover {
-  background: rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.3);
 }
 .dropdown button {
   border-radius: 1.1rem;
@@ -119,7 +119,7 @@ popover.background row:active {
   background-color: rgba(57, 57, 63, 0.6);
 }
 .dropdown button:active {
-  background-color: rgba(191, 194, 255, 0.2);
+  background-color: rgba(190, 194, 255, 0.2);
 }
 .dropdown button label {
   margin-top: 0.1rem;
@@ -182,20 +182,20 @@ popover.background row:active {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(110.6, 113.4, 160.5);
-  box-shadow: inset -2px -2px 2px rgb(80.4278463792, 82.8108936794, 122.8971536208);
+  background: rgb(109.9, 113.4, 160.5);
+  box-shadow: inset -2px -2px 2px rgb(79.9858096828, 82.9482470785, 122.8141903172);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(151.1, 152.9, 194.25);
-  box-shadow: inset -2px -2px 2px rgb(96.6179699362, 99.3618357121, 162.3945300638);
+  background: rgb(150.65, 152.9, 194.25);
+  box-shadow: inset -2px -2px 2px rgb(96.1522486372, 99.57733192, 162.5227513628);
 }
 .Bar .Workspaces .monitor1 {
-  background: rgb(174.5, 138, 159.5);
-  box-shadow: inset -2px -2px 2px rgb(138.8449367089, 95.5300632911, 121.0443037975);
+  background: rgb(174.5, 138, 160.5);
+  box-shadow: inset -2px -2px 2px rgb(138.8449367089, 95.5300632911, 122.2310126582);
 }
 .Bar .Workspaces .monitor1:hover {
-  background: rgb(206.7, 169.2, 190.5);
-  box-shadow: inset -2px -2px 2px rgb(172.8521812081, 109.0728187919, 145.2994966443);
+  background: rgb(206.7, 169.2, 191.5);
+  box-shadow: inset -2px -2px 2px rgb(172.8521812081, 109.0728187919, 147.0002796421);
 }
 .Bar .Workspaces .monitor2 {
   background: rgb(115.1, 115.5, 137);
@@ -228,11 +228,11 @@ popover.background row:active {
   min-height: 1px;
 }
 .Bar .Media.active > box {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border: 1px solid rgba(191, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border: 1px solid rgba(190, 194, 255, 0.3);
   border-radius: 16px;
   padding: 4px 8px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(221.6, 223.165625, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(220.6, 222.7169230769, 255, 0.12);
 }
 .Bar .Media.active > box label {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
@@ -269,11 +269,11 @@ popover.background row:active {
   margin-right: -0.3rem;
 }
 .Bar .SysTray.active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border: 1px solid rgba(191, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border: 1px solid rgba(190, 194, 255, 0.3);
   border-radius: 8px;
   padding: 4px 6px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .Bar {
   /* hw-monitor */
@@ -283,7 +283,7 @@ popover.background row:active {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(147.14, 150.48, 209.1);
+  color: rgb(146.14, 150.48, 209.1);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress radius {
@@ -293,7 +293,7 @@ popover.background row:active {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(147.14, 150.48, 209.1);
+  color: rgb(146.14, 150.48, 209.1);
 }
 .Bar .bar-hw-ram-box button label {
   margin: 1px 0px 0px 2px;
@@ -304,7 +304,7 @@ popover.background row:active {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(147.14, 150.48, 209.1);
+  color: rgb(146.14, 150.48, 209.1);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress radius {
@@ -314,7 +314,7 @@ popover.background row:active {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(185.08, 142.5, 168.46);
+  color: rgb(185.08, 142.5, 168.8);
 }
 .Bar .bar-hw-cpu-box button label {
   margin: 1px 0px 0px 1px;
@@ -334,9 +334,9 @@ popover.background row:active {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .Bar .system-menu-toggler.active box {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border: 1px solid rgba(191, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(221.6, 223.165625, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border: 1px solid rgba(190, 194, 255, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(220.6, 222.7169230769, 255, 0.12);
 }
 .Bar .separator {
   font-size: 1.8rem;
@@ -434,11 +434,11 @@ box.clipboard {
   box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.12);
 }
 .mode-bar .mode-button.active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.18), rgba(191, 194, 255, 0.12));
-  border-color: rgba(191, 194, 255, 0.3);
-  color: rgb(191, 194, 255);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
+  border-color: rgba(190, 194, 255, 0.3);
+  color: rgb(190, 194, 255);
   font-weight: 600;
-  box-shadow: inset 0 1px 1px rgba(242, 242.609375, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .mode-bar .clear-all-button {
   border-radius: 10px;
@@ -485,9 +485,9 @@ box.clipboard {
   box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 .search-section:focus-within {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.1), rgba(228, 225, 233, 0.08));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(228, 225, 233, 0.08));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .search-section label.search-icon {
   font-family: "Material Symbols Outlined";
@@ -535,12 +535,12 @@ box.clipboard {
   box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.12);
 }
 .clipboard-list button.clipboard-entry.selected {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.15), rgba(191, 194, 255, 0.1));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: inset 0 1px 1px rgba(242, 242.609375, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .clipboard-list button.clipboard-entry.selected .entry-text {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   font-weight: 600;
 }
 .clipboard-list button.clipboard-entry .entry-text {
@@ -572,8 +572,8 @@ box.clipboard {
   transition: all 0.2s ease;
 }
 .clipboard-list button.clipboard-entry.image-entry.selected .entry-image {
-  border-color: rgba(191, 194, 255, 0.3);
-  box-shadow: inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  border-color: rgba(190, 194, 255, 0.3);
+  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .clipboard-list button.clipboard-entry.image-entry:hover:not(.selected) .entry-image {
   border-color: rgba(228, 225, 233, 0.18);
@@ -684,8 +684,8 @@ button.invisible-close {
   margin: 8px;
 }
 .dock-item.active .icon-background {
-  background: linear-gradient(135deg, rgba(231.8, 232.8875, 255, 0.25), rgba(175.7, 179.4171875, 255, 0.18));
-  box-shadow: inset 0 1px 2px rgba(252.2, 252.33125, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(230.8, 232.2892307692, 255, 0.25), rgba(174.7, 179.6415384615, 255, 0.18));
+  box-shadow: inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .dock-item.active image {
   opacity: 1;
@@ -826,11 +826,11 @@ box.logout-background {
   background-color: rgba(0, 0, 0, 0.6);
 }
 box.logout-background .logout-menu {
-  background: linear-gradient(135deg, rgba(216.5, 218.3046875, 255, 0.08), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.3));
-  border: 1px solid rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(215.5, 217.9307692308, 255, 0.08), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.3));
+  border: 1px solid rgba(190, 194, 255, 0.12);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(191, 194, 255, 0.15), inset 0 1px 0 rgba(191, 194, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(190, 194, 255, 0.15), inset 0 1px 0 rgba(190, 194, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 box.logout-background .logout-menu button {
   background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
@@ -856,9 +856,9 @@ box.logout-background .logout-menu button:active {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(228, 225, 233, 0.15), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 box.logout-background .logout-menu button:focus {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.18), rgba(191, 194, 255, 0.12));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: 0 0 0 3px rgba(191, 194, 255, 0.1), 0 6px 16px rgba(0, 0, 0, 0.25), 0 0 30px rgba(191, 194, 255, 0.25), inset 0 1px 2px rgba(252.2, 252.33125, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: 0 0 0 3px rgba(190, 194, 255, 0.1), 0 6px 16px rgba(0, 0, 0, 0.25), 0 0 30px rgba(190, 194, 255, 0.25), inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";
@@ -884,12 +884,12 @@ box.picker {
   padding: 0.4rem;
 }
 box.picker box.search {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.18), rgba(191, 194, 255, 0.12));
-  border: 1px solid rgba(191, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
+  border: 1px solid rgba(190, 194, 255, 0.25);
   border-radius: 16px;
   margin: 1rem 0.5rem;
   padding: 8px 12px;
-  box-shadow: 0 4px 16px rgba(191, 194, 255, 0.25), 0 0 30px rgba(191, 194, 255, 0.12), inset 0 1px 1px rgba(242, 242.609375, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(190, 194, 255, 0.25), 0 0 30px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.picker box.search label {
   font-family: "Material Symbols Outlined";
@@ -971,13 +971,13 @@ box.picker box.results-list .app-button label.description {
   color: rgba(228, 225, 233, 0.7);
 }
 box.picker box.results-list .app-button:focus, box.picker box.results-list .app-button:hover, box.picker box.results-list .app-button.selected {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.15), rgba(191, 194, 255, 0.1));
-  border: 1px solid rgba(191, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
+  border: 1px solid rgba(190, 194, 255, 0.25);
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(191, 194, 255, 0.2), 0 0 20px rgba(191, 194, 255, 0.12), inset 0 1px 1px rgba(242, 242.609375, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.picker box.results-list .app-button:focus label.name, box.picker box.results-list .app-button:hover label.name, box.picker box.results-list .app-button.selected label.name {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 box.picker box.results-list .action-button {
   background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
@@ -993,9 +993,9 @@ box.picker box.results-list .action-button .action-icon {
   font-size: 24px;
 }
 box.picker box.results-list .action-button:focus, box.picker box.results-list .action-button:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.18), rgba(191, 194, 255, 0.12));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: 0 2px 10px rgba(191, 194, 255, 0.2), 0 0 20px rgba(191, 194, 255, 0.12), inset 0 1px 2px rgba(252.2, 252.33125, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.picker box.results-grid {
   background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
@@ -1012,9 +1012,9 @@ box.picker box.results-grid .wallpaper-thumbnail {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(228, 225, 233, 0.08);
 }
 box.picker box.results-grid .wallpaper-thumbnail:hover, box.picker box.results-grid .wallpaper-thumbnail:focus, box.picker box.results-grid .wallpaper-thumbnail.selected {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.12), rgba(191, 194, 255, 0.08));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: 0 4px 12px rgba(191, 194, 255, 0.2), 0 0 20px rgba(191, 194, 255, 0.12), inset 0 1px 1px rgba(231.8, 232.8875, 255, 0.15);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.12), rgba(190, 194, 255, 0.08));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(230.8, 232.2892307692, 255, 0.15);
   transform: translateY(-2px);
 }
 box.picker box.results-grid .wallpaper-thumbnail box.wallpaper-preview-container {
@@ -1089,9 +1089,9 @@ box.picker box.not-found label {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.12);
 }
 .mode-bar .mode-button.active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.18), rgba(191, 194, 255, 0.12));
-  border-color: rgba(191, 194, 255, 0.3);
-  box-shadow: 0 2px 10px rgba(191, 194, 255, 0.25), 0 0 20px rgba(191, 194, 255, 0.12), inset 0 1px 1px rgba(242, 242.609375, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
+  border-color: rgba(190, 194, 255, 0.3);
+  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.25), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .action-bar {
@@ -1117,9 +1117,9 @@ box.picker box.not-found label {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(228, 225, 233, 0.18);
 }
 .action-bar .action-button:focus, .action-bar .action-button:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.18), rgba(191, 194, 255, 0.12));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: 0 2px 10px rgba(191, 194, 255, 0.2), 0 0 20px rgba(191, 194, 255, 0.12), inset 0 1px 2px rgba(252.2, 252.33125, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .command-suggestions {
@@ -1147,20 +1147,20 @@ box.picker box.not-found label {
 }
 .command-suggestions .command-item .command-name {
   font-weight: bold;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   font-size: 1.1rem;
 }
 .command-suggestions .command-item .command-description {
   color: rgba(228, 225, 233, 0.7);
 }
 .command-suggestions .command-item:hover, .command-suggestions .command-item:focus {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.15), rgba(191, 194, 255, 0.1));
-  border: 1px solid rgba(191, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
+  border: 1px solid rgba(190, 194, 255, 0.25);
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(191, 194, 255, 0.2), 0 0 20px rgba(191, 194, 255, 0.12), inset 0 1px 1px rgba(242, 242.609375, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .command-suggestions .command-item:hover .command-name, .command-suggestions .command-item:focus .command-name {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 
 /* variables & mixins */
@@ -1280,10 +1280,10 @@ box.picker box.not-found label {
   transition: all 0.2s ease;
 }
 .notification .action-indicator .more-actions:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.12), rgba(191, 194, 255, 0.08));
-  border-color: rgba(191, 194, 255, 0.2);
-  color: rgb(191, 194, 255);
-  box-shadow: inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.12), rgba(190, 194, 255, 0.08));
+  border-color: rgba(190, 194, 255, 0.2);
+  color: rgb(190, 194, 255);
+  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 
 /* variables & mixins */
@@ -1329,8 +1329,8 @@ box.picker box.not-found label {
 }
 .osd levelbar block.filled {
   border-radius: 1.5rem;
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.85), rgba(191, 194, 255, 0.75));
-  box-shadow: 0 0 12px rgba(191, 194, 255, 0.5), 0 0 20px rgba(191, 194, 255, 0.25), inset 0 1px 1px hsla(237.1875, 100%, 102.4509803922%, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.85), rgba(190, 194, 255, 0.75));
+  box-shadow: 0 0 12px rgba(190, 194, 255, 0.5), 0 0 20px rgba(190, 194, 255, 0.25), inset 0 1px 1px hsla(236.3076923077, 100%, 102.2549019608%, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
 
 /* variables & mixins */
@@ -1487,13 +1487,13 @@ box.picker box.not-found label {
   transition: all 0.2s ease;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border-color: rgba(191, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border-color: rgba(190, 194, 255, 0.3);
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .quick-actions-widget .actions-grid .action-button:hover .action-icon {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .quick-actions-widget .actions-grid .action-button .action-icon {
   font-family: "Material Symbols Outlined";
@@ -1541,7 +1541,7 @@ box.picker box.not-found label {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 1.8rem;
   font-weight: 700;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   margin: 0 2px;
   opacity: 0.9;
   transition: all 300ms ease;
@@ -1553,21 +1553,21 @@ box.picker box.not-found label {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 0.75rem;
   font-weight: 700;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   margin-left: 6px;
   padding: 3px 8px;
   border-radius: 6px;
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.15), rgba(191, 194, 255, 0.1));
-  border: 1px solid rgba(191, 194, 255, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
+  border: 1px solid rgba(190, 194, 255, 0.2);
   opacity: 0.9;
   transition: all 200ms ease;
-  box-shadow: inset 0 1px 1px rgba(191, 194, 255, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .clock-widget .ampm-indicator:hover {
   opacity: 1;
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.2), rgba(191, 194, 255, 0.12));
-  border-color: rgba(191, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.2), rgba(190, 194, 255, 0.12));
+  border-color: rgba(190, 194, 255, 0.25);
   transform: translateY(-1px);
 }
 .clock-widget .date-label {
@@ -1719,9 +1719,9 @@ box.picker box.not-found label {
 .settings-nav .nav-icon-button.mode-button-active,
 .settings-nav .nav-button.active,
 .settings-nav .nav-button.mode-button-active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border-color: rgba(191, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border-color: rgba(190, 194, 255, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .settings-nav-compact .nav-icon-button.active .icon-compact,
 .settings-nav-compact .nav-icon-button.active .nav-icon,
@@ -1746,7 +1746,7 @@ box.picker box.not-found label {
 .settings-nav .nav-button.mode-button-active .icon-compact,
 .settings-nav .nav-button.mode-button-active .nav-icon,
 .settings-nav .nav-button.mode-button-active label {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .settings-nav-compact .nav-icon-button.button-disabled,
 .settings-nav-compact .nav-button.button-disabled,
@@ -1788,10 +1788,10 @@ box.picker box.not-found label {
   transition: all 100ms ease;
 }
 .settings-scroll scrollbar slider:hover {
-  background: rgba(191, 194, 255, 0.7);
+  background: rgba(190, 194, 255, 0.7);
 }
 .settings-scroll scrollbar slider:active {
-  background: rgb(191, 194, 255);
+  background: rgb(190, 194, 255);
 }
 
 .section-header,
@@ -1841,7 +1841,7 @@ box.picker box.not-found label {
 .option-row.widget-item .widget-info .widget-icon {
   font-family: "Material Symbols Outlined";
   font-size: 20px;
-  color: rgba(191, 194, 255, 0.7);
+  color: rgba(190, 194, 255, 0.7);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 .option-row.widget-item .widget-info .widget-name {
@@ -1857,13 +1857,13 @@ box.picker box.not-found label {
 }
 .option-row.widget-item .widget-controls .reorder-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(191, 194, 255, 0.2);
-  border: 1px solid rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.2);
+  border: 1px solid rgba(190, 194, 255, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .option-row.widget-item .widget-controls .reorder-button:hover {
-  background: rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.3);
 }
 .option-row.widget-item .widget-controls .reorder-button {
   padding: 0.25rem;
@@ -1913,20 +1913,20 @@ box.picker box.not-found label {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .option-switch:checked {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.8), rgba(191, 194, 255, 0.7));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(191, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(190, 194, 255, 0.3);
 }
 .option-switch:checked slider {
   background: white;
   margin-left: 22px;
   margin-right: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(191, 194, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(190, 194, 255, 0.5);
 }
 .option-switch:hover {
   background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
 }
 .option-switch:hover:checked {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.85), rgba(191, 194, 255, 0.75));
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.85), rgba(190, 194, 255, 0.75));
 }
 
 .option-switch-placeholder {
@@ -1948,13 +1948,13 @@ box.picker box.not-found label {
 }
 .option-dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(191, 194, 255, 0.2);
-  border: 1px solid rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.2);
+  border: 1px solid rgba(190, 194, 255, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .option-dropdown button:hover {
-  background: rgba(191, 194, 255, 0.3);
+  background: rgba(190, 194, 255, 0.3);
 }
 .option-dropdown button {
   background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
@@ -1973,10 +1973,10 @@ box.picker box.not-found label {
 .info-box {
   padding: calc(0.4rem * 1.2) 0.75rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.1), rgba(191, 194, 255, 0.07));
-  border: 1px solid rgba(191, 194, 255, 0.15);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(190, 194, 255, 0.07));
+  border: 1px solid rgba(190, 194, 255, 0.15);
   margin-top: 0.4rem;
-  box-shadow: inset 0 1px 1px rgba(191, 194, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .info-box .info-text {
   font-size: calc(1.1rem * 0.85);
@@ -2029,7 +2029,7 @@ separator {
 .weather-widget .weather-location .location-icon {
   font-family: "Material Symbols Outlined";
   font-size: 18px;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 .weather-widget .weather-location .location-text {
@@ -2051,7 +2051,7 @@ separator {
   font-size: 56px;
   min-width: 56px;
   min-height: 56px;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   margin-bottom: 0.25rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   animation: float 3s ease-in-out infinite;
@@ -2091,12 +2091,12 @@ separator {
 .weather-widget .current-weather .weather-stats .stat-item .weather-extra-icon {
   font-family: "Material Symbols Outlined";
   font-size: 18px;
-  color: rgba(191, 194, 255, 0.7);
+  color: rgba(190, 194, 255, 0.7);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   transition: all 0.2s ease;
 }
 .weather-widget .current-weather .weather-stats .stat-item:hover .weather-extra-icon {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .weather-widget .current-weather .weather-stats .stat-item label:last-child {
   font-size: calc(1.1rem * 0.85);
@@ -2121,17 +2121,17 @@ separator {
   box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 }
 .weather-widget .forecast-row .forecast-item:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border-color: rgba(191, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border-color: rgba(190, 194, 255, 0.3);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .weather-widget .forecast-row .forecast-item:hover .forecast-icon {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   transform: scale(1.1);
 }
 .weather-widget .forecast-row .forecast-item:hover .forecast-temp {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .weather-widget .forecast-row .forecast-item .forecast-hour {
   font-size: calc(1.1rem * 0.8);
@@ -2212,13 +2212,13 @@ separator {
 }
 .base-widget .header-row .header-subtitle {
   font-size: 1.1rem;
-  color: rgb(145, 143, 154);
+  color: rgb(145, 144, 154);
   margin-bottom: 0.2rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .base-widget .header-row .header-extra {
   font-size: 1.1rem;
-  color: rgb(145, 143, 154);
+  color: rgb(145, 144, 154);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .base-widget .items-row {
@@ -2229,7 +2229,7 @@ separator {
 }
 .base-widget .items-row .item .item-title {
   font-size: 1.1rem;
-  color: rgb(145, 143, 154);
+  color: rgb(145, 144, 154);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .base-widget .items-row .item .item-icon {
@@ -2274,15 +2274,15 @@ separator {
   transform: translateY(-1px);
 }
 .mode-selector .mode-button.mode-button-active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border-color: rgba(191, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border-color: rgba(190, 194, 255, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .mode-selector .mode-button.mode-button-active .mode-icon {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .mode-selector .mode-button.mode-button-active .mode-label {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   font-weight: 600;
 }
 .mode-selector .mode-button .mode-icon {
@@ -2330,7 +2330,7 @@ separator {
 .timer-widget .widget-header .header-icon {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   margin-right: 0.25rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
@@ -2418,15 +2418,15 @@ separator {
   min-width: 6px;
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar slider {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.7), rgba(191, 194, 255, 0.6));
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.7), rgba(190, 194, 255, 0.6));
   border-radius: 10px;
   min-width: 6px;
   transition: all 200ms ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar slider:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.8), rgba(191, 194, 255, 0.7));
-  box-shadow: 0 2px 4px rgba(191, 194, 255, 0.3), 0 0 8px rgba(191, 194, 255, 0.15);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
+  box-shadow: 0 2px 4px rgba(190, 194, 255, 0.3), 0 0 8px rgba(190, 194, 255, 0.15);
 }
 .timer-widget .timer-dialog .time-picker-item {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -2454,16 +2454,16 @@ separator {
   color: rgb(228, 225, 233);
 }
 .timer-widget .timer-dialog .time-picker-item-active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border-color: rgba(191, 194, 255, 0.3);
-  color: rgb(191, 194, 255);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border-color: rgba(190, 194, 255, 0.3);
+  color: rgb(190, 194, 255);
   font-weight: 700;
   font-size: calc(1.1rem * 1.1);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .timer-widget .timer-dialog .time-picker-item-active:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.3), rgba(191, 194, 255, 0.2));
-  border-color: rgba(191, 194, 255, 0.35);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.3), rgba(190, 194, 255, 0.2));
+  border-color: rgba(190, 194, 255, 0.35);
 }
 .timer-widget .timer-dialog .dialog-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -2495,15 +2495,15 @@ separator {
   transform: translateY(-1px);
 }
 .timer-widget .timer-dialog .dialog-button-confirm {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border: 1px solid rgba(191, 194, 255, 0.3);
-  color: rgb(191, 194, 255);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border: 1px solid rgba(190, 194, 255, 0.3);
+  color: rgb(190, 194, 255);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .timer-widget .timer-dialog .dialog-button-confirm:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.3), rgba(191, 194, 255, 0.2));
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.3), rgba(190, 194, 255, 0.2));
   transform: translateY(-2px);
-  border-color: rgba(191, 194, 255, 0.35);
+  border-color: rgba(190, 194, 255, 0.35);
 }
 .timer-widget .timer-list {
   margin-top: 0.4rem;
@@ -2547,7 +2547,7 @@ separator {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .timer-widget .timer-item .timer-active {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   font-weight: 700;
 }
 .timer-widget .timer-item .timer-button {
@@ -2579,16 +2579,16 @@ separator {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 .timer-widget .timer-item .timer-button-start, .timer-widget .timer-item .timer-button-stop {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.15), rgba(191, 194, 255, 0.1));
-  border-color: rgba(191, 194, 255, 0.2);
-  box-shadow: inset 0 1px 1px rgba(191, 194, 255, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
+  border-color: rgba(190, 194, 255, 0.2);
+  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
 .timer-widget .timer-item .timer-button-start .timer-button-icon, .timer-widget .timer-item .timer-button-stop .timer-button-icon {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .timer-widget .timer-item .timer-button-start:hover, .timer-widget .timer-item .timer-button-stop:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.2), rgba(191, 194, 255, 0.12));
-  border-color: rgba(191, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.2), rgba(190, 194, 255, 0.12));
+  border-color: rgba(190, 194, 255, 0.25);
 }
 .timer-widget .timer-item .timer-button-reset:hover {
   background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
@@ -2614,11 +2614,11 @@ separator {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .timer-widget .timer-item .timer-progress-bar {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.8), rgba(191, 194, 255, 0.7));
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
   border-radius: 8px;
   min-height: 6px;
   transition: min-width 1000ms linear;
-  box-shadow: inset 0 1px 1px hsla(237.1875, 100%, 102.4509803922%, 0.6), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px hsla(236.3076923077, 100%, 102.2549019608%, 0.6), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .timer-widget separator {
   background: linear-gradient(90deg, transparent, rgba(228, 225, 233, 0.1), transparent);
@@ -2670,7 +2670,7 @@ separator {
 .updater-widget .updater-header .header-title .header-icon {
   font-family: "Material Symbols Outlined";
   font-size: 28px;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   margin-right: 0.25rem;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
@@ -2691,11 +2691,11 @@ separator {
   border-color: rgba(228, 225, 233, 0.2);
 }
 .updater-widget .updater-nav .nav-mode-button.active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border-color: rgba(191, 194, 255, 0.3);
-  color: rgb(191, 194, 255);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border-color: rgba(190, 194, 255, 0.3);
+  color: rgb(190, 194, 255);
   font-weight: 600;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .updater-widget .updater-content {
   padding: 0.75rem;
@@ -2746,16 +2746,16 @@ separator {
   color: rgba(228, 225, 233, 0.7);
 }
 .updater-widget .status-box.status-checking, .updater-widget .status-box.status-cloning, .updater-widget .status-box.status-copying, .updater-widget .status-box.status-installing {
-  border-color: rgba(191, 194, 255, 0.3);
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.1), rgba(191, 194, 255, 0.07));
+  border-color: rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(190, 194, 255, 0.07));
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
 }
 .updater-widget .status-box.status-checking .status-icon, .updater-widget .status-box.status-cloning .status-icon, .updater-widget .status-box.status-copying .status-icon, .updater-widget .status-box.status-installing .status-icon {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   animation: pulse 2s ease-in-out infinite;
 }
 .updater-widget .status-box.status-checking .status-message, .updater-widget .status-box.status-cloning .status-message, .updater-widget .status-box.status-copying .status-message, .updater-widget .status-box.status-installing .status-message {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .updater-widget .status-box.status-success {
   border-color: rgba(74, 222, 128, 0.3);
@@ -2821,18 +2821,18 @@ separator {
   transform: translateY(-1px);
 }
 .updater-widget .updater-button-update {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.25), rgba(191, 194, 255, 0.18));
-  border: 1px solid rgba(191, 194, 255, 0.3);
-  color: rgb(191, 194, 255);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
+  border: 1px solid rgba(190, 194, 255, 0.3);
+  color: rgb(190, 194, 255);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 .updater-widget .updater-button-update .button-icon {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .updater-widget .updater-button-update:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.3), rgba(191, 194, 255, 0.2));
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.3), rgba(190, 194, 255, 0.2));
   transform: translateY(-2px);
-  border-color: rgba(191, 194, 255, 0.35);
+  border-color: rgba(190, 194, 255, 0.35);
 }
 .updater-widget .updater-button-update:active:not(:disabled) {
   transform: translateY(-1px);
@@ -2972,27 +2972,27 @@ separator {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .updater-widget .config-list .config-item .config-switch:checked {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.8), rgba(191, 194, 255, 0.7));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(191, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(190, 194, 255, 0.3);
 }
 .updater-widget .config-list .config-item .config-switch:checked slider {
   background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(191, 194, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(190, 194, 255, 0.5);
 }
 .updater-widget .config-list .config-summary,
 .updater-widget .config-list .package-summary {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.1), rgba(191, 194, 255, 0.07));
-  border: 1px solid rgba(191, 194, 255, 0.15);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(190, 194, 255, 0.07));
+  border: 1px solid rgba(190, 194, 255, 0.15);
   border-radius: 10px;
   padding: 0.25rem 0.4rem;
   margin-top: 0.4rem;
-  box-shadow: inset 0 1px 1px rgba(191, 194, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .updater-widget .config-list .config-summary .summary-text,
 .updater-widget .config-list .package-summary .summary-text {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .updater-widget .config-info {
   background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
@@ -3133,7 +3133,7 @@ separator {
   opacity: 0.7;
 }
 .hardware-monitor-widget .hw-nav .nav-button.button {
-  background: rgba(191, 194, 255, 0.2);
+  background: rgba(190, 194, 255, 0.2);
 }
 .hardware-monitor-widget .hw-nav .nav-button.button .nav-icon,
 .hardware-monitor-widget .hw-nav .nav-button.button .nav-label {
@@ -3190,16 +3190,16 @@ separator {
   transition: all 100ms ease;
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar slider:hover {
-  background: rgba(191, 194, 255, 0.7);
+  background: rgba(190, 194, 255, 0.7);
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar slider:active {
-  background: rgb(191, 194, 255);
+  background: rgb(190, 194, 255);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-main-content {
   padding: 0 0.75rem;
 }
 .hardware-monitor-widget .hw-content .hw-stack .circular-progress-bar-widget circularprogress progress {
-  color: rgb(147.14, 150.48, 209.1);
+  color: rgb(146.14, 150.48, 209.1);
 }
 .hardware-monitor-widget .hw-content .hw-stack .circular-progress-bar-widget circularprogress radius {
   color: rgba(255, 255, 255, 0.08);
@@ -3230,7 +3230,7 @@ separator {
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-label {
   font-size: calc(1.1rem * 0.7);
   font-weight: 600;
-  color: rgb(145, 143, 154);
+  color: rgb(145, 144, 154);
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.85);
 }
@@ -3248,13 +3248,13 @@ separator {
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-bar block.filled {
   border-radius: 8px;
-  background: rgb(191, 194, 255);
+  background: rgb(190, 194, 255);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-bar {
-  background: linear-gradient(to top, hsl(237.1875, 100%, 127.4509803922%), rgb(140, 145.390625, 255));
+  background: linear-gradient(to top, hsl(236.3076923077, 100%, 127.2549019608%), rgb(139, 146.1384615385, 255));
   border-radius: 4px;
   min-width: 12px;
-  box-shadow: 0 0 10px rgba(191, 194, 255, 0.5);
+  box-shadow: 0 0 10px rgba(190, 194, 255, 0.5);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-bar trough {
   background: rgba(128, 128, 128, 0.4);
@@ -3275,7 +3275,7 @@ separator {
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-display .vertical-display-label {
   font-size: calc(1.1rem * 0.7);
   font-weight: 600;
-  color: rgb(145, 143, 154);
+  color: rgb(145, 144, 154);
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.85);
 }
@@ -3303,7 +3303,7 @@ separator {
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list .disk-list-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(145, 143, 154);
+  color: rgb(145, 144, 154);
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.8);
 }
@@ -3348,19 +3348,19 @@ separator {
   box-shadow: 0 0 8px rgba(197, 196, 221, 0.5);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-cpu circularprogress progress {
-  color: rgb(185.08, 142.5, 168.46);
+  color: rgb(185.08, 142.5, 168.8);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-cpu circularprogress radius {
   color: rgba(228, 225, 233, 0.1);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-memory circularprogress progress {
-  color: rgb(147.14, 150.48, 209.1);
+  color: rgb(146.14, 150.48, 209.1);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-memory circularprogress radius {
   color: rgba(228, 225, 233, 0.1);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-gpu circularprogress progress {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-gpu circularprogress radius {
   color: rgba(228, 225, 233, 0.1);
@@ -3428,10 +3428,10 @@ separator {
   transition: all 100ms ease;
 }
 .notes-widget .notes-scroll scrollbar slider:hover {
-  background: rgba(191, 194, 255, 0.7);
+  background: rgba(190, 194, 255, 0.7);
 }
 .notes-widget .notes-scroll scrollbar slider:active {
-  background: rgb(191, 194, 255);
+  background: rgb(190, 194, 255);
 }
 .notes-widget .notes-scroll {
   padding: 0.75rem;
@@ -3449,14 +3449,14 @@ separator {
   transition: all 150ms ease;
 }
 .notes-widget .notes-scroll .notes-textview:focus {
-  border-color: rgba(191, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08), 0 0 12px rgba(191, 194, 255, 0.2);
+  border-color: rgba(190, 194, 255, 0.3);
+  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08), 0 0 12px rgba(190, 194, 255, 0.2);
 }
 .notes-widget .notes-scroll .notes-textview text {
   background: transparent;
 }
 .notes-widget .notes-scroll .notes-textview text selection {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.4), rgba(191, 194, 255, 0.3));
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.4), rgba(190, 194, 255, 0.3));
   color: white;
 }
 .notes-widget .notes-footer {
@@ -3583,8 +3583,8 @@ separator {
   box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 .system-menu .toggle button:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.35), rgba(191, 194, 255, 0.25));
-  border-color: rgba(191, 194, 255, 0.4);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.35), rgba(190, 194, 255, 0.25));
+  border-color: rgba(190, 194, 255, 0.4);
   box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -3625,8 +3625,8 @@ separator {
 }
 .system-menu .sliders block.filled {
   border-radius: 1.5rem;
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.85), rgba(191, 194, 255, 0.75));
-  box-shadow: inset 0 1px 2px hsla(237.1875, 100%, 102.4509803922%, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.85), rgba(190, 194, 255, 0.75));
+  box-shadow: inset 0 1px 2px hsla(236.3076923077, 100%, 102.2549019608%, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Battery Box */
@@ -3690,12 +3690,12 @@ separator {
 
 .network-item-active,
 .bluetooth-item-active {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.35), rgba(191, 194, 255, 0.25));
-  border: 1px solid rgba(191, 194, 255, 0.4);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.35), rgba(190, 194, 255, 0.25));
+  border: 1px solid rgba(190, 194, 255, 0.4);
   border-radius: 10px;
   margin: 0.25rem;
   padding: 0.4rem;
-  box-shadow: inset 0 1px 2px hsla(237.1875, 100%, 102.4509803922%, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 2px hsla(236.3076923077, 100%, 102.2549019608%, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .password-dialog {
@@ -3738,8 +3738,8 @@ separator {
 .refresh-button:hover,
 .disconnect-button:hover,
 .settings-button:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.35), rgba(191, 194, 255, 0.25));
-  border-color: rgba(191, 194, 255, 0.4);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.35), rgba(190, 194, 255, 0.25));
+  border-color: rgba(190, 194, 255, 0.4);
   box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -3753,21 +3753,21 @@ separator {
 .pair-button,
 .trust-button {
   margin: 0.4rem;
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.4), rgba(191, 194, 255, 0.3));
-  border: 1px solid rgba(191, 194, 255, 0.45);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.4), rgba(190, 194, 255, 0.3));
+  border: 1px solid rgba(190, 194, 255, 0.45);
   border-radius: 10px;
   padding: 10px 16px;
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 2px hsla(237.1875, 100%, 102.4509803922%, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 2px hsla(236.3076923077, 100%, 102.2549019608%, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 .connect-button:hover,
 .cancel-button:hover,
 .forget-button:hover,
 .pair-button:hover,
 .trust-button:hover {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.5), rgba(191, 194, 255, 0.4));
-  border-color: rgba(191, 194, 255, 0.55);
-  box-shadow: inset 0 1px 3px hsla(237.1875, 100%, 107.4509803922%, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.5), rgba(190, 194, 255, 0.4));
+  border-color: rgba(190, 194, 255, 0.55);
+  box-shadow: inset 0 1px 3px hsla(236.3076923077, 100%, 107.2549019608%, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.4);
   transform: translateY(-1px);
 }
 .connect-button:active,
@@ -3895,9 +3895,9 @@ box.window-switcher-background .window-switcher .search-section {
   box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08);
 }
 box.window-switcher-background .window-switcher .search-section:focus-within {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.1), rgba(228, 225, 233, 0.08));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: inset 0 1px 0 rgba(191, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(228, 225, 233, 0.08));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
 }
 box.window-switcher-background .window-switcher .search-section label.search-icon {
   font-family: "Material Symbols Outlined";
@@ -3948,19 +3948,19 @@ box.window-switcher-background .window-switcher button.window-card:hover:not(.se
   transform: translateY(-2px);
 }
 box.window-switcher-background .window-switcher button.window-card.selected {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.15), rgba(191, 194, 255, 0.1));
-  border-color: rgba(191, 194, 255, 0.25);
-  box-shadow: inset 0 1px 1px rgba(242, 242.609375, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
+  border-color: rgba(190, 194, 255, 0.25);
+  box-shadow: inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
 box.window-switcher-background .window-switcher button.window-card.selected .window-card-title {
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   font-weight: 600;
-  text-shadow: 0 0 8px rgba(191, 194, 255, 0.3);
+  text-shadow: 0 0 8px rgba(190, 194, 255, 0.3);
 }
 box.window-switcher-background .window-switcher button.window-card.selected .window-icon-large {
-  color: rgb(191, 194, 255);
-  filter: drop-shadow(0 0 8px rgba(191, 194, 255, 0.3));
+  color: rgb(190, 194, 255);
+  filter: drop-shadow(0 0 8px rgba(190, 194, 255, 0.3));
 }
 box.window-switcher-background .window-switcher button.window-card .window-icon-large {
   font-family: "Material Symbols Outlined";
@@ -3980,9 +3980,9 @@ box.window-switcher-background .window-switcher button.window-card .window-card-
 box.window-switcher-background .window-switcher button.window-card .window-card-workspace {
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgb(191, 194, 255);
+  color: rgb(190, 194, 255);
   margin: 0.2rem 0;
-  text-shadow: 0 0 6px rgba(191, 194, 255, 0.2);
+  text-shadow: 0 0 6px rgba(190, 194, 255, 0.2);
 }
 box.window-switcher-background .window-switcher button.window-card .window-card-subtitle {
   font-size: 0.75rem;
@@ -3995,9 +3995,9 @@ box.window-switcher-background .window-switcher button.window-card .window-badge
   margin: 2px 4px 0 0;
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small.fullscreen-badge {
-  background: linear-gradient(135deg, rgba(191, 194, 255, 0.2), rgba(191, 194, 255, 0.15));
-  color: rgb(191, 194, 255);
-  border: 1px solid rgba(191, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(190, 194, 255, 0.2), rgba(190, 194, 255, 0.15));
+  color: rgb(190, 194, 255);
+  border: 1px solid rgba(190, 194, 255, 0.3);
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small.floating-badge {
   background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
