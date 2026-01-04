@@ -15,21 +15,7 @@ export default function ControlPanel() {
   const [ateonSettingsExpanded, setAteonSettingsExpanded] =
     createState(false);
   const [barExpanded, setBarExpanded] = createState(false);
-  const [cavaExpanded, setCavaExpanded] = createState(false);
   const [systemMenuExpanded, setSystemMenuExpanded] = createState(false);
-
-  const cavaStyleOptions = [
-    "catmull_rom",
-    "smooth",
-    "bars",
-    "jumping_bars",
-    "dots",
-    "circular",
-    "particles",
-    "wave_particles",
-    "waterfall",
-    "mesh",
-  ];
 
   return (
     <window
@@ -118,41 +104,6 @@ export default function ControlPanel() {
                   <OptionToggle
                     option="bar.modules.showOsIcon"
                     label="Show OS Icon"
-                  />
-                </Section>
-              </box>
-            </CategoryButton>
-
-            {/* Cava Settings */}
-            <CategoryButton
-              title="Cava"
-              icon="audio-x-generic-symbolic"
-              expanded={cavaExpanded}
-              onToggle={() => setCavaExpanded((prev) => !prev)}
-            >
-              <></>
-              <box orientation={Gtk.Orientation.VERTICAL}>
-                <Section title="Cava Settings Bar">
-                  <OptionToggle option="bar.modules.cava.show" label="Enable" />
-                  <OptionSelect
-                    option="bar.modules.cava.style"
-                    label="Cava Style"
-                    choices={cavaStyleOptions}
-                  />
-                  <OptionToggle
-                    option="bar.modules.media.cava.show"
-                    label="Enable Cover Cava"
-                  />
-                </Section>
-                <Section title="Cava Settings Music Player">
-                  <OptionToggle
-                    option="musicPlayer.modules.cava.show"
-                    label="Enable"
-                  />
-                  <OptionSelect
-                    option="musicPlayer.modules.cava.style"
-                    label="Cava Style"
-                    choices={cavaStyleOptions}
                   />
                 </Section>
               </box>

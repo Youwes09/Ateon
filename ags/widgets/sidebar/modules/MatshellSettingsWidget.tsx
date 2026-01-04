@@ -5,7 +5,6 @@ import {
   OptionToggleProps,
   BAR_POSITION_OPTIONS,
   BAR_STYLE_OPTIONS,
-  CAVA_STYLE_OPTIONS,
   OS_OPTIONS,
 } from "utils/config";
 import options from "options.ts";
@@ -93,7 +92,6 @@ export default function MatshellSettingsWidget() {
 
   const pages = [
     { id: "bar", icon: "view_agenda" },
-    { id: "audio", icon: "graphic_eq" },
     { id: "dock", icon: "apps" },
     { id: "system", icon: "settings" },
   ];
@@ -167,37 +165,6 @@ export default function MatshellSettingsWidget() {
             option="bar.modules.os-icon.type"
             label="Icon Type"
             choices={OS_OPTIONS}
-          />
-        </box>
-
-        {/* Audio Settings */}
-        <box
-          $type="named"
-          name="audio"
-          orientation={Gtk.Orientation.VERTICAL}
-          spacing={8}
-        >
-          <SectionHeader label="Bar Visualizer" />
-          <OptionToggle option="bar.modules.cava.show" label="Enable" />
-          <OptionSelect
-            option="bar.modules.cava.style"
-            label="Style"
-            choices={CAVA_STYLE_OPTIONS}
-          />
-          <OptionToggle
-            option="bar.modules.media.cava.show"
-            label="Cover Visualizer"
-          />
-          
-          <SectionHeader label="Music Player" />
-          <OptionToggle
-            option="musicPlayer.modules.cava.show"
-            label="Enable Visualizer"
-          />
-          <OptionSelect
-            option="musicPlayer.modules.cava.style"
-            label="Style"
-            choices={CAVA_STYLE_OPTIONS}
           />
         </box>
 

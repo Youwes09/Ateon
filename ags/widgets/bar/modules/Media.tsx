@@ -5,11 +5,13 @@ import { firstActivePlayer } from "utils/mpris.ts";
 
 function Cover({ player }) {
   return (
-    <image
-      cssClasses={["cover"]}
-      overflow={Gtk.Overflow.HIDDEN}
-      file={createBinding(player, "coverArt")}
-    />
+    <box>
+      <image
+        cssClasses={["cover"]}
+        overflow={Gtk.Overflow.HIDDEN}
+        file={createBinding(player, "coverArt")}
+      />
+    </box>
   );
 }
 

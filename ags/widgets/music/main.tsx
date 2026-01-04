@@ -6,7 +6,6 @@ import Gio from "gi://Gio?version=2.0";
 import { findPlayer, generateBackground } from "utils/mpris";
 import { Cover } from "./modules/Cover";
 import { Info } from "./modules/Info";
-import { CavaDraw } from "./modules/cava";
 import options from "options.ts";
 import { gdkmonitor } from "utils/monitors";
 
@@ -20,7 +19,6 @@ function MusicBox({ player }: { player: Mpris.Player }) {
   const unsubscribe = coverBinding.subscribe(() => {
     const coverArt = player.cover_art;
     
-    // Prevent multiple simultaneous background generation calls
     if (coverArt && !isGeneratingBackground) {
       isGeneratingBackground = true;
       
@@ -85,22 +83,6 @@ function MusicBox({ player }: { player: Mpris.Player }) {
         />
       </Gtk.ScrolledWindow>
       
-      {/* CAVA visualization - wrapped in conditional for safety */}
-      {options["music-player.modules.cava.enable"] && (
-        <box
-          cssClasses={["cava-container"]}
-          $type="overlay"
-          canTarget={false}
-          visible={true}
-        >
-          <CavaDraw
-            hexpand
-            vexpand
-            style={options["music-player.modules.cava.style"]}
-          />
-        </box>
-      )}
-      
       <box
         $type="overlay"
         $={(self) => {
@@ -117,7 +99,6 @@ function MusicBox({ player }: { player: Mpris.Player }) {
 export default function MusicPlayer() {
   const mpris = Mpris.get_default();
   const { TOP, BOTTOM } = Astal.WindowAnchor;
-  const [visible, _setVisible] = createState(false);
 
   const topMargin = options["bar.position"]((pos) => {
     return pos === "top" ? 45 : 0;
@@ -147,7 +128,7 @@ export default function MusicPlayer() {
       exclusivity={Astal.Exclusivity.IGNORE}
       anchor={anchorPosition}
       keymode={Astal.Keymode.ON_DEMAND}
-      visible={visible}
+      visible={false}
       gdkmonitor={gdkmonitor}
       marginTop={topMargin}
       marginBottom={bottomMargin}
@@ -156,9 +137,11 @@ export default function MusicPlayer() {
         <With value={createBinding(mpris, "players")}>
           {(players: Mpris.Player[]) => {
             try {
-              return players && players.length > 0 ? (
-                <MusicBox player={findPlayer(players)} />
-              ) : null;
+              if (players && players.length > 0) {
+                return <MusicBox player={findPlayer(players)} />;
+              } else {
+                return null;
+              }
             } catch (error) {
               console.error("Error rendering MusicBox:", error);
               return null;

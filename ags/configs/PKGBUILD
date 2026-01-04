@@ -23,7 +23,6 @@ depends=(
     'libastal-mpris-git'
     'libastal-network-git'
     'libastal-bluetooth-git'
-    'libastal-cava-git'
     'libastal-battery-git'
     'libastal-powerprofiles-git'
     
