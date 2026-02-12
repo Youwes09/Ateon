@@ -1,9 +1,11 @@
 import { Gtk } from "ags/gtk4";
 import { createState, onCleanup, Accessor } from "ags";
+import { exec } from "ags/process";
 import Pango from "gi://Pango";
 import Wp from "gi://AstalWp";
 import Brightness from "utils/brightness";
 import Bluetooth from "gi://AstalBluetooth";
+import options from "options";
 
 interface OnScreenProgressProps {
   visible: boolean | Accessor<boolean>;
@@ -30,15 +32,74 @@ export default function OnScreenProgress({ visible, setVisible }: OnScreenProgre
     currentTimeout = setTimeout(() => setVisible(false), TIMEOUT_DELAY);
   };
 
-  // Audio
-  [Wp.get_default()?.get_default_speaker(), Wp.get_default()?.get_default_microphone()]
-    .filter(Boolean)
-    .forEach((endpoint) => {
-      const id = endpoint!.connect("notify::volume", () =>
-        show(endpoint!.volume, endpoint!.description || "", endpoint!.volumeIcon)
-      );
-      onCleanup(() => endpoint!.disconnect(id));
-    });
+  // Audio - Handle both PCM and Master with dynamic switching
+  let pcmPollInterval: any = null;
+  let lastVolume = 0;
+  let speakerConnection: number | null = null;
+
+  const setupPcmMonitoring = () => {
+    if (pcmPollInterval) clearInterval(pcmPollInterval);
+    lastVolume = 0;
+    
+    pcmPollInterval = setInterval(() => {
+      try {
+        const output = exec("amixer -c 2 sget PCM");
+        const match = output.match(/\[(\d+)%\]/);
+        if (match) {
+          const volume = parseInt(match[1]) / 100;
+          if (volume !== lastVolume) {
+            lastVolume = volume;
+            show(volume, "PCM Volume", "audio-volume-high-symbolic");
+          }
+        }
+      } catch {}
+    }, 100);
+  };
+
+  const setupMasterMonitoring = () => {
+    if (pcmPollInterval) {
+      clearInterval(pcmPollInterval);
+      pcmPollInterval = null;
+    }
+
+    const speaker = Wp.get_default()?.get_default_speaker();
+    if (speaker) {
+      if (speakerConnection !== null) {
+        speaker.disconnect(speakerConnection);
+      }
+      
+      speakerConnection = speaker.connect("notify::volume", () => {
+        show(speaker.volume, speaker.description || "Master Volume", speaker.volumeIcon);
+      });
+    }
+  };
+
+  const updateAudioMonitoring = () => {
+    const mode = options["audio.volume-control"].value;
+    
+    if (mode === "pcm") {
+      setupPcmMonitoring();
+    } else {
+      setupMasterMonitoring();
+    }
+  };
+
+  // Initial setup
+  updateAudioMonitoring();
+
+  // Watch for config changes using subscribe
+  const unsubscribe = options["audio.volume-control"].subscribe(() => {
+    updateAudioMonitoring();
+  });
+
+  onCleanup(() => {
+    if (pcmPollInterval) clearInterval(pcmPollInterval);
+    if (speakerConnection !== null) {
+      const speaker = Wp.get_default()?.get_default_speaker();
+      if (speaker) speaker.disconnect(speakerConnection);
+    }
+    unsubscribe();
+  });
 
   // Brightness
   try {
@@ -65,7 +126,6 @@ export default function OnScreenProgress({ visible, setVisible }: OnScreenProgre
       onCleanup(() => device.disconnect(devId));
     });
   });
-
   onCleanup(() => {
     try { bluetooth.disconnect(btId); } catch {}
   });
