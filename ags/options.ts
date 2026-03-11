@@ -10,6 +10,7 @@ const options = initializeConfig(
   {
     "theme.style": defineOption("normal", { useCache: true }),
     "app.audio": defineOption("pwvucontrol"),
+    "audio.volume-control": defineOption<"master" | "pcm">("master", { useCache: true }),
     "app.bluetooth": defineOption("overskride"),
     "app.browser": defineOption("firefox"),
     "app.file-manager": defineOption("nautilus"),
@@ -20,7 +21,7 @@ const options = initializeConfig(
     ),
     "bar.position": defineOption("top"),
     "bar.style": defineOption("beveled"),
-	"bar.workspaces.style": defineOption("beveled"),
+	  "bar.workspaces.style": defineOption("beveled"),
     "bar.modules.media.truncate": defineOption(true),
     "bar.modules.media.max-chars": defineOption(70),
     "bar.modules.os-icon.type": defineOption("arch-symbolic"),
