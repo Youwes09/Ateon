@@ -32,7 +32,7 @@
   }
 
   /* Hyperland */
-  .Workspaces {
+  .bar-workspaces-style-rounded {
     margin: 0.4rem 0.8rem;
 
     button {
@@ -63,7 +63,6 @@
           inset 0 -1px 1px rgba(0, 0, 0, 0.15);
       }
     }
-
     .focused {
       min-width: 2.5rem;
     }
@@ -85,6 +84,57 @@
     }
   }
 
+  .bar-workspaces-style-beveled {
+    margin: 0.4rem 0.8rem;
+
+    button {
+      background: linear-gradient(
+        135deg,
+        color.adjust($bg, $alpha: -0.3, $lightness: if($darkmode, 8%, -12%)),
+        color.adjust($bg, $alpha: -0.4, $lightness: if($darkmode, 4%, -16%))
+      );
+      border: 1px solid color.adjust($fg, $alpha: -0.85);
+      border-radius: 0.5rem;
+      margin: 0.6rem 0.35rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 
+        inset 0 1px 1px color.adjust($fg, $alpha: -0.9),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($bg, $alpha: -0.25, $lightness: if($darkmode, 10%, -14%)),
+          color.adjust($bg, $alpha: -0.35, $lightness: if($darkmode, 6%, -18%))
+        );
+        border-color: color.adjust($fg, $alpha: -0.75);
+        box-shadow: 
+          inset 0 1px 2px color.adjust($fg, $alpha: -0.85),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+      }
+    }
+    .focused {
+      min-width: 2.5rem;
+    }
+
+    .monitor0 {
+      @include hypr-workspace-style($primaryMon, $primaryMonHover);
+    }
+
+    .monitor1 {
+      @include hypr-workspace-style($secondaryMon, $secondaryMonHover);
+    }
+
+    .monitor2 {
+      @include hypr-workspace-style($tertiaryMon, $tertiaryMonHover);
+    }
+
+    .monitor3 {
+      @include hypr-workspace-style($fourthMon, $fourthMonHover);
+    }
+}
   /* music */
   .Media {
     & > box {
@@ -248,7 +298,6 @@
     }
   }
 }
-
 /* Floating elements style */
 .bar-style-floating {
   .centerbox > box {

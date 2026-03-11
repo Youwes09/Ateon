@@ -13,15 +13,15 @@
 * {
   all: unset;
   font-family: FiraCode Nerd Font;
-  color: rgb(228, 225, 233);
-  text-shadow: 0 2px 3px rgba(19, 19, 24, 0.2);
+  color: rgb(222, 227, 229);
+  text-shadow: 0 2px 3px rgba(14, 20, 22, 0.2);
 }
 
 /* variables & mixins */
 /* general styles */
 tooltip.background,
 tooltip > box {
-  background-color: rgb(19, 19, 24);
+  background-color: rgb(14, 20, 22);
   border-radius: 8px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 rgba(0, 0, 0, 0.4);
 }
@@ -32,14 +32,14 @@ tooltip > box label {
 
 /* scales */
 scale trough {
-  background-color: rgba(57, 57, 63, 0.6);
+  background-color: rgba(52, 58, 60, 0.6);
   border-radius: 0.5rem;
   min-width: calc(0.5rem * 10);
   padding: 0 calc(0.5rem / 2);
 }
 scale highlight,
 scale progress {
-  background: rgba(228, 225, 233, 0.75);
+  background: rgba(222, 227, 229, 0.75);
   border-radius: 0.5rem;
   margin: 0 calc(0px - 0.5rem / 2);
   min-height: 0.5rem;
@@ -50,10 +50,10 @@ popover.background {
   background: transparent;
 }
 popover.background > contents {
-  background-color: rgba(57, 57, 63, 0.9);
+  background-color: rgba(52, 58, 60, 0.9);
   border-radius: 8px;
   padding: 0.25rem;
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  border: 1px solid rgba(222, 227, 229, 0.15);
 }
 popover.background modelbutton,
 popover.background row {
@@ -64,62 +64,62 @@ popover.background row {
 }
 popover.background modelbutton:hover,
 popover.background row:hover {
-  background-color: rgba(190, 194, 255, 0.2);
+  background-color: rgba(130, 211, 226, 0.2);
 }
 popover.background modelbutton:selected, popover.background modelbutton:active,
 popover.background row:selected,
 popover.background row:active {
-  background-color: rgba(190, 194, 255, 0.2);
+  background-color: rgba(130, 211, 226, 0.2);
 }
 
 /* buttons */
 .button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(190, 194, 255, 0.2);
-  border: 1px solid rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.2);
+  border: 1px solid rgba(130, 211, 226, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.3);
 }
 
 .button-disabled {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .button-disabled:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 
 /* dropdowns */
 .dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(190, 194, 255, 0.2);
-  border: 1px solid rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.2);
+  border: 1px solid rgba(130, 211, 226, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .dropdown button:hover {
-  background: rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.3);
 }
 .dropdown button {
   border-radius: 1.1rem;
   padding: 0.4rem;
   margin: 0.5rem;
-  border: 1px solid rgba(228, 225, 233, 0.1);
-  background-color: rgba(57, 57, 63, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
+  background-color: rgba(52, 58, 60, 0.6);
   transition: all 200ms ease;
 }
 .dropdown button:hover {
-  border-color: rgba(228, 225, 233, 0.3);
-  background-color: rgba(57, 57, 63, 0.6);
+  border-color: rgba(222, 227, 229, 0.3);
+  background-color: rgba(52, 58, 60, 0.6);
 }
 .dropdown button:active {
-  background-color: rgba(190, 194, 255, 0.2);
+  background-color: rgba(130, 211, 226, 0.2);
 }
 .dropdown button label {
   margin-top: 0.1rem;
@@ -154,64 +154,117 @@ popover.background row:active {
   -gtk-icon-size: 2rem;
   margin-left: 0.8rem;
   margin-right: -0.5rem;
-  color: rgb(199, 197, 208);
+  color: rgb(191, 200, 202);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .Bar {
   /* Hyperland */
 }
-.Bar .Workspaces {
+.Bar .bar-workspaces-style-rounded {
   margin: 0.4rem 0.8rem;
 }
-.Bar .Workspaces button {
-  background: linear-gradient(135deg, rgba(37.0279069767, 37.0279069767, 46.7720930233, 0.2), rgba(28.0139534884, 28.0139534884, 35.3860465116, 0.1));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+.Bar .bar-workspaces-style-rounded button {
+  background: linear-gradient(135deg, rgba(29.8666666667, 42.6666666667, 46.9333333333, 0.2), rgba(21.9333333333, 31.3333333333, 34.4666666667, 0.1));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 0.7rem;
   margin: 0.6rem 0.35rem;
   min-width: 1.5rem;
   min-height: 1.5rem;
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
-.Bar .Workspaces button:hover {
-  background: linear-gradient(135deg, rgba(41.5348837209, 41.5348837209, 52.4651162791, 0.25), rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.15));
-  border-color: rgba(228, 225, 233, 0.25);
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.15), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+.Bar .bar-workspaces-style-rounded button:hover {
+  background: linear-gradient(135deg, rgba(33.8333333333, 48.3333333333, 53.1666666667, 0.25), rgba(25.9, 37, 40.7, 0.15));
+  border-color: rgba(222, 227, 229, 0.25);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.15), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
-.Bar .Workspaces .focused {
+.Bar .bar-workspaces-style-rounded .focused {
   min-width: 2.5rem;
 }
-.Bar .Workspaces .monitor0 {
-  background: rgb(109.9, 113.4, 160.5);
-  box-shadow: inset -2px -2px 2px rgb(79.9858096828, 82.9482470785, 122.8141903172);
+.Bar .bar-workspaces-style-rounded .monitor0 {
+  background: rgb(47.4, 126.3, 138.8);
+  box-shadow: inset -2px -2px 2px rgb(35.55, 94.725, 104.1);
 }
-.Bar .Workspaces .monitor0:hover {
-  background: rgb(150.65, 152.9, 194.25);
-  box-shadow: inset -2px -2px 2px rgb(96.1522486372, 99.57733192, 162.5227513628);
+.Bar .bar-workspaces-style-rounded .monitor0:hover {
+  background: rgb(86.9, 166.55, 180.3);
+  box-shadow: inset -2px -2px 2px rgb(61.6551894563, 127.3959637562, 138.7448105437);
 }
-.Bar .Workspaces .monitor1 {
-  background: rgb(174.5, 138, 160.5);
-  box-shadow: inset -2px -2px 2px rgb(138.8449367089, 95.5300632911, 122.2310126582);
+.Bar .bar-workspaces-style-rounded .monitor1 {
+  background: rgb(139.5, 147.5, 178);
+  box-shadow: inset -2px -2px 2px rgb(95.25, 105.1461038961, 142.875);
 }
-.Bar .Workspaces .monitor1:hover {
-  background: rgb(206.7, 169.2, 191.5);
-  box-shadow: inset -2px -2px 2px rgb(172.8521812081, 109.0728187919, 147.0002796421);
+.Bar .bar-workspaces-style-rounded .monitor1:hover {
+  background: rgb(171.3, 178.5, 208.8);
+  box-shadow: inset -2px -2px 2px rgb(110.0714203233, 122.5383949192, 175.0035796767);
 }
-.Bar .Workspaces .monitor2 {
-  background: rgb(115.1, 115.5, 137);
-  box-shadow: inset -2px -2px 2px rgb(86.325, 86.625, 102.75);
+.Bar .bar-workspaces-style-rounded .monitor2 {
+  background: rgb(97.2, 121.8, 126.4);
+  box-shadow: inset -2px -2px 2px rgb(72.9, 91.35, 94.8);
 }
-.Bar .Workspaces .monitor2:hover {
-  background: rgb(154.35, 154.25, 177);
-  box-shadow: inset -2px -2px 2px rgb(108.5480769231, 108.4090909091, 140.0284090909);
+.Bar .bar-workspaces-style-rounded .monitor2:hover {
+  background: rgb(135.7, 160.8, 165.9);
+  box-shadow: inset -2px -2px 2px rgb(96.710268714, 123.9541266795, 129.489731286);
 }
-.Bar .Workspaces .monitor3 {
-  background: rgb(151.7, 151.3, 174.5);
-  box-shadow: inset -2px -2px 2px rgb(107.3176710098, 106.7870521173, 137.5629478827);
+.Bar .bar-workspaces-style-rounded .monitor3 {
+  background: rgb(132.3, 157.7, 163.1);
+  box-shadow: inset -2px -2px 2px rgb(94.8762581547, 121.0988583411, 126.6737418453);
 }
-.Bar .Workspaces .monitor3:hover {
-  background: rgb(113.95, 114.05, 135.75);
-  box-shadow: inset -2px -2px 2px rgb(85.4625, 85.5375, 101.8125);
+.Bar .bar-workspaces-style-rounded .monitor3:hover {
+  background: rgb(95.05, 119.95, 124.85);
+  box-shadow: inset -2px -2px 2px rgb(71.2875, 89.9625, 93.6375);
+}
+.Bar .bar-workspaces-style-beveled {
+  margin: 0.4rem 0.8rem;
+}
+.Bar .bar-workspaces-style-beveled button {
+  background: linear-gradient(135deg, rgba(29.8666666667, 42.6666666667, 46.9333333333, 0.2), rgba(21.9333333333, 31.3333333333, 34.4666666667, 0.1));
+  border: 1px solid rgba(222, 227, 229, 0.15);
+  border-radius: 0.5rem;
+  margin: 0.6rem 0.35rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+}
+.Bar .bar-workspaces-style-beveled button:hover {
+  background: linear-gradient(135deg, rgba(33.8333333333, 48.3333333333, 53.1666666667, 0.25), rgba(25.9, 37, 40.7, 0.15));
+  border-color: rgba(222, 227, 229, 0.25);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.15), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+.Bar .bar-workspaces-style-beveled .focused {
+  min-width: 2.5rem;
+}
+.Bar .bar-workspaces-style-beveled .monitor0 {
+  background: rgb(47.4, 126.3, 138.8);
+  box-shadow: inset -2px -2px 2px rgb(35.55, 94.725, 104.1);
+}
+.Bar .bar-workspaces-style-beveled .monitor0:hover {
+  background: rgb(86.9, 166.55, 180.3);
+  box-shadow: inset -2px -2px 2px rgb(61.6551894563, 127.3959637562, 138.7448105437);
+}
+.Bar .bar-workspaces-style-beveled .monitor1 {
+  background: rgb(139.5, 147.5, 178);
+  box-shadow: inset -2px -2px 2px rgb(95.25, 105.1461038961, 142.875);
+}
+.Bar .bar-workspaces-style-beveled .monitor1:hover {
+  background: rgb(171.3, 178.5, 208.8);
+  box-shadow: inset -2px -2px 2px rgb(110.0714203233, 122.5383949192, 175.0035796767);
+}
+.Bar .bar-workspaces-style-beveled .monitor2 {
+  background: rgb(97.2, 121.8, 126.4);
+  box-shadow: inset -2px -2px 2px rgb(72.9, 91.35, 94.8);
+}
+.Bar .bar-workspaces-style-beveled .monitor2:hover {
+  background: rgb(135.7, 160.8, 165.9);
+  box-shadow: inset -2px -2px 2px rgb(96.710268714, 123.9541266795, 129.489731286);
+}
+.Bar .bar-workspaces-style-beveled .monitor3 {
+  background: rgb(132.3, 157.7, 163.1);
+  box-shadow: inset -2px -2px 2px rgb(94.8762581547, 121.0988583411, 126.6737418453);
+}
+.Bar .bar-workspaces-style-beveled .monitor3:hover {
+  background: rgb(95.05, 119.95, 124.85);
+  box-shadow: inset -2px -2px 2px rgb(71.2875, 89.9625, 93.6375);
 }
 .Bar {
   /* music */
@@ -228,11 +281,11 @@ popover.background row:active {
   min-height: 1px;
 }
 .Bar .Media.active > box {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border: 1px solid rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border: 1px solid rgba(130, 211, 226, 0.3);
   border-radius: 16px;
   padding: 4px 8px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(220.6, 222.7169230769, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(154.8376623377, 219.7428571429, 231.7623376623, 0.12);
 }
 .Bar .Media.active > box label {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
@@ -242,7 +295,7 @@ popover.background row:active {
   min-width: 2.5rem;
   min-height: 2.5rem;
   margin: 0.1rem 0.4rem;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(222, 227, 229, 0.1);
   -gtk-icon-size: 2.5rem;
 }
 .Bar {
@@ -262,18 +315,18 @@ popover.background row:active {
   padding: 4px;
 }
 .Bar .SysTray .tray-item:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
 .Bar .SysTray:not(:last-child) {
   margin-right: -0.3rem;
 }
 .Bar .SysTray.active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border: 1px solid rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border: 1px solid rgba(130, 211, 226, 0.3);
   border-radius: 8px;
   padding: 4px 6px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .Bar {
   /* hw-monitor */
@@ -283,17 +336,17 @@ popover.background row:active {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(146.14, 150.48, 209.1);
+  color: rgb(85.8, 165.78, 179.42);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress radius {
-  color: rgba(19, 19, 24, 0.5);
+  color: rgba(14, 20, 22, 0.5);
 }
 .Bar .bar-hw-ram-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(146.14, 150.48, 209.1);
+  color: rgb(85.8, 165.78, 179.42);
 }
 .Bar .bar-hw-ram-box button label {
   margin: 1px 0px 0px 2px;
@@ -304,17 +357,17 @@ popover.background row:active {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(146.14, 150.48, 209.1);
+  color: rgb(85.8, 165.78, 179.42);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress radius {
-  color: rgba(19, 19, 24, 0.5);
+  color: rgba(14, 20, 22, 0.5);
 }
 .Bar .bar-hw-cpu-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(185.08, 142.5, 168.8);
+  color: rgb(143.82, 153.82, 189.44);
 }
 .Bar .bar-hw-cpu-box button label {
   margin: 1px 0px 0px 1px;
@@ -334,13 +387,13 @@ popover.background row:active {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .Bar .system-menu-toggler.active box {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border: 1px solid rgba(190, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(220.6, 222.7169230769, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border: 1px solid rgba(130, 211, 226, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(154.8376623377, 219.7428571429, 231.7623376623, 0.12);
 }
 .Bar .separator {
   font-size: 1.8rem;
-  color: rgba(228, 225, 233, 0.3);
+  color: rgba(222, 227, 229, 0.3);
   opacity: 0.5;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -363,58 +416,58 @@ popover.background row:active {
 
 /* Floating elements style */
 .bar-style-floating .centerbox > box {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.22), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.15));
-  border: 1px solid rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.22), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.15));
+  border: 1px solid rgba(222, 227, 229, 0.2);
   border-radius: calc(8px * 4);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(222, 227, 229, 0.1);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Full-width style */
 .bar-style-expanded {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.22), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.15));
-  border: 1px solid rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.22), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.15));
+  border: 1px solid rgba(222, 227, 229, 0.2);
   border-radius: calc(8px * 4);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(222, 227, 229, 0.1);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Beveled style */
 .bar-style-beveled {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.22), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.15));
-  border: 1px solid rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.22), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.15));
+  border: 1px solid rgba(222, 227, 229, 0.2);
   border-radius: 0.8rem;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(222, 227, 229, 0.1);
   padding: 0 0.5rem;
   margin: 0 0.3rem;
 }
 
 /* Corner-integrated style */
 .bar-style-corners {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.2), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.12));
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.2), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.12));
   border-radius: 0;
-  border-bottom: 1px solid rgba(228, 225, 233, 0.2);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(228, 225, 233, 0.08);
+  border-bottom: 1px solid rgba(222, 227, 229, 0.2);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(222, 227, 229, 0.08);
 }
 
 /* variables & mixins */
 /* general styles */
 box.clipboard {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 20px;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .mode-bar {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.06));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.06));
   border-radius: 14px;
   padding: 8px 12px;
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  border: 1px solid rgba(222, 227, 229, 0.15);
   margin: 12px 12px 0;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 .mode-bar .mode-button {
   border-radius: 10px;
@@ -422,23 +475,23 @@ box.clipboard {
   margin: 0 3px;
   background: transparent;
   border: 1px solid transparent;
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   font-weight: 500;
   font-size: 0.85rem;
   transition: all 0.2s ease;
 }
 .mode-bar .mode-button:hover:not(.active) {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.15);
-  color: rgb(228, 225, 233);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.15);
+  color: rgb(222, 227, 229);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.12);
 }
 .mode-bar .mode-button.active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
-  border-color: rgba(190, 194, 255, 0.3);
-  color: rgb(190, 194, 255);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.18), rgba(130, 211, 226, 0.12));
+  border-color: rgba(130, 211, 226, 0.3);
+  color: rgb(130, 211, 226);
   font-weight: 600;
-  box-shadow: inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 1px rgba(171.3961038961, 225.5714285714, 235.6038961039, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .mode-bar .clear-all-button {
   border-radius: 10px;
@@ -470,38 +523,38 @@ box.clipboard {
 }
 .mode-bar .entry-count {
   font-size: 0.8rem;
-  color: rgba(228, 225, 233, 0.55);
+  color: rgba(222, 227, 229, 0.55);
   margin: 20px;
   font-weight: 500;
 }
 
 .search-section {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.06));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.06));
   border-radius: 14px;
   margin: 10px 12px;
   padding: 10px 14px;
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  border: 1px solid rgba(222, 227, 229, 0.15);
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 .search-section:focus-within {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(228, 225, 233, 0.08));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.1), rgba(222, 227, 229, 0.08));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .search-section label.search-icon {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
   font-size: 1.1rem;
   margin: 0 8px 0 2px;
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
 }
 .search-section entry.search-entry {
   font-size: 0.95rem;
   padding: 4px 8px;
   background: transparent;
   border: none;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
 }
 .search-section entry.search-entry:focus {
   outline: none;
@@ -509,7 +562,7 @@ box.clipboard {
 }
 .search-section .shortcut-hint {
   font-size: 0.75rem;
-  color: rgba(228, 225, 233, 0.45);
+  color: rgba(222, 227, 229, 0.45);
   margin-left: 4px;
   margin-right: 4px;
   font-weight: 500;
@@ -524,28 +577,28 @@ box.clipboard {
   border-radius: 12px;
   padding: 10px 14px;
   margin: 4px 0;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.05));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.05));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08);
 }
 .clipboard-list button.clipboard-entry:hover:not(.selected) {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.18);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.18);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.12);
 }
 .clipboard-list button.clipboard-entry.selected {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.15), rgba(130, 211, 226, 0.1));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: inset 0 1px 1px rgba(171.3961038961, 225.5714285714, 235.6038961039, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .clipboard-list button.clipboard-entry.selected .entry-text {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   font-weight: 600;
 }
 .clipboard-list button.clipboard-entry .entry-text {
   font-size: 0.88rem;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-right: 0px;
   line-height: 1.5;
   font-weight: 400;
@@ -567,22 +620,22 @@ box.clipboard {
 }
 .clipboard-list button.clipboard-entry.image-entry .entry-image {
   border-radius: 8px;
-  border: 1px solid rgba(228, 225, 233, 0.12);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.05);
+  border: 1px solid rgba(222, 227, 229, 0.12);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.05);
   transition: all 0.2s ease;
 }
 .clipboard-list button.clipboard-entry.image-entry.selected .entry-image {
-  border-color: rgba(190, 194, 255, 0.3);
-  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  border-color: rgba(130, 211, 226, 0.3);
+  box-shadow: inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .clipboard-list button.clipboard-entry.image-entry:hover:not(.selected) .entry-image {
-  border-color: rgba(228, 225, 233, 0.18);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.1);
+  border-color: rgba(222, 227, 229, 0.18);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.1);
   transform: scale(1.02);
 }
 .clipboard-list label.no-entries {
   padding: 40px 16px;
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   font-style: italic;
   font-size: 0.9rem;
   font-weight: 400;
@@ -611,11 +664,11 @@ button.invisible-close {
 }
 
 .dock {
-  background: linear-gradient(to bottom, rgba(37.0279069767, 37.0279069767, 46.7720930233, 0.4), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.3));
+  background: linear-gradient(to bottom, rgba(29.8666666667, 42.6666666667, 46.9333333333, 0.4), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.3));
   padding: 5px 10px;
-  border: 1px solid rgba(228, 225, 233, 0.18);
+  border: 1px solid rgba(222, 227, 229, 0.18);
   border-radius: 20px;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: bottom center;
 }
@@ -635,13 +688,13 @@ button.invisible-close {
   transform-origin: bottom center;
 }
 .dock-item .icon-background {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.14), rgba(228, 225, 233, 0.1));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.14), rgba(222, 227, 229, 0.1));
   border-radius: 14px;
   padding: 0;
   min-width: 48px;
   min-height: 48px;
   transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
 .dock-item image {
   opacity: 0.85;
@@ -657,10 +710,10 @@ button.invisible-close {
   margin-bottom: 8px;
 }
 .dock-item:hover .icon-background {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.2), rgba(228, 225, 233, 0.14));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.2), rgba(222, 227, 229, 0.14));
   min-width: 58px;
   min-height: 58px;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .dock-item:hover image {
   opacity: 1;
@@ -684,8 +737,8 @@ button.invisible-close {
   margin: 8px;
 }
 .dock-item.active .icon-background {
-  background: linear-gradient(135deg, rgba(230.8, 232.2892307692, 255, 0.25), rgba(174.7, 179.6415384615, 255, 0.18));
-  box-shadow: inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(163.1168831169, 222.6571428571, 233.6831168831, 0.25), rgba(117.5811688312, 206.6285714286, 223.1188311688, 0.18));
+  box-shadow: inset 0 1px 2px rgba(179.6753246753, 228.4857142857, 237.5246753247, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .dock-item.active image {
   opacity: 1;
@@ -826,39 +879,39 @@ box.logout-background {
   background-color: rgba(0, 0, 0, 0.6);
 }
 box.logout-background .logout-menu {
-  background: linear-gradient(135deg, rgba(215.5, 217.9307692308, 255, 0.08), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.3));
-  border: 1px solid rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(150.6980519481, 218.2857142857, 230.8019480519, 0.08), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.3));
+  border: 1px solid rgba(130, 211, 226, 0.12);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(190, 194, 255, 0.15), inset 0 1px 0 rgba(190, 194, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(130, 211, 226, 0.15), inset 0 1px 0 rgba(130, 211, 226, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 box.logout-background .logout-menu button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 18px;
   margin: 0.75rem;
   padding: 1.5rem 2rem;
   min-width: 180px;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(228, 225, 233, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(222, 227, 229, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
 box.logout-background .logout-menu button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.16), rgba(228, 225, 233, 0.12));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.16), rgba(222, 227, 229, 0.12));
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(228, 225, 233, 0.22), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
-  border-color: rgba(228, 225, 233, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(222, 227, 229, 0.22), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  border-color: rgba(222, 227, 229, 0.2);
 }
 box.logout-background .logout-menu button:hover label {
   transform: scale(1.05);
 }
 box.logout-background .logout-menu button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(228, 225, 233, 0.15), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(222, 227, 229, 0.15), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 box.logout-background .logout-menu button:focus {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: 0 0 0 3px rgba(190, 194, 255, 0.1), 0 6px 16px rgba(0, 0, 0, 0.25), 0 0 30px rgba(190, 194, 255, 0.25), inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.18), rgba(130, 211, 226, 0.12));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: 0 0 0 3px rgba(130, 211, 226, 0.1), 0 6px 16px rgba(0, 0, 0, 0.25), 0 0 30px rgba(130, 211, 226, 0.25), inset 0 1px 2px rgba(179.6753246753, 228.4857142857, 237.5246753247, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";
@@ -878,18 +931,18 @@ box.logout-menu button + button {
 /* general styles */
 box.picker {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
 }
 box.picker box.search {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
-  border: 1px solid rgba(190, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.18), rgba(130, 211, 226, 0.12));
+  border: 1px solid rgba(130, 211, 226, 0.25);
   border-radius: 16px;
   margin: 1rem 0.5rem;
   padding: 8px 12px;
-  box-shadow: 0 4px 16px rgba(190, 194, 255, 0.25), 0 0 30px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(130, 211, 226, 0.25), 0 0 30px rgba(130, 211, 226, 0.12), inset 0 1px 1px rgba(171.3961038961, 225.5714285714, 235.6038961039, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.picker box.search label {
   font-family: "Material Symbols Outlined";
@@ -908,22 +961,22 @@ box.picker box.search entry:focus {
   outline: none;
 }
 box.picker box.search entry menu {
-  background: rgb(19, 19, 24);
+  background: rgb(14, 20, 22);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 box.picker box.search entry menu separator {
-  background-color: rgba(57, 57, 63, 0.6);
+  background-color: rgba(52, 58, 60, 0.6);
 }
 box.picker box.search entry menu menuitem {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 box.picker box.search entry menu menuitem:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 box.picker box.search entry menu menuitem {
   border-radius: 0;
@@ -939,11 +992,11 @@ box.picker box.search entry menu menuitem:only-child {
   border-radius: 8px;
 }
 box.picker box.results-list {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 16px;
   padding: 6px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 box.picker box.results-list .app-button {
   padding: 0.5rem 0.6rem;
@@ -968,75 +1021,75 @@ box.picker box.results-list .app-button label.name {
   font-size: 1.1rem;
 }
 box.picker box.results-list .app-button label.description {
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
 }
 box.picker box.results-list .app-button:focus, box.picker box.results-list .app-button:hover, box.picker box.results-list .app-button.selected {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
-  border: 1px solid rgba(190, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.15), rgba(130, 211, 226, 0.1));
+  border: 1px solid rgba(130, 211, 226, 0.25);
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(130, 211, 226, 0.2), 0 0 20px rgba(130, 211, 226, 0.12), inset 0 1px 1px rgba(171.3961038961, 225.5714285714, 235.6038961039, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.picker box.results-list .app-button:focus label.name, box.picker box.results-list .app-button:hover label.name, box.picker box.results-list .app-button.selected label.name {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 box.picker box.results-list .action-button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 20px;
   padding: 0 0.8rem;
   margin: 2px;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(228, 225, 233, 0.18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(222, 227, 229, 0.18);
 }
 box.picker box.results-list .action-button .action-icon {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
 }
 box.picker box.results-list .action-button:focus, box.picker box.results-list .action-button:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.18), rgba(130, 211, 226, 0.12));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: 0 2px 10px rgba(130, 211, 226, 0.2), 0 0 20px rgba(130, 211, 226, 0.12), inset 0 1px 2px rgba(179.6753246753, 228.4857142857, 237.5246753247, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 box.picker box.results-grid {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 box.picker box.results-grid .wallpaper-thumbnail {
   border-radius: 12px;
   padding: 0.6rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.06), rgba(228, 225, 233, 0.04));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.06), rgba(222, 227, 229, 0.04));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(228, 225, 233, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(222, 227, 229, 0.08);
 }
 box.picker box.results-grid .wallpaper-thumbnail:hover, box.picker box.results-grid .wallpaper-thumbnail:focus, box.picker box.results-grid .wallpaper-thumbnail.selected {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.12), rgba(190, 194, 255, 0.08));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: 0 4px 12px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(230.8, 232.2892307692, 255, 0.15);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.12), rgba(130, 211, 226, 0.08));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: 0 4px 12px rgba(130, 211, 226, 0.2), 0 0 20px rgba(130, 211, 226, 0.12), inset 0 1px 1px rgba(163.1168831169, 222.6571428571, 233.6831168831, 0.15);
   transform: translateY(-2px);
 }
 box.picker box.results-grid .wallpaper-thumbnail box.wallpaper-preview-container {
   border-radius: 8px;
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  border: 1px solid rgba(222, 227, 229, 0.12);
   min-width: 140px;
   min-height: 100px;
-  background-color: rgba(228, 225, 233, 0.08);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(228, 225, 233, 0.06);
+  background-color: rgba(222, 227, 229, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(222, 227, 229, 0.06);
 }
 box.picker box.results-grid .wallpaper-thumbnail .wallpaper-picture {
   border-radius: 8px;
 }
 box.picker box.results-grid .wallpaper-thumbnail box.wallpaper-placeholder {
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.05));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.05));
   min-width: 140px;
   min-height: 100px;
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  border: 1px solid rgba(222, 227, 229, 0.12);
 }
 box.picker box.results-grid .wallpaper-thumbnail .wallpaper-name {
-  color: rgba(228, 225, 233, 0.9);
+  color: rgba(222, 227, 229, 0.9);
   margin-top: 0.3rem;
   font-weight: 500;
   font-size: 0.85rem;
@@ -1054,22 +1107,22 @@ box.picker box.not-found {
 }
 box.picker box.not-found image {
   -gtk-icon-size: 6rem;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   opacity: 0.6;
 }
 box.picker box.not-found label {
-  color: rgba(228, 225, 233, 0.8);
+  color: rgba(222, 227, 229, 0.8);
   font-size: 1.2em;
   font-weight: 500;
 }
 
 .mode-bar {
   padding: 8px 12px;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.06), rgba(228, 225, 233, 0.04));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.06), rgba(222, 227, 229, 0.04));
   border-radius: 14px;
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   margin: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(222, 227, 229, 0.08);
 }
 .mode-bar .mode-button {
   border-radius: 10px;
@@ -1084,50 +1137,50 @@ box.picker box.not-found label {
   font-size: 24px;
 }
 .mode-bar .mode-button:hover, .mode-bar .mode-button:focus {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.15);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(222, 227, 229, 0.12);
 }
 .mode-bar .mode-button.active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
-  border-color: rgba(190, 194, 255, 0.3);
-  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.25), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.18), rgba(130, 211, 226, 0.12));
+  border-color: rgba(130, 211, 226, 0.3);
+  box-shadow: 0 2px 10px rgba(130, 211, 226, 0.25), 0 0 20px rgba(130, 211, 226, 0.12), inset 0 1px 1px rgba(171.3961038961, 225.5714285714, 235.6038961039, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .action-bar {
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.06), rgba(228, 225, 233, 0.04));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.06), rgba(222, 227, 229, 0.04));
   border-radius: 14px;
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   margin: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(228, 225, 233, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(222, 227, 229, 0.08);
 }
 .action-bar .action-icon {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
 }
 .action-bar .action-button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 20px;
   padding: 0.3rem 0.6rem;
   margin: 0 2px;
   min-width: 32px;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(228, 225, 233, 0.18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(222, 227, 229, 0.18);
 }
 .action-bar .action-button:focus, .action-bar .action-button:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.18), rgba(190, 194, 255, 0.12));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 2px rgba(251.2, 251.4338461538, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.18), rgba(130, 211, 226, 0.12));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: 0 2px 10px rgba(130, 211, 226, 0.2), 0 0 20px rgba(130, 211, 226, 0.12), inset 0 1px 2px rgba(179.6753246753, 228.4857142857, 237.5246753247, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .command-suggestions {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 16px;
   padding: 6px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 .command-suggestions .command-item {
   padding: 0.5rem 0.6rem;
@@ -1140,51 +1193,51 @@ box.picker box.not-found label {
 .command-suggestions .command-item .command-icon {
   font-family: "Material Symbols Outlined";
   font-size: 3rem;
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   margin-right: 0.5rem;
   margin-left: 0.3rem;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 .command-suggestions .command-item .command-name {
   font-weight: bold;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   font-size: 1.1rem;
 }
 .command-suggestions .command-item .command-description {
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
 }
 .command-suggestions .command-item:hover, .command-suggestions .command-item:focus {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
-  border: 1px solid rgba(190, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.15), rgba(130, 211, 226, 0.1));
+  border: 1px solid rgba(130, 211, 226, 0.25);
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(190, 194, 255, 0.2), 0 0 20px rgba(190, 194, 255, 0.12), inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(130, 211, 226, 0.2), 0 0 20px rgba(130, 211, 226, 0.12), inset 0 1px 1px rgba(171.3961038961, 225.5714285714, 235.6038961039, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 .command-suggestions .command-item:hover .command-name, .command-suggestions .command-item:focus .command-name {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 
 /* variables & mixins */
 /* general styles */
 .notification {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0.4rem 0.75rem;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 16px;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .notification.notification-hovered {
   transform: translateX(-4px) translateY(-2px);
-  background: linear-gradient(135deg, rgba(37.0279069767, 37.0279069767, 46.7720930233, 0.42), rgba(25.7604651163, 25.7604651163, 32.5395348837, 0.35));
-  border-color: rgba(228, 225, 233, 0.18);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, rgba(29.8666666667, 42.6666666667, 46.9333333333, 0.42), rgba(19.95, 28.5, 31.35, 0.35));
+  border-color: rgba(222, 227, 229, 0.18);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 .notification:active {
   transform: scale(0.98);
@@ -1192,7 +1245,7 @@ box.picker box.not-found label {
 }
 .notification.critical {
   border-left: 3px solid #d17678;
-  background: linear-gradient(135deg, rgba(255, 193.6607142857, 186.3, 0.08), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
+  background: linear-gradient(135deg, rgba(255, 193.6607142857, 186.3, 0.08), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
   box-shadow: inset 0 1px 0 rgba(255, 180, 171, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 .notification.critical .header .app-name {
@@ -1204,7 +1257,7 @@ box.picker box.not-found label {
 }
 .notification.low {
   opacity: 0.9;
-  background: linear-gradient(135deg, rgba(30.2674418605, 30.2674418605, 38.2325581395, 0.35), rgba(21.2534883721, 21.2534883721, 26.8465116279, 0.3));
+  background: linear-gradient(135deg, rgba(23.9166666667, 34.1666666667, 37.5833333333, 0.35), rgba(15.9833333333, 22.8333333333, 25.1166666667, 0.3));
 }
 .notification .header {
   margin-bottom: 0.25rem;
@@ -1214,18 +1267,18 @@ box.picker box.not-found label {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .notification .header .time {
   font-size: 0.7rem;
   font-weight: 500;
-  color: rgba(228, 225, 233, 0.5);
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.05));
+  color: rgba(222, 227, 229, 0.5);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.05));
   padding: 2px 6px;
   border-radius: 6px;
-  border: 1px solid rgba(228, 225, 233, 0.1);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.06);
+  border: 1px solid rgba(222, 227, 229, 0.1);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.06);
 }
 .notification .content .thumb > box {
   min-width: 48px;
@@ -1233,8 +1286,8 @@ box.picker box.not-found label {
   border-radius: 8px;
   background-size: contain;
   background-repeat: no-repeat;
-  border: 1px solid rgba(228, 225, 233, 0.1);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.05);
+  border: 1px solid rgba(222, 227, 229, 0.1);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.05);
 }
 .notification .content .thumb image {
   -gtk-icon-size: 48px;
@@ -1243,20 +1296,20 @@ box.picker box.not-found label {
 .notification .content .text-content .title {
   font-size: 0.95rem;
   font-weight: 600;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   line-height: 1.3;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 .notification .content .text-content .body {
   font-size: 0.85rem;
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   margin-top: 0.25rem;
   line-height: 1.4;
 }
 .notification .action-indicator {
   margin-top: 0.4rem;
   padding-top: 0.25rem;
-  border-top: 1px solid rgba(228, 225, 233, 0.1);
+  border-top: 1px solid rgba(222, 227, 229, 0.1);
   opacity: 0;
   transition: opacity 0.2s ease-out;
 }
@@ -1265,39 +1318,39 @@ box.picker box.not-found label {
 }
 .notification .action-indicator .action-hint {
   font-size: 0.75rem;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   font-style: italic;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .notification .action-indicator .more-actions {
   font-size: 0.7rem;
-  color: rgba(228, 225, 233, 0.5);
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.05));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  color: rgba(222, 227, 229, 0.5);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.05));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   padding: 2px 6px;
   border-radius: 6px;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.06);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.06);
   transition: all 0.2s ease;
 }
 .notification .action-indicator .more-actions:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.12), rgba(190, 194, 255, 0.08));
-  border-color: rgba(190, 194, 255, 0.2);
-  color: rgb(190, 194, 255);
-  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.12), rgba(130, 211, 226, 0.08));
+  border-color: rgba(130, 211, 226, 0.2);
+  color: rgb(130, 211, 226);
+  box-shadow: inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 
 /* variables & mixins */
 /* general styles */
 .osd {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 3rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
   margin: 5rem;
   padding: 1.5rem;
 }
@@ -1320,38 +1373,38 @@ box.picker box.not-found label {
   margin: 0.5rem 0.5rem;
   min-height: 1rem;
   border-radius: 1.5rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.05));
-  border: 1px solid rgba(228, 225, 233, 0.1);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(228, 225, 233, 0.05);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.05));
+  border: 1px solid rgba(222, 227, 229, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(222, 227, 229, 0.05);
 }
 .osd levelbar block {
   min-height: 1rem;
 }
 .osd levelbar block.filled {
   border-radius: 1.5rem;
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.85), rgba(190, 194, 255, 0.75));
-  box-shadow: 0 0 12px rgba(190, 194, 255, 0.5), 0 0 20px rgba(190, 194, 255, 0.25), inset 0 1px 1px hsla(236.3076923077, 100%, 102.2549019608%, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.85), rgba(130, 211, 226, 0.75));
+  box-shadow: 0 0 12px rgba(130, 211, 226, 0.5), 0 0 20px rgba(130, 211, 226, 0.25), inset 0 1px 1px rgba(192.0941558442, 232.8571428571, 240.4058441558, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
 
 /* variables & mixins */
 /* general styles */
 .music.window {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(37.0279069767, 37.0279069767, 46.7720930233, 0.25), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.15));
+  background: linear-gradient(135deg, rgba(29.8666666667, 42.6666666667, 46.9333333333, 0.25), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.15));
   padding: 0rem;
   margin-top: 0.75rem;
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 16px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(222, 227, 229, 0.12);
 }
 .music.window .cover {
   border-radius: 16px;
-  border: 1px solid rgba(228, 225, 233, 0.2);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(228, 225, 233, 0.15);
+  border: 1px solid rgba(222, 227, 229, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(222, 227, 229, 0.15);
   margin: 0.4rem;
   min-height: 13rem;
   min-width: 13rem;
@@ -1361,7 +1414,7 @@ box.picker box.not-found label {
 .music.window .blurred-cover {
   border-radius: 8px;
   opacity: 0.8;
-  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(228, 225, 233, 0.1);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(222, 227, 229, 0.1);
 }
 .music.window .cava-container cava {
   opacity: 0.2;
@@ -1379,7 +1432,7 @@ box.picker box.not-found label {
 .music.window .info label,
 .music.window .info .title,
 .music.window .info image {
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .music.window .info label.position,
@@ -1403,16 +1456,16 @@ box.picker box.not-found label {
   -gtk-icon-size: 1.5rem;
   border-radius: 10px;
   padding: 8px;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
-  color: rgb(228, 225, 233);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+  color: rgb(222, 227, 229);
 }
 .music.window .controls button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.22), rgba(228, 225, 233, 0.15));
-  border-color: rgba(228, 225, 233, 0.3);
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.22), rgba(222, 227, 229, 0.15));
+  border-color: rgba(222, 227, 229, 0.3);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .music.window .player-info {
@@ -1433,72 +1486,72 @@ box.picker box.not-found label {
 .ScreenCorners.corner-top .corner-content {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 24, 0.5), inset 0 10px 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(14, 20, 22, 0.5), inset 0 10px 10px -10px rgba(0, 0, 0, 0.2);
   min-height: max(12px, 8px * 8);
 }
 .ScreenCorners.corner-bottom .corner-content {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 24, 0.5), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(14, 20, 22, 0.5), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.2);
   min-height: max(12px, 8px * 8);
 }
 .ScreenCorners.corner-left .corner-content {
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 24, 0.5), inset 10px 0 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(14, 20, 22, 0.5), inset 10px 0 10px -10px rgba(0, 0, 0, 0.2);
   min-width: calc(8px * 8);
 }
 .ScreenCorners.corner-right .corner-content {
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
-  box-shadow: 0 0 0 99px rgba(19, 19, 24, 0.5), inset -10px 0 10px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 99px rgba(14, 20, 22, 0.5), inset -10px 0 10px -10px rgba(0, 0, 0, 0.2);
   min-width: calc(8px * 8);
 }
 
 /* variables & mixins */
 /* general styles */
 .quick-actions-widget {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 16px;
   padding: 0.75rem;
   margin: 0.75rem;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .quick-actions-widget .actions-grid {
   margin: 0.4rem 0;
 }
 .quick-actions-widget .actions-grid .action-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .quick-actions-widget .actions-grid .action-button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border: 1px solid rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border: 1px solid rgba(222, 227, 229, 0.2);
   border-radius: 14px;
   margin: 0 0.4rem;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
 .quick-actions-widget .actions-grid .action-button:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border-color: rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border-color: rgba(130, 211, 226, 0.3);
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .quick-actions-widget .actions-grid .action-button:hover .action-icon {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .quick-actions-widget .actions-grid .action-button .action-icon {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease;
@@ -1508,20 +1561,20 @@ box.picker box.not-found label {
 /* general styles */
 .clock-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: calc(8px * 3);
   padding: 0.75rem;
   margin: 0.75rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 16px;
   padding: 0.75rem;
   margin-top: 12px;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   min-width: 0;
 }
 .clock-widget .digit-stack {
@@ -1531,7 +1584,7 @@ box.picker box.not-found label {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 1.8rem;
   font-weight: 700;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
@@ -1541,7 +1594,7 @@ box.picker box.not-found label {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 1.8rem;
   font-weight: 700;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   margin: 0 2px;
   opacity: 0.9;
   transition: all 300ms ease;
@@ -1553,39 +1606,39 @@ box.picker box.not-found label {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 0.75rem;
   font-weight: 700;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   margin-left: 6px;
   padding: 3px 8px;
   border-radius: 6px;
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
-  border: 1px solid rgba(190, 194, 255, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.15), rgba(130, 211, 226, 0.1));
+  border: 1px solid rgba(130, 211, 226, 0.2);
   opacity: 0.9;
   transition: all 200ms ease;
-  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 1px rgba(130, 211, 226, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .clock-widget .ampm-indicator:hover {
   opacity: 1;
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.2), rgba(190, 194, 255, 0.12));
-  border-color: rgba(190, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.2), rgba(130, 211, 226, 0.12));
+  border-color: rgba(130, 211, 226, 0.25);
   transform: translateY(-1px);
 }
 .clock-widget .date-label {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   margin-top: 6px;
   transition: all 200ms ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .clock-widget .date-label:hover {
-  color: rgba(228, 225, 233, 0.8);
+  color: rgba(222, 227, 229, 0.8);
 }
 
 .clock-divider {
   min-height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(228, 225, 233, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(222, 227, 229, 0.1), transparent);
   margin: 8px 0;
   border-radius: 2px;
   transition: all 300ms ease;
@@ -1616,25 +1669,25 @@ box.picker box.not-found label {
 .matshell-settings,
 .stacked-settings-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: calc(8px * 3);
   padding: 0.75rem;
   margin: 0.75rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   padding: 0;
   border-radius: 16px;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .settings-header-compact,
 .settings-header {
   padding: 0.75rem 0.75rem 0.4rem 0.75rem;
-  border-bottom: 1px solid rgba(228, 225, 233, 0.1);
+  border-bottom: 1px solid rgba(222, 227, 229, 0.1);
   background: transparent;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -1645,7 +1698,7 @@ box.picker box.not-found label {
 .settings-header .header-title {
   font-size: calc(1.1rem * 1.1);
   font-weight: 700;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-right: auto;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
@@ -1680,7 +1733,7 @@ box.picker box.not-found label {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
   font-size: calc(1.1rem * 1.3);
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   transition: all 150ms ease;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
@@ -1695,8 +1748,8 @@ box.picker box.not-found label {
 .settings-nav-compact .nav-button:hover,
 .settings-nav .nav-icon-button:hover,
 .settings-nav .nav-button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
 }
 .settings-nav-compact .nav-icon-button:hover .icon-compact,
 .settings-nav-compact .nav-icon-button:hover .nav-icon,
@@ -1710,7 +1763,7 @@ box.picker box.not-found label {
 .settings-nav .nav-button:hover .icon-compact,
 .settings-nav .nav-button:hover .nav-icon,
 .settings-nav .nav-button:hover label {
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
 }
 .settings-nav-compact .nav-icon-button.active, .settings-nav-compact .nav-icon-button.mode-button-active,
 .settings-nav-compact .nav-button.active,
@@ -1719,9 +1772,9 @@ box.picker box.not-found label {
 .settings-nav .nav-icon-button.mode-button-active,
 .settings-nav .nav-button.active,
 .settings-nav .nav-button.mode-button-active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border-color: rgba(190, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border-color: rgba(130, 211, 226, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .settings-nav-compact .nav-icon-button.active .icon-compact,
 .settings-nav-compact .nav-icon-button.active .nav-icon,
@@ -1746,7 +1799,7 @@ box.picker box.not-found label {
 .settings-nav .nav-button.mode-button-active .icon-compact,
 .settings-nav .nav-button.mode-button-active .nav-icon,
 .settings-nav .nav-button.mode-button-active label {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .settings-nav-compact .nav-icon-button.button-disabled,
 .settings-nav-compact .nav-button.button-disabled,
@@ -1759,7 +1812,7 @@ box.picker box.not-found label {
 .settings-nav-compact .nav-button.button-disabled:hover,
 .settings-nav .nav-icon-button.button-disabled:hover,
 .settings-nav .nav-button.button-disabled:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
 }
 
 .settings-content,
@@ -1770,35 +1823,35 @@ box.picker box.not-found label {
 }
 
 .settings-scroll scrollbar {
-  background: rgba(14.4930232558, 14.4930232558, 18.3069767442, 0.5);
+  background: rgba(10.0333333333, 14.3333333333, 15.7666666667, 0.5);
   border-radius: calc(8px * 1);
 }
 .settings-scroll scrollbar.vertical {
   margin-left: 4px;
 }
 .settings-scroll scrollbar trough {
-  background: rgba(228, 225, 233, 0.1);
+  background: rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1);
   min-width: 8px;
 }
 .settings-scroll scrollbar slider {
-  background: rgba(228, 225, 233, 0.4);
+  background: rgba(222, 227, 229, 0.4);
   border-radius: calc(8px * 1);
   min-width: 8px;
   transition: all 100ms ease;
 }
 .settings-scroll scrollbar slider:hover {
-  background: rgba(190, 194, 255, 0.7);
+  background: rgba(130, 211, 226, 0.7);
 }
 .settings-scroll scrollbar slider:active {
-  background: rgb(190, 194, 255);
+  background: rgb(130, 211, 226);
 }
 
 .section-header,
 .subsection-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0.75rem 0 0.25rem 0;
@@ -1815,22 +1868,22 @@ box.picker box.not-found label {
 }
 
 .option-row {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: calc(0.4rem * 1.2) 0.75rem;
   margin: 0.25rem 0;
   transition: all 150ms ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .option-row:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
 }
 .option-row .option-label {
   font-size: calc(1.1rem * 0.95);
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   margin-right: 0.4rem;
 }
@@ -1841,46 +1894,46 @@ box.picker box.not-found label {
 .option-row.widget-item .widget-info .widget-icon {
   font-family: "Material Symbols Outlined";
   font-size: 20px;
-  color: rgba(190, 194, 255, 0.7);
+  color: rgba(130, 211, 226, 0.7);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 .option-row.widget-item .widget-info .widget-name {
   margin: 0;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   font-weight: 500;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .option-row.widget-item .widget-info .widget-description {
   font-size: calc(1.1rem * 0.8);
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   opacity: 0.8;
 }
 .option-row.widget-item .widget-controls .reorder-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(190, 194, 255, 0.2);
-  border: 1px solid rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.2);
+  border: 1px solid rgba(130, 211, 226, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .option-row.widget-item .widget-controls .reorder-button:hover {
-  background: rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.3);
 }
 .option-row.widget-item .widget-controls .reorder-button {
   padding: 0.25rem;
   margin-right: 0.4rem;
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   transition: all 150ms ease;
 }
 .option-row.widget-item .widget-controls .reorder-button .icon {
   font-family: "Material Symbols Outlined";
   font-size: 14px;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
 }
 .option-row.widget-item .widget-controls .reorder-button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
 }
 .option-row.widget-item .widget-controls .reorder-button.button-disabled {
   opacity: 0.3;
@@ -1897,7 +1950,7 @@ box.picker box.not-found label {
   border-radius: 12px;
   padding: 0;
   margin: 0.4rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
   transition: background 200ms ease;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
 }
@@ -1913,33 +1966,33 @@ box.picker box.not-found label {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .option-switch:checked {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.8), rgba(130, 211, 226, 0.7));
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(130, 211, 226, 0.3);
 }
 .option-switch:checked slider {
   background: white;
   margin-left: 22px;
   margin-right: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(190, 194, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(130, 211, 226, 0.5);
 }
 .option-switch:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
 }
 .option-switch:hover:checked {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.85), rgba(190, 194, 255, 0.75));
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.85), rgba(130, 211, 226, 0.75));
 }
 
 .option-switch-placeholder {
   padding: 0 0.75rem;
   margin: 0.5rem;
   border-radius: 5rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 .option-switch-placeholder .placeholder-icon {
   font-family: "Material Symbols Outlined";
   font-size: 20px;
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   opacity: 0.6;
 }
 
@@ -1948,39 +2001,39 @@ box.picker box.not-found label {
 }
 .option-dropdown button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(190, 194, 255, 0.2);
-  border: 1px solid rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.2);
+  border: 1px solid rgba(130, 211, 226, 0.3);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .option-dropdown button:hover {
-  background: rgba(190, 194, 255, 0.3);
+  background: rgba(130, 211, 226, 0.3);
 }
 .option-dropdown button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
   border-radius: 10px;
   padding: 0.25rem calc(0.4rem * 1.2);
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  border: 1px solid rgba(222, 227, 229, 0.15);
   font-size: calc(1.1rem * 0.95);
   transition: all 150ms ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .option-dropdown button:hover {
-  border-color: rgba(228, 225, 233, 0.2);
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
 }
 
 .info-box {
   padding: calc(0.4rem * 1.2) 0.75rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(190, 194, 255, 0.07));
-  border: 1px solid rgba(190, 194, 255, 0.15);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.1), rgba(130, 211, 226, 0.07));
+  border: 1px solid rgba(130, 211, 226, 0.15);
   margin-top: 0.4rem;
-  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(130, 211, 226, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .info-box .info-text {
   font-size: calc(1.1rem * 0.85);
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   font-style: italic;
   line-height: 1.4;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -1990,11 +2043,11 @@ box.picker box.not-found label {
   font-size: 0.85em;
   opacity: 0.7;
   margin-bottom: 0.4rem;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
 }
 
 separator {
-  background: linear-gradient(90deg, transparent, rgba(228, 225, 233, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(222, 227, 229, 0.1), transparent);
   margin: 0.75rem 0;
   min-height: 1px;
   opacity: 0.5;
@@ -2004,54 +2057,54 @@ separator {
 /* general styles */
 .weather-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: calc(8px * 3);
   padding: 0.75rem;
   margin: 0.75rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 16px;
   padding: 0.75rem;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .weather-widget .weather-location {
   padding: 0.25rem 0.4rem;
   margin: 0 0 0.4rem 0;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .weather-widget .weather-location .location-icon {
   font-family: "Material Symbols Outlined";
   font-size: 18px;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 .weather-widget .weather-location .location-text {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .weather-widget .current-weather {
   padding: 0.4rem 0.75rem;
   margin-bottom: 0.4rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .weather-widget .current-weather .current-icon {
   font-family: "Material Symbols Outlined";
   font-size: 56px;
   min-width: 56px;
   min-height: 56px;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   margin-bottom: 0.25rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   animation: float 3s ease-in-out infinite;
@@ -2059,84 +2112,84 @@ separator {
 .weather-widget .current-weather .weather-temp {
   font-size: calc(1.1rem * 1.3);
   font-weight: 700;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .weather-widget .current-weather .weather-desc {
   font-size: calc(1.1rem * 0.85);
   font-weight: 500;
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   margin-top: 0.25rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .weather-widget .current-weather .weather-stats {
   margin-top: 0.4rem;
   padding-top: 0.4rem;
-  border-top: 1px solid rgba(228, 225, 233, 0.1);
+  border-top: 1px solid rgba(222, 227, 229, 0.1);
 }
 .weather-widget .current-weather .weather-stats .stat-item {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.06));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.06));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: 10px;
   padding: 0.25rem 0.4rem;
   margin: 0.25rem 0;
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 }
 .weather-widget .current-weather .weather-stats .stat-item:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.15);
   transform: translateX(2px);
 }
 .weather-widget .current-weather .weather-stats .stat-item .weather-extra-icon {
   font-family: "Material Symbols Outlined";
   font-size: 18px;
-  color: rgba(190, 194, 255, 0.7);
+  color: rgba(130, 211, 226, 0.7);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   transition: all 0.2s ease;
 }
 .weather-widget .current-weather .weather-stats .stat-item:hover .weather-extra-icon {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .weather-widget .current-weather .weather-stats .stat-item label:last-child {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .weather-widget .forecast-row {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.4rem;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .weather-widget .forecast-row .forecast-item {
   min-width: 3rem;
   padding: 0.25rem;
   border-radius: 10px;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.06));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.06));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 }
 .weather-widget .forecast-row .forecast-item:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border-color: rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border-color: rgba(130, 211, 226, 0.3);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .weather-widget .forecast-row .forecast-item:hover .forecast-icon {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   transform: scale(1.1);
 }
 .weather-widget .forecast-row .forecast-item:hover .forecast-temp {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .weather-widget .forecast-row .forecast-item .forecast-hour {
   font-size: calc(1.1rem * 0.8);
   font-weight: 500;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   margin-bottom: 2px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -2144,14 +2197,14 @@ separator {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
   margin: 2px 0;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   transition: all 0.2s ease;
 }
 .weather-widget .forecast-row .forecast-item .forecast-temp {
   font-size: calc(1.1rem * 0.9);
   font-weight: 600;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
 }
@@ -2166,7 +2219,7 @@ separator {
 }
 .weather-loading {
   padding: calc(0.75rem * 2);
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   font-style: italic;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   animation: pulse 2s ease-in-out infinite;
@@ -2184,8 +2237,8 @@ separator {
 /* general styles */
 .base-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -2199,7 +2252,7 @@ separator {
 .base-widget .header-row .header-icon {
   min-width: 72px;
   min-height: 72px;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-bottom: 0.5rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
@@ -2207,18 +2260,18 @@ separator {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.2rem;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .base-widget .header-row .header-subtitle {
   font-size: 1.1rem;
-  color: rgb(145, 144, 154);
+  color: rgb(137, 146, 148);
   margin-bottom: 0.2rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .base-widget .header-row .header-extra {
   font-size: 1.1rem;
-  color: rgb(145, 144, 154);
+  color: rgb(137, 146, 148);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .base-widget .items-row {
@@ -2229,18 +2282,18 @@ separator {
 }
 .base-widget .items-row .item .item-title {
   font-size: 1.1rem;
-  color: rgb(145, 144, 154);
+  color: rgb(137, 146, 148);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .base-widget .items-row .item .item-icon {
   margin: 0.3rem 0;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .base-widget .items-row .item .item-value {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
@@ -2252,44 +2305,44 @@ separator {
 }
 .mode-selector .mode-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .mode-selector .mode-button:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .mode-selector .mode-button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 12px;
   padding: 0.4rem 0.25rem;
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .mode-selector .mode-button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
   transform: translateY(-1px);
 }
 .mode-selector .mode-button.mode-button-active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border-color: rgba(190, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border-color: rgba(130, 211, 226, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .mode-selector .mode-button.mode-button-active .mode-icon {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .mode-selector .mode-button.mode-button-active .mode-label {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   font-weight: 600;
 }
 .mode-selector .mode-button .mode-icon {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
   font-size: 20px;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   transition: all 200ms ease;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
@@ -2297,7 +2350,7 @@ separator {
 .mode-selector .mode-button .mode-label {
   font-size: calc(1.1rem * 0.85);
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   transition: all 200ms ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -2310,19 +2363,19 @@ separator {
 /* general styles */
 .timer-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: calc(8px * 3);
   padding: 0.75rem;
   margin: 0.75rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 16px;
   padding: 0.75rem;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .timer-widget .widget-header {
   margin-bottom: 0.4rem;
@@ -2330,61 +2383,61 @@ separator {
 .timer-widget .widget-header .header-icon {
   font-family: "Material Symbols Outlined";
   font-size: 24px;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   margin-right: 0.25rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 .timer-widget .widget-header .header-title {
   font-size: calc(1.1rem * 1.1);
   font-weight: 700;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .timer-widget .timer-add-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-add-button:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .timer-widget .timer-add-button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 12px;
   padding: 0.4rem 0.75rem;
   margin: 0;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   font-weight: 600;
   transition: all 250ms ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .timer-widget .timer-add-button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
   transform: translateY(-1px);
 }
 .timer-widget .timer-add-button .timer-add-icon {
   font-family: "Material Symbols Outlined";
   font-size: 20px;
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 .timer-widget .timer-dialog {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.75rem;
   margin: 0.4rem 0 0 0;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .timer-widget .timer-dialog .dialog-title {
   font-size: calc(1.1rem * 1.05);
   font-weight: 600;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-bottom: 0.4rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -2394,17 +2447,17 @@ separator {
 .timer-widget .timer-dialog .time-picker-label {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.25rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .timer-widget .timer-dialog .time-picker-scroll {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.06));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.06));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: 10px;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar {
   background: transparent;
@@ -2413,30 +2466,30 @@ separator {
   padding: 2px;
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar trough {
-  background: rgba(228, 225, 233, 0.04);
+  background: rgba(222, 227, 229, 0.04);
   border-radius: 10px;
   min-width: 6px;
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar slider {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.7), rgba(190, 194, 255, 0.6));
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.7), rgba(130, 211, 226, 0.6));
   border-radius: 10px;
   min-width: 6px;
   transition: all 200ms ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .timer-widget .timer-dialog .time-picker-scroll scrollbar slider:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
-  box-shadow: 0 2px 4px rgba(190, 194, 255, 0.3), 0 0 8px rgba(190, 194, 255, 0.15);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.8), rgba(130, 211, 226, 0.7));
+  box-shadow: 0 2px 4px rgba(130, 211, 226, 0.3), 0 0 8px rgba(130, 211, 226, 0.15);
 }
 .timer-widget .timer-dialog .time-picker-item {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-dialog .time-picker-item:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .timer-widget .timer-dialog .time-picker-item {
   background: transparent;
@@ -2445,35 +2498,35 @@ separator {
   padding: 0.25rem 0.4rem;
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: calc(1.1rem * 0.95);
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   transition: all 150ms ease;
 }
 .timer-widget .timer-dialog .time-picker-item:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.15);
-  color: rgb(228, 225, 233);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.15);
+  color: rgb(222, 227, 229);
 }
 .timer-widget .timer-dialog .time-picker-item-active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border-color: rgba(190, 194, 255, 0.3);
-  color: rgb(190, 194, 255);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border-color: rgba(130, 211, 226, 0.3);
+  color: rgb(130, 211, 226);
   font-weight: 700;
   font-size: calc(1.1rem * 1.1);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .timer-widget .timer-dialog .time-picker-item-active:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.3), rgba(190, 194, 255, 0.2));
-  border-color: rgba(190, 194, 255, 0.35);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.3), rgba(130, 211, 226, 0.2));
+  border-color: rgba(130, 211, 226, 0.35);
 }
 .timer-widget .timer-dialog .dialog-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-dialog .dialog-button:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .timer-widget .timer-dialog .dialog-button {
   border-radius: 12px;
@@ -2483,27 +2536,27 @@ separator {
   transition: all 200ms ease;
 }
 .timer-widget .timer-dialog .dialog-button-cancel {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
-  color: rgb(228, 225, 233);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .timer-widget .timer-dialog .dialog-button-cancel:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.18);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.18);
   transform: translateY(-1px);
 }
 .timer-widget .timer-dialog .dialog-button-confirm {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border: 1px solid rgba(190, 194, 255, 0.3);
-  color: rgb(190, 194, 255);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border: 1px solid rgba(130, 211, 226, 0.3);
+  color: rgb(130, 211, 226);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .timer-widget .timer-dialog .dialog-button-confirm:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.3), rgba(190, 194, 255, 0.2));
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.3), rgba(130, 211, 226, 0.2));
   transform: translateY(-2px);
-  border-color: rgba(190, 194, 255, 0.35);
+  border-color: rgba(130, 211, 226, 0.35);
 }
 .timer-widget .timer-list {
   margin-top: 0.4rem;
@@ -2514,61 +2567,61 @@ separator {
 .timer-widget .timer-empty .empty-icon {
   font-family: "Material Symbols Outlined";
   font-size: 64px;
-  color: rgba(228, 225, 233, 0.4);
+  color: rgba(222, 227, 229, 0.4);
   margin-bottom: 0.4rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 .timer-widget .timer-empty .empty-text {
   font-size: 1.1rem;
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   font-style: italic;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .timer-widget .timer-item {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.4rem 0.75rem;
   margin: 0.25rem 0;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
 }
 .timer-widget .timer-item:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
   transform: translateY(-1px);
 }
 .timer-widget .timer-item .timer-time {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: calc(1.1rem * 1.5);
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   transition: all 200ms ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .timer-widget .timer-item .timer-active {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   font-weight: 700;
 }
 .timer-widget .timer-item .timer-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .timer-widget .timer-item .timer-button:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .timer-widget .timer-item .timer-button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.06));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.06));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: 10px;
   padding: 0.25rem;
   min-width: 36px;
   min-height: 36px;
   transition: all 200ms ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 }
 .timer-widget .timer-item .timer-button:hover {
   transform: translateY(-1px);
@@ -2579,20 +2632,20 @@ separator {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 .timer-widget .timer-item .timer-button-start, .timer-widget .timer-item .timer-button-stop {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
-  border-color: rgba(190, 194, 255, 0.2);
-  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.15), rgba(130, 211, 226, 0.1));
+  border-color: rgba(130, 211, 226, 0.2);
+  box-shadow: inset 0 1px 1px rgba(130, 211, 226, 0.12), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
 }
 .timer-widget .timer-item .timer-button-start .timer-button-icon, .timer-widget .timer-item .timer-button-stop .timer-button-icon {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .timer-widget .timer-item .timer-button-start:hover, .timer-widget .timer-item .timer-button-stop:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.2), rgba(190, 194, 255, 0.12));
-  border-color: rgba(190, 194, 255, 0.25);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.2), rgba(130, 211, 226, 0.12));
+  border-color: rgba(130, 211, 226, 0.25);
 }
 .timer-widget .timer-item .timer-button-reset:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.15);
 }
 .timer-widget .timer-item .timer-button-delete {
   background: linear-gradient(135deg, rgba(255, 180, 171, 0.1), rgba(255, 180, 171, 0.07));
@@ -2607,21 +2660,21 @@ separator {
   border-color: rgba(255, 180, 171, 0.25);
 }
 .timer-widget .timer-item .timer-progress-container {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.06), rgba(228, 225, 233, 0.04));
-  border: 1px solid rgba(228, 225, 233, 0.08);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.06), rgba(222, 227, 229, 0.04));
+  border: 1px solid rgba(222, 227, 229, 0.08);
   border-radius: 8px;
   margin-top: 0.4rem;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .timer-widget .timer-item .timer-progress-bar {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.8), rgba(130, 211, 226, 0.7));
   border-radius: 8px;
   min-height: 6px;
   transition: min-width 1000ms linear;
-  box-shadow: inset 0 1px 1px hsla(236.3076923077, 100%, 102.2549019608%, 0.6), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(192.0941558442, 232.8571428571, 240.4058441558, 0.6), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .timer-widget separator {
-  background: linear-gradient(90deg, transparent, rgba(228, 225, 233, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(222, 227, 229, 0.1), transparent);
   margin: 0.4rem 0;
   min-height: 1px;
   opacity: 0.5;
@@ -2639,23 +2692,23 @@ separator {
 /* general styles */
 .updater-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: calc(8px * 3);
   padding: 0.75rem;
   margin: 0.75rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   padding: 0;
   border-radius: 16px;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .updater-widget .updater-header {
   padding: 0.75rem 0.75rem 0.4rem 0.75rem;
-  border-bottom: 1px solid rgba(228, 225, 233, 0.1);
+  border-bottom: 1px solid rgba(222, 227, 229, 0.1);
   background: transparent;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -2663,14 +2716,14 @@ separator {
 .updater-widget .updater-header .header-title {
   font-size: calc(1.1rem * 1.1);
   font-weight: 700;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-right: auto;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .updater-widget .updater-header .header-title .header-icon {
   font-family: "Material Symbols Outlined";
   font-size: 28px;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   margin-right: 0.25rem;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
@@ -2683,34 +2736,34 @@ separator {
   min-width: 36px;
   font-size: calc(1.1rem * 0.85);
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .updater-widget .updater-nav .nav-mode-button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
 }
 .updater-widget .updater-nav .nav-mode-button.active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border-color: rgba(190, 194, 255, 0.3);
-  color: rgb(190, 194, 255);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border-color: rgba(130, 211, 226, 0.3);
+  color: rgb(130, 211, 226);
   font-weight: 600;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .updater-widget .updater-content {
   padding: 0.75rem;
 }
 .updater-widget .version-info {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.4rem 0.75rem;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .updater-widget .version-info .version-label {
   font-size: calc(1.1rem * 0.9);
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   min-width: 70px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -2718,16 +2771,16 @@ separator {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: calc(1.1rem * 0.9);
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .updater-widget .status-box {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.4rem 0.75rem;
   transition: all 250ms ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .updater-widget .status-box .status-icon {
   font-family: "Material Symbols Outlined";
@@ -2740,22 +2793,22 @@ separator {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .updater-widget .status-box.status-idle .status-icon {
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
 }
 .updater-widget .status-box.status-idle .status-message {
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
 }
 .updater-widget .status-box.status-checking, .updater-widget .status-box.status-cloning, .updater-widget .status-box.status-copying, .updater-widget .status-box.status-installing {
-  border-color: rgba(190, 194, 255, 0.3);
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(190, 194, 255, 0.07));
+  border-color: rgba(130, 211, 226, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.1), rgba(130, 211, 226, 0.07));
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
 }
 .updater-widget .status-box.status-checking .status-icon, .updater-widget .status-box.status-cloning .status-icon, .updater-widget .status-box.status-copying .status-icon, .updater-widget .status-box.status-installing .status-icon {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   animation: pulse 2s ease-in-out infinite;
 }
 .updater-widget .status-box.status-checking .status-message, .updater-widget .status-box.status-cloning .status-message, .updater-widget .status-box.status-copying .status-message, .updater-widget .status-box.status-installing .status-message {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .updater-widget .status-box.status-success {
   border-color: rgba(74, 222, 128, 0.3);
@@ -2783,13 +2836,13 @@ separator {
 }
 .updater-widget .updater-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .updater-widget .updater-button:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .updater-widget .updater-button {
   border-radius: 12px;
@@ -2806,50 +2859,50 @@ separator {
   opacity: 0.5;
 }
 .updater-widget .updater-button-check {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
-  color: rgb(228, 225, 233);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
+  color: rgb(222, 227, 229);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .updater-widget .updater-button-check .button-icon {
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
 }
 .updater-widget .updater-button-check:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
   transform: translateY(-1px);
 }
 .updater-widget .updater-button-update {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.25), rgba(190, 194, 255, 0.18));
-  border: 1px solid rgba(190, 194, 255, 0.3);
-  color: rgb(190, 194, 255);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.25), rgba(130, 211, 226, 0.18));
+  border: 1px solid rgba(130, 211, 226, 0.3);
+  color: rgb(130, 211, 226);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 .updater-widget .updater-button-update .button-icon {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .updater-widget .updater-button-update:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.3), rgba(190, 194, 255, 0.2));
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.3), rgba(130, 211, 226, 0.2));
   transform: translateY(-2px);
-  border-color: rgba(190, 194, 255, 0.35);
+  border-color: rgba(130, 211, 226, 0.35);
 }
 .updater-widget .updater-button-update:active:not(:disabled) {
   transform: translateY(-1px);
 }
 .updater-widget .config-toggle-button {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .updater-widget .config-toggle-button:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .updater-widget .config-toggle-button {
   background: transparent;
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 12px;
   padding: 0.4rem 0.75rem;
   transition: all 250ms ease;
@@ -2857,111 +2910,111 @@ separator {
 .updater-widget .config-toggle-button .button-icon {
   font-family: "Material Symbols Outlined";
   font-size: 18px;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 .updater-widget .config-toggle-button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.2);
 }
 .updater-widget .package-categories {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.75rem;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .updater-widget .package-categories .category-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.4rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .updater-widget .package-categories .package-category {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.06));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.06));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: 12px;
   padding: 0.4rem;
   margin: 0.25rem 0;
   transition: all 200ms ease;
 }
 .updater-widget .package-categories .package-category:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.15);
 }
 .updater-widget .package-categories .package-category .category-header .category-name {
   font-size: calc(1.1rem * 0.95);
   font-weight: 600;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .updater-widget .package-categories .package-category .category-header .category-count {
   font-size: calc(1.1rem * 0.8);
-  color: rgba(228, 225, 233, 0.5);
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
+  color: rgba(222, 227, 229, 0.5);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
   padding: 2px 8px;
   border-radius: 8px;
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  border: 1px solid rgba(222, 227, 229, 0.15);
 }
 .updater-widget .package-categories .package-category .package-list {
   margin-top: 0.25rem;
 }
 .updater-widget .package-categories .package-category .package-list .package-item {
   font-size: calc(1.1rem * 0.85);
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   font-family: "JetBrainsMono Nerd Font", monospace;
   padding: 2px 0;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .updater-widget .config-list {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.75rem;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .updater-widget .config-list .config-list-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.4rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .updater-widget .config-list .config-item {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.06));
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.06));
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: 10px;
   padding: 0.4rem 0.75rem;
   margin: 0.25rem 0;
   transition: all 200ms ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.07), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
 }
 .updater-widget .config-list .config-item:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.15);
 }
 .updater-widget .config-list .config-item .config-name {
   font-size: calc(1.1rem * 0.95);
   font-weight: 600;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-bottom: 2px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 .updater-widget .config-list .config-item .config-path {
   font-size: calc(1.1rem * 0.75);
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   font-family: "JetBrainsMono Nerd Font", monospace;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .updater-widget .config-list .config-item .config-switch {
   border-radius: 12px;
   padding: 0;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 .updater-widget .config-list .config-item .config-switch slider {
@@ -2972,39 +3025,39 @@ separator {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .updater-widget .config-list .config-item .config-switch:checked {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.8), rgba(190, 194, 255, 0.7));
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.8), rgba(130, 211, 226, 0.7));
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(130, 211, 226, 0.3);
 }
 .updater-widget .config-list .config-item .config-switch:checked slider {
   background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(190, 194, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 8px rgba(130, 211, 226, 0.5);
 }
 .updater-widget .config-list .config-summary,
 .updater-widget .config-list .package-summary {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(190, 194, 255, 0.07));
-  border: 1px solid rgba(190, 194, 255, 0.15);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.1), rgba(130, 211, 226, 0.07));
+  border: 1px solid rgba(130, 211, 226, 0.15);
   border-radius: 10px;
   padding: 0.25rem 0.4rem;
   margin-top: 0.4rem;
-  box-shadow: inset 0 1px 1px rgba(190, 194, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(130, 211, 226, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .updater-widget .config-list .config-summary .summary-text,
 .updater-widget .config-list .package-summary .summary-text {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .updater-widget .config-info {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.07));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.07));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.4rem 0.75rem;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .updater-widget .config-info .config-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.25rem;
@@ -3012,7 +3065,7 @@ separator {
 }
 .updater-widget .config-info .config-detail {
   font-size: calc(1.1rem * 0.85);
-  color: rgba(228, 225, 233, 0.7);
+  color: rgba(222, 227, 229, 0.7);
   font-family: "JetBrainsMono Nerd Font", monospace;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -3041,7 +3094,7 @@ separator {
   font-family: "JetBrainsMono Nerd Font", monospace;
 }
 .updater-widget separator {
-  background: linear-gradient(90deg, transparent, rgba(228, 225, 233, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(222, 227, 229, 0.1), transparent);
   margin: 0.25rem 0;
   min-height: 1px;
   opacity: 0.5;
@@ -3066,7 +3119,7 @@ separator {
   text-transform: none;
   font-feature-settings: "liga";
   font-size: calc(1.1rem * 1.3);
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
   transition: all 150ms ease;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
@@ -3075,8 +3128,8 @@ separator {
 /* general styles */
 .hardware-monitor-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -3092,14 +3145,14 @@ separator {
   margin: 0 0.4rem;
 }
 .hardware-monitor-widget .hw-header image {
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-right: 0.4rem;
 }
 .hardware-monitor-widget .hw-header .header-title {
   margin-top: 0.75rem;
   font-size: 1.1rem;
   font-weight: 700;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
 }
 .hardware-monitor-widget .hw-header {
   margin: 0.4rem auto 0 auto;
@@ -3109,7 +3162,7 @@ separator {
   color: rgba(255, 255, 255, 0.95);
 }
 .hardware-monitor-widget separator {
-  background-color: rgba(228, 225, 233, 0.15);
+  background-color: rgba(222, 227, 229, 0.15);
   margin: 0.4rem 0;
   min-height: 1px;
   background: rgba(255, 255, 255, 0.1);
@@ -3133,7 +3186,7 @@ separator {
   opacity: 0.7;
 }
 .hardware-monitor-widget .hw-nav .nav-button.button {
-  background: rgba(190, 194, 255, 0.2);
+  background: rgba(130, 211, 226, 0.2);
 }
 .hardware-monitor-widget .hw-nav .nav-button.button .nav-icon,
 .hardware-monitor-widget .hw-nav .nav-button.button .nav-label {
@@ -3143,7 +3196,7 @@ separator {
   background-color: transparent;
 }
 .hardware-monitor-widget .hw-nav .nav-button.button-disabled:hover {
-  background-color: rgba(57, 57, 63, 0.99);
+  background-color: rgba(52, 58, 60, 0.99);
 }
 .hardware-monitor-widget .hw-nav .nav-button {
   min-width: 0;
@@ -3165,41 +3218,41 @@ separator {
 .hardware-monitor-widget .hw-nav .nav-button > box .nav-icon,
 .hardware-monitor-widget .hw-nav .nav-button > box .nav-label {
   min-width: 0;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   opacity: 0.85;
 }
 .hardware-monitor-widget .hw-content {
   padding: 0.75rem 0;
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar {
-  background: rgba(14.4930232558, 14.4930232558, 18.3069767442, 0.5);
+  background: rgba(10.0333333333, 14.3333333333, 15.7666666667, 0.5);
   border-radius: calc(8px * 1);
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar.vertical {
   margin-left: 4px;
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar trough {
-  background: rgba(228, 225, 233, 0.1);
+  background: rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1);
   min-width: 8px;
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar slider {
-  background: rgba(228, 225, 233, 0.4);
+  background: rgba(222, 227, 229, 0.4);
   border-radius: calc(8px * 1);
   min-width: 8px;
   transition: all 100ms ease;
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar slider:hover {
-  background: rgba(190, 194, 255, 0.7);
+  background: rgba(130, 211, 226, 0.7);
 }
 .hardware-monitor-widget .hw-content .hw-scroll scrollbar slider:active {
-  background: rgb(190, 194, 255);
+  background: rgb(130, 211, 226);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-main-content {
   padding: 0 0.75rem;
 }
 .hardware-monitor-widget .hw-content .hw-stack .circular-progress-bar-widget circularprogress progress {
-  color: rgb(146.14, 150.48, 209.1);
+  color: rgb(85.8, 165.78, 179.42);
 }
 .hardware-monitor-widget .hw-content .hw-stack .circular-progress-bar-widget circularprogress radius {
   color: rgba(255, 255, 255, 0.08);
@@ -3230,7 +3283,7 @@ separator {
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-label {
   font-size: calc(1.1rem * 0.7);
   font-weight: 600;
-  color: rgb(145, 144, 154);
+  color: rgb(137, 146, 148);
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.85);
 }
@@ -3243,18 +3296,18 @@ separator {
   margin: 0.25rem 0;
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-bar trough {
-  background: rgba(228, 225, 233, 0.1);
+  background: rgba(222, 227, 229, 0.1);
   border-radius: 8px;
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-bar block.filled {
   border-radius: 8px;
-  background: rgb(190, 194, 255);
+  background: rgb(130, 211, 226);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-bar {
-  background: linear-gradient(to top, hsl(236.3076923077, 100%, 127.2549019608%), rgb(139, 146.1384615385, 255));
+  background: linear-gradient(to top, hsl(189.375, 62.3376623377%, 109.8039215686%), rgb(88.6038961039, 196.4285714286, 216.3961038961));
   border-radius: 4px;
   min-width: 12px;
-  box-shadow: 0 0 10px rgba(190, 194, 255, 0.5);
+  box-shadow: 0 0 10px rgba(130, 211, 226, 0.5);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-metric .vertical-metric-bar trough {
   background: rgba(128, 128, 128, 0.4);
@@ -3264,7 +3317,7 @@ separator {
   font-size: calc(1.1rem * 0.75);
   font-family: monospace;
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   color: rgba(255, 255, 255, 0.75);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-display {
@@ -3275,7 +3328,7 @@ separator {
 .hardware-monitor-widget .hw-content .hw-stack .hw-vertical-display .vertical-display-label {
   font-size: calc(1.1rem * 0.7);
   font-weight: 600;
-  color: rgb(145, 144, 154);
+  color: rgb(137, 146, 148);
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.85);
 }
@@ -3290,7 +3343,7 @@ separator {
   font-size: calc(1.1rem * 0.75);
   font-family: monospace;
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   color: rgba(255, 255, 255, 0.75);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list {
@@ -3303,7 +3356,7 @@ separator {
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list .disk-list-title {
   font-size: calc(1.1rem * 0.85);
   font-weight: 600;
-  color: rgb(145, 144, 154);
+  color: rgb(137, 146, 148);
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.8);
 }
@@ -3315,7 +3368,7 @@ separator {
   font-size: calc(1.1rem * 0.8);
   font-family: monospace;
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   color: rgba(255, 255, 255, 0.85);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list .hw-disk-bar .disk-bar-detail {
@@ -3330,12 +3383,12 @@ separator {
   margin: 0.25rem 0;
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list .hw-disk-bar .disk-bar-level trough {
-  background: rgba(228, 225, 233, 0.1);
+  background: rgba(222, 227, 229, 0.1);
   border-radius: 8px;
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list .hw-disk-bar .disk-bar-level block.filled {
   border-radius: 8px;
-  background: rgb(197, 196, 221);
+  background: rgb(177, 203, 209);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list .hw-disk-bar .disk-bar-level {
   border-radius: calc(8px * 0.5);
@@ -3344,55 +3397,55 @@ separator {
   background: rgba(255, 255, 255, 0.08);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-disk-list .hw-disk-bar .disk-bar-level block.filled {
-  background: linear-gradient(to right, hsl(242.4, 26.8817204301%, 121.7647058824%), rgb(165.1935483871, 163.6451612903, 202.3548387097));
-  box-shadow: 0 0 8px rgba(197, 196, 221, 0.5);
+  background: linear-gradient(to right, hsl(191.25, 25.8064516129%, 115.6862745098%), rgb(144.9193548387, 181.6129032258, 190.0806451613));
+  box-shadow: 0 0 8px rgba(177, 203, 209, 0.5);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-cpu circularprogress progress {
-  color: rgb(185.08, 142.5, 168.8);
+  color: rgb(143.82, 153.82, 189.44);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-cpu circularprogress radius {
-  color: rgba(228, 225, 233, 0.1);
+  color: rgba(222, 227, 229, 0.1);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-memory circularprogress progress {
-  color: rgb(146.14, 150.48, 209.1);
+  color: rgb(85.8, 165.78, 179.42);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-memory circularprogress radius {
-  color: rgba(228, 225, 233, 0.1);
+  color: rgba(222, 227, 229, 0.1);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-gpu circularprogress progress {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-gpu circularprogress radius {
-  color: rgba(228, 225, 233, 0.1);
+  color: rgba(222, 227, 229, 0.1);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-disk circularprogress progress {
-  color: rgb(197, 196, 221);
+  color: rgb(177, 203, 209);
 }
 .hardware-monitor-widget .hw-content .hw-stack .hw-page-disk circularprogress radius {
-  color: rgba(228, 225, 233, 0.1);
+  color: rgba(222, 227, 229, 0.1);
 }
 
 /* variables & mixins */
 /* general styles */
 .notes-widget {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: calc(8px * 3);
   padding: 0.75rem;
   margin: 0.75rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   padding: 0;
   border-radius: 16px;
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 .notes-widget .notes-header {
   padding: 0.75rem 0.75rem 0.4rem 0.75rem;
-  border-bottom: 1px solid rgba(228, 225, 233, 0.1);
+  border-bottom: 1px solid rgba(222, 227, 229, 0.1);
   background: transparent;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -3400,88 +3453,88 @@ separator {
 .notes-widget .notes-header label {
   font-size: calc(1.1rem * 1.1);
   font-weight: 700;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .notes-widget separator {
-  background: linear-gradient(90deg, transparent, rgba(228, 225, 233, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(222, 227, 229, 0.1), transparent);
   margin: 0.4rem 0;
   min-height: 1px;
   opacity: 0.5;
 }
 .notes-widget .notes-scroll scrollbar {
-  background: rgba(14.4930232558, 14.4930232558, 18.3069767442, 0.5);
+  background: rgba(10.0333333333, 14.3333333333, 15.7666666667, 0.5);
   border-radius: calc(8px * 1);
 }
 .notes-widget .notes-scroll scrollbar.vertical {
   margin-left: 4px;
 }
 .notes-widget .notes-scroll scrollbar trough {
-  background: rgba(228, 225, 233, 0.1);
+  background: rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1);
   min-width: 8px;
 }
 .notes-widget .notes-scroll scrollbar slider {
-  background: rgba(228, 225, 233, 0.4);
+  background: rgba(222, 227, 229, 0.4);
   border-radius: calc(8px * 1);
   min-width: 8px;
   transition: all 100ms ease;
 }
 .notes-widget .notes-scroll scrollbar slider:hover {
-  background: rgba(190, 194, 255, 0.7);
+  background: rgba(130, 211, 226, 0.7);
 }
 .notes-widget .notes-scroll scrollbar slider:active {
-  background: rgb(190, 194, 255);
+  background: rgb(130, 211, 226);
 }
 .notes-widget .notes-scroll {
   padding: 0.75rem;
 }
 .notes-widget .notes-scroll .notes-textview {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.07), rgba(228, 225, 233, 0.05));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.07), rgba(222, 227, 229, 0.05));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 12px;
   padding: 0.75rem;
   font-family: monospace;
   font-size: 1.1rem;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
   transition: all 150ms ease;
 }
 .notes-widget .notes-scroll .notes-textview:focus {
-  border-color: rgba(190, 194, 255, 0.3);
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08), 0 0 12px rgba(190, 194, 255, 0.2);
+  border-color: rgba(130, 211, 226, 0.3);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.08), 0 0 12px rgba(130, 211, 226, 0.2);
 }
 .notes-widget .notes-scroll .notes-textview text {
   background: transparent;
 }
 .notes-widget .notes-scroll .notes-textview text selection {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.4), rgba(190, 194, 255, 0.3));
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.4), rgba(130, 211, 226, 0.3));
   color: white;
 }
 .notes-widget .notes-footer {
   padding: 0.4rem 0.75rem 0.75rem 0.75rem;
-  border-top: 1px solid rgba(228, 225, 233, 0.1);
+  border-top: 1px solid rgba(222, 227, 229, 0.1);
   background: transparent;
 }
 .notes-widget .notes-footer .notes-char-count {
   font-weight: 500;
   font-size: calc(1.1rem * 0.75);
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   opacity: 0.8;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .notes-widget .notes-footer .notes-clear-button {
   padding: 0.25rem calc(0.4rem * 1.2);
   border-radius: 10px;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   transition: all 150ms ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
 }
 .notes-widget .notes-footer .notes-clear-button:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.15), rgba(228, 225, 233, 0.1));
-  border-color: rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.15), rgba(222, 227, 229, 0.1));
+  border-color: rgba(222, 227, 229, 0.2);
 }
 .notes-widget .notes-footer .notes-clear-button:active {
   transform: scale(0.95);
@@ -3490,33 +3543,33 @@ separator {
 .notes-widget .notes-footer .notes-clear-button label {
   font-family: "Material Symbols Outlined";
   font-size: 16px;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 .sidebar {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 20px;
   min-width: 300px;
   margin: 0.75rem;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 .sidebar > box {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 63, 0.6);
+  background: rgba(52, 58, 60, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   background: transparent;
 }
 .sidebar separator {
-  background: linear-gradient(90deg, transparent, rgba(228, 225, 233, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(222, 227, 229, 0.12), transparent);
   margin: 0.5rem 0;
   min-height: 1px;
   opacity: 0.5;
@@ -3532,23 +3585,23 @@ separator {
 .system-menu {
   -gtk-icon-size: 1.1rem;
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(37.0279069767, 37.0279069767, 46.7720930233, 0.35), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.25));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(29.8666666667, 42.6666666667, 46.9333333333, 0.35), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.25));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 20px;
   margin-top: 0.75rem;
   margin-right: 0.75rem;
   padding: 0.75rem;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(222, 227, 229, 0.12);
   transform: translateZ(0);
 }
 .system-menu > box {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 63, 0.6);
+  background: rgba(52, 58, 60, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
   background: transparent;
@@ -3561,12 +3614,12 @@ separator {
 .system-menu-section, .wifi-menu,
 .bluetooth-menu,
 .notification-center, .system-menu .battery-box, .system-menu .sliders, .system-menu .power-profiles, .system-menu .toggle {
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.2), rgba(25.7604651163, 25.7604651163, 32.5395348837, 0.1));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.2), rgba(19.95, 28.5, 31.35, 0.1));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 14px;
   padding: 0.4rem;
   margin-bottom: 0.4rem;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(222, 227, 229, 0.12);
 }
 
 /* toggles */
@@ -3575,17 +3628,17 @@ separator {
 }
 .system-menu .toggle button {
   margin-right: 0.4rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.22), rgba(228, 225, 233, 0.15));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.22), rgba(222, 227, 229, 0.15));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 10px;
   padding: 8px 12px;
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 .system-menu .toggle button:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.35), rgba(190, 194, 255, 0.25));
-  border-color: rgba(190, 194, 255, 0.4);
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.35), rgba(130, 211, 226, 0.25));
+  border-color: rgba(130, 211, 226, 0.4);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 /* power profiles */
@@ -3616,8 +3669,8 @@ separator {
   margin: 0.4rem;
   min-height: 0.4rem;
   border-radius: 1.5rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.22), rgba(228, 225, 233, 0.15));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.22), rgba(222, 227, 229, 0.15));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
 }
 .system-menu .sliders block {
@@ -3625,8 +3678,8 @@ separator {
 }
 .system-menu .sliders block.filled {
   border-radius: 1.5rem;
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.85), rgba(190, 194, 255, 0.75));
-  box-shadow: inset 0 1px 2px hsla(236.3076923077, 100%, 102.2549019608%, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.85), rgba(130, 211, 226, 0.75));
+  box-shadow: inset 0 1px 2px rgba(192.0941558442, 232.8571428571, 240.4058441558, 0.7), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Battery Box */
@@ -3643,21 +3696,21 @@ separator {
 
 .system-menu-list {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(37.0279069767, 37.0279069767, 46.7720930233, 0.25), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.15));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(29.8666666667, 42.6666666667, 46.9333333333, 0.25), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.15));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 16px;
   margin: 0.4rem 0;
   padding: 0.4rem;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(222, 227, 229, 0.12);
   transform: translateZ(0);
 }
 .system-menu-list > box {
-  background: linear-gradient(135deg, rgba(28.0139534884, 28.0139534884, 35.3860465116, 0.15), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.05));
-  border: 1px solid rgba(228, 225, 233, 0.2);
+  background: linear-gradient(135deg, rgba(21.9333333333, 31.3333333333, 34.4666666667, 0.15), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.05));
+  border: 1px solid rgba(222, 227, 229, 0.2);
   border-radius: 12px;
   padding: 0.25rem;
 }
@@ -3673,9 +3726,9 @@ separator {
 }
 .network-item:hover,
 .bluetooth-item:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.2), rgba(228, 225, 233, 0.13));
-  border-color: rgba(228, 225, 233, 0.25);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.2), rgba(222, 227, 229, 0.13));
+  border-color: rgba(222, 227, 229, 0.25);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 .network-item image:first-child,
 .bluetooth-item image:first-child {
@@ -3690,22 +3743,22 @@ separator {
 
 .network-item-active,
 .bluetooth-item-active {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.35), rgba(190, 194, 255, 0.25));
-  border: 1px solid rgba(190, 194, 255, 0.4);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.35), rgba(130, 211, 226, 0.25));
+  border: 1px solid rgba(130, 211, 226, 0.4);
   border-radius: 10px;
   margin: 0.25rem;
   padding: 0.4rem;
-  box-shadow: inset 0 1px 2px hsla(236.3076923077, 100%, 102.2549019608%, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 2px rgba(192.0941558442, 232.8571428571, 240.4058441558, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .password-dialog {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 63, 0.6);
+  background: rgba(52, 58, 60, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.2), rgba(25.7604651163, 25.7604651163, 32.5395348837, 0.1));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.2), rgba(19.95, 28.5, 31.35, 0.1));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 12px;
   margin-bottom: 0.75rem;
   padding: 0.75rem;
@@ -3727,20 +3780,20 @@ separator {
 .refresh-button,
 .disconnect-button,
 .settings-button {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.22), rgba(228, 225, 233, 0.15));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.22), rgba(222, 227, 229, 0.15));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 10px;
   margin: 0.4rem;
   padding: 8px 12px;
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 .refresh-button:hover,
 .disconnect-button:hover,
 .settings-button:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.35), rgba(190, 194, 255, 0.25));
-  border-color: rgba(190, 194, 255, 0.4);
-  box-shadow: inset 0 1px 2px rgba(228, 225, 233, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.35), rgba(130, 211, 226, 0.25));
+  border-color: rgba(130, 211, 226, 0.4);
+  box-shadow: inset 0 1px 2px rgba(222, 227, 229, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .disconnect-button {
@@ -3753,21 +3806,21 @@ separator {
 .pair-button,
 .trust-button {
   margin: 0.4rem;
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.4), rgba(190, 194, 255, 0.3));
-  border: 1px solid rgba(190, 194, 255, 0.45);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.4), rgba(130, 211, 226, 0.3));
+  border: 1px solid rgba(130, 211, 226, 0.45);
   border-radius: 10px;
   padding: 10px 16px;
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 2px hsla(236.3076923077, 100%, 102.2549019608%, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 2px rgba(192.0941558442, 232.8571428571, 240.4058441558, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 .connect-button:hover,
 .cancel-button:hover,
 .forget-button:hover,
 .pair-button:hover,
 .trust-button:hover {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.5), rgba(190, 194, 255, 0.4));
-  border-color: rgba(190, 194, 255, 0.55);
-  box-shadow: inset 0 1px 3px hsla(236.3076923077, 100%, 107.2549019608%, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.5), rgba(130, 211, 226, 0.4));
+  border-color: rgba(130, 211, 226, 0.55);
+  box-shadow: inset 0 1px 3px rgba(212.7922077922, 240.1428571429, 245.2077922078, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.4);
   transform: translateY(-1px);
 }
 .connect-button:active,
@@ -3793,31 +3846,31 @@ image {
 .password-search {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 63, 0.6);
+  background: rgba(52, 58, 60, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.2), rgba(25.7604651163, 25.7604651163, 32.5395348837, 0.1));
-  border: 1px solid rgba(228, 225, 233, 0.25);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.2), rgba(19.95, 28.5, 31.35, 0.1));
+  border: 1px solid rgba(222, 227, 229, 0.25);
   border-radius: 10px;
   padding: 0.4rem;
 }
 .password-search entry menu {
-  background: rgb(19, 19, 24);
+  background: rgb(14, 20, 22);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 .password-search entry menu separator {
-  background-color: rgba(57, 57, 63, 0.6);
+  background-color: rgba(52, 58, 60, 0.6);
 }
 .password-search entry menu menuitem {
   transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background: rgba(57, 57, 63, 0.6);
-  border: 1px solid rgba(228, 225, 233, 0.1);
+  background: rgba(52, 58, 60, 0.6);
+  border: 1px solid rgba(222, 227, 229, 0.1);
   border-radius: calc(8px * 1.97);
   padding: 0.4rem;
 }
 .password-search entry menu menuitem:hover {
-  background: rgba(57, 57, 63, 0.99);
+  background: rgba(52, 58, 60, 0.99);
 }
 .password-search entry menu menuitem {
   border-radius: 0;
@@ -3850,9 +3903,9 @@ image {
   transition: all 0.2s ease;
 }
 .saved-network:hover {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.2), rgba(228, 225, 233, 0.13));
-  border-color: rgba(228, 225, 233, 0.25);
-  box-shadow: inset 0 1px 1px rgba(228, 225, 233, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.2), rgba(222, 227, 229, 0.13));
+  border-color: rgba(222, 227, 229, 0.25);
+  box-shadow: inset 0 1px 1px rgba(222, 227, 229, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
 }
 .saved-network > label {
   margin-left: 0.4rem;
@@ -3870,48 +3923,48 @@ box.window-switcher-background {
 }
 box.window-switcher-background .window-switcher {
   border-radius: 16px;
-  box-shadow: 0 3px 5px 1px rgba(19, 19, 24, 0.1);
-  background: rgba(19, 19, 24, 0.5);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 22, 0.1);
+  background: rgba(14, 20, 22, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(32.5209302326, 32.5209302326, 41.0790697674, 0.38), rgba(23.5069767442, 23.5069767442, 29.6930232558, 0.32));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(25.9, 37, 40.7, 0.38), rgba(17.9666666667, 25.6666666667, 28.2333333333, 0.32));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 20px;
   padding: 1.5rem;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 box.window-switcher-background .window-switcher .search-section {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 63, 0.6);
+  background: rgba(52, 58, 60, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.1), rgba(228, 225, 233, 0.06));
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.1), rgba(222, 227, 229, 0.06));
+  border: 1px solid rgba(222, 227, 229, 0.15);
   border-radius: 14px;
   margin-bottom: 1rem;
   padding: 0.4rem;
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08);
 }
 box.window-switcher-background .window-switcher .search-section:focus-within {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.1), rgba(228, 225, 233, 0.08));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: inset 0 1px 0 rgba(190, 194, 255, 0.12);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.1), rgba(222, 227, 229, 0.08));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: inset 0 1px 0 rgba(130, 211, 226, 0.12);
 }
 box.window-switcher-background .window-switcher .search-section label.search-icon {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
   font-size: 1.5rem;
   margin: 0 0.5rem;
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
 }
 box.window-switcher-background .window-switcher .search-section entry.search-entry {
   font-size: 1rem;
   padding: 0.25rem 0.4rem;
   background: transparent;
   border: none;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
 }
 box.window-switcher-background .window-switcher .search-section entry.search-entry:focus {
   outline: none;
@@ -3919,7 +3972,7 @@ box.window-switcher-background .window-switcher .search-section entry.search-ent
 }
 box.window-switcher-background .window-switcher .search-section .shortcut-hint {
   font-size: 0.7rem;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   margin: 0 0.5rem;
 }
 box.window-switcher-background .window-switcher .window-grid {
@@ -3928,65 +3981,65 @@ box.window-switcher-background .window-switcher .window-grid {
 box.window-switcher-background .window-switcher button.window-card {
   border-radius: calc(16px - 0.4rem - 2px);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-  background: rgba(57, 57, 63, 0.6);
+  background: rgba(52, 58, 60, 0.6);
   margin: 0.4rem;
   padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.08), rgba(228, 225, 233, 0.05));
-  border: 1px solid rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.08), rgba(222, 227, 229, 0.05));
+  border: 1px solid rgba(222, 227, 229, 0.12);
   border-radius: 16px;
   margin: 0.5rem;
   padding: 1rem;
   min-width: 220px;
   min-height: 160px;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.08);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.08);
 }
 box.window-switcher-background .window-switcher button.window-card:hover:not(.selected) {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  border-color: rgba(228, 225, 233, 0.18);
-  box-shadow: inset 0 1px 0 rgba(228, 225, 233, 0.12);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  border-color: rgba(222, 227, 229, 0.18);
+  box-shadow: inset 0 1px 0 rgba(222, 227, 229, 0.12);
   transform: translateY(-2px);
 }
 box.window-switcher-background .window-switcher button.window-card.selected {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.15), rgba(190, 194, 255, 0.1));
-  border-color: rgba(190, 194, 255, 0.25);
-  box-shadow: inset 0 1px 1px rgba(241, 241.8615384615, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.15), rgba(130, 211, 226, 0.1));
+  border-color: rgba(130, 211, 226, 0.25);
+  box-shadow: inset 0 1px 1px rgba(171.3961038961, 225.5714285714, 235.6038961039, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
 box.window-switcher-background .window-switcher button.window-card.selected .window-card-title {
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   font-weight: 600;
-  text-shadow: 0 0 8px rgba(190, 194, 255, 0.3);
+  text-shadow: 0 0 8px rgba(130, 211, 226, 0.3);
 }
 box.window-switcher-background .window-switcher button.window-card.selected .window-icon-large {
-  color: rgb(190, 194, 255);
-  filter: drop-shadow(0 0 8px rgba(190, 194, 255, 0.3));
+  color: rgb(130, 211, 226);
+  filter: drop-shadow(0 0 8px rgba(130, 211, 226, 0.3));
 }
 box.window-switcher-background .window-switcher button.window-card .window-icon-large {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
   font-size: 4rem;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin-bottom: 0.5rem;
   transition: all 0.3s ease;
 }
 box.window-switcher-background .window-switcher button.window-card .window-card-title {
   font-size: 1rem;
   font-weight: 500;
-  color: rgb(228, 225, 233);
+  color: rgb(222, 227, 229);
   margin: 0.3rem 0;
   transition: all 0.3s ease;
 }
 box.window-switcher-background .window-switcher button.window-card .window-card-workspace {
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgb(190, 194, 255);
+  color: rgb(130, 211, 226);
   margin: 0.2rem 0;
-  text-shadow: 0 0 6px rgba(190, 194, 255, 0.2);
+  text-shadow: 0 0 6px rgba(130, 211, 226, 0.2);
 }
 box.window-switcher-background .window-switcher button.window-card .window-card-subtitle {
   font-size: 0.75rem;
-  color: rgba(228, 225, 233, 0.5);
+  color: rgba(222, 227, 229, 0.5);
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small {
   border-radius: 8px;
@@ -3995,18 +4048,18 @@ box.window-switcher-background .window-switcher button.window-card .window-badge
   margin: 2px 4px 0 0;
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small.fullscreen-badge {
-  background: linear-gradient(135deg, rgba(190, 194, 255, 0.2), rgba(190, 194, 255, 0.15));
-  color: rgb(190, 194, 255);
-  border: 1px solid rgba(190, 194, 255, 0.3);
+  background: linear-gradient(135deg, rgba(130, 211, 226, 0.2), rgba(130, 211, 226, 0.15));
+  color: rgb(130, 211, 226);
+  border: 1px solid rgba(130, 211, 226, 0.3);
 }
 box.window-switcher-background .window-switcher button.window-card .window-badge-small.floating-badge {
-  background: linear-gradient(135deg, rgba(228, 225, 233, 0.12), rgba(228, 225, 233, 0.08));
-  color: rgb(228, 225, 233);
-  border: 1px solid rgba(228, 225, 233, 0.15);
+  background: linear-gradient(135deg, rgba(222, 227, 229, 0.12), rgba(222, 227, 229, 0.08));
+  color: rgb(222, 227, 229);
+  border: 1px solid rgba(222, 227, 229, 0.15);
 }
 box.window-switcher-background .window-switcher label.no-entries {
   padding: 2rem;
-  color: rgba(228, 225, 233, 0.6);
+  color: rgba(222, 227, 229, 0.6);
   font-style: italic;
   font-size: 0.95rem;
 }
