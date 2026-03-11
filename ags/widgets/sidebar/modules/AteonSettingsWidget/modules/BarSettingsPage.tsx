@@ -5,6 +5,7 @@ import {
   BAR_STYLE_OPTIONS,
   OS_OPTIONS,
   THEME_STYLE_OPTIONS,
+  BAR_WORKSPACE_STYLE_OPTIONS,
 } from "utils/config";
 
 export default function BarSettingsPage() {
@@ -33,7 +34,11 @@ export default function BarSettingsPage() {
           label="Style"
           choices={BAR_STYLE_OPTIONS}
         />
-        
+		<OptionSelect
+		  option="bar.workspaces.style"
+		  label="Workspaces"
+		  choices={BAR_WORKSPACE_STYLE_OPTIONS}
+        />
         <SectionHeader label="OS Icon" />
         <OptionToggle option="bar.modules.os-icon.show" label="Show Icon" />
         <OptionSelect

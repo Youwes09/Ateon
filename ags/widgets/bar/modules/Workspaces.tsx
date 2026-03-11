@@ -1,5 +1,7 @@
 import Hyprland from "gi://AstalHyprland";
 import { createBinding, For, With } from "ags";
+import options from "options";
+
 
 function FocusedClient() {
   const hypr = Hyprland.get_default();
@@ -47,28 +49,27 @@ export default function Workspaces() {
   });
 
   return (
-    <box cssClasses={["Workspaces"]}>
-      <For each={workspaceButtons}>
-        {(buttonData) => (
-          <button
-            visible={buttonData.visible}
-            cssClasses={createBinding(
-              hypr,
-              "focusedWorkspace",
-            )((fw) => {
-              const classes: string[] = [];
-              if (buttonData.workspace === fw) classes.push("focused");
-              if (buttonData.workspace?.monitor) {
-                classes.push(`monitor${buttonData.workspace.monitor.id}`);
-              }
-              return classes;
-            })}
-            onClicked={() =>
-              hypr.message(`dispatch workspace ${buttonData.id}`)
+  <box cssClasses={options["bar.workspaces.style"].as(v => ["Workspaces", `bar-workspaces-style-${v}`])}>
+    <For each={workspaceButtons}>
+      {(buttonData) => (
+        <button
+          visible={buttonData.visible}
+          cssClasses={createBinding(
+            hypr,
+            "focusedWorkspace",
+          )((fw) => {
+            const classes: string[] = [];
+            if (buttonData.workspace === fw) classes.push("focused");
+            if (buttonData.workspace?.monitor) {
+              classes.push(`monitor${buttonData.workspace.monitor.id}`);
             }
-          ></button>
-        )}
-      </For>
-    </box>
-  );
-}
+            return classes;
+          })}
+          onClicked={() =>
+            hypr.message(`dispatch workspace ${buttonData.id}`)
+          }
+        ></button>
+      )}
+    </For>
+  </box>
+)};

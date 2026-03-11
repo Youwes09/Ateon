@@ -23,3 +23,8 @@ export const THEME_STYLE_OPTIONS = [
   { label: "Normal", value: "normal" },
   { label: "Glass", value: "glass" },
 ];
+
+export const BAR_WORKSPACE_STYLE_OPTIONS: OptionChoice[] = [
+	{ label: "Beveled", value: "beveled" },
+	{ label: "Rounded", value: "rounded" },
+];
